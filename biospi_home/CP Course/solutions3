@@ -1,0 +1,347 @@
+/*
+Concurrent Prolog Programming Techniques                       Fall, 1986
+
+Instructor: William Silverman
+
+Assignment No. 3    Due Monday, December 8
+
+Solutions.
+
+*/
+
+/*
+(1) Define:
+	(a) fib(N,Fs) :- Fs are the first N elements of the Fibonacci
+			 series, N >= 2.
+	This can be done by changing the program shown in
+	class to a bounded producer, having four arguments (easy),
+	or by having a bounded producer with only two arguments
+	(tricky).
+
+	(b) factorials(N,Fs) :- Fs is a stream of the first N factorials.
+	(Same trick in (a) can be used to reduce number of arguments).
+*/
+%(a)
+
+fib(N,[0,1|Fs]) :- fibb(N,[0,1|Fs]).
+
+fibb(2,[X,Y]).
+fibb(N,[Prev_2,Prev_1 | Fs]) :-
+	N > 2 |
+	This_One := Prev_2 + Prev_1,
+	Fs = [This_One? | More_Fs],
+
+	N1 := N - 1, % Bound the stream producer by counting down to two.
+
+	fibb(N1,[Prev_1,This_One | More_Fs]).
+
+/*  ---- Sample run   ---
+
+@ex3#fib(10,Fibs^)
+<2> started
+loaded(ex3) /ps/student/simran/cs442/ex3.bin
+Fibs / 1 = 0
+<2> ended
+Fibs / 2 = 1
+Fibs / 3 = 1
+Fibs / 4 = 2
+Fibs / 5 = 3
+Fibs / 6 = 5
+Fibs / 7 = 8
+Fibs / 8 = 13
+Fibs / 9 = 21
+Fibs / 10 = 34
+Fibs /   = []
+Fibs = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+@
+
+*/
+%(b)
+% Note that this producer is bound by counting up.
+
+factorials(N,[1|Fs]) :- facts(N,1,[1|Fs]).
+
+facts(N,Prev_Multiplier,[Prev_Fact | Fs]) :-
+	Prev_Multiplier < N |
+	Multiplier := Prev_Multiplier + 1,
+	This_One := Prev_Fact * Multiplier,
+	Fs = [This_One | More_Fs],
+	facts(N,Multiplier?,[This_One | More_Fs]).
+
+facts(M,M,[X]).
+
+/*  ---- Sample run   ---
+@ex3#factorials(2,Fs^)
+<3> started
+Fs / 1 = 1
+Fs / 2 = 2
+<3> ended
+Fs /   = []
+@
+@ex3#factorials(10,F10^)
+<4> started
+F10 / 1 = 1
+F10 / 2 = 2
+<4> ended
+F10 / 3 = 6
+F10 / 4 = 24
+F10 / 5 = 120
+F10 / 6 = 720
+F10 / 7 = 5040
+F10 / 8 = 40320
+F10 / 9 = 362880
+F10 / 10 = 3628800
+F10 /   = []
+@
+*/
+/*
+(2) Define:
+	(a) mult(Xs,M) :- M is the result of multiplying all Xs.
+	(b) preds(N,Xs) :- Xs are the predecessors of N, inclusive.
+	(c) fact(N,F) :- F is the factorial of N,
+			 using (a) and (b).
+*/
+%(a)
+
+mults(Xs,M) :- mults(Xs,1,M).
+mults([X|Xs],Accumulator,Result) :-
+	Next_Acc := Accumulator * X,
+	mults(Xs?,Next_Acc,Result).
+mults([],Result,Result).
+
+%(b)
+
+preds(N,[N | Xs?]) :-
+	N > 1 |
+	N1 := N - 1,
+	preds(N1?,Xs).
+preds(1,[1]).
+
+%(c)
+
+fact(N,F) :-
+	N > 0 |
+	preds(N,Xs),
+	mults(Xs?,F).
+fact(0,1).
+
+/*  ---- Sample run   ---
+@
+@ex3#mults([1,2,3,4,5,6],Mults^)
+<5> started
+Mults = 720
+<5> ended
+@
+@ex3#mults([2,3,1,2,4,5,0,435,3,22,5,3,2,4],Zero^)
+<6> started
+Zero = 0
+<6> ended
+@
+@
+@ex3#preds(7,Pred7^)
+<7> started
+Pred7 / 1 = 7
+Pred7 / 2 = 6
+<7> ended
+Pred7 / 3 = 5
+Pred7 / 4 = 4
+Pred7 / 5 = 3
+Pred7 / 6 = 2
+Pred7 / 7 = 1
+Pred7 /   = []
+@
+@ex3#fact(5,F5^)
+<8> started
+F5 = 120
+<8> ended
+@ex3#fact(8,F8^)
+<9> started
+F8 = 40320
+<9> ended
+@
+*/
+/*
+(3) Define an efficient inner product, ip(Xs,Ys,S),
+    using an accumulator.  Xs and Ys are streams of integers, you can
+    thing of them as vectors. The inner product of two vectors is defined as:
+    ip([a1,...,aN],[b1,...,bN],S) if S = a1*b1 + a2*b2 + ... + aN*bN.
+*/
+
+ip(Xs,Ys,S) :- ip(Xs,Ys,0,S).
+
+ip([X|Xs],[Y|Ys],Acc,Result) :-
+	Next_Acc := Acc + X * Y,
+	ip(Xs?,Ys?,Next_Acc,Result).
+
+ip([],[],Result,Result).
+
+/*  ---- Sample run   ---
+@
+@ex3#ip([1,2,3,4],[1,2,3,4],Ip1^)
+<10> started
+Ip1 = 30
+<10> ended
+@ex3#ip([1,2,3,4,5,6],[1,1,1,1,1,1],Ip2^)
+<11> started
+Ip2 = 21
+<11> ended
+@ex3#ip([1,2,3,4,5,6],[1,2,3,4,5],Failure^)
+<12> started
+<12> failed(ip([6], [], 55, _))
+<12> ended
+@
+*/
+
+/*
+(4) Define:
+	(a) mult(Xs,N,Ys) :-  Multiplying each element in the stream Xs
+				 by N gives the stream Ys.
+	(b) powers(N,Ns) :- Ns is the powers of N, using mult/3.
+	    Hint: One axiom is enough.
+	
+*/
+
+mult([X | Xs],N,[Y | Ys]) :-
+	Y := X * N,
+	mult(Xs?,N,Ys).
+mult([],N,[]).
+
+/*   Powers:
+The intuition behind the one-axiom solution:
+
+                          2   3   4   5
+let Xs be the list [ 1   n   n   n   n   n   ... ]
+                                                           2   3
+and let it be split into two parts:   [1]  and  Ps = [n   n   n  ...]
+
+note that:	1.  Xs = [1 | Ps]
+		2.  Ps = N * Xs  (scalar multiply)
+
+or, more concisely,
+
+	          [1 | Ps] * N = Ps
+
+let's rewrite this using mult/3 to get
+
+		  mult([1 | Ps],N,Ps)
+
+and there is our answer.
+
+*/
+
+powers(N,Ps) :-
+	mult([1|Ps],N,Ps).
+
+/*  ---- Sample run   ---
+@
+@ex3#mult([1,2,3,4,5,6],5,Mult5^)
+<13> started
+Mult5 / 1 = 5
+<13> ended
+Mult5 / 2 = 10
+Mult5 / 3 = 15
+Mult5 / 4 = 20
+Mult5 / 5 = 25
+Mult5 / 6 = 30
+Mult5 /   = []
+@
+@
+@ex3#powers(2,Powers^)
+<14> started
+Powers / 1 = 2
+Powers / 2 = 4
+Powers / 3 = 8
+Powers / 4 = 16
+Powers / 5 = 32
+Powers / 6 = 64
+Powers / 7 = 128
+Powers / 8 = 256
+Powers / 9 = 512
+Powers / 10 = 1024
+Powers / 11 = 2048
+Powers / 12 = 4096
+Powers / 13 = 8192
+Powers / 14 = 16384
+Powers / 15 = 32768
+Powers / 16 = 65536
+Powers / 17 = 131072
+Powers / 18 = 262144
+Powers / 19 = 524288
+Powers / 20 = 1048576
+@break
+Powers / 21 = 2097152
+Powers / 22 = 4194304
+@abort
+<14> aborted
+*/
+
+/*
+(5) Define:
+		(a) bbl(Xs,Y,Ys) :-
+			Y is the smallest element in Xs, and Ys
+			are the rest (not necessarily in the original order).
+		Hint:
+		bbl([X|Xs],Y,Ys) :- bbl1(X,Xs?,Y,Ys).
+	
+		(b) sort(Xs,Ys) :- Sorting Xs gives Ys,
+			using bbl (or bbl1).
+
+*/
+
+
+bbl([X|Xs],Y,Ys) :- bbl1(X,Xs?,Y,Ys).
+
+bbl1(Min_so_far,[X|Xs],Smallest,[X | Ys]) :-
+	Min_so_far < X |
+	bbl1(Min_so_far,Xs?,Smallest,Ys).
+
+bbl1(Min_so_far,[X|Xs],Smallest,[Min_so_far | Ys]) :-
+	Min_so_far >= X |
+	bbl1(X,Xs?,Smallest,Ys).
+
+bbl1(Smallest,[],Smallest,[]).
+
+
+sort(Xs,[Smallest | Sorted_Ys]) :-
+	Xs =\= [] |
+	bbl(Xs?,Smallest,Unsorted_Ys),
+	sort(Unsorted_Ys?,Sorted_Ys).
+sort([],[]).
+
+
+/*  ---- Sample run   ---
+
+@ex3#bbl([3,4,5,3,6,1,2,5,34],Smallest^,Bozos^)
+<15> started
+loaded(ex3) /ps/student/simran/cs442/ex3.bin
+Smallest = 1
+Bozos / 1 = 4
+Bozos / 2 = 5
+<15> ended
+Bozos / 3 = 3
+Bozos / 4 = 6
+Bozos / 5 = 3
+Bozos / 6 = 2
+Bozos / 7 = 5
+Bozos / 8 = 34
+Bozos /   = []
+@
+@
+@ex3#sort([4,34,2,1,3,56,7,23,0,87,3],Sorted^)
+<16> started
+Sorted / 1 = 0
+Sorted / 2 = 1
+<16> ended
+Sorted / 3 = 2
+Sorted / 4 = 3
+Sorted / 5 = 3
+Sorted / 6 = 4
+Sorted / 7 = 7
+Sorted / 8 = 23
+Sorted / 9 = 34
+Sorted / 10 = 56
+Sorted / 11 = 87
+Sorted /   = []
+@
+
+*/

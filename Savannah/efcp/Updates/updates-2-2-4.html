@@ -1,0 +1,377 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="ltr">
+<title>BioSpi : Update - 2.2.4</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+</head>
+<body>
+<span class="postbody"><ul><span style="font-size: 32px; line-height: normal">Release 2.2.4</span>
+ (December 5, 2008)<br>
+<br>
+<span class="postbody"><ul><span style="font-size: 24px; line-height: normal">Color Codes</span>
+<br>
+<br>
+
+<span style="color: blue">Minor modification</span>
+<br>
+<span style="color: red">Functional change</span>
+<br>
+<span style="color: darkred">Significant change</span>
+<br>
+<span style="color: green">Revision identifier</span>
+<br>
+<br>
+
+<span style="font-size:24px; line-height: normal">Source Updates</span>
+<br>
+<br>
+
+<span style="color:blue">Logix/install</span> -
+  <span style="color: green">r 2.6, r 2.7</span> :
+  Altered to use new "Kill Ring" keystrokes (was <u><i>tab</i></u>, now <u><i>escape</i></u>).
+<br>
+
+<span style="color:blue">Logix/file_commands.cp</span> -
+  <span style="color: green">r 1.1</span> :
+  Name file commands.
+   <strong><font color="black">*** New ***</font></strong>
+<br>
+
+<span style="color:blue">Logix/processor.cp</span> -
+  <span style="color: green">r 1.2</span> :
+  Replace integer "commands" with command names.
+<br>
+
+<span style="color:blue">Logix/processor_server/file_server.cp</span> -
+  <span style="color: green">r 1.2</span> :
+  Replace integer "commands" with command names.
+<br>
+
+<span style="color: red">Logix/utils.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   A natural string functor need not be quoted.
+<br>
+
+<span style="color: red">Logix/EMULATOR/kernels.c</span> - 
+   <span style="color: green">r 1.3</span> :
+   Change 
+   <font face="courier new, courier, mono">convert_to_string(Real,Output)</font>.
+   conversion format from "%f" to "%.7G".
+<br>
+
+<span style="color: red">Logix/system/display_server.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Implemented <font face="courier new, courier, mono">copy(Value)</font>
+   disposition of generated string(s).
+<br>
+
+<span style="color: red">Logix/system/make_table.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Produce formatted table from list or tuple of elements.
+   <strong><font color="black">*** New ***</font></strong>
+<br>
+
+<span style="color: red">Logix/system/user_macros.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added commands:
+   <font face="courier new, courier, mono">help, _complete_names</font>.
+<br>
+
+<span style="color: red">Logix/system/compile/precompile/rpc.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Sorted imports. 
+<br>
+
+<span style="color: red">Logix/system/compile/precompile/self.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Sorted exports.
+   <br>
+
+<span style="color: red">Logix/system/shell_server/self.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added commands 
+   <font face="courier new, courier, mono">help, _all_functors, _complete_names</font>.
+<br>
+
+<span style="color: red">Logix/system/shell_server/system_macros.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Added commands 
+   <font face="courier new, courier, mono">help</font>.
+   Improved commands:
+   <font face="courier new, courier, mono">Stream!Term</font> and
+   <font face="courier new, courier, mono">Stream!</font> .
+<br>
+
+<span style="color: red">Logix/system/shell_server/system_macros.cp</span> - 
+   <span style="color: green">r 1.4</span>:
+   Display tabular output for command 
+   <font face="courier new, courier, mono">help</font>.
+<br>
+
+<span style="color: red">Logix/system/sio_server/line_editor.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added command 
+   <font face="courier new, courier, mono">complete_names</font>.
+   Changed <font face="courier new, courier, mono"><u><i>tab</i></u>, <u><i>escape</i></u></font></font> to
+   <u><i>complete name</i></u> (as in <b>UNIX</b>), <u><i>kill ring</i></u>, respectively.
+<br>
+
+<span style="color: red">Logix/system/sio_server/server.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added command 
+   <font face="courier new, courier, mono">complete_names</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/self.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Recognize language 
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/bio_constants.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Improve language implementation.
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/call.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Improve language implementation.
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/self.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Improve language implementation.
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/server.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Improve language implementation.
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/utilities.cp</span> - 
+   <span style="color: green">r 1.3</span>:
+   Improve language implementation.
+   <font face="courier new, courier, mono">A#B</font> as target.
+   <font face="courier new, courier, mono">B</font>.
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/user_macros.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added commands:
+   <font face="courier new, courier, mono">_all_functors, _complete_names</font>.
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/convert.cp</span> - 
+   <span style="color: green">r 1.1</span>:
+   Convert source by transforming up to 
+   <font face="courier new, courier, mono">Target</font>.
+   <strong><font color="black">*** New ***</font></strong>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/pretty.cp</span> - 
+   <span style="color: green">r 1.2, r 1.3</span>:
+   Improved pretty printer output.
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/user_macros.cp</span> - 
+   <span style="color: green">r 1.2, r 1.3</span>:
+   Added commands 
+   <font face="courier new, courier, mono">_all_functors, _complete_names</font>.
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/spi_utils.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Fixed bug displaying tail of list.
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/user_macros.cp</span> - 
+   <span style="color: green">r 1.2</span>:
+   Added commands 
+   <font face="courier new, courier, mono">_all_functors, _complete_names</font>.
+<br>
+
+<br>
+
+<span style="font-size:24px; line-height: normal">Binary Updates</span>
+<br>
+<br>
+
+<span style="color: blue">Logix/Bin/processor.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: blue">Logix/processor_server/Bin/self.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/Bin/utils.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/Bin/display_server.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/Bin/make_table.bin</span> - 
+   <span style="color: green">r 1.2</span>
+   <strong><font color="black">*** New ***</font></strong>
+<br>
+
+<span style="color: red">Logix/system/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/compile/precompile/Bin/self.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/shell_server/Bin/self.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/sio_server/Bin/self.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/transform/Bin/self.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/Bin/self.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/Bin/convert.bin</span> - 
+   <span style="color: green">r 1.1</span>
+   <strong><font color="black">*** New ***</font></strong>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/Bin/pretty.bin</span> - 
+   <span style="color: green">r 1.2, r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.2, r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/Bin/spi_utils.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<br>
+
+<span style="font-size:24px; line-height: normal">Binary Updater</span>
+<br>
+<br>
+This script may be used to update the EMULATOR source and Bin file content
+<font color="blue">- see Note 1</font>.
+<br>
+<br>
+<hr>
+<font face="courier new, courier, mono">
+<br>
+pushd Logix/EMULATOR
+<br>
+cvs -q update
+<br>
+cd ../Bin
+<br>
+cvs update
+<br>
+cd ../processor_server/Bin
+<br>
+cvs update
+<br>
+cd ../../system/Bin
+<br>
+cvs update
+<br>
+cd ../compile/precompile/Bin
+<br>
+cvs update
+<br>
+cd ../../../shell_server/Bin
+<br>
+cvs update
+<br>
+cd ../../sio_server/Bin
+<br>
+cvs update
+<br>
+cd ../../transform/Bin
+<br>
+cvs update
+<br>
+cd ../biospi/Bin
+<br>
+cvs update
+<br>
+cd ../../../Logix_Users/Bin
+<br>
+cvs update
+<br>
+cd ../SpiFcp_Users/Bin
+<br>
+cvs update
+<br>
+cd ../BioSpi_Users/Bin
+<br>
+cvs update
+<br>
+popd
+<br>
+<spacer type="horizontal" size="1">
+<br>
+</font>
+<hr>
+<br>
+Suggested method:
+<br>
+<br>
+<ol><li>copy the script to 
+		<font face="courier new, courier, mono">Efcp-release/updater</font></li>
+	<li><font face="courier new, courier, mono">cd Efcp-release</font></li>
+	<li><font face="courier new, courier, mono">source updater</font></li>
+</ol>
+<br>
+
+<span style="font-size:24px; line-height: normal">Notes</span>
+<br>
+<br>
+
+<a name="note1"><font color="blue">Note1:</font>
+</font>The script does not update 
+<span style="color:blue">Logix/install</span>.</a>
+<br>
+
+<br>
+<!--
+<b>Next:</b> <A NAME = "Next" HREF="updates-2-2-4.html">2.2.4</A>
+-->
+
+<b>Next</b>: <A NAME = "Next" HREF="updates-2-3-1.html">2.3.1</A>
+<b>Previous</b>: <A NAME = "Previous" HREF="updates-2-2-3.html">2.2.3</A>
+<b>Up: </b> <A NAME = "Up" HREF="index.html">Index</A>
+
+</body>
+</html>
+

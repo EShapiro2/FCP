@@ -1,0 +1,1845 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class1.htm">
+<link rel=Preview href=preview.wmf>
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../class1.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0001.htm');">Biomolecular processes as
+concurrent computation</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0002.htm');">Goal</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Represent a wide variety of chemical,
+  biochemical and molecular systems as concurrent computation in the stochastic
+  pi-calculus</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0003.htm');">Course Outline</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 1+2 (19 April; 3 May)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Introduction</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>The electron theory of chemical bonds</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 3 (10 May)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Modular representation of chemical
+  reactions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Membranes and transport</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 4+5 (17 May, 24 May)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Enzymatic reactions and metabolism</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 6 (31 May)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Polymers</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0004.htm');">Course Outline</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 7 (7 June)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Molecular machines</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 8 (14 June)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Regulatory networks</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Lecture 9 (28 June)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Signal transduction</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0005.htm');">Course Outline</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>In each unit</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Chemistry/Biology backgrounder</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Modeling principles in stochastic
+  pi-calculus</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Examples</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Exercises</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>References and supplementary reading</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0006.htm');">Course Requirements</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Exercises: Weekly. Write and execute
+  pi-calculus programs. Can be submitted in pairs (CS and biology students)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Project: Model and analyze by
+  simulation a larger system (e.g. from a list of suggested ones). Can be done
+  individually or in teams combining CS and biology students</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Grading: 6/8 best exercises (10% each)
+  + project (40%).</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0007.htm');">Course Team</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0008.htm');">Motivation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Biochemical processes as concurrent
+  computation</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0009.htm');">Molecular Biology is…</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Sequence: Sequence of DNA and Proteins</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Structure: 3D Structure of Proteins and
+  other biomolecules and molecular complexes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Interaction: How do these molecules
+  interact?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0010.htm');">Sharing Scientific
+Knowledge</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Sequence and structure: encoded,
+  shared, processed and updated via computers.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Molecular interactions: shared via
+  articles.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Why?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0011.htm');">Computer Languages for
+Sharing Biological Knowledge</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Sequence: Strings over {A,C,T,G}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Structure: Labeled 3D Graphs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Interaction: ?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0012.htm');">The “New Biology”</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>The cell as an information processing
+  device</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cellular information processing and
+  passing are carried out by networks of interacting molecules</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Ultimate understanding of the cell
+  requires an information processing model</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Which?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0014.htm');">Describing the Cell</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Compositional, executable
+  representations of biological knowledge</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Executable – to enable computer
+  simulation and analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Compositional – so that a
+  representation of the cell can be composed bottom-up</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0015.htm');">&quot;“We have no real...&quot;</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>“We have no real ‘algebra’ for
+  describing regulatory circuits across different systems...”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>		- T. F. Smith (TIG 14:291-293, 1998)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>“The data are accumulating and the
+  computers are humming, what we are lacking are the words, the grammar and the
+  syntax of a new language…”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>		- D. Bray (TIBS 22:325-326, 1997)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0016.htm');">Computer Languages for
+Sharing Biological Knowledge</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Sequence: Strings over {A,C,T,G}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Structure: Labeled 3D Graphs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Interaction: ?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Answer: Process description language</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0017.htm');">Molecules as Processes</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0018.htm');">The pi-Calculus<br>
+(Milner,
+Walker and Parrow 1989)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A program specifies a network of
+  interacting processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Processes are defined by their
+  potential communication activities</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Communication occurs on complementary
+  channels, identified by names</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Communication content: Change of
+  channel names (mobility)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Stochastic version (Priami 1995) :
+  Channels are assigned rates</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0200.htm');">Unit 1: The valence
+theory of chemical bonds</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0021.htm');">The Chemical Reaction</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Unbalanced equation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>N<sub>2</sub>O<sub>5</sub> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> NO</font><font
+  face=Arial size=2><sub>2</sub> + O<sub>2</sub></font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0022.htm');">The Chemical Reaction</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Balanced Equation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>2N<sub>2</sub>O<sub>5</sub> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> </font><font
+  face=Arial size=2>4NO<sub>2</sub> + O<sub>2</sub></font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0023.htm');">The Chemical Reaction</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Reaction Mechanism</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0024.htm');">The Chemical Bond</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Chemical bonds as the “glue” that holds
+  atoms together to form molecules</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Valence - the property of an atom to
+  form bonds, e.g.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Univalent – capable of forming a single
+  chemical bond</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>H – valence of 1</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>C – valence of 4</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Na – valence of +1</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Some elements (e.g. N, S, P) have
+  multiple possible valences</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0026.htm');">Covalent and Ionic Bonds</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A covalent bond results when a pair of
+  electrons is shared between two atoms (unsigned valence)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>In ion formation, the sharing is so
+  unequal that electrons are transferred from one atom to another (signed
+  valence)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0029.htm');">Octet Structures</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0030.htm');">Bond Diagrams</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A covalent bond is a sharing of a pair
+  of electrons, so that both atoms have filled octets</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0040.htm');">The pi-Calculus</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Syntax and Semantics - I</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0041.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2(10)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Na | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0042.htm');">Process Definition</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Na | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0043.htm');">Channel Names and
+Communication Actions</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2(10)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0044.htm');">Guarded Communication
+Clauses</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0045.htm');">Parallel Composition</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Na | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0046.htm');">Communication and
+alternation between states - I</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0086.htm');">Communication and
+alternation between states - II</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0087.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0118.htm');">Chemical Kinetics</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0119.htm');">Reversibility of Chemical
+Reactions: Equilibrium</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Chemical reactions are reversible</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Under certain conditions
+  (concentration, temperature) both reactants and products exist together in equilibrium
+  state</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0123.htm');">Reaction Rates</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Net reaction rate = forward rate –
+  reverse rate</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0125.htm');">The Differential Rate Law</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>How does the rate of the reaction
+  depend on concentration? E.g.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0127.htm');">Rate Constants and
+Reaction Orders</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Each reaction is characterized by its
+  own rate constant, depending on the nature of the reactants and the
+  temperature</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>In general, the order with respect to
+  each reagent must be found experimentally (not necessarily equal to
+  soichiometric coefficienct)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0130.htm');">Elementary Processes and
+Rate Laws</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Reaction mechanism: The collection of
+  elementary processes by which an overall reaction occurs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>The order of an elementary process is
+  predictable</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0135.htm');">Stochastic pi-Calculus</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0195.htm');">Coupled chemical
+reactions as stochastic processes (Gillespie 76,77)*</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>N chemical species, each in quantity X<sub>i</sub>
+  in volume V</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Can participate in R reactions, each
+  characterized by a reaction parameter c<sub>m </sub>(similar to rate
+  constant)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>What is the next time step and which
+  reaction would occur in it ?</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>h<sub>i</sub>c<sub>i</sub>dt<span
+  style="mso-spacerun: yes">&nbsp; </span>- probability that the next reaction
+  is R<sub>i</sub>, where h<sub>i</sub> – number of combinations of reactants</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>P(t,m) – probability that the time step
+  is t and the reaction is Rm</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0137.htm');">Monte-Carlo Algorithm for
+Exact Stochastic Simulation of Coupled Chemical Reactions</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A Monte-Carlo technique to simulate the
+  stochastic process described by P(t,m)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Initialization:<span
+  style="mso-spacerun: yes">&nbsp; </span>Set t<sub>0</sub>, t<sub>stop</sub>,
+  reaction parameters c<sub>1</sub>-c<sub>M</sub> and types, species quantities
+  X<sub>1</sub>-X<sub>N</sub>.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Monte-Carlo step: Select random t and m
+  according to P(t,m) (based on all h<sub>i</sub>c<sub>i</sub>)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Update system: Advance t and update
+  products and reactant species to reflect one R<sub>m</sub> reaction.
+  Re-calculate h<sub>i</sub>c<sub>i</sub> for reactions whose reactants have
+  changed</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Repeat 2-3 until t &gt;= t<sub>stop</sub></font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0198.htm');">Monte-Carlo Algorithm for
+Exact Stochastic Simulation of Coupled Chemical Reactions</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Each run – one possible realization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Must carry out several independent runs
+  from same initial conditions but with different random seeds</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Number of runs depends on system (and
+  desired confidence)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>In practice, between 3 and 10 runs
+  often suffice</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0138.htm');">Stochastic (Chemical)
+pi-Calculus</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Every channel is attached with the
+  reaction parameter (“base rate”) of its corresponding reaction</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>2.<span style="mso-spacerun:
+  yes">&nbsp; </span>A global (external) clock is maintained</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>3.<span style="mso-spacerun:
+  yes">&nbsp; </span>The “actual rate” (c<sub>m</sub>h<sub>m</sub>)of the
+  reaction is determined. For a bimolecular reaction:</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>	Rate = &lt;base rate&gt; *
+  &lt;#sends&gt; * &lt;#receives&gt;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>4.<span style="mso-spacerun:
+  yes">&nbsp; </span>The clock is advanced and a communication is selected
+  according to Gillespie’s algorithm</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>5.<span style="mso-spacerun:
+  yes">&nbsp; </span>The selected communication is carried out</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>6.<span style="mso-spacerun:
+  yes">&nbsp; </span>Steps 3-5 are repeated (until t&lt;t<sub>stop</sub>)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0139.htm');">Base Rate</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A base rate is defined for each channel
+  when the channel is declared. A base rate is a real non-negative number.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Only a single base rate per global
+  channel</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A channel with a base rate of 0 acts as
+  a sink – all messages on the channel are discarded</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>If no specific base rate is determined,
+  then the default base rate applies</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>If no default base rate is determined,
+  then the default is instantaneous (infinite rate)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Infinite channels and alternative rate
+  calculation methods may<span style="mso-spacerun: yes">&nbsp; </span>be
+  defined (below and Unit 3)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0177.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>baserate(10).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0201.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0140.htm');">Using BioPSI</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0181.htm');">BioPSI architecture</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0186.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e1(100),e2(10)).<br>
+  System(N1,N2)::=
+  <br>
+  	&lt;&lt; CREATE_Na(N1) | CREATE_Cl(N2) . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>CREATE_Na(C)::= <br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{C =&lt;
+  0} , true ;				<span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>{C &gt; 0} , {C--} | Na | self .		<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>CREATE_Cl(C)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>{C =&lt; 0} , true ;		 		<span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{C &gt; 0} , {C--} | Cl | self &gt;&gt;
+  . Na::= e1 ! [] , Na_plus .<br>
+  Na_plus::= e2 ? [] , Na .<br>
+  Cl::= e1 ? [] , Cl_minus .<br>
+  Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0143.htm');">Starting Logix:
+Compilation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;116% logix</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Weizmann Institute Logix 2.2 07/11/00 -
+  13:12:58</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Copyright (C) 1991, Weizmann Institute
+  of Science - Rehovot, ISRAEL</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Welcome to SGI Logix !</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>12/04/01 - 19:02:46</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@c(nacl_1)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; started</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; source :
+  /home/aviv/Course/Electron_1/nacl_1.cp - 20010412190219</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; interpret : export([System /
+  2, Na / 0, Na_plus / 0, Cl / 0, Cl_minus / 0])</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; file :
+  /home/aviv/Course/Electron_1/nacl_1.bin - written</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; terminated</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0144.htm');">Starting Logix: Running</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Welcome to SGI Logix !</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>12/04/01 - 19:13:59</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@run(nacl_1#&quot;System&quot;(10,10),1)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; started</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>source :
+  /home/aviv/Course/Electron_1/nacl_1.cp - 20010412190219</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>interpret : export([System / 2, Na / 0,
+  Na_plus / 0, Cl / 0, Cl_minus / 0])</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>file :
+  /home/aviv/Course/Electron_1/nacl_1.bin - written</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>done @ 1.000443 : seconds = 4</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0191.htm');">Starting Logix: Aborting</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@run(nacl_1#&quot;System&quot;(2,2))</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; started</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@spr</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; suspended</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>nacl_1 # .Na_plus.comm(global.e1(100)!,
+  global.e2(10)!)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>nacl_1 # .Na.comm(global.e1(100)!,
+  global.e2(10)!)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>nacl_1 #
+  .Cl_minus.comm(global.e1(100)!, global.e2(10)!)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>nacl_1 # .Cl.comm(global.e1(100)!,
+  global.e2(10)!)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@a(1)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; aborted</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0187.htm');">Starting Logix: Recording</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@record(nacl_1#&quot;System&quot;(10,10),nacl_out,1)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>&lt;1&gt; started</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>done @ 1.000443 : seconds = 3</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>@</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0188.htm');">Starting Logix: Record
+file</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.002118</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Na</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Na_plus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Cl_minus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.003595</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Na</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Na_plus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Cl_minus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.003888</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Cl_minus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-.Na_plus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>+.Na</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0192.htm');">Processing the Record
+file</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;131% psi2t
+  nacl_out</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;132%
+  more nacl_out.names</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>time<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>Cl<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Cl_minus<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>Na<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>Na_plus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>2<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>3<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>Cl_minus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>4<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>Na</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;133%
+  more nacl_out.table</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>9.1e-06<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>10<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>0<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>10<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>0</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>1.00044<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>4<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>6<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>4<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>6</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>2.00000<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>6<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>6</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0193.htm');">Processing the Record
+file: Scaling</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;138% psi2t
+  nacl_out 0.01</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>wisdom:~/Course/Electron_1-&gt;139%
+  more nacl_out.table</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>9.1e-06<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>10<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>0<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>10<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>0</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.01176<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>2<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>8<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>2<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>8</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.02259<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>2<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>8<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>2<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>8</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.03342<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>2<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>8<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>2<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>8</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.04665<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>7</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.05753<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>5<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>5<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>5<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>5</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.06827<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>7</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.07856<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>1<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>9<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>1<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>9</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.09131<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>7</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.10197<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>7</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.11228<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>2<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>8<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>2<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>8</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>0.12290<span style="mso-spacerun:
+  yes">&nbsp;&nbsp; </span>3<span style="mso-spacerun: yes">&nbsp;&nbsp;
+  </span>7<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>3<span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>7</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0145.htm');">Plotting Output</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0190.htm');">Recording Consecutive
+Runs</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>The random seed is reset only when
+  exiting and re-entering the Logix system</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Global channels may require resetting
+  to avoid conflicts (prgcs command)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>If a record was suspended (nothing left
+  to do but time limit not reached) then the clock is not reset</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0147.htm');">Exercise #1: Using Logix</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Write a BioPSI program for the reaction
+  K + F </font><font face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS"
+  size=2> K</font><font face=Arial size=2><sup>+</sup> + F<sup>-</sup></font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Use the attached code (System process)
+  to spawn K and F processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Run the program, each time with
+  different rates and initial quantities</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Plot the results of each run. Remember
+  to use scaling to obtain enough data points: when to scaling are suggested,
+  use the refined one to plot the events up to steady state.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Submit: program code, record, .table
+  and .names files, plots</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>p.s. : For comments use % at beginning
+  of line</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0189.htm');">Some Useful Logix
+Commands</a></b></font></p>
+
+</body>
+
+</html>

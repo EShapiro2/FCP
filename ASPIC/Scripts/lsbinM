@@ -1,0 +1,6 @@
+foreach B (Bin system/Bin system/ndg/Bin system/ndg/assemble/Bin system/ndg/phase2/Bin system/ndg/phase2/ctl_pe/Bin system/ndg/phase2/ctl_pe/immediate/Bin system/ndg/phase2/ctlopt/Bin system/ndg/phase0/Bin system/ndg/phase1/Bin system/dictionary_server/Bin system/parse/Bin system/parse/syntax/Bin system/lint/Bin system/block/Bin system/block/tree/Bin system/block/tree/rename/Bin system/transform/Bin system/transform/lpi/Bin system/transform/inherit/Bin system/debug/Bin system/widgets/Bin system/shell_server/Bin system/sio_server/Bin system/library_server/Bin system/compile/Bin system/compile/precompile/Bin system/compile/control/Bin system/profile/Bin processor_server/Bin)
+echo $B
+foreach F ($B/*)
+ls -l $F ~/Mogix/$F
+end
+end

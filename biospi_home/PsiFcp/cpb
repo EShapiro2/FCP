@@ -1,0 +1,22 @@
+rm -f ../Psi-release/Logix/system/library_server/Bin/psi_library.bin
+cp -p Bin/psi_library.bin ../Psi-release/Logix/system/library_server/Bin/psi_library.bin
+rm -f ../Psi-release/Logix/system/Bin/psi_macros.bin
+cp -p Bin/psi_macros.bin ../Psi-release/Logix/system/Bin/psi_macros.bin
+rm -f ../Psi-release/Logix/system/Bin/psi_monitor.bin
+cp -p Bin/psi_monitor.bin ../Psi-release/Logix/system/Bin/psi_monitor.bin
+rm -f ../Psi-release/Logix/system/Bin/psi_record.bin
+cp -p Bin/psi_record.bin ../Psi-release/Logix/system/Bin/psi_record.bin
+rm -f ../Psi-release/Logix/system/Bin/psi_trace.bin
+cp -p Bin/psi_trace.bin ../Psi-release/Logix/system/Bin/psi_trace.bin
+rm -f ../Psi-release/Logix/system/Bin/psi_utils.bin
+cp -p Bin/psi_utils.bin ../Psi-release/Logix/system/Bin/psi_utils.bin
+rm -f ../Psi-release/Logix/system/Bin/repeat.bin
+cp -p Bin/repeat.bin ../Psi-release/Logix/system/Bin/repeat.bin
+
+rm -f ../Psi-release/Logix/system/user_macros.bin
+cp -p Bin/user_macros.bin ../Psi-release/Logix/system/user_macros.bin
+
+rm -f ../Psi-release/Logix/system/transform/Bin/psifcp.bin
+cp -p psifcp/Bin/self.bin ../Psi-release/Logix/system/transform/Bin/psifcp.bin
+rm -f ../Psi-release/Logix/system/Bin/psidbg.bin
+cp -p psidbg/Bin/self.bin ../Psi-release/Logix/system/Bin/psidbg.bin

@@ -1,0 +1,3554 @@
+
+
+
+
+
+
+
+
+
+                                  Logix
+
+
+
+                 Supplement to User Manual for System 2.2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                William Silverman
+                                                Michael Hirsch
+                                                Avshalom Houri
+                                                Ehud Shapiro
+                                                January, 1990
+
+
+
+
+
+
+Copyright (C) 1989, Weizmann Institute of Science - Rehovot, ISRAEL
+
+Contents
+========
+
+1.  Introduction
+
+2.  Terminology
+
+        Procedure  RPC  Module  Library  Stream
+
+3.  Services
+
+        Basic Messages
+        Service Kinds
+        Directors
+        Source Modules
+        Monitors
+        Special Module
+
+4.  Computations
+
+        Computation State
+        Nested Computations
+
+5.  The User Interface
+
+        Context Manipulation
+        Shell_server
+        User_macros
+        System_macros
+        Computation Management
+        Output Control
+        Computation Displays and Side-effects
+        Source Code
+
+6.  Compiling
+
+        Commands and Options
+        System Library
+        Compilation Output
+        Pre-Compiler
+
+7. Alternate Languages
+
+        Colon and FGHC
+        Implicit
+        Compound
+        Syntax
+        Language Transformations
+        Meta-Variables
+
+8.  Meta-Interpreters
+
+        Vanilla
+        Dynamic Debugger
+        Profiler
+
+9.  System Services
+
+        director(s)        link            stream
+        block              parse           system_dictionary
+        file               screen          timer
+        goal_compiler      sio             utils
+
+10. Other Utilities
+
+        array              hierarchy       trap
+        computation_utils  lint            widgets
+        get_source         math
+
+11. Bugs
+
+Appendices
+
+1.  User Guard Kernel Predicates
+
+2.  Additional Predicates
+
+1.  Introduction
+================
+
+The Logix System User Manual [1] describes the Logix system and its commonly
+used features.  This supplement provides details about more obscure features
+and about system behavior.  It is the basic reference manual for users of
+the Logix System.
+
+Logix is a programming environment written in Flat Concurrent Prolog (FCP),
+see [5], which allows the user to develop and test concurrent logic programs.
+While the environment itself is written in FCP(:,?), the underlying machine
+emulator is written in C.
+
+The reader is assumed to be familiar with FCP and with [1].
+
+
+****************************** W A R N I N G *********************************
+*                                                                            *
+*       The Logix system which is described here is still evolving -         *
+*       subsequent releases may differ radically from the description        *
+*       that follows.                                                        *
+*                                                                            *
+******************************************************************************
+
+
+For details of the Emulator, see [2].
+For details about FCP, see [3].
+
+
+2.  Terminology
+===============
+
+Procedure
+---------
+
+A procedure is identified by the name and arity of its clauses, indicated
+Name/Arity .  The name of a clause is its functor; the arity of a clause is
+its argument count.  The functor of a clause is the functor of the head of
+the clause.
+
+A procedure is a contiguous set of clauses with the same functor and arity.
+The procedure, its clauses and predicates which reference it share the same
+identifier,  Name/Arity .
+
+Remote Procedure Call
+---------------------
+
+A remote procedure call (RPC) is a goal in the body of a clause of the form:
+
+        Service # Goal ,
+
+meaning  Goal  is to be reduced by a procedure of  Service .  Goal may be a
+list of  Goals  to be reduced by  Service .  Service  is normally a (string)
+name, however, it may be any legitimate path in the hierarchy (see below in
+section 3, Path#Goal).
+
+Module
+------
+
+A module is a set of procedures (see [1], section 6).  A module may begin
+with declarations, which appear as clauses of the procedure  -/1 .
+
+One of the clauses of the declaration may be:
+
+        -export(ProcedureIdentifiers).
+
+where  ProcedureIdentifiers  is a list of identifiers of procedures within
+the module which may be called from other modules by RPCs.
+
+A module is an object of the Logix system, which assumes different forms
+depending on the function required.
+
+The passive form of a module is a file in a UNIX directory.
+
+The name of a module is the first part of the name of each file which
+contains some form of it.  A suffix identifies the contents of a file.
+Logix uses the suffix when selecting the file from a UNIX directory to
+be used for a module designated by name.  For a module named  Name :
+
+    Name.cp         contains the source text of the module;
+    Name.bin        contains an executable (binary) form of the module.
+
+The active form of a module is a  service .  The service may be either a
+server  or a  monitor (See section 3.)
+
+Library
+-------
+
+A  library  is a set of procedures which may be selectively incorporated
+during compilation of some other module.  Many of the primitive procedures
+described in [1], section 2.5, are defined in the system library - see
+section 6 below for details.
+
+The source form of a library begins with the fact:
+
+        library.
+
+It should not include a module declaration, other than syntax and language
+attributes (see section 3).
+
+A library module has no executable or interpretable form.
+
+Stream
+------
+
+A stream is a list of terms, which may be incomplete (i.e. have a variable
+tail.)  Streams are the principal means of communication between processes.
+Each service has an input stream, whose terms are goals for procedures
+exported by the module.  Remote procedure calls imported by a module are
+implemented as terms of an output stream to the Logix System.
+
+A stream is closed by instantiating its tail to the empty list, "[]".
+
+3. Services
+===========
+
+The Logix System is a hierarchical tree of services.  Each node of the tree
+defines a nested naming scope.
+
+Services communicate by sending messages to each other.
+
+A message may be sent to a service by name:  Name # Message .
+Two service names are pre-defined, relative to every service:
+
+  self   the service itself.
+  super  the service immediately superior in the tree.
+
+One service name is reserved and defined for all remote procedure calls.
+
+  computation
+         The reference name of the context of a computation (see section 4).
+
+Every service has a unique identifier,  ServiceId .  This is a list of service
+names, starting with the name of the service itself, followed by the names of
+its superior nodes in the hierarchy, in reverse order up to the root - e.g.
+[code,precompile,compile,system]  is the unique identifier of the module
+"code" in the system compiler's precompiler.  The root of the Logix System
+hierarchy has  ServiceId = [] .
+
+Basic Messages
+--------------
+
+Output only arguments are annotated "^" below; arguments which may be either
+input or output are annotated "!"; input only arguments are unannotated.
+
+Every service understands these messages (goals):
+
+    path(P^)    P  is the full path from the root of the tree to the service
+                in the form  N1# ... #Nn#ServiceName , where  N1 is the name
+                of a direct descendant of the root of the tree, and each Ni
+                is the name of a director service in order along the path
+                from the root to the responding service, known to its super
+                as  ServiceName .
+
+    service_id(ServiceId^)
+                ServiceId  is the unique identifier of the service.
+
+    attributes(A^)
+                A  is the list of attributes of the service.
+
+    clause(Goal,Body^,Id!,Time^)
+    clause(Goal,Body^,{Suspense^, Id!,Time^})
+    clause(Goal,Body^)
+                Goal  is to be reduced to  Body .
+                Id  is the integer identifier of the clause which reduces
+                Goal  or a (non-integer) input which terminates the
+                attempted reduction.
+                Time  is a number which uniquely orders the reduction,
+                or an exception, indicating that the goal has not been
+                reduced - e.g.  aborted  or  failed(Goal,Time') .
+                If the goal reduced without suspending, Suspend = "reduced";
+                otherwise, Suspend = "suspended" (See section 6.)
+
+    open_context(Channel^)
+                Channel  is a channel to the service.  It may be used
+                to send messages to the service anonymously.
+
+
+    Path#Goal   Path  is the path, starting in the local scope, to that
+                service which can reduce Goal.  A path is a compound name
+                of the form  N1# ... #Nn , where  N1  is defined in the
+                local scope, and each  Ni, i > 1  is defined within the
+                scope of  N(i-1) ; Ni  may also be context(Channel)  or
+                context(Channel,L,R) , where  Channel  is a channel
+                produced by an  open_context(C)  (see above), or it may
+                be a  ServiceId .
+                Any service which receives the message  self#Goal
+                sends  Goal  to itself.  Any service which receives
+                the message  super#Goal  sends  Goal  to the service
+                immediately superior to itself in the hierarchy.
+
+    true        Always succeeds.
+
+
+One of the attributes is  export(Exports) , where  Exports  is a list of
+identifiers of procedures which may be called by RPCs to the service.
+
+
+Service Kinds
+-------------
+
+A service is defined within a director.  It may be either local or implicit.
+
+There are three kinds of local services:
+
+1. A server has no internal state, except its input stream.  Its  Exports
+   are procedure identifiers for which it can reduce corresponding goals
+   from its input stream.  A server may have multiple parallel instances
+   in a multi-machine Logix System.
+
+2. A monitor has an internal state, consisting at least of its input stream.
+   Its  Exports  identify messages which it can serve from its input stream.
+   A monitor has only one instance in a multi-machine Logix System.
+   One of a monitor's attributes is "monitor".
+
+A monitor or a server which receives the goal  A#B  where  A  is neither
+"self" nor "super", delegates  A#B  to its super (a director).
+
+3. A director distributes messages to a set of named services.  A director
+   which receives the message  A#B , where  A  is the name of one of its
+   local services, sends the message  B  to the service designated by  A .
+   If  A  is a name and is not a local service, the message  A#B  is
+   delegated to the next higher node (director) in the hierarchy.
+   An implicit service is a local service of some director which is higher
+   in the hierarchy.  When a local service and an implicit service have the
+   same name, the local service is preferred.
+   One of a director's attributes is "director".
+
+Director
+--------
+
+A director's set of services includes active and inactive services.
+
+Its basic active set is empty.  Initially, all services are inactive.
+The local services are all of the source/binary modules and directories
+designated in the UNIX directory corresponding to the director.
+
+When an inactive service is referenced it becomes active.  Typically the
+reference is the leading name of the path of an RPC.
+
+1. A source module is compiled (optionally), if it is more recent than
+   any corresponding binary module. The active service may be either a
+   server or a monitor.
+
+2. When a directory is referenced, the active service is a director,
+   whose super is the director which activates it.  Thus a reference to
+   sub#subsub#Name#Goal  may have the side-effect of  activating internal
+   nodes (directors) of the tree ( sub  and its service  subsub ) along
+   the path to  Name .
+
+3. A reference to an implicit service (for which there is no local service
+   with the same name) is relayed to the actual local service of some
+   higher (director) node of the hierarchy.  Normal scoping rules apply.
+
+
+A director serves the additional messages:
+
+    context(C,L,R)#Goal
+    context(C)#Goal
+                C  is a channel produced by an  open_context/1   message,
+                and  Goal  is sent to the service which was the target of
+                that request - note that  Goal  is logically part of the
+                computation which created the channel.
+                L  and  R  are unified when  Goal  has been sent -  thus,
+                context(C,C,C')  can be used to serialize messages to the
+                (anonymous) service.
+                Note that C may be an arbitrary channel (e.g. created by
+                the primitive procedure make_channel/2), in which case
+                Goal  is sent to the ouptut stream of the channel.
+
+
+Any message which is not understood by a director is delegated to its
+super, the next higher node of the hierarchy (see  Special Module  below).
+
+In version 2.1 of the Logix System, the user executes shell commands within
+a current context.  Initially this context is the nested scope defined by
+the director  UserName  within the director "system", which is defined in
+the root node of the hierarchy - i.e. the full path of the initial shell
+context is  system#UserName , where  UserName  is the name of the user.
+
+The director  UserName  is defined when the Logix System is started, relative
+to the UNIX working directory.  It corresponds to the home directory of the
+user, if that directory is on the UNIX path to the working directory;
+otherwise it corresponds to the earliest directory (if any), with the same
+name as the user on the UNIX path to the working directory - other directories
+on the UNIX path from the  UserName  directory to the working directory
+correspond to director-nodes of the hierarchy.  If there is no directory on
+the UNIX path with the same name as the user, and the user's home directory
+does not lie on the UNIX path to the working directory,  UserName  corresponds
+to the UNIX working directory.
+
+Source Modules
+--------------
+
+A source module is the textual source of a server, a monitor or a library.
+A monitor is distinguished from a server by the "monitor" attribute.
+
+Attributes of a source module are specified as its first procedure, with
+functor "-" and arity 1.  Significant attributes are:
+
+  -export(Exports)  Exports is a list of procedure identifiers of the form
+                    Functor/Arity, or for a server it may be the string "all",
+                    in which case all of the procedures in the server are
+                    exported.  If this attribute is omitted, the default for
+                    a server is "all".  The active service provides the term
+                    exports(ExportList) , where  ExportList  is a list of
+                    identifiers of exported procedures, as an element of its
+                    list of attributes.
+  -monitor(Start)   This attribute designates a monitor.  It appears in the
+                    attributes of the active service as the string "monitor".
+                    If this attribute is omitted, the module's active form is
+                    a server.
+                    Start  is the functor of a procedure, with arity 1, which
+                    is executed initially with argument  In? , the input
+                    stream of the monitor.
+  -mode(Mode)       For a server,  Mode  may be one of  trust,failsafe ,
+                    interrupt,interpret .  The default is  interpret .
+                    For a monitor,  Mode  may be one of  user,system .
+                    The  default is  user .
+  -language(Language)
+                    Language  is the name of a service which transforms the
+                    source module into FCP, or a list of such names - e.g.s:
+                         -language(syntax).
+                         -language([implicit,colon]).
+                         -language(compound).
+  -syntax(Syntax)   Syntax  is the name of the modified parsing rules used
+                    to parse the source text.  This attributes does not
+                    appear in the attributes list of the active module.
+
+A module cannot export any of the procedures  attributes/1, clause/2,
+clause/3, clause/4, open_context/1, path/1, service_id/1, true/0, #/2 ,
+and procedures with those identifiers cannot be meta-interpreted.
+
+For further information about source modules, see section 6 below.
+
+Monitors
+--------
+
+A user monitor receives goals on its input stream in the form they are sent.
+It is the monitor's responsibility to analyze and respond to the goals.  No
+connection to the originating computation is preserved.
+
+Typically, a user monitor has the general form:
+
+  start(In) :-
+    initialize_monitor_state(State),
+    serve(In, State).
+
+  serve([Message|In], State) :-
+    service(Message, State, State'),
+    serve(In, State').
+
+The procedure  service/3  discriminates messages and updates  State .
+
+
+A system monitor receives input in the form  {Goal, CommunicationControls} .
+The monitor may manipulate  CommunicationControls  directly, or it may
+use a simplified interface, provided by the the system library.
+
+Given a system monitor with a dynamically changing state, initialize the
+simplified interface:
+
+  start(In) :-
+    generate_initial_state(State),
+    dynamic_server(In, State).
+
+The procedure  dynamic_server/2  is provided in the system library.
+
+As each message is received,  dynamic_server  calls the user procedure
+select/4  to process it, iterating with the altered state,  State' :
+
+  select(Goal, State, State', Common)
+
+State  (input) is the State of the monitor following the last message served;
+State' (output) is the state of the monitor for the next message to be served;
+Common  is a blackboard interface to the computation to which  Goal  belongs.
+
+
+Two other servers are supplied in the Logix System  library , static_server/2
+and  stateless_server/1 , called respectively:
+
+  start(In) :-
+    generate_initial_state(State),
+    static_server(In, State)
+
+  start(In) :-
+    stateless_server(In).
+
+The former process calls  select/3  for each goal, iterating with the
+static  State :
+
+  select(Goal, State, Common)
+
+The latter process calls  select/2  for each goal:
+
+  select(Goal, Common)
+
+You may use the  Common  blackboard by instantiating it to a message.
+If the computation is aborted by an "abort" basic signal, the interface
+sets  Common = abort .
+
+Blackboard messages served by the interface are:
+
+  done              The process provided for the goal is logically complete;
+                    this is not necessarily synchronous with the completion
+                    of State'.
+
+  computation(Request, NewCommon!)
+                    Send  Request  to the associated computation (which
+                    delegates unknown requests to its current context -
+                    see section 4); iterate with  NewCommon .
+
+  context(Request, NewCommon!)
+                    Send  Request  to the monitor's super;
+                    iterate with  NewCommon .
+
+  fork(Common1!, Common2!)
+                    Split the common interface into two interfaces.
+
+  exception(Status, Goal)
+                    Send the exception message  failed(ServiceId#Goal, Status)
+                    to the computation.
+
+  reply(Ready, In, Out, NewCommon)
+                    When  Ready  is known, unify  In  and  Out ; if the
+                    unification fails, send the exception message
+                    failed(ServiceId#(In =\= Out), cant_reply)  to the
+                    computation.
+
+For example to call A#B and terminate the interface process:
+
+  Common = computation(A#B, done)
+
+Of course, since Common is a blackboard, you must allow for conflicting use.
+Typically this may be done by adding a clause with guard predicate:
+
+  known(Common)
+
+whose reduction completes the process without further reference to the common
+interface.
+
+
+The library procedure  unknown/2 , called:
+
+  unknown(Goal,Common)
+
+is defined:
+
+  unknown(Goal, Common) :-
+      Common = exception(unknown, Goal).
+
+The library procedure  reply/4  is defined
+
+  reply(Status, In, Out, Common) :-
+      Common = reply(Status, In, Out, done).
+
+These procedures terminate quietly if the unification fails.
+
+
+See the monitor  screen  and the module  screen_server  for an extended
+example of the use of the dynamic interface.
+
+See the monitor  math  for an example of the use of the static interface.
+
+
+Special Module
+--------------
+
+A module named  "self"  (usually one whose source is self.cp) serves all
+messages to the director within which it is defined.  Any unrecognized
+message (not an exported procedure) is delegated to the director itself.
+
+An elementary use of this feature is to declare types common to local
+services in this module (see [1], Appendix 6).
+
+The "system" director includes a "self" module which exports all of the
+primitive procedure calls, so that when unknown shell commands are delegated
+(the normal default), all primitive procedures can be called from the console
+(see  shell_server  in section 5).  Thus, this feature provides an alternative
+method of extending the user interface (see section 5.)
+
+Many of the sub-directors of system include a "self" module, which provides
+primary control of the functions supported by its sub-hierarchy.
+
+4.  Computations
+================
+
+A new (sub) computation is initiated by a computation function :
+
+        computation#call(Requests, Events^)
+
+The new computation reduces the RPCs from the  Requests  stream, producing
+the  Events  stream.
+
+At any given time a computation consists of all unreduced processes descended
+from RPCs which have appeared in the  Requests  stream.
+
+Computation State
+-----------------
+
+A computation has a state consisting of:
+
+1. Its super-computation - the computation of the original caller.
+
+2. Its lexical context - the node in the Logix System service hierarchy which
+   serves requests RPCs delegated by the computation (typically RPCs).
+   Initially this is the same as the lexical context of its super-computation.
+   Each RPC in the  Requests  stream, or which is sent to the computation by
+   an internal RPC (e.g. computation#Target#Goal), is performed in the current
+   lexical context of the computation.  The lexical context may be addressed
+   by an RPC of the form  self#Goal .
+
+3. The input  Requests  stream - basic signals are:
+
+   * suspend  - suspend execution of all interruptable processes.
+   * resume   - resume execution of suspended processes.
+   * abort    - abort all unresolved, interruptable processes -
+                subsequent requests are ignored.
+
+   Other requests are:
+
+   * A#B      - The RPC  A#B  is reduced in the current computation context.
+
+   * state(R) - unify  R  with the resolvent, a list (of lists) of all
+                unresolved, suspended processes.
+
+   * extract(Nth, Goal)
+              - The  Nth  goal in the resolvent is extracted from the
+                computation as an RPC and unified with  Goal .  It is replaced
+                by the goal "true".
+
+   * events(SE)
+              - SE = [Status|Events']  (output):
+                Status  is one of  resumed, suspended, aborted, terminated ;
+                Events'  is a list of all subsequent  Events  stream messages.
+
+   * identifier(Identifier)
+              - Identifier  replaces the term which represents the computation
+                in the resolvent of the super-computation (Initially that term
+                is  Requests .)
+
+
+4. The computation controls - these include a basic signal stream, a
+   communication circuit, and an internal event stream.  The communication
+   controls carried by messages passed between services are derived from
+   these controls.
+
+   CommunicationControls = {BasicSignals, Left, Right, InternalEvents}
+
+   * BasicSignals - a stream of basic signals, to which all interruptable
+     processes of the computation and all sub-computations are sensitive.
+
+   * Left, Right - two communication circuit terms, which propagate
+     messages such as  state(R)  to which all processes must respond.
+
+   * InternalEvents - an output stream used to send computation requests
+     and events to the internal events stream.
+
+     A computation request is sent by an RPC  computation#Request  from
+     any process within the computation.  Request  may be one of:
+
+         A#B - reduce  A#B  in the current computation context.
+
+         events(SE) - SE = [Status|Events']  like the shell command  events/3 .
+
+         change_scope(NewContext,Ok) - change context to   NewContext , which
+         is the  ServiceId  of some (internal) node - Ok is unified with
+         "true" when the request is accepted.
+
+         Other - a message delegated to the output  Events  stream
+         (event(Event) or failed(Goal, Reason) - see below), or
+         delegated to the supe computation (all others).
+
+   Note that an active process has (almost) direct access to the basic
+   signal stream for rapid response to the three basic signals.
+
+5. The output  Events  stream
+
+   Three kinds of messages appear in the  Events  stream:
+
+   a. Status events - these are responses to the three basic signals, or
+      the normal termination event.
+
+      * suspended  <==  suspend
+      * resumed    <==  resume
+      * aborted    <==  abort
+      * terminated
+
+   b. failed(Goal, Reason) - typically,  Goal  is one of:
+
+        A#B , indicating that the process  B  failed to reduce in module  A ,
+        or that the message  B  was not understood by service  A .
+        The most common values of  Reason  are:
+            failed  -  the process failed to reduce;
+            unknown -  B  is not exported by service  A .
+
+        failed(call(Identifier),  failed(Goal', Reason'))  means that  Goal'
+        failed in a sub-computation (recursively defined).
+
+   c. event(Event)
+      Any stream element  of the form  event(Event)  as well as any internal
+      event of that form (typically called  computation#event(E)) is delegated
+      to the  Events  stream.
+
+The "terminated" signal is generated when no unresolved goal remains in the
+computation.  When there are no unresolved goals, and the  Requests  stream
+is closed, the  Events  stream is closed, and computation control ends.
+
+Further events may appear on the  Events  stream following "aborted" or
+"terminated".  These may arise from non-interruptable processes, which
+continue following termination or the  abort  signal.
+
+
+Nested Computations
+-------------------
+
+When a computation starts a sub-computation, that sub-computation acts like
+a single process of the calling computation.
+
+Computations are nested according to the following rules:
+
+ * When a computation is aborted (signal "abort"), all of its sub-computations
+   are aborted - subsequent requests are ignored.
+
+ * When a computation is suspended, its sub-computations are suspended
+   indirectly, without event - i.e. Only a computation which is directly
+   suspended (by signal "suspend") responds with the event "suspended"
+
+ * When a computation is resumed, its sub-computations which have been
+   indirectly suspended (see above) are resumed, without event.  However,
+   a sub-computation which has been suspended both directly and indirectly
+   remains suspended until it is directly resumed and its calling computation
+   is resumed (or aborted).
+
+ * Multiple successive "suspend" signals are equivalent to one such signal.
+   Multiple successive "resume" signals are equivalent to one such signal.
+
+ * An internal event of the form  failed(Goal, Reason)  is transformed by
+   a computation into an internal event for its calling computation:
+
+      failed(call(Identifier), failed(Goal, Reason))
+
+   Other internal events are not relayed to the calling computation.
+
+ * A sub-computation is represented in the resolvent of its calling
+   computation by a term of the form:
+
+      call(Identifier, SE)
+
+   It may be extracted from the resolvent (see 3 above).
+
+
+Extended Computations
+---------------------
+
+When a stream of goals is sent to a service, or (equivalently) when a
+channel to a service is obtained by an  open_context/1  request, the
+stream or channel may be used to introduce new goals into the computation
+which created it.  This is a very efficient way to add goals to a
+computation interactively.  It is commonly used by meta-interpreters
+(see section 8).
+
+5.  The User Interface
+======================
+
+As explained in [1], section 4, terminal commands to the Logix System are
+served by a command interpreter, comprised of several modules, known
+jointly as the shell.  The shell is a computation of the Logix System.
+
+Lexical Context Manipulation
+----------------------------
+
+Shell commands are performed within a lexical context.  This is the
+initial lexical context of any computation started by the shell.  It is
+served by a director, which distributes remote procedure calls to its
+active services, activates new services as needed, and delegates requests
+for other services to its  super .
+
+
+To address the director explicitly, enter the shell command:
+
+        self#Message
+
+To address the director's super explicitly, enter the shell command:
+
+        super#Message
+
+
+Shell_server
+------------
+
+The shell is organized as a pipeline of functions.  The monitor  shell
+applies these functions to commands in the order they are entered.  The
+module  shell_server  implements the pipe as a series of filters, each
+serving its input, which is the output of its predecessor, and producing
+output, which is the input of its successor.  Each stage of the shell
+produces side-effects (e.g. starting computations).
+
+Commands entered from the keyboard are compiled by the module  goal_compiler ,
+using the service  system_dictionary  to associate Variable names with their
+values.   The compiled terms are merged with the input to the shell monitor.
+
+The term  X^  where  X  is a parsed variable is replaced by a new variable,
+and the former value associated with the name  X  is discarded.  The value
+of the new variable is displayed as it is instantiated.
+
+The terms  ~X  and  unbind(X)  are intercepted, and the name  X  is deleted
+from the global dictionary.
+
+Compiled terms are completely compiled - the transformation is atomic from
+the user's point of view.  However, since compilation is concurrent with
+other references to  system_dictionary , some indeterminacy is possible
+within a single term if other processes are also manipulating the named
+entries of the global dictionary.
+
+The user may compile a stream of parsed terms, using the same dictionary as
+the shell, by calling  shell_server#compile(ParsedTerms, CompiledTerms) .
+
+See the shell command "input" below, for a means of reading keyboard commands
+from an alternate source.
+
+The module shell_server provides a filter which recognizes and sequences
+lists of goals.  It also defers goals which are variable or have a variable
+functor.  The shell command:
+
+    defer(Ready, Goal)
+                Defers the command(s)  Goal  until  Ready  is instantiated.
+
+Other commands served by the initial filter of the shell server are:
+
+    unbind      Forget all named variable bindings.
+
+    ~X
+    unbind(X)   Forget the binding of the variable named "X".
+
+
+Two syntactic conventions are applied by shell_server.
+
+1. The operator ";" separates successive shell commands on the same
+   (extended) line, which are served in left-to-right order.
+
+2. Remote procedure calls, which are separated by commas, are computed
+   conjunctively as part of the same computation.
+
+
+The services  user_macros  and  system_macros  are called by subsequent
+filters to expand shell commands.  Commands for computations are served by
+a filter in shell_server, following  system_macros , as are the remaining
+commands, which control the shell's output.
+
+Two commands may be used to filter the input to  user_macros  and to
+system_macros .
+
+    filter_user_macros(In^, Out)
+    filter_system_macros(In^, Out)
+                In  is a stream of shell goals to be filtered;  Out  is a
+                stream of goals produced or forwarded by the filtering
+                process to its successor (user_macros or system_macros).
+
+Successive filters are pushed ahead of their predecessors.  A filter is
+removed by unifying the tail of the  In  stream with  Out .
+
+See also  filter_computation(In, Out)  and  delegate(In, Out)  below.
+
+User_macros
+-----------
+
+This service is called by the shell server to expand user specified  macros.
+It receives each shell command for intial processing.
+It exports the procedure  expand/2  of the form:
+
+        expand(Goal, Head^\Tail)
+
+Head\Tail  is a difference list of goals for the next stage of the  shell .
+Several goals,  A,B,...,G , may be passed to the next stage by unifying
+Head = [A,B,...,G|Tail] .
+
+The distributed version only recognizes the goals "macros" and "hi".  To
+add your own macros to the system, modify a copy of  user_macros  and enter
+the goal "macros" (or close(user_macros)).  This happens automatically at
+the start of a session, since your local copy of user_macros is preferred
+to the default (distributed) version.
+
+Goals which are not recognized by  user_macros  are forwarded to the service
+system_macros  (see below) for expansion.
+
+User_macros  may generate goals to be filtered by subsequent stages of
+the shell.  To direct a goal or a list of goals to the shell's lexical
+context, ignored by intervening stages, wrap it (them):
+
+    to_context(Goal)
+
+For example, to add the macro  pwd/0  to display the path to the shell's
+lexical context, add clause:
+
+        expand(pwd, [to_context(path(Path)) | Commands] \ Commands) :-
+            screen#display(Path, type(ground)).
+
+to your personal copy of  user_macros .  A substantial example of user_macros
+is distributed in  system#widgets#user_macros .
+
+The (nested) lexical context in which  user_macros  is found corresponds
+to the working directory of the UNIX system when the Logix System is started.
+It may be changed by the shell command:
+
+    change_context(NewSuper)
+                NewSuper  is the  ServiceId  of some internal node
+                (director), which becomes the lexical context of the shell.
+                The  user_macros  of that context is used subsequently.
+
+A command which is commonly used to change the shell's lexical context
+(without changing the context of user_macros) is  cd/2  (see below).
+
+
+System_macros
+-------------
+
+Module  system_macros  is the system macro facility.  Most of the shell
+commands described in [1] are implemented in this module.
+
+
+    X=Y         Unify  X  and  Y .
+
+    X:=Y        Evaluate the arithmetic expression  Y , unifying  X  with the
+                integer result (See utils, evaluate/2, in section 9.) 
+
+    info(X)     Return execution statistics to list  X ; if  X  is omitted
+    info        print current execution statistics.
+
+    ^           Display the current bindings of all named dictionary variables.
+
+    Name^       Display the current binding of  Name .  Use the current value
+                of the  iterations  option of the screen server to control
+                recursive display of named variables which are displayed as
+                part of a structured value and are subsequently instantiated.
+
+    Stream!Term
+                Add  Term  to the end of  Stream ;  Stream  remains incomplete.
+    Channel!Term
+                Write  Term  to the channel.
+
+    Stream!     Close  Stream   (End of  Stream = [] .)
+    Channel!    Close  Channel  (close_channel(Channel) predicate.)
+
+    date        Display the date and time.
+
+    collect     Do garbage collection immediately.
+
+    freeze_heap Maintain modules outside of the general heap, reducing
+                the frequency and duration of garbage collection.  This
+                operation requires two or three garbage collections.
+
+    melt_heap   Return modules to the general heap, making the heap space
+                of "frozen", unreferenced (closed) modules available.
+                This operation requires one or two garbage collections.
+
+    reset       Stop monitoring all current computations.  This command is
+                useful to release the suspended processes which are monitoring
+                computations that are no longer of interest.  All such
+                processes and all related goals and arguments which are no
+                longer otherwise referenced are released for garbage
+                collection ( unbind(X) / unbind  may be necessary as well).
+                Set the current computation number to 1.
+
+    status      Display the current range of computations, the current service
+                and the current computation number.
+
+    signal_fcp(Signal)
+                Send Signal to the emulator.  Signal is one of
+
+                suspend         Suspend execution, like ^Z.
+                abort           Terminate execution, like ^C.
+                resolvent(FileName)
+                                Write a dump like  ^\  to UNIX file FileName,
+                                but continue, instead of terminating.
+
+This module also expands all of the computation management goals described
+in [1], section 4, the module management commands described in [1], section 6
+and the system requests described in [1], section 7.1.
+
+Annotation and Defaults
+-----------------------
+
+Many of the commands described below may be given with fewer arguments
+than are specified.  When an ipput argument is omitted, its value is
+defaulted.  When an output argument is omitted, its value is displayed,
+if it is significant (e.g.  Ok = true  is not displayed).  Some normal
+defaults for omitted arguments are:
+
+   Omitted     Default Action/Value
+
+   Ok        If the command does not succeed, display the reason for failure.
+   No        The current computation number is the default.
+   Service   The current service is the default.
+   New,Old   The current value is unchanged, and it is displayed.
+
+Output arguments are annotated "^" below; arguments which may be either
+input or output are annotated "!"; input arguments are unannotated.
+
+Some conventions for input arguments referenced below are:
+
+  Service       may be designated by any valid compound path.
+  Module        may be designated by any valid compound path which
+                refers to a text module file.
+  Goal          may be a list of goals, to be executed concurrently;
+                however, they are received in list order when they are
+                directed to a monitor service.
+
+Shell Commands
+--------------
+
+    cd(Path, Ok^)
+                Path is the (compound path) name of a director which will
+                serve subsequent commands (the new "self"), becoming the
+                shell's new lexical context - e.g.s
+
+                      cd(super)
+                      cd(sub#subsub, Ready)
+
+    input(File, Ok^)
+                File  (relative to the shell's lexical context), is read
+                edited and echoed, one line at a time, pushing the current 
+                input (keyboard or some other input file).  The process
+                waits for the system to become idle following each line.
+                Current input resumes following end-of-file.
+
+    Service#Goal
+                Start a computation of  Goal  in  Service ;  <No> and  Events
+                are displayed.
+    #Goal       Same as  Service#Goal , where current  Service  is assumed.
+
+    start(Requests, No!, Events^, Ok^)
+                Start a computation with  Requests ; requests which are RPCs
+                are executed concurrently.
+
+    state(No!, Goal^, Events^, Ok^)
+                Unify  Goal  with the goal of computation <No>, with its
+                current bindings (See  new_goal  below.)  Events  is the
+                list of events of the computation so far.
+    events(No!, Events^, Ok^)
+                Events  is the stream of events of the computation, including
+                all previous and subsequent events.
+
+    resolvent(No!, Resolvent^, Ok^)
+                Suspend computation <No>.  Resolvent  is a snapshot of its
+                resolvent.  The resolvent is edited before being displayed.
+
+    suspend(No!, Ok^)
+                Suspend computation <No>.
+    resume(No!, Ok^)
+                Resume suspended computation <No>.
+    abort(No!, Ok^)
+                Abort computation <No>.
+
+    extract(ProcessNo, No!, (Service#Goal)^, Ok^)
+                Extract  Goal  in  Service  with serial number  ProcessNo
+                from computation <No>.  Process numbers can be determined by
+                inspecting the computation's resolvent.
+    add(Requests, No!, Ok^)
+                Direct computation <No>  to perform  Requests ; RPCs are
+                added to the computation.
+
+    debug(Service#Goal, No!, Events^, Ok^)
+               Start a computation of  Goal  in  Service  under a debugger.
+    debug(ProcessNo, No!, Ok^)
+               Extract process number  ProcessNo  from computation <No> and
+               prepare to debug it.  The computation is suspended by the
+               command.  Enter  resume  to continue.
+
+    services(Path, Services^)
+                Services  is a sorted list of all active services of the
+                specified director (Default to the shell's lexical context.)
+
+    time(Service#Goal, Timing^, No^, Events^, Ok^)
+               Unify  Timing  with timing information about the computation
+               of  Goal  in  Service .  Interactive computations cannot be
+               timed with this command, or with  rpc/5 .  See "timer" in
+               section 9 for details of  Timing .
+    rpc(Service#Goal, Rspc^, No^, Events^, Ok^)
+               Rspc  is a crude measure of the parallelism in a computation,
+               which is the average number of process reductions in one
+               emulator cycle.
+    profile(Service#Goal, Profile^, No^, Events^, Ok^)
+               Unify  Profile  with profiling information about the 
+               computation of  Goal  by  Service .
+
+    close(Services, Ok^)
+               Close currently active  Services .  Services  may be a
+               single  Service ,  a list of  Services  or omitted (close
+               current service).  Current service is updated.
+    edit(Modules, Ok^) 
+               Like  close  but suspend Logix after closing  Modules .
+               A new copy of each module is activated at next reference
+               (by recompilation if the source has been touched).  The
+               Logix System is suspended to edit, and must be resumed
+               manually by the UNIX command fg.
+    load(Services, Ok^)
+               Activate inactive  Services .  No action is taken for a
+               service which is already active.
+
+    compile(Service, Options, OK^)
+               Compile  Service  and close its current incarnation (if any).
+               When  Service  is a module, it is compiled, and its binary
+               form is written.
+               When  Service  is a director, it is block-compiled; the text
+               of its sub-hierarchy is block-loaded (see block in section 9)
+               and compiled into a new binary self module.
+    lint(Module, Options, OK^)
+               Perform various checks on  Module .
+    type_check(Module, Options, OK^)
+               Check the type-declarations of  Module .
+
+    computation(New, Old^)
+               <Old> used to be the current computation.  Set the current
+               computation to be  <New> .
+    service(New, Old^)
+               Old  used to be the current service name.  Set the current
+               service name to be  New .
+
+When the  No!  argument is input, it becomes the new current computation.
+
+Computation Management
+----------------------
+
+The next stage of the shell is computation management.  It creates and
+numbers computations, updates and supplies their statuses, sends requests
+to them and extracts information from them on command.
+
+The input to this stage may be filtered by the command:
+
+    filter_computations(In^, Out)
+                In  is a stream of requests to be filtered;  Out  is a stream
+                of goals produced or forwarded by the filtering process.
+
+
+This stage implements most of the commands described in [1], 5.2 and above.
+
+
+Additional commands are  status/1 ,  new_goal/2 .
+
+    status(X^)  Returns the current range of computations - one of:
+                    "idle", Only, First-Last
+                where  Only, First, Last  are computation numbers.
+    new_goal(N, Goal)
+                Replace the goal returned by  state/4  by  Goal .  This
+                command may be used to make the displayed goal of the
+                shell  state commands easier to look at.  It also helps to
+                conserve heap space, which might otherwise be occupied by
+                obsolete arguments of the original goal.
+
+Output Control
+--------------
+
+The remaining shell_commands are:
+
+    prompt(X)   Change the prompt to string   X  (concatenated with one
+                blank space if X is at least two characters long).
+    pop_prompt  Pop the old prompt.
+
+    delegate(In^, Out)
+                Delegate unrecognized commands to the stream  In ; Out  is
+                the stream to which unrecognized commands were previously
+                delegated (initially to the shell_computation monitor -
+                see below).  Unify  Out  and the tail of  In  to restore
+                the previous situation.
+    display_stream(Stream, Options)
+                Display the terms of  Stream  as they are instantiated;
+                Options  are those described for screen#display_stream/2.
+                The display is terminated by end-of-stream or "break".
+    display_variable(Name, Value)
+                Display  Value  like the embedded variable binding display
+                started by  Name^  within a shell goal.  The display is
+                terminated by end-of-stream or "break".
+
+    break       Terminate uncontrolled stream output, particularly variable
+                bindings and resolvents.  User procedures can condition
+                their own output on the break signal, instead of on
+                computation control by using shell#display_stream/2 and
+                shell#display_variable/2.
+
+    to_context(Message)
+                Message  is sent to the lexical context; Message may be
+                a list of messages/requests.
+
+Commands which are not recognized are delegated to a monitor in the module
+shell_computation , which delegates or diagnoses them and displays various
+diagnostics regarding trust/failsafe system processes.  This monitor serves
+shell commands of the form:
+
+    shell_computation(Command)
+
+where  Command  is one of:
+
+    delegate_unknown
+                Pass unknown shell commands to the current computation
+                (which in turn may delegate them to its context, etc.).
+                This is the default state, set at system cold-start.
+    diagnose_unknown
+                Display unknown shell commands (inverse of delegate_unknown).
+
+    ignore_lost
+                Discard diagnostics of orphaned system processes.  This is
+                the default state, set at system cold-start.
+    display_lost
+                Display diagnostics of orphaned system processes (inverse
+                of ignore_lost).
+    lost(N^)    Return the number of diagnostics discarded since the Logix
+                System started (discarded while "ignore_lost" in effect).
+
+When the shell computation state is set to "delegate_unknown", all messages
+which are not understood by the shell are delegated to its lexical context.
+If this context is within the "system" director, any goal for a primitive
+procedure (see [1], 2.5) may be interpreted by the "self" of that director.
+Use  system#attributes(Attributes)  to get the exports of this service, which
+include many useful guard predicates as well.
+
+Computation Displays and Side-effects
+-------------------------------------
+
+The  Events  stream of a shell computation begins with the message "started",
+which is supplied by the shell, not by the computation itself.  Otherwise,
+the  Events  stream is a faithful copy of the actual events of the computation.
+
+When  Events  is omitted from any command which starts a computation, the
+events of the computation are displayed, slightly edited.  Specifically,
+messages reporting sub-computation failure are not included in the running
+display; messages of the form  failed(Goal,Reason) , reporting computation
+process failure, are displayed as  Reason(Goal) , except for the message
+failed(Service#Goal,no_service) , which is displayed  no_service(Service) ;
+a message of the form  event(Event)  is displayed  event(F,A1,A2,...An)
+when  Event = F(A1,A2,...,An) .
+
+The event  failed(Goal,lost) , displayed as  lost(Goal) , indicates that
+Goal  was orphaned; i.e. it suspended, waiting for one or more variables
+which could never be instantiated by any other process.
+
+Shell computation events have side-effects.  The "terminated" and "aborted"
+events establish a state where many shell commands are rejected with reply
+Ok = false(done) .  The  resume  and  suspend  commands are rejected when
+the computation is already resumed (suspended).  The  resolvent  and extract
+commands suspend the computation automatically.
+
+In general, shell computation commands are served in the order that they
+are received by the shell, however when a key input argument is uninstantiated,
+a command may be deferred.
+
+The response to a shell command is not necessarily synchronized with
+subsequent commands.  Once the response is returned to the reply variable
+(the  Events  stream for basic signals), subsequent commands are properly
+synchronized.
+
+The  reset  command terminates shell computation control for all current
+computations.  If the computation is not done, it continues, unsupervised,
+and with no further report of events.
+
+Notes
+-----
+
+1. The  close   command may be used to close entire directors.  This is
+   useful to free heap-space - e.g. after linting a  module, the shell
+   request  close(lint)  closes the lint director, freeing the space
+   occupied by its services.  Root services cannot be closed by this
+   command.
+   Some directors contain services which are pre-loaded (when the Logix
+   System is cold-started).  The shell commands  melt_heap  and  freeze_heap
+   should be used in conjunction with  close  to reclaim the space of
+   pre-loaded services.  For example:
+
+        melt_heap
+        close([compile,transform])
+        freeze_heap
+
+2. Several services are commonly called within the shell's lexical context.
+   These include  compile ,  computation_utils ,  lint ,  profile , screen ,
+   sio ,  system_directory ,  timer ,  type_check ,  utils .  Avoid the use
+   of these names for local modules or directories, unless you wish to
+   supply your own version of the service.
+
+Source Code
+-----------
+
+Some of the source code for the modules and monitors mentioned above can be
+found within the hierarchical Logix System in:
+
+    system#                (UNIX  LogixRootDirectory/system)
+
+        goal_compiler   input      screen          screen_server
+        self            shell      system_macros   user_macros
+
+6.  Compiling
+=============
+
+The unit of compilation is a module, and the object code (i.e. the code
+processed by the Emulator) is a "Warren-style Abstract Instruction Set".
+Source code is compiled to object code by a service named  "compile".
+Compile  exports  file/3 ,  string/3 ,  characters/3 ,  parsed/3  and
+context/4 .
+
+The compiler executes within a computation.  The (current) context of that
+computation corresponds to a UNIX directory.  Files which are read or written
+as part of the compilation are in that directory, unless otherwise qualified.
+
+Commands and Options
+--------------------
+
+The compiler is the service "compile", called with a goal of the form:
+
+        Functor(Source, Options, Output)
+        context(Path, Source, Options, Output)
+
+                the meaning of  Source  depends on  Functor :
+
+                  file          The file  Source.cp  is compiled.
+                  string        The string  Source  is compiled.
+                  characters    The list of ascii characters  Source  is
+                                compiled.
+                  parsed        The list of clauses (ground parser output)
+                                Source  is compiled.
+
+                A call to context/4 is like a call to file/3, except that
+                files are read and written relative to the specified context.
+                e.g.  compile#context(sub#subsub,nested,[],_)  compiles
+                the file  nested  in the sub-director  subsub  of the sub-
+                director  sub  of the calling computation's context.
+
+                Options is a single Option or a list of options - the options
+                are:
+
+                  name(Name)    Name  is the reference name of the module.
+                  mode(Mode)    Mode  is one of  trust,failsafe,interrupt,
+                                interpret,  or one of  user,system .
+                  module(Module)
+                                The binary module produced by the compiler
+                                is unified with  Module  - it is not written.
+                  intermediate(Intermediate)
+                                The output of the pre-processor is unified
+                                with  Intermediate  - the intermediate form
+                                is not compiled further, unless the option
+                                module(Module) is specified.
+                  display(source)
+                                The intermediate code produced by the pre-
+                                processor is displayed.
+                  syntax(Name)  Name  is the name of an alternate parser
+                                syntax, specified by the module  Name (if
+                                none, default to system#parse#syntax#Name).
+                                The operators and their priorities specified
+                                in that module are preferred to (pushing)
+                                previously declared operators, including
+                                the standard definitions, which are defined
+                                in  system#parse#syntax#fcp .
+                                (See  Operator Declaration  below.)
+
+                  language(Name)
+                                Name  designates an alternate language which
+                                is to be transformed to FCP.  Currently
+                                recognized  Names  are  implicit,compound,
+                                colon,syntax,typed,fcp .  A list of paths
+                                may appear in place of  Name , in which case
+                                the designated transformations are applied
+                                in the order specified - e.g.
+
+                                    language([implicit,colon])
+
+                                Named trasformation and listed paths are
+                                relative to  system#transform  unless
+                                the option  transformer(Path)  appears.
+                                For more details, see section 7 below.
+                  transformer(Path)
+                                Path  is the path from the computation context
+                                to the transformation - e.g. to use your own
+                                language "mine", defined in the current shell
+                                context, followed by the normal system
+                                transformation "colon", use the options:
+
+                                  transformer(self),
+                                  language([mine,system#transform#colon])
+
+                                Note that missing (mis-spelled) transformations
+                                are diagnosed and skipped.
+                                For details on how to write your own
+                                transformation, see section 7 below.
+                  control(Path) Path is the path from the compile service to
+                                the service which performs the "Layers of
+                                Protection and Control" transformations [4].
+                                The default path is "control".  The modules
+                                that provide this transformation by default
+                                are in  system#compile#control .
+
+                  Any other option is included in the module as an attribute -
+                  e.g.  "version(3)" becomes "-version(3)."
+
+                  The options  name,mode,language  override corresponding
+                  attributes of the module;
+
+                  The options  transformer,language  are also understood by
+                  lint  and  type_check .
+
+                Output  is the stream of messages produced by the compiler -
+                        the first message is descriptive, and subsequent
+                        messages are diagnostic (see below).
+
+
+The module is compiled to executable code, which is written to "Name.bin"
+(except when either  module(Module)  or  intermediate(Intermediate)  is
+specified).  If there is a  Bin  sub-directory, then the executable code
+is written there; otherwise, it is written in the compilation's context
+(see  file#put_module/2  in section 9).
+
+No executable or intermediate code is produced for a library module.
+
+System Library
+--------------
+
+The compiler maintains a library of commonly used procedures.  When a module
+is being compiled, this library is searched for procedures referenced in the
+module but not declared there.  Any such procedure found in the library is
+included in the module.  Library procedures may reference each other and
+user declared procedures.  The library is also consulted by  lint .
+
+
+The library has initial content (See  system#library#system_text ).
+A library module begins (following attributes) with the fact  library.
+The command:
+
+        compile#file(Name, [], _)
+
+adds the procedures in the library module  Name.cp  to the system library .
+To reinitialize the system library:
+
+        close(library)
+
+The library should be recreated with some content before normal compilation
+can proceed - e.g.
+
+        compile#string("library.A=A.")
+
+
+Compilation Output
+------------------
+
+The descriptive message produced for a normal compilation is:
+
+        Mode([Exports], [Imports])
+
+
+The compilation system may produce various diagnostic messages.
+
+Parsing error diagnostic messages warn the user of syntactic errors. The
+message lists the tokens comprising the unparseable clause.
+
+Other compilation diagnostic messages warn the user of semantic errors: 
+
+    Undefined Procedure - a locally called or exported procedure which is 
+    not defined within the module nor in the library;
+
+    Multiply-defined Procedure - a second or subsequent appearance of a
+    procedure within a module.
+
+    Dead Code - a procedure which is defined within the module but is neither
+    called nor exported;
+
+    Illegal Guard - a reference to an undefined guard kernel.
+
+    Illegal Clause - a clause whose head is neither a string nor a tuple with
+    a string functor.
+
+    Illegal Goal - a goal which is neither a string nor a tuple with a string
+    functor.
+
+    Illegal Expression - An unrecogized operation in a Guard expression, or a
+    nil or a list in a body expression.
+
+Pre-Compiler
+------------
+
+Many guard kernels and some body goals are treated as macros, which are
+expanded by the pre-compilation phase of the compiler (e.g. := / 2).
+
+Arguments are added to goals and clause-heads to support some of the services
+provided by the Logix System.
+
+Three extra arguments are added to every clause head (and all body goals
+which reference it) of every procedure, except in  trust  mode, where no extra
+arguments are needed for procedures which do not import any goal directly
+or through a derived goal.  These arguments connect a process which
+is executing the procedure to the Logix System and to the controlling
+computation.  A fourth argument is added to all clause heads (and body goals)
+compiled in  interrupt  mode.
+
+An extra guard predicate is also added to every clause head and body goal
+which is compiled in  interrupt  mode.  One extra clause is added to every
+procedure which is compiled in  failsafe   mode, and two extra clauses to each
+procedure which is compiled in  interrupt  or  interpret  mode.  In all modes,
+an additional procedure is added to select exported remote procedure calls.
+
+In interpret mode, the transformation changes each clause:
+
+        f(Args) :- Guard | Body.
+
+into:
+
+        f(Args, Body, Index, Time) :- Guard | true.
+
+where  Body  and  Time  are output, and  Index  is a blackboard.
+
+
+It may be useful while developing a program to inspect the expanded code.
+The compiler displays the output of the pre-compiler when the option
+"display(source)" is specified.  The macro expansions and added guard kernels,
+as well as the additional arguments, clauses and procedures appear in the
+displayed code.  Note that the pre-compiled source is in FCP(:,?) format [5].
+
+7. Alternate Languages
+   ===================
+
+Logix provides a way to add a language to the system by specifying its syntax
+and supplying a source-to-source transformation to convert it to FCP.  Four
+commonly used languages are "colon", "implicit", "compound" and "syntax".
+The procedure definition and type declaration facilities of the Logix System
+are also implemented as an alternative language, "typed".
+
+Colon and FGHC
+--------------
+
+The language "colon" is described in [5].  In summary, it provides a
+syntactic extension to FCP, and a modified semantics of head/guard
+unification.  The language colon supports both  FCP(:)  and  FCP(:,?).
+
+FCP(:,?) is equivalent to FCP.  It encourages a convenient and efficient
+programming style, and it has a clean, easily implementable operational
+semantics.
+
+
+A clause in the language colon has the form:
+
+        Head :- Ask : Tell | Body.
+
+Ask  and  Tell  are conjunctions of guard predicates, where the meaning of
+a guard predicate may depend on whether it is in the  Ask  or  Tell  part.
+If the  Tell  part is the predicate "true", it may be omitted, in the form:
+
+        Head :- Ask | Body.
+
+When the  Ask  part is also the predicate "true", both parts may be omitted
+in the form:
+
+        Head :- Body.
+or      Head.
+
+When the  Body  is the predicate "true", the clause may be written:
+
+        Head :- Ask : Tell.
+
+All unification specified by  Head  arguments or by guard predicates in
+the  Ask  part, is input unification - i.e. it fails or it succeeds without
+affecting any global variable, or else it suspends, suspending the process
+which is being reduced if no other clause reduces the process.  Guard
+predicates in the  Tell  part of the guard use general unification.  For a
+clause to reduce a goal, all unification specified by the  Head  and by the
+Ask  and  Tell  parts, must succeed.
+
+A term in the  Head  or in the  Ask  part may be annotated with the postfix
+operator "^".  The effect is to perform general unification for that term.
+A  Head  parameter specified by a variable annotated by the read-only operator
+"?" indicates that the corresponding argument of a goal reduced by the clause
+is unified with the parameter, using general unification - this notation may
+be used to "lock" an argument.
+
+FCP(:) is a super-set of Flat Guarded Horn Clauses (FGHC).  Programs written
+in FGHC (without the FGHC meta-call), run under the Logix System with their
+original semantics, with the added initial clause:
+
+        -language(colon).
+
+Implicit
+--------
+
+The language "implicit" provides a notational extension for FCP procedures,
+to support the concise expression of recurrent processes. The notation permits
+specifying just the changes in a process's state during a state transition,
+rather than the entire old and new states required by a plain logic program.
+The semantics of the extended notation is given in terms of its translation
+to plain FCP programs.
+
+The goals of this notation are:
+
+  * To enable the expression of an FCP program in a way that highlights
+    the important parts and de-emphasizes the small but necessary details.
+
+  * To facilitate the process reading of an FCP program without losing
+    its declarative reading.
+
+When an FCP process has several message streams and/or several state
+variables, and on each process reduction only a few of them are accessed
+or changed, plain FCP programs become quite cumbersome to express.
+The reason is the need to specify explicitly all the streams and state
+variables that do not change in a process's state transition twice: once
+in the ``old" state in the clause head, and once in the ``new" state in
+the clause body.  In addition, different names must be invented for the
+old and new incarnation of a state variable or a stream that did change
+in the transition.
+
+This verbose syntax introduces the possibility of trivial errors and
+reduces the readability of programs, since it does not highlight the
+important parts (what has changed) from other details (repetition of the
+unchanged part).
+
+The  implicit  language provides a notational extension to FCP programs
+which supports a frame axiom for the state of a process.
+
+An  implicit  language module begins with the normal FCP attributes,
+including:
+
+  -language(implicit).
+
+The rest of the module is composed of plain FCP procedures, type declarations
+and defined procedures.  The type declarations are for the type-checker .
+They should include a type declaration for every variable named in any
+procedure definition in the module (see below).
+
+
+A procedure definition has the general form:
+
+  procedure p(X1,X2, ... ,Xn)+(Xn+1=V1,Xn+2=V2, ... ,Xn+k=Vk).
+
+where  n >= 0  and  k >= 0 .  When  n=0  or  k=0, corresponding parentheses
+are omitted.
+
+Each  Xi  is a distinct variable name, and each  Vi  is an initial value for
+the variable  Xn+i  when the procedure is called from a plain procedure, from
+a different defined procedure or by a remote procedure call to the module.
+Parameter  n+i  may be specified by  Xn+i  only - in that case its initial
+value is a write-enabled variable.
+
+The defined procedure is referred to as  p/n+k .  It is referenced in the
+body of a plain procedure or of a different defined procedure in the form:
+
+  p(T1,T2, ...,Tn)
+
+The functor of a defined procedure must be unique within the module.
+A defined procedure  p/n+k  may be exported as  p/n .
+
+
+A clause of a defined procedure, refered to as an implicit clause, has the
+general form:
+
+  p :- G1,G2, ...,Gg | B1,B2, ...,Bb.
+
+where  g >= 0   and  b >= 0.  When  g = 0  or  b = 0 , the normal FCP
+conventions apply - e.g.
+
+  p :- known(X1) | true.
+  p :- B1,B2, ...,Bm.  
+
+A variable which appears in the right-hand-side of a clause may be local
+to the clause, or it may be one of the named variables of the procedure
+definition, or one of those named variables suffixed by one or more primes
+("'").  The most primed form, if it appears, is used as needed in recursive
+calls to the defined procedure in the body (see below).
+
+A clause of a defined procedure may have an explicit head - i.e. one in
+which all n+k parameters appear explicitly.
+
+Guard predicates in implicit clauses of defined procedures may include the
+macros:
+
+  X ? T
+  X ! T
+
+where  X  is variable  and  T is a term.  The two macros mean, respectively:
+
+  X =?= [T | X']
+  X = [T | X']
+
+The macro:
+
+  X ! T
+
+is also permitted in the body of an implicit clause, with the same expansion.
+
+A body predicate of an implicit clause may be a recursive call to the
+defined procedure.  In that
+case it has the form:
+
+  p(T1,T2, ...,Tj)
+
+where each  Ti  is a term, 0 =< j =< n+k.  When  j = 0  the parentheses are
+omitted.  The recursive call is expanded to:
+
+  p(T1,T2, ...,Tj,Uj+1, ...,Un+k)
+
+where each  Ui  is either the corresponding named variable of the procedure
+definition, or the named variables suffixed by one or more primes ("'"), if
+that form appears explicitly or implied by a macro in the clause containing
+the recursive call.
+
+Consider the plain FCP program:
+
+  counter(In) :-
+      counter(In,0).
+
+  counter(In,_) :-
+    In =?= [clear|In'] |
+      counter(In',0).
+  counter(In,C) :-
+    In =?= [increment|In'] |
+      C' := C + 1,
+      counter(In',C').
+  counter(In,C) :-
+    In =?= [read(V)|In'] |
+      V = C,
+      counter(In',C).
+  counter(In,_) :-
+    In =?= [] | true.
+
+Rewritten in  language(implicit)  it is:
+
+  -language(implicit).
+
+  In ::= [clear,increment,read(C)].
+  C ::= Integer.
+
+  procedure counter(In)+(C=0).
+  counter :-
+    In ? clear |
+      C' = 0,
+      counter.
+  counter :-
+    In ? increment |
+      C' := C + 1,
+      counter.
+  counter :-
+    In ? read(V) |
+      V = C,
+      counter.
+  counter :-
+    In =?= [] | true.
+
+The quicksort procedure may be written using implicit variables.
+
+  -language(implicit).
+
+  Numbers ::= [Number].
+  In ::= Numbers.
+  Out ::= Numbers.
+  Tail ::= Numbers.
+
+  procedure qsort(In,Out)+(Tail=[]).
+
+  qsort :-
+    In ? X |
+      partition(In',X,Ss,In''),
+      qsort(Ss,Out,[X|Out']),
+      qsort.
+  qsort :-
+    In =?= [] |
+      Out = Tail.
+
+  A ::= Number.
+  Ss ::= Numbers.
+  Ls ::= Numbers.
+
+  procedure partition(In,A,Ss,Ls).
+
+  partition :-
+    In ? X, X =< A |
+      Ss ! X,
+      partition.
+  partition :-
+    In ? X, X > A |
+      Ls ! X,
+      partition.
+  partition :-
+    In =?= [] |
+      Ss = [], Ls = [].
+
+
+Compound
+--------
+
+The language "compound" is similar to "implicit", with some differences:
+
+Procedure declarations are relegated to language(typed).  A compound
+procedure is declared:
+
+<compound-clause> ::= <head> :- <rhss> ||
+                      <head> + (<extra>) :- <rhss> .
+
+<rhss> ::= <rhs> ||
+           <rhs> ; <rhss> .
+<extra> ::= <local-variable> ; <local-variable> , <extra> .
+<local-variable> ::= <variable-name> ; <variable-name> = <initial-value> .
+
+    <head>  is an atom,
+    <rhs> is a body (a sequence of atoms where true denotes an empty
+          sequence) which can be preceded by an ask/tell guard as in
+          ordinary FCP programs.  It may also have the form  Ask : Tell
+          when  Body  is the predicate "true", as in FCP(:,?) programs.
+    <initial-value> is any term.
+
+A procedure is declared by one or more compound clauses, mixed with normal
+FCP clauses.  A clause is assumed to be compound if it has an extra component
+in the head, or if the body is compound (at least one semicolon appears.),
+or if all of its head arguments are variables.  The head arguments of a
+compound clause are treated just like the variables of an implicit procedure
+declaration (see above).
+
+The macro operations "?"/2 and "!"/2 are recognised in compound clauses, and
+they are treated as in language(implicit).
+
+A compound clause body may include a recursive call with no arguments (the
+functor only).  This is treated as in language(implicit), and the most primed
+form of the arguments is used in the same way.
+
+A module whose language attribute is:
+
+    -language(compound)
+
+is automatically assumed to be in languages "colon" and "typed" as well.
+
+Examples:
+
+Example 1 is a server which changes the value of  Value  according to
+messages received on input stream  In .  It returns  Value  when requested.
+
+-language([compound, colon]).
+
+server(In) + (Value = 0) :-
+
+    In ? Message |
+        update(Message, Value, Value'),
+        server;
+
+    In = [] .
+
+update(Message, Value, NewValue) :-
+
+    Message = increment,
+    NewValue^ := Value + 1 ;
+
+    Message = decrement,
+    NewValue^ := Value - 1 ;
+
+    Message = clear :
+      NewValue = 0 ;
+
+    Message = value(Value^) |
+      Value = NewValue .
+
+Example 2 is a procedure which splits a list of integers  In  into the lists
+Odd and  Even  , the odd and even elements of  In , using a sub-procedure
+to select a list for each element.
+
+-language(compound).
+
+Integers ::= [Integer].
+
+procedure split(Integers, Integers, Integers).
+
+split(In, Odd, Even) :
+
+    In ? X :
+      List ! X |
+        parity(X, A), 
+        select(A, Odd, Odd', Even, Even', List, List'),
+        split; 
+
+    In = [] :
+      Odd = [], 
+      Even = [] .
+
+procedure select(Integer, Integers, Integers, Integers, Integers,
+                        Integers, Integers).
+
+select(A, Odd, Odd1, Even, Even1, List, List1) :-
+    A = odd :
+      Odd = List, Odd1 = List1,
+      Even = Even1 ;
+
+    A = even :
+      Even = List, Even1 = List1, 
+      Odd = Odd1 .
+
+procedure parity(Integer, (odd ; even)).
+
+parity(1, odd^).
+parity(0, even^).
+parity(X, A) :-
+    X >= 2,
+    X' := X - 2 |
+        parity.
+
+Syntax
+------
+
+In defining a language based on FCP, it is often desirable to specify
+additional syntax.  The language "syntax" addresses this need.  A module
+written in language(syntax) specifies operators which are required for some
+other language.
+
+The syntax specification may include declarations of prefix, infix and
+postfix operators and their priorities.  Any string or concatenating
+special characters may be declared (e.g.  "::=", "?-", "if", "then") to
+be a new operator, or an operator may be re-declared with different
+syntax and/or priority.
+
+Operator Declaration:
+
+A module written in language(syntax) includes the attribute:
+
+        -language(syntax).
+
+Other attributes may be specified, but "export" should not be among them.
+The attributes are followed by operator declarations - facts of the form:
+
+        Spec(Name, Priority).
+
+Spec is one of the strings  fx, fy, xfx, xfy, yfx, yfy, xf, yf .  The Specs
+fx, fy  designate prefix operators,  xfx, xfy, yfx, yfy  designate infix
+operators, and  xf, yf  designate postfix operators (See Programming in
+Prolog, pps 108-110 for details about specs.)
+
+Name is any string.  If it contains special characters, it should be enclosed
+in quotes.
+
+Priority is an integer, indicating the priority of this operator.
+Priorities are in the range 1..1200. The higher the priority, the weaker
+is the binding power of the operator. Thus, a prefix operator of priority
+100 binds tighter than an operator of priority 200 (e.g. -a+b  is parsed
+((-a)+b), given the declarations  fy('-',220)  and  xfy('+',500) ).
+
+Operator declarations may appear in any order in the file. Thus, for example,
+all of the 'xfx' operators need not be grouped together.
+
+Comments within the module are allowed and should appear in normal FCP
+syntax. The syntax of comments cannot be changed at present.
+
+
+In order to use the operator declarations, the module must be compiled.
+This may be done in the normal fashion - e.g.
+
+        compile(ModuleName)
+
+producing a binary form of the module, ModuleName.bin .
+
+The module in which you wish to use the extended syntax should include
+an attribute of the form:
+
+        -syntax(ModuleName).
+or      -syntax(ListOfModuleNames).
+
+This attribute causes the named operator declarations to be used in
+parsing subsequent terms.  When multiple declarations are used, operator
+declarations in later modules override (push) those in earlier modules.
+
+The binary of the declarations has is in  ModuleName  relative to the
+computation context in which it is used.  If that module does not exist,
+the binary of the declarations may be in  system#parse#syntax#ModuleName.
+This allows the system to supply a common syntax specification for many users.
+
+The parser uses a default set of operators which specify the FCP syntax.  The
+default operator declarations appear in  system#parse#syntax#fcp .
+It is possible to override these built-in operators.  However, caution
+should be exercised in doing so, since this may make the file unparsable.
+
+Example: Operator declarations module for CFL (Concurrent Functional Language)
+
+-language(syntax).
+
+yfx(and,  751).
+xfx(then, 780).
+yfx(par,  786).
+yfx(else, 786).
+xfy(":",  741).
+xfx(in,   975).
+xfx(where,975).
+
+fx("`",   100).
+fy(if,    776).
+fy(let,   971).
+fy(lambda,991).
+
+
+Language Transformations
+------------------------
+
+The compiler and other source module processors (e.g. lint, type_check)
+recognizes the "language" attribute, and before processing the module,
+they call the transformations named in the attribute - e.g.
+
+        -language(syntax)
+
+induces the processor to call:
+
+        transform#syntax#
+            transform(Attributes, Clauses, Attributes', Clauses', Errors)
+
+and then to continue normal processing using  Attributes'  and  Clauses' .
+
+To use a local version of a transformation, include the option
+transformer(Path)  in the language processor call.  In that case, the
+processor calls (relative to the computation):
+
+        Path#Name#
+            transform(Attributes, Clauses, Attributes', Clause', Errors)
+
+E.g. transformer(sub)  designates that your transformation modules are
+in the sub-hierarchy  "sub"  in the context of the computation.
+
+     transformer(context(C))  designates that your transformation modules
+are in the dynamic context referenced by channel  C .
+
+Attributes  is a merged list of compiler options and attributes from the
+head of the module.
+
+Clauses  is a list of parsed clauses, not including attribute declarations.
+
+Errors  is the diagnostic error stream - ground diagnostic terms may be
+added to it.
+
+The  transform/5  procedure should perform the appropriate transformation
+of the  Attributes  and the  Clauses , producing  Attributes'  and Clauses' ;
+diagnostic messages go in the  Errors  stream, which should be closed
+when the transformation is completed.
+
+The module  system#transform#syntax  provides a simple example of a language
+transformation.
+
+The transform service does not default to system transformations, when the
+option  transformer(Path)  appears.  If you need to mix local and system
+transformations, you should provide local relay modules (i.e. ones that
+relay calls to transform/5 to the corresponding modules in system#transform).
+
+
+Meta-Variables
+--------------
+
+In implementing a language transformation, it is useful to be able to specify
+variables as internally represented by the compiler.  This is done using
+the prefix operators  "`"  and  "?" .  The compiler understands the terms:
+
+        `X      The write-enabled variable whose name is  X ;
+        ?X      The read-only variable whose name is  X .
+
+Of course  X  may be any ground term, but it is usually a string.  To "quote"
+a tuple to be compiled as  `Term  or  ?Term , use an extra back-quote - i.e.
+``Term  or  `?Term , etc.
+
+Examples of the use of these constructs appear in modules of  system#transform.
+
+
+The compiler uses terms of the general form  `tempY(constant)  , where Y
+is a (concatenated) string, to represent temporary variables created by
+its other transformations, and this form should be avoided in language
+transformations.  A commonly used convention is to name generated variables
+using the name of the language transformation which generates them - e.g.
+`mylanguage(27).
+
+8.  Meta-Interpreters
+=====================
+
+Several meta-interpreters are available under Logix.  They all operate on
+modules compiled in interpret mode.  A meta-interpreter may call a module
+to reduce a  Goal  interpretively by either form of RPC:
+
+        Module#clause(Goal, Body^)
+        Module#clause(Goal, Body^, Id!, Time^)
+
+For both forms, if the request succeeds,  Goal  is unified with the head of
+the reducing clause, and  Body  is assigned the conjunction of body goals
+of that clause.
+
+For the first form, if the request fails (e.g. Goal fails to unify with all
+possible clause heads),  Goal  is unchanged and  Body  is assigned "true".
+
+The second form may be used to obtain additional information about the
+reduction of the goal, to detect failure, or to interrupt interpretation
+of the request.
+
+If the request succeeds,  Id  is unified with the index of the clause within
+the module which reduces  Goal , and  Time  is assigned a unique integer
+(within run).  Currently this integer is the number of reductions since the
+start of the Logix System run.
+
+If the request fails  Id  and  Body  are unchanged, and  Time  is assigned
+failed(Goal, Reductions) .
+
+To select a specific clause to reduce  Goal , call with Id = Index  of the
+clause within the procedure.
+
+To interrupt interpretation, instantiate  Id  to any string -  Body  is
+unchanged and  Time  is assigned  failed(Goal, aborted) .
+
+A module compiled in a mode other than interpret, and all system services,
+only recognize  Goals  which are exported, when called with a clause request.
+For both forms above,  Body  is assigned "true" when  the RPC is received.
+
+The system meta-interpreters, described below, all use an efficient means of
+reducing clauses.  The computation_utils service is called to obtain a channel
+to each service to be interpreted (see section 9).  Clauses are presented to
+the service via the channel.  E.g. to obtain a channel to interpret A#B,
+in the context of the service referenced by the current channel, C, call:
+
+    computation_utils#call_context_goal(context(C)#A#B,CA,G,Ok)
+
+Now reduce the goal (G), and derived goals within the new service by:
+
+    write_channel(clause(Goal,Body,...),CA,CA')
+
+Vanilla
+-------
+
+This service produces a trace or an execution tree of a goal conjunction.
+It exports trace/3, trace/4, tree/3, tree/4.
+
+    widgets#vanilla#tree(Context, Conjunction, Tree^)
+    widgets#vanilla#tree(Context, Conjunction, Tree^, Depth)
+    widgets#vanilla#trace(Context, Conjunction, Trace^)
+    widgets#vanilla#trace(Context, Conjunction, Trace^, Depth)
+
+Depth  is used to limit the depth of Remote Procedure Calls - e.g. Depth = 0
+(default) causes all RPCs to be executed, uninterpreted; Depth = -1 (or a very
+large integer) causes all RPCs to be interpreted (where possible).
+
+Tree  includes an open  Channel , which refers to the target service for each
+separately interpreted RPC.  The nodes of  Tree  are declared:
+
+    Tree ::= tree(TreeId, Channel, BranchList) ; failed(TreeId, Any).
+    TreeId ::= Path ; RPC.
+    BranchList ::= [Node].
+    Node ::= reduce(Goal, Id, Time, BranchList) ; RPC ; Tree.
+
+Id  and  Time  are defined above.  Each goal reduced and each remote procedure
+call is a node of the tree.  The goals derived from a reduction form a list
+of sub-trees.  Id ,  Time  and  BranchList  are uninstantiated until  Goal  is
+actually reduced.  A  Node  which is an  RPC  indicates a remote procedure
+call which was not interpreted.
+
+Because the  Channel(s)  are part of the computation which created them (so
+long as they remain open), the computation cannot terminate until all of the 
+channels have been closed.
+
+Trace  is a list of Goals reduced and RPCs called, in prefix order.  The tail
+of Trace is uninstantiated until the corresponding goal has been reduced.
+
+    Trace ::= [Goal].
+
+Dynamic Debugger
+----------------
+
+The dynamic debugger is a meta-interpreter which displays processes as it
+reduces them and prompts for directions on how to continue.
+
+To call the dynamic debugger:
+
+    debug#interpret(Id, Service#Goal)
+
+The shell commands:
+
+    debug(Service#Goal, No!, Events^, Ok^)
+    debug(ProcessNo, No!, Ok^)
+
+may also be used.
+
+Details of use of the Dynamic Debugger appear in [1], page 8.
+
+To debug a module which is invoked by an arbitrary RPC, use the trap service
+to interrupt execution when the module is called, and then debug the trapped
+RPC (See system services below.)
+
+Profiler
+--------
+
+The profiler is a meta-interpreter that counts the number of reductions,
+suspensions and creations for each procedure called in solving a goal.
+
+To profile a goal with respect to one or more modules:
+
+        profile#profile(Modules, Goal, Output^).
+
+    Modules  A single module name or a list of modules.
+             Profile output will include information about procedures
+             called within the module(s).
+
+    Goal     A goal to be reduced.
+             This goal will be reduced by the named module or by the
+             first module in the module list.
+
+    Output   An output variable.
+             This becomes a sorted list of all procedures called within
+             profiled modules, where each entry is:
+
+               (procedure_id, reductions, creations, rpcs)
+
+The slow down factor between profiling a goal and simply solving it was
+measured for some examples - factors in the range 5 to 50 were observed.
+
+9.  System Services
+===================
+
+The system services export procedures which may be called remotely like
+procedures exported by user modules.  The difference is that system services
+are pre-loaded.
+
+director(s)
+-----------
+
+Each internal node of the Logix System is a director.  A director routes
+messages of the form  A # B .
+
+
+block
+-----
+
+This service collects a composite module from a sub-hierarchy.  It is used
+by the shell to "block"-compile a director.
+
+It exports the services  compose/1  and  compose/2 .
+
+    compose(Path)
+    compose(Path, Options)
+
+Path specifies a director, whose self module, and all subordinate modules
+which are called by the self module (recursively) are collected as a
+composite module.
+
+Options  include:
+
+    name(Name)       Name is the name of the composite module.
+    text(Text)       Text  is a pretty-printed list of strings which may be
+                     displayed, concatenated, saved (by file#put_file/4), etc.
+    source(Source)   Source  is a list of the declarations and clauses of
+                     the composite module.
+    report(Report)   Report  is a list of comments and diagnostics, regarding
+                     the process of composition.
+
+If  Options  is omitted (or nil), the composite module is written with the
+same name as the root director, suffixed ".cp".
+If only  name(Name)  appears, the module is written with the given  Name ,
+suffixed ".cp".
+If  text(Text)  appears (but not  source(Source) ), the  Text  of the module
+is pretty-printed, but is not written.
+If  source(Source)  appears,  Source  is the parsed composite module.  The
+name and text options are ignored.
+Report  includes a message for each module included, as well as diagnostics
+for excluded modules.  If omitted, the messages and diagnostics are displayed.
+
+Procedure clause heads and calls are renamed to eliminate conflicts.  The name
+of a renamed procedure is composed of the names of the elements of the path
+from the root directory to the module in which it appears, followed by the
+original name of the procedure.  Components of the name are separated by the
+character "$".  Library procedures are pooled.
+
+The attributes and type declarations of the root self module are conserved.
+Attributes and declarations of other included modules are discarded.
+
+file
+----
+
+This is the service which interfaces to the UNIX file system.  It provides
+file access utilities needed by Logix - e.g. read the source of a module
+or write its binary form.
+
+The  file  process exports  get_file/4 ,  get_source/5 ,  put_file/4 ,
+put_module/2 ,  put_module/3 , fileinfo/2 , working_directory/1 ,
+isdirectory/2  and  execute_in_context(Context, Goal) .
+
+    get_file(Path,Contents^, Options, Ok^)
+                Read the file designated by  Path, producing string  Contents.
+                Ok  becomes  "true"  or  "not_found" .  Options  may contain:
+
+                  string  Contents  is a single string, read in internal
+                          form from the file (see put_file/4).
+                  chars   Contents  is a single string, constructed from
+                          the characters of the file (default).
+
+    get_source(Path, Chars^, Ok^, UNIXFilePath^, UNIXFileModDate^)
+                Read the module designated by  Path , producing ascii  Chars
+                list.  Ok  becomes  "found"  or  "not_found" .
+
+    put_file(Path, Contents, Options, Ok^)
+               Write  Contents  to the file designated by  Path .  Ok  is
+               unified with "true" or "write_error"  when writing is completed.
+               Contents  is a constant, or a stream of constants.   Options 
+               is [] or a list of options:
+
+                  put     erase any previous data.
+                  append  add output to the end of previous data.
+                  string  Contents  is a single string, written in internal
+                          form to the file; frozen terms may be written
+                          using this option, and read by get_file/4 using
+                          its string option.
+
+    put_module(Path, Module)
+    put_module(Path, Module, Result^)
+                Write the module designated by  Path .  Module  is an
+                executable module.  The module is written to the  Bin
+                sub-directory of the designated directory, to the designated
+                directory itself, or to the original working directory in
+                that order of preference.  Success or failure is reported.
+                Result  is  module(Module, UNIXFileName, UNIXModDate)  or
+                import , if the file was not written.
+
+    fileinfo(Name, UNIXModDate^)
+                UNIXModDate = 0  if the file does not exist.
+
+    working_directory(UNIXFilePath^)    
+
+    isdirectory(Path, SystemReply^)
+                SystemReply = true  if  Path  refers to a UNIX directory, and
+                false(0)  otherwise.
+
+    execute_in_context(Context, Goal)
+                Context  is an arbitrary path, relative to the computation's
+                current context, designating some internal node of the Logix
+                System hierarchy.  Goal may be any of the other goals exported
+                by file; it is executed within the specified context, however,
+                its  Path  must be a string file name within that context.
+
+goal_compiler
+-------------
+
+This service is used by the shell to compile commands.  It exports procedures
+term/3  and  display/4 .
+
+    term(ParsedTerm, CompiledTerm^, Requests^)
+                Compile  ParsedTerm ;  Each variable is replaced by its
+                value, obtained by a requests of the form:  add(Name, Value)
+                sent on the stream  Requests  (see system_dictionary below).
+
+    display(ParsedTerm, CompiledTerm^, Requests^, Done^)
+                Compile  ParsedTerm  as above for the shell server.  Requests
+                of the form:  display(Name, ValueOfNewX, CompiledTerm)  are
+                generated to help compile terms of the form  Name^ (see
+                section 5 above).
+
+link
+----
+
+This service supports linkage to c-kernels which provide efficient utilities
+and interfaces to the UNIX operating system.
+
+It exports the procedures  lookup/2, lookup/3, execute/3, unbind/2 .
+
+It automatically loads a kernel requested by  lookup/2  or  lookup/3  at first
+request, returning a magic number,  Offset , which may be used to execute
+the kernel.
+
+The request  execute/3  may be used to execute a kernel which has been loaded
+by some previous lookup.
+
+The request  unbind/2  may be used to remove the record of a lookup.
+
+
+The emulator provides two special guard kernels, link/3  and execute/2,  to
+extend itself, and to call extension procedures.
+
+
+parse
+-----
+
+This service is used by the compiler to parse terms and by the Logix System
+to parse commands.  It exports the procedures  characters/3, string/3,
+tokens/3, tokenize/2.
+
+    characters(Characters, Terms^, Errors^)
+                consumes a stream of ascii characters, producing a stream
+                of terms and a list of diagnostic strings.
+
+    string(String, Terms^, Errors^)
+                converts  String  to a list of characters and proceeds as
+                above.
+
+    tokens(Tokens, Terms^, Errors^)
+                consumes a stream of FCP tokens, producing a stream of
+                terms and  a list of diagnostic strings.
+
+    tokenize(Source, Tokens^)
+                Source  may be a string or a list of ascii characters.  A
+                corresponding stream of FCP tokens is produced.
+
+An input term ends at a full-stop (supplied by the input system for commands),
+which is not included in the output.
+
+The tail of the output stream is protected, and each term which is added is
+completely ground.  A write-enabled variable named in the input stream is
+represented by the compiled term  `<variable name> , where  <variable name>
+is a string.  A read-only variable named in the input stream is represented
+by the compiled term  ?<variable name> .
+
+The list of tokens produced by the tokenize request is described in tokenize,
+below.
+
+A useful sequence to parse a response to a query is:
+
+        screen#ask(enter_term, Chars, read(chars)),
+        parse#characters(Chars, Terms, Errors),
+        goal_compiler#term(Terms, Goals, Requests),
+        widgets#linear_dictionary#requests(Requests, Dictionary),
+
+This chain of processes converts the  response into the list  Goals (more
+than one goal can be produced by separating them by full-stops (".") in the
+response), and a dictionary of variables which appear in the response.
+Errors is a list of diagnostics from the parser (A defective term is omitted
+from the  Terms  list.)
+
+A  parse  process recognizes the term  "-syntax(Name)" , where  Name  is
+a string.  The module  Name_syntax  is called to determine whether a string
+is an operator, and its parsing priority.  Thus, additional syntax rules can
+be consulted in parsing a stream (see  Alternate Languages  in 6 above).
+
+
+screen
+------
+
+This is the service which governs all output and prompting to the screen.
+The integrity of messages is maintained; i.e. messages sent to the screen
+do not intermingle.
+
+The  screen  service exports  display/1, display/2, display_stream/1,
+display_stream/2, ask/2, ask/3, option/1, option/2, option/3 .
+
+    display(Term)
+    display(Term, Options)
+                Display  Term  on screen (according to  Options ).
+
+    display_stream(TermsStream)
+    display_stream(TermsStream, Options)
+                Display  TermsStream , one term per line as they become
+                available (according to  Options ).
+
+    ask(Term, Answer^)
+    ask(Term, Answer^, Options)
+                Display the query  Term  (according to  Options ), and
+                read keyboard input of  Answer .
+
+    option(Attribute)
+    option(Attribute, New)
+    option(Attribute, New, Old^)
+                Inspect/modify default value of  Attribute  Old  to  New .
+
+When the  Options  argument is omitted, the default options are assumed.
+
+Options  is a list of terms of the form  Attribute(Value)  or  Control(Args).
+Attributes  are  [type,read,depth,length,indent,width,frozen_term,iterations] .
+
+Settable attributes are:
+
+    type         This attribute determines the mode of display of variables.
+
+        freeze      Write-Enabled variables are output  _ , read-only variables
+                    are output   _?  - default.
+        ground      Wait until variables are all ground before output;
+        namevars    Variables are printed by name or, if anonymous, numbered
+                    as  Vnnn  or  Vnnn? - identical variables are given
+                    identical names.
+        parsed      A variable is represented by the parsed (internal) form
+                    of its name (number, if anonymous).
+        unparse     Wait until variables are all ground - replace parsed
+                    (internal) representation of named variable by its name
+                    in the output.
+
+    read         This attribute is relevant to queries only. It specifies what
+                 input is read by the query, and what is returned to  Answer .
+
+        char        One character is read from input (the keyboard) and
+                    converted to a string - default.
+        string      One line is read from input, returned as a string ending
+                    with the line-feed character  <lf> .
+        chars       One line is read from input, returned as a difference list
+                    of characters (small integers) followed by ascii
+                    characters  <space> . <lf> , suitable for tokenize->parse.
+
+    depth
+            D       integer (default 8)  D = depth of nesting compound terms.
+    length
+            L       integer (default 20) L = maximum length of list output.
+    indent
+            I       integer (default 0)  I spaces indent the first output
+                    line; an automatic new-line is indented  I+4  spaces.
+    width
+            W       integer (default 78)  W  characters without <lf> until new
+                    line is begun, when adding a token to a (non-empty) line
+                    would extend it beyond column  W .
+
+    frozen_term  This attribute determines how frozen terms are diplayed.
+
+         frozen     The string  FROZEN  represents the term - default.
+         melted     The term is melted (recursively); it is represented by
+                    the tuple  MELTED(MeltedTerm) - the melted variables are
+                    represented by strings of the form  _N_ (N is an integer).
+
+Control options are used to control the time and format of display. 
+
+known(X)        Wait until  X  is assigned a non-variable value before output.
+close(L,R)      After output, unify  L  and  R .
+prefix(T)       Output the term  T  before (each)  Term , separating them by
+                one space.
+list            Treat (each)  Term  as a list of terms to be printed without
+                separation - no automatic final line-feed is added.
+put(File)       The prepared image is written to the named  File .
+append(File)    The prepared image is appended to the named  File .
+
+When only one option is specified for  display/2, display_stream/2, ask/3
+it may appear as a term, without list-brackets.
+
+The option "list" permits the user to specify his output stream completely -
+when it is omitted, the data displayed for  display/n, display_stream/n  is
+followed by a <lf>, and the question for  ask/n  is followed by " ? ".
+
+For  display_stream/2 , if the option  prefix(Prefix)  is not specified,
+each stream element is displayed on a separate line with no other information.
+For  display_stream/2  , when the option  prefix(Prefix)  is specified, the
+Prefix  is separated from the following term by " - n " or " \ n ", where n
+is the ordinal of the term in the stream.  The latter form is used when the
+stream ends with a term other than nil ([]).
+
+stream
+------
+
+This service provides access to the fast multi-way merge and to the indexed
+distribute.  It exports  merger/2,  distributor/2 , hash_table/1.
+
+    merger(In, Out^)
+                Merges multiple input streams, starting with  In , to the
+                stream  Out .  An additional input stream is specified by
+                input term  merge(In') .  The  Out  stream is closed when
+                all of the input streams have been closed.
+
+    distributor(In, Outs)
+                Distributes messages from multiple input streams, starting
+                with  In , to the streams specified by  Outs .
+                Outs  may be an N-tuple of streams or a list of N streams
+                (N > 0).
+                The message  K#Message , is sent to the  Kth stream
+                (0 < K < N).
+                The input term  merge(In')  specifies an additional input
+                stream.  All of the output streams are closed when all of
+                the input streams have been closed.
+                Note that a distributor is also a merger - it is unnecessary
+                to precede it by a separate merger.
+
+    hash_table(In)
+                manages a dictionary of entries, according to the stream of
+                requests  In .  It serves the requests:
+
+        lookup(Name, NewValue, OldValue!, Status^)
+                replace  OldValue , indexed by  Name , by  NewValue ;
+                        Status = old.
+                else add  NewValue , indexed by  Name , to hash-table;
+                        Status = new.
+        delete(Name, OldValue!, Ok^) :-
+                delete  OldValue  indexed by  Name .
+        insert(Value, NewKey^)
+                Add an entry for distinct new key  NewKey  with value  Value .
+        replace(Name, NewValue, OldValue!, Ok^)
+                replace  OldValue , indexed by  Name , by  NewValue .
+        send(Name, Message, Ok^) :-
+                replace(Name, Stream, [Message | Stream], Ok).
+        entries(List^) :-
+                List  is a list of every currently known  entry(Name,Value) .
+
+Name  may be any string or number.  NewKey  is an integer.
+
+
+sio
+---
+
+The  sio  service coordinates echoing and initial editing of the input
+character string.  In addition, it manages the shell prompt, which
+begins every shell input line.  Commands to manipulate the prompt are
+supported by the  shell .
+
+The editing functions supported by  sio  and its associated processes are
+described in [1], Appendix 3.  Basically, editing implements functions,
+specified by <control> <character>, removes most non-graphic characters and
+divides the character stream into lines.
+
+This process also coordinates input commands, output display, and responses
+to queries, so that output is only begun between lines of input (although
+input may be entered while output is in progress).  For further details,
+of related output functions, see  screen  above.
+
+
+system_dictionary
+-----------------
+
+This service maintains the global dictionary and provides access to it.
+It exports the procedures  add/3 , find/3 , freeze/6 , bindings/2 , size/1 ,
+unbind/1 , unbind/0 .
+
+    add(Name, Value, Response^)
+                Lookup string  Name  in dictionary:
+                        If in dictionary, unify  Value  with its value ,
+                                Response = old
+                        If not in dictionary, add with value  Value ,
+                                Response = new
+
+    find(Id, Value, Response^)
+                Lookup  Id :
+                        If in dictionary, unify  Value  with its value ,
+                                Response = true
+                        If not in dictionary,  Response = false
+
+    freeze(Term, Frozen^, Depth, Length, Self_Reference, Variable_Format)
+                Copy  Term  to  Frozen , replacing each write-enabled or
+                read-only variable by a ground representation.
+                Depth = maximum depth of copied compound structure.
+                Length = maximum length of copied list.
+
+timer
+-----
+
+This module exports two procedures -  time/2  , rpc/2 .
+
+    time(A#B, Out!)
+                Wait until the system is idle; issue the remote procedure
+                calls A#attributes(_) and A#B; compute the measurements
+                for A#B by deducting the overhead of the minimal call.
+                Return the net cpu-time, reductions and creations to  Out .
+
+    rpc(A#B, Out^)
+                Like  time(A#B,Out) , but calculate the average reductions per
+                emulator cycle of the remote procedure call  A#B  - a measure
+                of the parallelism of the processes involved.
+                Return the net reductions, cycles and reductions/cycle to Out.
+
+For  time/2 , the caller can select his own conjunction of measurements from
+the available info measurements.  Out  may be any conjunction of terms of the
+form:
+
+    InfoKey = Variable
+
+where  InfoKey  is any of [cpu, free_heap, used_heap, creations, terminations,
+reductions, suspensions, activations, collections, real_time]
+(see also Appendix 2.)
+
+
+tokenize
+--------
+
+This module exports the procedure  characters/2 .
+
+    characters(Chars, Tokens^)
+                consumes the list of ascii characters, Chars, and produces the
+                stream of FCP tokens, Tokens.
+
+Characters between  <space>  ( = 32)  and  <DEL>  ( = 127) , exclusive of the
+boundary values, are significant, as are  <lf>  ( = 10)  and  <cr>  ( = 13).
+The non-significant characters act as separators and are otherwise ignored,
+except within a quoted string.  The rules for token formation appear in [1],
+Appendix 1.
+
+The  Token  stream may include any string or number.  It also may include
+the special tokens:
+
+        string(String,N)  represents a string, where:
+
+                String is a string;
+
+                    0   String was not quoted.
+                N = 39  String was single-quoted (e.g. 'X-3');
+                    34  String was double-quoted (e.g. "how's tricks?").
+
+        funct(Functor,N)  represents a functor (a string or variable
+                        followed immediately by a left-parenthesis).
+
+                Functor is a string or has the form  '_var'(Name)  or
+                        '_ro(Name) , representing a (read-only) variable
+                        functor, whose name is the string  Name .
+
+                N       is defined as above, when Functor is a string -
+                        N = 0, when  Functor  represents a variable.
+
+        '_var'(Name)  represents a variable whose name is the string  Name .
+
+        '_ro'(Name)   represents a read-only variable, whose name is the
+                      string  Name  (followed immediately by a question mark).
+
+        overflow(Digits)  represents an integer which exceeds the capacity
+                          of the implementation (-2^25 ... 2^25-1).
+
+The  Token  stream may be input to the parser (see above).
+
+
+utils
+-----
+
+This module is a general utilities package. It exports the procedures:
+append_strings/2, binary_sort_merge/2, chars_to_lines/2, evaluate/2,
+ground/2, ground_stream/2, integer_to_dlist/3, 
+
+
+    append_strings(Strings, String!)
+                Strings  is a list of strings and integers, which are
+                concatenated and returned in  String .
+    binary_sort_merge(Input, Output!)
+                Input  is a stream of terms which are sorted in canonical
+                order, with duplicates suppressed, producing  Output .
+    chars_to_lines(Chars, Lines!)
+                The ascii stream  Chars  is split into strings which are
+                returned in the list  Lines . A new string is started
+                at each ascii <lf> or <cr> in the character stream.
+    evaluate(Expression, Result!)
+                Evaluate the arithmetic term  Expression , returning integer
+                Result .
+    ground(X, Y!)
+                Wait until  X  is ground, and then unify  X   and  Y .
+    ground_stream(X, Y!)
+                Treat  X  as a stream, doing a "ground" for each element,
+                unifying the ground term with the corresponding element in Y .
+    integer_to_dlist(I, List!, Tail)
+                Convert the integer  I  to a list of ascii characters in 
+                List , ending with  Tail .
+
+10. Other Utilities
+===================
+
+array
+-----
+
+This service exports  make/3.
+
+    make(N, In, Ok^)
+                Initiates a server of the stream In.  Messages served are
+
+                    write(Index, Value)
+                    read(Index, Value^)
+
+                allowing the user to write and read indexed values of an N
+                element array efficiently.  The array is maintained until
+                the In stream is closed.
+
+                Ok is an N-tuple, each entry of which is a stream of values
+                written with the corresponding index.  When the In stream
+                is closed, the value streams are also closed.
+
+                Ok is "false" if either argument N or In is improper.
+
+computation_utils
+-----------------
+
+This service exports  path_context/3, path_id/3, call_context_goal/4,
+call_id_goal/4, call_list/2, call_output/3.
+
+    path_context(Path, Channel^, Reply^)
+                traces  Path  and opens channel  Channel  to its target.
+    path_id(Path, ServiceId^, Reply^)
+                traces  Path  and returns the unique identifier of its target.
+                Reply  is  true  or false(Reason) .
+
+                For example given a channel to a service,  ServiceChannel ,
+                to get the unique identifier of the service's super, call:
+
+          computation_utils #
+                path_id(context(ServiceChannel) # super, SuperId, Reply)
+
+    call_context_goal(PathGoal, Channel^, Goal^, Reply^)
+                parses  PathGoal  into a path and a  Goal , and uses
+                path_context/3  to open  Channel  and to return  Reply .
+    call_id_goal(PathGoal, ServiceId^, Goal^, Reply^)
+                parses  PathGoal  into a path and a  Goal , and uses
+                path_id/3  to find  ServiceId  and to return  Reply .
+
+When  Reply = false(Reason)  for the above procedures, it means:
+
+    Reason        Meaning
+
+    invalid       Error in path - a path element must be one of:
+                  String, context(Channel), context(Channel,Left,Right),
+                  ServiceId ; when the element refers to a channel, the
+                  channel must be open.
+    no_service    The path is not complete within its hierarchy - some
+                  node is not defined.
+    no_path       PathGoal =\= Front#Back  for  call_context_goal/4  or
+                  call_id_goal/4 .
+    aborted       The computation has been aborted.
+
+    call_list(Goals, Reply^)
+                Starts a sub-computation with  Signals  from the  Goals 
+                stream.  To synchronize on some trigger, instead of ending
+                the stream with [], end it with  known(Trigger, Goals') -
+                when Trigger is instantiated, further  Signals  are added
+                from the  Goals'  stream, etc.
+                If the sub-computation produces an event other than
+                "terminated", the sub-computation fails.  Reply = true
+                when the the sub-computation terminates, or  false(Event)
+                when it fails.
+
+    call_output(Input, Output, Options)
+                Input  is the requests stream for a new sub-computation.
+                Output  is a stream of terms to be sent in order to screen
+                with the specified  Options .
+                Terms are displayed until the end of  Output  or until the
+                sub-computation is aborted.
+
+get_source
+----------
+
+This service is called to prepare a source module for processing.
+
+Get_source exports  file/4, string/4, characters/4, parsed/4, context/5.
+
+    file(Path, Options, Result^, Outs)
+    string(String, Options, Result^, Outs)
+    characters(Chars, Options, Result^, Outs)
+    parsed(Terms, Options, Result^, Outs)
+    context(ContextPath, Name, Options, Result^, Outs)
+
+Path  designates a source module file relative to the computation context.
+
+String ,  Chars ,  Terms  is the source module content in a string, a list of
+ascii characters or a list of parsed terms (clauses).
+
+ContextPath , relative to the computation context, designates the context of
+the source module file,  Name .
+
+Options  is a list which may include terms of the form  syntax(Service) ,
+specifying that the syntax transformation supplied by  Service  is to be
+applied in parsing the source module.  Syntax transformations are applied
+in order of appearance in options, prior to any transformations specified
+in the source module.
+
+Result  =  library(Options',Attributes, Clauses)  or
+           module(Options', Attributes, Clauses)  or
+           false(Reason)
+
+where the functor of  Result  is "library" if the module begins with the fact
+"library.", and it is "module" otherwise.  When get_source cannot produce a
+normal  Result , it returns  false(Reason) .
+
+        Options' is a list of the residual options (syntax(Service) removed).
+        Attributes  is a list of all clauses of the form  -Attribute.  at the
+                    head of the module.
+        Terms  is a list of the rest of the clauses of the module.
+
+Outs  is a two-tuple, whose arguments are a difference list of the parsing
+errors encountered in in preparing the source - if no errors are found (or
+the source module is given as a parsed list of terms), the two arguments
+are unified.
+
+hierarchy
+---------
+
+The  hierarchy  service may be called to walk a sub-tree  of the Logix System
+hierarchy in prefix order, (conditionally) processing each source module.
+
+Hierarchy exports  update/1, update/2, compile/1, compile/2, lint/1, lint/2,
+type_check/1, source_tree/2.
+
+For the following description,  Base  is an arbitrary path, relative to the
+computation's current context.  When  ...Options  is omitted, the indicated
+process uses its normal default options.
+
+
+    update(Base, Options)
+                 examines every module in the sub-tree rooted at  Base.
+                 If the source is more recent than the binary, the module
+                 is compiled.  If option "query" appears, the user is prompted
+                 to save/discard the binary output of a faulty compilation;
+                 otherwise, faulty binary is discarded automatically.  Other
+                 Options  (if any) serve as compile options.
+                 For example, to update the sub-tree at  sub#subsub  of the
+                 computation's context with default compile options, call:
+
+          hierarchy#update(sub#subsub)
+
+    compile(Base, CompileOptions)
+                 compiles every module in the sub-tree rooted at  Base .
+                 For example, to compile all the modules of the sub-tree
+                 at  context(C) , in interpret mode, call:
+
+          hierarchy#compile(context(C),mode(interpret))
+
+    lint(Base, LintOptions)
+                 "lints" each module in the sub-tree rooted at  Base .
+
+    type_check(Base)
+                 type-checks each module in the sub-tree rooted at  Base
+
+    source_tree(Base, ServiceId^, Tree^)
+                 Creates a  Tree  rooted at  Base , with corresponding
+                 ServiceId .
+
+                     Tree ::= {RelativePath, ModuleNames, SubTrees}.
+                     RelativePath ::= String ; String # RelativePath.
+
+                 ModuleNames  is a list of names of source modules whose
+                 source is in the corresponding scope, while  SubTrees  is
+                 a list of  Trees  corresponding to nested scopes; either may
+                 be nil.  If a source module named "self" (self.cp) appears,
+                 it is first in  ModuleNames .  RelativePath = '' for the
+                 returned  Tree  and is the path from the root of  Tree
+                 (ServiceId) to the corresponding scope for each  SubTree .
+
+To specify a starting point other than the computation's current context, use
+context(C)  (channel C) or a  ServiceId  as the leftmost term of  Base .
+
+  side-effects
+  ------------
+
+An auxiliary file,  .logix_names , is written in the computation context.
+The file may be rewritten and read several times during the process.  It
+is removed at normal termination.
+
+  bugs
+  ----
+
+The hierarchy may include soft-links, but it must be at worst a directed
+acyclic graph.
+
+
+lint
+----
+Lint is a Flat Concurrent Prolog verification program. Lint analyses a program
+written in FCP, diagnosing some possible problems in the program.
+
+Usage:
+------
+
+Lint exports  lint/1  and  lint/2
+
+    lint(Source)
+                Analyse  Source .
+                If  Source = Name  - analyse file  Name.cp ;
+                If  Source = Name(Terms) - analyse parsed  Terms .
+
+    lint(Source, Options)
+                Analyse  Source  with options.
+                Options is an option or a list of options.
+
+
+ option                 produces
+ ------                 --------
+constref        - A full reference list of all the constants in the program.
+                  (including strings, numbers, function names etc.)
+varsref         - A full reference list of all variables in the program.
+procref         - A full reference list of all procedure calls and declarations
+                  in the programs (including whether they are predefined).
+crossref        - A full cross reference of the program; equivalent to the
+                  triple [constref, varsref, procref].
+undef           - Every procedure that is called and not defined.
+deadcode        - Every procedure that is defined and not called.
+casecheck       - All variables and constants which appear with two or more
+                  spellings, diferring only in letter case.
+                  Useful for finding typing mistakes. (e.g. And = and = anD).
+                  This option is a sub-case of similarity.
+similarity      - Like casecheck but ignores special characters and checks for 
+                  similarity in letters and digits only. (e.g. And = and =
+                  _and = aNd+ = an_d).
+prccasechk      - Like casecheck for procedures.
+                  This option is a sub-case of prcsimilar.
+prcsimilar      - like prccasechk but ignores special characters and checks for
+                  similarity in letters and digits only.
+varonce         - For each clause, variables that appears once in the clause.
+varoncenusc     - Like varonce but ignore variables whose names begin with
+                  underscore (_); also note variables whose names begin with
+                  underscore that appear more than once.
+proclist        - All the procedures declared in the module and the number of
+                  clauses declared for each of them.
+
+callcheck       - Illegal calls of standard procedures; the checks are for
+                  illegal arguments or placement of the procedures.
+imported        - Lists all procedures imported from another module.
+all             - Equivalent to all of the above options (except for those
+                  which are sub-cases of others). You can use sub-cases with
+                  "all" by giving a list of the sub-cases and "all" at the end
+                  of the list (e.g [casecheck,all]).
+
+
+Default  Options are:
+
+       [deadcode, undef, varoncenusc, callcheck]
+
+
+Examples:
+---------
+
+@lint#lint(foo)
+@lint#lint(foo,all)
+@lint#lint(foo,procref)
+@lint#lint(foo,[crossref, varoncenusc, undef])
+@lint#lint(foo,[crossref, undef, all])
+
+Errors and diagnostics
+----------------------
+
+Message:                                                   Option required:
+
+parsing_error - N  ErrorString                                   none
+lint - missing_attributes                                        none
+lint - invalid_mode(Mode)                                        none
+lint - invalid_attribute(Attribute)                              none
+lint - duplicate_attribute(Attribute)                            none
+lint - export_argument_error(Error)                              none
+lint - illegal_monitor_name(Name)                                none
+lint(Id) - illegal_head((Head))                                  none
+lint(Id) - non_functor_head(H)                                   none
+lint(Id, Part) - illegal_call(Call)                              none
+lint(Id, Part) - anonymous_read_only_variable                    none
+lint(Id) - variable - Name - appears_only_once           varonce,varoncenusc
+lint(Id) - variable - Name - only_in_read_only_mode      varonce,varoncenusc
+
+lint - undefined_procedure - Proc                                undef
+lint - undefined_guard_predicate - Pred                          undef
+lint - dead_code  - Proc                                         deadcode
+lint - constref(Const, List)                               constref,crossref
+lint - varsref(Var, State, List)                           varsref,crossref
+lint - proc_ref(Proc, List)                                procref,crossref
+lint - proc_ref(Proc, predefined, List)                    procref,crossref
+lint(Proc) - case_duplication(Dup)                       prccasechk,prcsimilar
+lint(modulewise) - case_duplication(Dup)                 casecheck,similarity
+lint(Id) - multiply_defined_procedure                            none
+lint(Id) - underscored_variable - Name - appears_multiply        varoncenusc
+lint - proc_list(List)                                           proclist
+lint(Id, Part), illegal argument = Arg -
+               arg(Argno, Call) - should_be_one_of(List)         callcheck
+lint(Id, Part) - illegal_RPC(A#B)                                none
+lint(Id, Part) - suspect_RPC(A#B)                                none
+lint - imported_procs(Procs_list)                                imported
+
+math
+----
+
+The Logix System Math Monitor supplies several standard functions for
+real number computations.
+
+To call a math  Function :
+
+        math#Function(Arguments)
+
+or functionally as part of an evaluated (body) expression.
+
+        math # sin(1.5707, ApproximatelyOne)
+        math # sqrt(X, SquareRootOfX)
+
+The  Functions  and their meanings are:
+
+
+        Function(Arguments)        Meaning
+
+        sqrt(Number,Result)     The square root of Number is Result.
+        exp(Number,Result)      e to the power Number is Result.
+        log(Number,Result)      The natural logarithm of Number is Result.
+
+        random(Result)          Result is a random value: uniform(0,1).
+        srandom(Number)         Number (non-0) initiates a pseudo-random
+                                sequence of values of random.
+
+        sin(Number,Result)      The sin of Number radians is Result.
+        cos(Number,Result)      The cos of Number radians is Result.
+        tan(Number,Result)      The tan of Number radians is Result.
+        asin(Number,Result)     The asin of Number is Result radians.
+        acos(Number,Result)     The acos of Number is Result radians.
+        atan(Number,Result)     The atan of Number is Result radians.
+
+Number may be integer or real.  The computed value is real and is unified
+with Result.
+
+The math functions may be called within an Expression of a body goal:
+
+        A := Expression
+
+The function is referred to without a result argument, as in familiar
+computational usage - e.g.
+
+        X := sqrt(1 + sin(A)*cos(B/2)) + 2.5*random
+
+
+trap
+----
+
+It is possible to trap specific Remote Procedure Calls.  The service
+trap exports procedures which may be used to suspend a computation when
+a specific RPC is trapped, to interrupt a call, extracting it from the
+computation or simply to record/modify selected RPCs.
+
+For a given  Service  and a list of  Goals  the following RPCs trap any
+request to  Service  which unifies with any element of  Goals .
+Goals  may be a single goal, a list of goals or a variable.  When  Goals
+is variable, the process iterates until it is aborted, or  Service  is
+untrapped.  To untrap  Service , issue the request:
+
+        Service#untrap
+
+When  Goals  is not variable, for each RPC which is trapped, the corresponding
+goal is removed from  Goals , until  Goals  is empty, and trap terminates.
+
+Trap exports  suspend/2, unify/2, interrupt/3, filter/3 .
+
+    suspend(Service, Goals!)
+                Suspend any computation which calls  Service  with an RPC
+                whose goal is in  Goals .
+                The term "trapped(Service#Goal)" is added to the computation's
+                Events  stream - a shell computation is suspended by an event.
+
+    unify(Service, Goals!)
+                Unify each goal of an RPC for  Service  with the first matching
+                Goal  in  Goals , if any.
+
+    interrupt(Service, Goals!, Interrupts!)
+                Interrupt any computation which calls  Service  with an RPC
+                whose goal is in  Goals .
+                The term  "trapped(ServiceId#Goal)"  is added to the stream
+                of  Interrupts .
+                The stream of  Interrupts  is closed when the trap process
+                terminates.
+
+    filter(Service, Goals!, TrappedGoals^)
+                Extract each call to  Service , with a goal which is in
+                Goals .
+                The term "trapped(ServiceId#Goal, Reply)" is sent to
+                TrappedGoals , and  Goal  is held, awaiting  Reply :
+                If:  Reply = true ,  Goal  is forgotten;
+                If:  Reply = false , Goal  is forwarded.
+
+Note that the suspend/2 trap has no direct effect on calls to trusted or
+failsafe services, and its direct effect on non-shell computations is limited
+to the event which is produced.
+
+An interrupt/3 trap actually extracts each trapped  Request , and puts it
+on the  Interrupts  stream  (Request = ServiceId # Goal) - you must reissue
+it to enable the call to proceed.  The call:
+
+        ServiceId # Goal
+
+reissues the  Request  (although it may be trapped again).
+
+To debug the  Goal  with the dynamic debugger, call:
+
+        shell # debug(Request)
+
+The debugging session is a separate computation.
+
+Example:
+
+        trap#interrupt(test, [_], [Request])
+        test#case(10, _)
+        debug(Request)
+
+The  Reply  argument of a  TrappedGoal  must be instantiated before the goal
+can be executed (Reply = false) or removed from the computation (Reply = true).
+
+widgets
+-------
+
+This is a selection of services which have been useful in developing the
+Logix System.  Each service is called:
+
+    widgets # ServiceName # Goal
+
+Included are a pretty-printer, a dictionary server, a service aliasing
+function, a library tree flattener, a vanilla meta-interpreter (described
+above) and a real-time measurer.
+
+The pretty-printer, pretty,  exports  context/3, module/2, intermediate/2 .
+
+    context(PathToSuper, Name, ListOfLines^)
+    module(Name, ListOfLines^)
+    module(PrecompilerIntermediate, ListOfLines^)
+    module(ParsedClauses, ListOfClauses^)
+    intermediate(PrecompiledProcedureList, ParsedClauses^)
+
+ListOfLines is suitable for display or to be saved as a a text file:
+
+        screen # display_stream(ListOfLines, list)
+        file # put_file(FileName, ListOfLines, [], Status) 
+
+To call this service to prettify the module  sub#subsub#eg , call:
+
+        widgets # pretty # context(sub#subsub, eg, Peg)
+
+Notes:
+
+1. An atom which begin with a lower-case character, is not re-quoted -
+   e.g. "mixed-atom", "a punctuated atom!".
+
+2. An atom which (properly) contains the character "'" is not re-quoted
+   correctly - e.g. "What's your name?" becomes "'What's your name?'".
+
+3. The atom "procedure" is quoted, except as the functor of a predicate -
+   e.g. the clause "procedure procedure(procedure, Procedure)" becomes
+   "procedure procedure('procedure', Procedure)."
+
+4. Comments are not preserved.
+
+Example - Given fib.cp in the shell context:
+
+% Fibonacci series up to N
+-export([fib/2]).
+fib(N,Xs) :- fib1(N,[0,1|Xs]).
+fib1(N,[X1,X2,X3|Xs]) :- N>X2 | X3:=X1+X2, fib1(N,[X2,X3|Xs]).
+fib1(N,[X1,X2]) :- N=<X2 | true.
+
+@widgets#pretty#module(fib,FP)  
+<3> started
+<3> terminated
+@screen#display_stream(FP,list)
+<4> started
+-export([fib / 2]).
+
+fib(N, Xs) :-
+      fib1(N, [0, 1 | Xs]).
+
+fib1(N, [X1, X2, X3 | Xs]) :-
+  N > X2 |
+      X3 := X1 + X2,
+      fib1(N, [X2, X3 | Xs]).
+fib1(N, [X1, X2]) :-
+  N =< X2 |
+      true.
+<4> terminated
+@
+
+Other widgets include comments which indicate how they may be used.
+
+11. Bugs
+========
+
+Some parts of the Logix system do not conform to the specification, which
+appears in  The Logix System User Manual .
+
+Reporting Errors
+----------------
+
+Report system errors and suspected malfunctions to "fcp@wisdom.bitnet" by
+electronic mail, or write to:
+
+                        Logix
+                        Department of Computer Science
+                        Weizmann Institute of Science
+                        Rehovot 76100, ISRAEL
+
+A report should include the source of the module(s) which elicit(s) the
+erroneous behavior, and a log of an entire session of Logix, during which
+the error(s) occured.
+
+Please include any other relevant material, such as dumps which may be
+produced by the system.
+
+Any reduction of the complexity of the problem, preferably to the simplest
+case which produces the error, will be appreciated, and will probably speed
+both the reponse to the report and a satisfactory correction of the problem.
+
+We will attempt to answer every report, but we are unable to maintain
+ongoing status reports or widely distributed error logs at this time.
+
+Appendix 1 : User Guard Kernel Predicates
+=========================================
+
+Any guard kernel predicate which is used in the Logix system, and is not
+described here, is reserved to the system, or scheduled for elimination.
+The predicates described in [1], 2.4, comprise the stable base list.
+
+
+A guard kernel may fail, succeed or "suspend" - kernels which have only one
+or two of these possibilities are flagged "*" in the table.  Other common
+characteristics are foot-noted by number.
+
+
+Unification:
+
+X=Y                     X is unified with Y
+
+Meta-logical:
+
+unknown(X)              X is a variable                 * succeed or fail
+
+known(X)                X is not a variable             * succeed or suspend
+
+Type checking:
+
+integer(X)              X is an integer
+real(X)                 X is a real number
+number(X)               X is an integer or a real number
+string(X)               X is a character string
+constant(X)             X is a number or a string or nil ("[]")
+tuple(X)                X is a tuple
+list(X)                 X is a list
+compound(X)             X is a tuple, a list or a vector (channel)
+module(X)               X is a module (also a string)
+channel(X)              X is a channel
+vector(X)               X is a vector
+
+General Comparison:
+
+X =?= Y                 X is equal to Y                                   (1)
+X =\= Y                 X is not equal to Y                                "
+X @< Y                  X is "canonically less than" Y                    (2)
+
+Top-level comparison:
+
+X == Y                  X is top-equivalent to Y        * succeed or fail (1)
+
+Integer arithmetic comparison:
+
+X > Y                   X is greater than Y                               (3)
+X >= Y                  X is greater than or arithmetically equal to Y     "
+X < Y                   X is less than Y                                   "
+X =< Y                  X is arithmetically equal to or less than Y        "
+
+Integer arithmetic operations:
+
+plus(X,Y,Z)             Z is unified with the sum of X and Y              (3)
+diff(X,Y,Z)             Z is unified with the difference of X and Y        " 
+times(X,Y,Z)            Z is unified with the product of X and Y           " 
+div(X,Y,Z)              Z is unified with the quotient of X and Y          " 
+mod(X,Y,Z)              Z is unified with the modulus of X by Y            " 
+
+Logical operations on integers:
+
+bitwise_and(X,Y,Z)      Z is unified with the boolean product of X and Y  (3)
+bitwise_or(X,Y,Z)       Z is unified with the boolean sum of X and Y       " 
+bitwise_not(X,Z)        Z is unified with the boolean complement of X      "
+
+Term introspection:
+
+arity(T,A)              The arity of tuple T is unified with A            (4)
+string_length(S,L)      The length of string S is unified with L           "
+string_hash(S,H)        The 8-bit hash code  of string S is unified with H "
+arg(N,T,A)              The Nth argument of tuple T is unified with A      "
+
+Type conversions:
+
+make_tuple(A,T)         Create tuple with arity A, and unify it with T    (4)
+string_to_dlist(S,L,E)  Convert characters of string S to a list of        "
+                        ascii characters (small integers) with tail E,
+                        and unify it with L
+list_to_string(L,S)     Convert the list of ascii characters L to a        "
+                        string, and unify it with S.
+convert_to_integer(C,I) Convert the string or number C to an integer,      "
+                        and unify it with I
+convert_to_real(C,R)    Convert the string or number C to a real number,   "
+                        and unify it with R
+convert_to_string(C,S)  Convert the string or number C to a string, and    "
+                        unify it with S
+Control:
+
+true                    succeed                         * succeed
+fail                    fail                            * fail
+otherwise               succeed only if all previous    * succeed or fail
+                        clauses of this procedure fail                    (5)
+deschedule              reduced goals are queued        * succeed         (6)
+
+Runtime:
+
+info(Index,Value)       Integer  Index  selects an      * suspend or succeed
+                        execution statistic which
+                        is unified with  Value                            (7)
+
+Notes
+-----
+
+(1) Two constants are equal if they are identical in type and in value.
+    A real is not equal to an integer (although they may be arithmeticaly
+    equal).
+    A global variable is equal only to itself or to a local write-enabled
+    variable.
+    Two tuples are equal if they have the same arity and their arguments
+    are equal.
+    Two lists are equal if their CARs are equal and their CDRs are equal.
+    A local write-enabled variable is equal to (renames) any term.
+
+    For general comparisons ( =\= , =?= , @< ) a comparison of a global
+    variable with anything except itself or a write-enabled local variable,
+    suspends.
+ 
+    Constants and variables are top-equivalent if they are equal.
+    Two tuples are top-equivalent if they have the same arity.
+    Two lists are top-equivalent.
+
+(2) Terms are canonically ordered  number @< string @< [] @< list @< tuple .
+    Numbers are ordered arithmetically and strings (modules) are ordered
+    lexically.  Tuples are ordered by arity and recursively by the order
+    of their arguments, left to right, when they have the same arity.
+    Lists are ordered recursively by the order of their CARs and by the
+    order of their CDRs when their CARs are equal.
+
+    The smallest string is the empty string, represented  ''  or  "" .
+
+(3) X and Y must be instantiated as numbers before the operation can be
+    performed.  (For mod and for the bitwise operations, X, Y, Z are integers.)
+
+(4) All arguments, except the argument to be unified, must be instantiated
+    before the unification is attempted.
+
+(5) Otherwise fails if some preceding clause of the procedure has suspended.
+    Otherwise may appear in more than one clause of a procedure.
+
+(6) A reduced goal might otherwise be processed immediately.
+
+(7)     Index = 1 : cpu-time
+                2 : free heap space
+                3 : active/garbage heap space
+                4 : number of creations
+                5 : number of reductions
+                6 : number of suspensions
+                7 : number of terminations
+                8 : number of activations
+                9 : number of garbage collections
+               10 : seconds since start-of-run
+
+
+In addition to the predicates explicitly provided, the user may use the guard
+macros  := / 2, < / 2, > /2, =< / 2, >= / 2, =:= / 2.
+
+These macros are used for arithmetic expression evaluation and comparison.
+The macro  := / 2  unifies its left-hand-argument with the computed value
+of its right-hand-argument.  Each of the other macros compares the computed
+value of its left-hand-argument with the computed value of its right-hand-
+argument.  Computations are compiled from normal arithmetic expressions to
+the basic evaluation guard kernel predicates described above.
+Examples are:
+
+        X := (3 + 12) / 2 % succeeds when X is unified with 7.
+        Y - 3 < 2 * Z     % succeeds when diff(Y,3,D), times(2,Z,P), D < P.
+
+An expression may include functional references  integer(Number),
+real(Number) , arity(Tuple) , ascii(String) , string_hash(String) ,
+string_length(String) .  These are also permitted in expressions in the
+body of a clause.
+
+
+The macro  ascii/2  accepts as arguments a string of length 1 or the name
+of an ascii control character, and a variable, and unifies the variable with
+the ascii value of the string - e.g.
+
+        ascii('A',A)
+        ascii(lf,LF)
+
+A  is unified with 65 (hex 41), and  LF  is unified with 10 (hex 0A).
+
+The ascii control character names:
+
+        bel, bs, lf, cr, esc, del
+
+are implemented.
+
+2. Additional Predicates
+========================
+
+Some additional predicates are available, both as guard predicates and as
+primitive procedures.
+
+    freeze(Term, FrozenTerm, FrozenVariableList)
+        FrozenTerm  is a string, whose interior represents  Term  with each
+        write-enabled variable replaced by a frozen write-enabled variable and
+        each read-only variable replaced by a frozen read-only variable.  The
+        connection between write-enabled variables and read-only variables is
+        preserved in their corresponding frozen variables.
+        FrozenVariableList  contains an entry for each distinct frozen variable
+        in  FrozenTerm . A variable in  FrozenVariableList  is write-enabled
+        if some corresponding frozen variable is write-enabled.
+
+    melt(FrozenTerm, MeltedTerm, MeltedVariableList)
+        MeltedTerm  is isomorphic to  Term .  All variables in  MeltedTerm  are
+        local to it, except that each distinct variable in  MeltedTerm  is in
+        MeltedVariableList  in the same order as the corresponding variables
+        (terms) in  Term  are in  FrozenVariableList .  Thus,  melt/3  can be
+        used like the familiar "melt_new".
+        MeltedVariableList  is a list of write-enabled variables corresponding
+        to distinct frozen variables in  FrozenTerm .  If it is unified with
+        FrozenVariableList ,  MeltedTerm  becomes identical to  Term .
+
+    freeze(Term, Depth ,Length, StringLength, FrozenTerm, FrozenVariableList)
+        Depth >= 0  is the depth to freeze a compound term.  A compound
+        term at  depth > Depth  is frozen as a frozen ro-variable in
+        FrozenTerm , corresponding to the excess term in  FrozenVariableList .
+        Length >= 0  is the maximum length of a frozen (compound) list.
+        A CDR beyond  Length  is represented by a frozen read-only variable in
+        FrozenTerm  corresponding to the excess term in  FrozenVariableList .
+        StringLength >= 0  is the maximum length of a frozen string.  A string
+        whose length is greater than  StringLength  is frozen as a ro-variable
+        in  FrozenTerm , corresponding to the string itself in
+        FrozenVariableList .
+        Any of  Depth ,  Length ,  StringLength  may be nil "[]", indicating
+        that the corresponding limit is the system maximum.
+
+    make_channel(Channel, Stream)
+        Channel  may be used to send messages to  Stream  by the write_channel
+        predicates.  Channel  may be shared by separate processes, whose
+        messages to  Stream  are merged first-come-first-served.
+
+    write_channel(Element, Channel)
+    write_channel(Element, Channel, Channel')
+        Element  is added to the  Stream  corresponding to  Channel .
+        Channel'  may be used to add messages to  Stream , following
+        Element .
+
+    close_channel(Channel)
+        The corresponding  Stream  is closed.
+
+The predicate freeze/6 is only a primitive procedure.  Freeze functions are
+provided by the guard kernel predicate freeze/4:
+
+    freeze(Term, Limits, FrozenTerm, FrozenVariableList)
+       Limits  is [] (freeze/3) or {Depth ,Length, StringLength} where each
+       of  Depth ,  Length ,  StringLength  may be [] (system maximum) or a
+       non-negative integer.
+
+References
+==========
+
+[1]             Silverman, W., M. Hirsch, A. Houri and E. Shapiro, The Logix
+                System User Manual, Weizmann Institute Report CS-21, Rehovot,
+                1988.
+
+[2]             Houri, A. and E. Shapiro, A sequential abstract machine for
+                Flat Concurrent Prolog, Weizmann Institute Report CS-20,
+                Rehovot, 1986
+
+[3]             Mierowsky, C., S. Taylor, E. Shapiro, J. Levy and M. Safra,
+                The design and implementation of Flat Concurrent Prolog,
+                Weizmann Institute Technical Report CS85-09, Rehovot, 1985.
+
+[4]             Hirsch, M., W. Silverman and E. Shapiro, Layers of Protection
+                and Control in the Logix system, Weizmann Institute Technical
+                Report CS86-19, Rehovot, 1986.
+
+[5]             Kliger, S., E. Yardeni, K. Kahn and E. Shapiro,
+                The Language FCP(:,?)
+                FGCS Proceedings, 1988.
+
+
+This document is licensed under Gnu General Public License - Version 3 
+
+     http://www.nongnu.org/efcp/gnu-gpl3.html

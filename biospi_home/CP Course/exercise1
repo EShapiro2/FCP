@@ -1,0 +1,65 @@
+     
+Assignment No. 1	Due Monday, November 17th, 1986.
+--------------------------------------------------------
+     
+The following is a pencil and paper exercise. If you know Prolog,
+ignore its operational behavior.  Just specify the most concise
+and elegant logic programs, with the desired meaning.
+     
+For additional examples of logic programs, see "the Art of Prolog",
+Part I.
+     
+1. Given a logic program with rules defining the relations 
+	father(X,Y), mother(X,Y), male(X), female(X),
+add rules defining the following relations:
+
+	sibling(X,Y) :- X and Y are siblings.
+	procreated(X,Y) :- X and Y have procreated.
+	sister(X,Y) :- X is a sister of Y.
+	ancestor(X,Y) :- X is an ancestor of Y.
+     
+Note: here and in the following exercises define auxilliary relations
+as needed.  Specify their declarative meaning in the same style used
+in this assignment.
+     
+2. Assuming a relation on(X,Y), stating that block X is on block Y
+(block X is resting upon block Y), define the relation:
+
+	above(X,Y) :- X is above Y.
+     
+3. Assuming a unary representation of the natural numbers:
+	0, s(0), s(s(0)), s(s(s(0))), ...
+define the following relations:
+
+	plus(X,Y,Z) :- X plus Y is Z.
+	less_than(X,Y) :- X is less than Y.
+	even(X) :- X is an even number.
+	fib(N,F) :- F is the N'th Fibonacci number.
+     
+     
+4. Define the following predicates over lists:
+
+	reverse(X,Y) :- reversing the list X gives Y.
+	double(X,Y) :- Y contains every element of X twice in
+			a row, e.g. double([a,b,c],[a,a,b,b,c,c]).
+	sum(X,S) :- S is the sum of a list of integers X.
+		(a) Using plus/3 as a subroutine.
+		(b) Without using plus/3.
+     
+5. Define the following predicates over trees of integers, composed of
+	tree(Left,X,Right) and nil:
+
+	subtree(X,T,) :- X is a subtree of tree T.
+		e.g. subtree(tree(nil,3,nil),
+			     tree(nil,7,tree(nil,3,nil))).
+                and  subtree(tree(nil,s,nil),
+	                     tree(tree(nil,8,tree(nil,3,nil)),
+	                          7,
+	                          tree(nil,4,nil))).
+     
+	insert(X,Tree,Tree1) :- The result of inserting X into
+		the ordered tree Tree is the tree Tree1.
+		(A tree is ordered if all elements on the right
+		subtree are greater or equal to the element in
+		the root, which is in turn greater than or equal
+		to all the elements in the left subtree).

@@ -1,0 +1,197 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../YaaraYaki.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Modeling a Molecular Computing Device using &Otilde;-Calculus</title>
+<meta name=Description content="21-Jun-01: Code Example">
+<link rel=next href="v3_slide0019.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0018.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master11_background.gif" bgcolor=black alink="#9933ff"
+link=aqua vlink="#0099cc" text="#f8f8f8" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=142 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=242 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=25 height=30></td>
+  <td width=157 height=30 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=157 height=30><font face=Tahoma color=yellow size=4>Code Example</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=293 height=30 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=43 colspan=3></td>
+  <td width=385 height=43 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=308 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=308 height=23><font face=Tahoma color="#ffff99" size=3>With the
+    help of Aviv Regev and Bill</font><br>
+    </td>
+    <td width=77 height=23></td>
+   </tr>
+   <tr>
+    <td width=385 height=20 colspan=2><font face=Tahoma color="#ffff99" size=3>Silverman,
+    the following code was produced:</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=50 height=43></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=36 height=191 colspan=2></td>
+  <td width=388 height=191 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=117 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=160 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=28 height=23><font face=Tahoma color="#6699ff" size=3>•</font></td>
+    <td width=360 height=23 colspan=8><font face=Tahoma color="#ffff99" size=3>The
+    code starts out with a list of symbols.</font><br>
+    </td>
+    <td width=1 height=23></td>
+   </tr>
+   <tr>
+    <td width=389 height=4 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=28 height=23><font face=Tahoma color="#6699ff" size=3>•</font></td>
+    <td width=361 height=23 colspan=9><font face=Tahoma color="#ffff99" size=3>According
+    to the head of the list, it output</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=28 height=22></td>
+    <td width=118 height=22 colspan=2><font face=Tahoma color="#ffff99" size=3>the
+    following:</font><br>
+    </td>
+    <td width=243 height=22 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=28 height=22></td>
+    <td width=173 height=22 colspan=5><font face=Tahoma color="#ffff99" size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ffff99" size=3>‘</font><font face=Tahoma
+    color="#ffff99" size=3>Minnesota</font><font face="Times New Roman"
+    color="#ffff99" size=3>’</font><font face=Tahoma color="#ffff99" size=3>
+    for M</font><br>
+    </td>
+    <td width=188 height=22 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=28 height=22></td>
+    <td width=160 height=22 colspan=4><font face=Tahoma color="#ffff99" size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ffff99" size=3>‘</font><font face=Tahoma
+    color="#ffff99" size=3>NewYork</font><font face="Times New Roman"
+    color="#ffff99" size=3>’</font><font face=Tahoma color="#ffff99" size=3>
+    for N</font><br>
+    </td>
+    <td width=201 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=28 height=22></td>
+    <td width=147 height=22 colspan=3><font face=Tahoma color="#ffff99" size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ffff99" size=3>‘</font><font face=Tahoma
+    color="#ffff99" size=3>Oregon</font><font face="Times New Roman"
+    color="#ffff99" size=3>’</font><font face=Tahoma color="#ffff99" size=3>
+    for O</font><br>
+    </td>
+    <td width=214 height=22 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=28 height=22></td>
+    <td width=333 height=22 colspan=6><font face=Tahoma color="#ffff99" size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ffff99" size=3>‘</font><font face=Tahoma
+    color="#ffff99" size=3>Who Knows</font><font face="Times New Roman"
+    color="#ffff99" size=3>’</font><font face=Tahoma color="#ffff99" size=3>
+    for none of the above.</font><br>
+    </td>
+    <td width=28 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=389 height=4 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=28 height=26><font face=Tahoma color="#6699ff" size=4>•</font></td>
+    <td width=349 height=26 colspan=7><font face=Tahoma color="#ffff99" size=4>Repeat
+    until reaches the empty list.</font><br>
+    </td>
+    <td width=12 height=26 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=51 height=191 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=40 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

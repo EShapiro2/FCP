@@ -1,0 +1,42 @@
+#! /bin/sh
+#
+#  This module is part of EFCP.
+#
+#     Copyright 2007 William Silverman
+#     Weizmann Institute of Science, Rehovot, Israel
+#
+#  EFCP is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 2 of the License, or
+#  (at your option) any later version.
+#
+#  EFCP is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+#  GNU General Public License for more details.
+#  
+#  You should have received a copy of the GNU General Public License
+#  along with EFCP; if not, write to:
+#
+#       Free Software Foundation, Inc.
+#       59 Temple Place, Suite 330
+#       Boston, MA 02111-1307  USA
+#
+#
+# Make a prototype Logix system.
+#
+
+rm -rf ~/EFCP
+mkdir ~/EFCP
+mkdir ~/EFCP/Logix
+cp -rp ../bin ~/EFCP/bin
+cp -rp Bin ~/EFCP/Logix
+foreach D ( processor_server system system/block system/block/tree system/block/tree/rename system/compile system/compile/control system/compile/precompile system/debug system/decode system/dictionary_server system/Doors system/Doors/server system/Doors/Processor system/Doors/server/logging_monitor system/library_server system/lint system/ndg system/ndg/assemble system/ndg/phase0 system/ndg/phase1 system/ndg/phase2 system/ndg/phase2/ctl_pe system/ndg/phase2/ctl_pe/immediate system/ndg/phase2/ctlopt system/parse system/parse/syntax system/profile system/shell_server system/sio_server system/SpiFcp system/SpiFcp/BioSpi system/transform system/transform/biospi system/transform/inherit system/transform/lpi system/transform/spifcp system/widgets )
+mkdir ~/EFCP/Logix/$D
+mkdir ~/EFCP/Logix/$D/Bin
+cp -p $D/Bin/*.bin ~/EFCP/Logix/$D/Bin
+end
+cp -p COPYING install README WARRANTY ~/EFCP/Logix
+cp -p system/widgets/Bin/user_macros.bin ~/EFCP/Logix/system
+cp -p system/SpiFcp/spi_constants.cp ~/EFCP/Logix/system
+cp -rp EMULATOR ~/EFCP/Logix/EMULATOR

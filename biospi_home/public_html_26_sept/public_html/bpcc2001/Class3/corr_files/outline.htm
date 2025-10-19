@@ -1,0 +1,1823 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../corr.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#FFFFFF",gOtlNormalClr="#000000",gOtlActiveClr="#FFFF00",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	padding-bottom:5px;}
+a
+	{color:white;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">&nbsp; </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0297.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">Notices</a></font></div>
+  <div id=PPTC1 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB1 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Milner’s book on the pi-calculus is available in
+    the CS/Applied math library. We also have a photocopy that you can use.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Code for all examples shown in class is
+    available on the web site. Use it.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A few typos were present in the last class
+    slides. A corrected version will be on the web site. Its always worthwhile
+    to check.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Submit full exercise</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Any problems with submission dates (miluim,
+    trips abroad etc) clear with Barak in advance.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0001.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">Biomolecular processes as concurrent computation</a></font></div>
+  <div id=PPTC2 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB2 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Unit 1: The electron theory of chemical bonds</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0238.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Ionic Bonds</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0232.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Na + Cl <font face=Symbol>«</font><font
+  face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0233.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Na + K + 2Cl <font face=Symbol>«</font><font
+  face="Comic Sans MS"> Na<sup>+</sup> + K<sup>+</sup> + 2Cl<sup>-</sup></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0234.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Mg + 2Cl <font face=Symbol>«</font><font
+  face="Comic Sans MS"> MgCl<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0240.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Covalent Bonds</a></font></div>
+  <div id=PPTC7 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB7 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A covalent bond is a sharing of a pair of
+    electrons, so that both atoms have filled octets</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0235.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">H + Cl <font face=Symbol>«</font><font
+  face="Comic Sans MS"> HCl</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0298.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">H + H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0236.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">O + O <font face=Symbol>«</font><font
+  face="Comic Sans MS"> O<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0237.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">Lattices, molecules and networks</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0242.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Limitations</a></font></div>
+  <div id=PPTC12 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB12 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>“Atom” centered view is cumbersome and
+    inappropriate when complex molecules are involved</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E.g. C (valence of 4) and N (valence of 3)
+    become highly difficult to model even for simple compounds</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0243.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Limitations</a></font></div>
+  <div id=PPTC13 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB13 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Lack in explicit modeling of higher order
+    entities</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>radicals, molecules</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Limitations on global interactions of such
+    entities</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Interactions explained by more than pair-wise
+    sharing of electrons, e.g.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Resonance structures (benzen, ozone)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Lattice energies of ionic compounds (MgCl<sub>2</sub>,
+    NaCl)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0206.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">Lone Electron Pairs</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0248.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Resonance Structures</a></font></div>
+  <div id=PPTC15 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB15 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In certain bonding situations two alternative
+    resonance electron dot structures can be suggested. For example in the
+    ozone molecule:</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0296.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Resonance Structures</a></font></div>
+  <div id=PPTC16 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB16 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The incorrect view assumes that both forms exist
+    and that the electron goes back and forth between both forms, resulting
+    over time in the average</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The correct view is that there is really only
+    one form corresponding to the average. The two forms are only a conceptual
+    method for getting this average. The actual bonding is represented by</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0244.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Exercise 3 – Question 1A</a></font></div>
+  <div id=PPTC17 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB17 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>(i) Which process does the following program
+    model ? (running it won’t help </font><font face=Wingdings size=2>J</font><font
+    face="Comic Sans MS" size=2> )</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>(ii) Which kind of compound will be formed and
+    which bonds will be involved (covalent? Ionic? Single? Double? Etc) ?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>(iii) What is the inherent limitation in using
+    this program to model the process in (i)?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0245.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Exercise 3 – Question 1A</a></font></div>
+  <div id=PPTC18 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB18 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e(20)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>baserate(0.1).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>System(N1)::= &lt;&lt; CREATE_C(N1) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>CREATE_C(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | &lt;&lt; el1, el2, el3, el4 .<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>		<span style="mso-spacerun: yes">&nbsp; </span>C(e,e,e,e,el1,el2,el3,el4)
+    &gt;&gt; | self . &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>C(e1,e2,e3,e4,el1,el2,el3,el4)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>e1 ! {el1}<span style="mso-spacerun:
+    yes">&nbsp; </span>, C(el1,e2,e3,e4,e1,el2,el3,el4) ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e1 ? {el1}<span
+    style="mso-spacerun: yes">&nbsp; </span>, C(el1,e2,e3,e4,e1,el2,el3,el4) ;
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e2 ! {el2}<span
+    style="mso-spacerun: yes">&nbsp; </span>, C(e1,el2,e3,e4,el1,e2,el3,el4)
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e2 ?
+    {el2}<span style="mso-spacerun: yes">&nbsp; </span>,
+    C(e1,el2,e3,e4,el1,e2,el3,el4) ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e3 ! {el3}<span
+    style="mso-spacerun: yes">&nbsp; </span>, C(e1,e2,el3,e4,el1,el2,e3,el4) ;
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e3 ? {el3}<span
+    style="mso-spacerun: yes">&nbsp; </span>, C(e1,e2,el3,e4,el1,el2,e3,el4)
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e4 !
+    {el4}<span style="mso-spacerun: yes">&nbsp; </span>,
+    C(e1,e2,e3,el4,el1,el2,el3,e4) ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>e4 ? {el4}<span
+    style="mso-spacerun: yes">&nbsp; </span>, C(e1,e2,e3,el4,el1,el2,el3,e4) .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0247.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Exercise 3 – Question 1B (bonus*)</a></font></div>
+  <div id=PPTC19 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB19 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In an ozone (O<sub>3</sub>) molecule, a
+    resonance structure exists, where three O atoms are sharing 3 electron
+    pairs (see picture): 2 electron pairs are shared in “the usual way”. The
+    third pair is shared by all three atoms.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	Try to write a pi-calculus program to describe
+    this molecule (no need to run it). <br>
+    More information on resonance in O3 can be found in Mahan, pp 280-281</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Even an unsuccessful (but interesting) attempt
+    can gain points.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0208.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Unit 2: Molecules, Radicals and Functional
+  Groups</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0207.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">Radicals</a></font></div>
+  <div id=PPTC21 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB21 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Parts of molecules which have special
+    significance</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, H<sub>2</sub>O can be divided to
+    two parts: H and OH.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We can consider H<sub>2</sub>0 as formed from
+    combining these two radicals</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0250.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Free Radicals</a></font></div>
+  <div id=PPTC22 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB22 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Radicals sometimes exist as independent free,
+    entities</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Free radicals possess an odd number of electrons
+    (one or more unpaired electrons)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The ordinary free radical<span
+    style="mso-spacerun: yes">&nbsp; </span>is univalent, capable of forming a
+    single chemical bond</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Usually short lived and highly reactive</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Many chemical reactions take place with radicals
+    as reactive intermediates</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0251.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">Radicals</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0249.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">(Organic) Functional Groups</a></font></div>
+  <div id=PPTC24 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB24 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Carbon based compounds are termed organic</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Organic compounds are composed of functional
+    groups</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A functional group is the the part of a molecule
+    having a special arrangement of atoms that is largely responsible for the
+    chemical behavior of the parent molecule</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Different molecules containing the same kind of
+    functional group react similarly</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0220.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">A Modular Approach to Radicals, Groups and
+  Compounds</a></font></div>
+  <div id=PPTC25 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB25 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>For a reaction of the type</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>A+B </font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2> C</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>We will</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Represent A, B as processes</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=2><font size=2>Upon interaction</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>A, B processes will be terminated</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>A new process, C, will be spawned</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0265.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)">A Modular Approach to Radicals, Groups and
+  Compounds</a></font></div>
+  <div id=PPTC26 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB26 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For reverse unimolecular reaction</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>C </font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2> A + B</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Before, we had two counterparts (Bound_A and
+    Bound_B) which unbound from each other</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Now, we have a single reactant process C</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In the pi-calculus we are limited to pair wise
+    interactions</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0267.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">A Modular Approach to Radicals, Groups and
+  Compounds</a></font></div>
+  <div id=PPTC27 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB27 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We will add a Timer process that will offer the
+    complementary communication required by the pi-calculus.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We will use a single instance of this process to
+    ensure a correct rate calculation</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Example: O + H </font><font face=Wingdings
+    size=2>&agrave;</font><font face="Comic Sans MS" size=2> O<sub>2</sub> + H<sub>2</sub>
+    + H<sub>2</sub>O</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0221.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">2H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  <div id=PPTC28 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB28 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>language(psifcp).<br>
+    global(eCH(33),eHO(40),eHH(40),breakHH(0.25)).<br>
+    System(N1)::= <br>
+    &lt;&lt; timer_0#Timer_HH
+    | CREATE_H(N1).<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>CREATE_H(C)::= {C
+    =&lt; 0} , true ;				<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | H | self &gt;&gt; .<br>
+    H::=<span
+    style="mso-spacerun: yes">&nbsp; </span>eHH ? [] , HH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHH
+    ! [] , true ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHO
+    ! [] , true ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCH
+    ! [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>HH::= breakHH ? [] , H | H .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0222.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">Timer Processes</a></font></div>
+  <div id=PPTC29 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB29 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(breakOH(0.25), breakHOH(0.25),breakOO(0.2), breakHH(0.25),
+    breakCO(0.1), breakCOH(0.3), breakCH(0.37)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Timer_OH::= breakOH ! [] , Timer_OH.<br>
+    Timer_HOH::= breakHOH ! [] , Timer_OH. <br>
+    Timer_OO::= breakOO ! [] , Timer_OO.<br>
+    Timer_HH::=
+    breakHH ! [] , Timer_HH.<br>
+    Timer_CO::= breakCO ! [] ,
+    Timer_CO.<br>
+    Timer_CH::= breakCH ! [] , Timer_CH.<br>
+    Timer_COH::= breakCOH ! [] , Timer_COH.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0269.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">2H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0268.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">2H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0223.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">2H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0266.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">Exercise 3: Question 2</a></font></div>
+  <div id=PPTC33 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB33 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>As we saw, the reaction A+B </font><font
+    face=Symbol size=2>«</font><font face="Comic Sans MS" size=2> C can be
+    modeled in pi-calculus in two ways</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>In the first one</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>An A_Bound and B_Bound processes are created as
+    a result of the forward reaction, sharing the same private channel.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>The reverse reaction occurs by communication on
+    this private channel.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>An example for this is the HCl program from unit
+    1</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>In the second one</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>A single C process is created by the forward
+    reaction (A and B “disappear”).</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>The reverse reaction occurs by communication
+    between a C process an a specific Timer process (one copy)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>An example<span style="mso-spacerun: yes">&nbsp;
+    </span>is the H-OH unbinding we saw in this unit</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0291.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)">Exercise 3: Question 2</a></font></div>
+  <div id=PPTC34 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB34 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Why do these two alternative unimolecular
+    unbinding reactions correspond to the same correct rate calculation rule
+    for a unimolecular elementary reaction (k*[C]) ?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0224.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">2O <font face=Symbol>«</font><font
+  face="Comic Sans MS"> O<sub>2</sub></font></a></font></div>
+  <div id=PPTC35 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB35 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(eeCO(100), eCOH(37), eHO(40), eeOO(50), breakOH(0.25),
+    breakHOH(0.25), breakOO(0.2)).<br>
+    System(N1)::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>&lt;&lt; timer_0#Timer_OO
+    | CREATE_O(N1).		CREATE_O(C)::= {C =&lt; 0} , true ;				<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | O | self &gt;&gt; .<br>
+    O::= eeOO ? [] ,
+    OO ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eeOO ! []
+    , true ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eHO<span
+    style="mso-spacerun: yes">&nbsp; </span>? [] , OH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO ! []
+    , true .<br>
+    OH::= breakOH ? [] , O | h2_1#H ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHO
+    ? [] , H2O ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH
+    ! [] , true .<br>
+    OO::= breakOO ? [] , O | O .<br>
+    H2O::=
+    breakHOH ? [] , OH | h2_1#H .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0225.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">2O <font face=Symbol>«</font><font
+  face="Comic Sans MS"> O<sub>2</sub></font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0226.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">H<sub>2</sub> + O<sub>2</sub> <font
+  face=Symbol>«</font><font face="Comic Sans MS"> H<sub>2</sub>O</font></a></font></div>
+  <div id=PPTC37 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB37 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>SystemHO(N1,N2)::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>h2_1#System(N1) |
+    o2_2#System(N2) |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>timer_0#Timer_OH.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP38 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0270.htm');" onmouseover="Over(this)"
+  id=PPTL38 onmouseout="Out(this)">2H <font face=Symbol>«</font><font
+  face="Comic Sans MS"> H<sub>2</sub></font></a></font></div>
+  <div id=PPTC38 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB38 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>language(psifcp).<br>
+    global(eCH(33),eHO(40),eHH(40),breakHH(0.25)).<br>
+    System(N1)::= <br>
+    &lt;&lt; timer_0#Timer_HH | CREATE_H(N1).<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>CREATE_H(C)::= {C
+    =&lt; 0} , true ;				<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | H | self &gt;&gt; .<br>
+    H::=<span style="mso-spacerun: yes">&nbsp; </span>eHH ? [] , HH ;<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHH ! [] ,
+    true ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHO
+    ! [] , true ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCH ! [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>HH::= breakHH ? [] , H | H .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP39 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0271.htm');" onmouseover="Over(this)"
+  id=PPTL39 onmouseout="Out(this)">2O <font face=Symbol>«</font><font
+  face="Comic Sans MS"> O<sub>2</sub></font></a></font></div>
+  <div id=PPTC39 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB39 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(eeCO(100), eCOH(37), eHO(40), eeOO(50), breakOH(0.25),
+    breakHOH(0.25), breakOO(0.2)).<br>
+    System(N1)::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>&lt;&lt; timer_0#Timer_OO
+    | CREATE_O(N1).		CREATE_O(C)::= {C =&lt; 0} , true ;				<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | O | self &gt;&gt; .<br>
+    O::= eeOO ? [] , OO ;<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eeOO ! [] , true
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eHO<span style="mso-spacerun: yes">&nbsp; </span>? [] , OH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO ! []
+    , true .<br>
+    OH::= breakOH ? [] , O | h2_1#H ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eHO
+    ? [] , H2O ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ! [] , true .<br>
+    OO::= breakOO ? [] , O | O .<br>
+    H2O::=
+    breakHOH ? [] , OH | h2_1#H .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP40 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0272.htm');" onmouseover="Over(this)"
+  id=PPTL40 onmouseout="Out(this)">OH + H <font face=Wingdings>&agrave;</font><font
+  face="Comic Sans MS"> H<sub>2</sub>O</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP41 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0273.htm');" onmouseover="Over(this)"
+  id=PPTL41 onmouseout="Out(this)">H<sub>2</sub>O <font face=Wingdings>&agrave;</font><font
+  face="Comic Sans MS"> OH + H</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP42 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0227.htm');" onmouseover="Over(this)"
+  id=PPTL42 onmouseout="Out(this)">H<sub>2</sub> + O<sub>2</sub> <font
+  face=Symbol>«</font><font face="Comic Sans MS"> H<sub>2</sub>O</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP43 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0293.htm');" onmouseover="Over(this)"
+  id=PPTL43 onmouseout="Out(this)">H<sub>2</sub> + O<sub>2</sub> <font
+  face=Symbol>«</font><font face="Comic Sans MS"> H<sub>2</sub>O</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP44 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0228.htm');" onmouseover="Over(this)"
+  id=PPTL44 onmouseout="Out(this)">C + O + H</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP45 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0275.htm');" onmouseover="Over(this)"
+  id=PPTL45 onmouseout="Out(this)">C + O + H</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP46 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0276.htm');" onmouseover="Over(this)"
+  id=PPTL46 onmouseout="Out(this)">C + O + H</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP47 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0229.htm');" onmouseover="Over(this)"
+  id=PPTL47 onmouseout="Out(this)">C + O + H</a></font></div>
+  <div id=PPTC47 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB47 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+   
+    global(eCH(33),eeCO(100),eCOH(37),breakOO(0.1),breakCO(0.1),breakCOH(0.3),breakCH(0.37)).<br>
+    System(N1)::= &lt;&lt; timer_0#Timer_CO
+    |<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>timer_0#Timer_COH |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>timer_0#Timer_CH |<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>CREATE_C(N1)<span style="mso-spacerun: yes">&nbsp; </span>.		
+    CREATE_C(C)::= {C =&lt; 0} , true ;				<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{C &gt; 0} , {C--} | C | self 		<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>&gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP48 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0277.htm');" onmouseover="Over(this)"
+  id=PPTL48 onmouseout="Out(this)">C + O + H</a></font></div>
+  <div id=PPTC48 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB48 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>C::= eCH<span style="mso-spacerun: yes">&nbsp;
+    </span>? [] , CH<span style="mso-spacerun: yes">&nbsp; </span>;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO ? []
+    , CO<span style="mso-spacerun: yes">&nbsp; </span>;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ? []
+    , COH .<br>
+    CH::= eCH<span style="mso-spacerun: yes">&nbsp; </span>? [] , CH2 ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO
+    ? [] , HCO<span style="mso-spacerun: yes">&nbsp; </span>;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH
+    ? [] , HCOH .<br>
+    CO::= eCH<span style="mso-spacerun: yes">&nbsp; </span>? [] , HCO ;<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO ? [] ,
+    CO2<span style="mso-spacerun: yes">&nbsp; </span>;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH
+    ? [] , COOH .<br>
+    COH::= eCH<span style="mso-spacerun: yes">&nbsp;
+    </span>? [] , HCOH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eeCO ? [] , COOH<span style="mso-spacerun: yes">&nbsp;
+    </span>;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ? [] , COHOH .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP49 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0278.htm');" onmouseover="Over(this)"
+  id=PPTL49 onmouseout="Out(this)">C + O + H</a></font></div>
+  <div id=PPTC49 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB49 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>CH2::= eCH<span style="mso-spacerun: yes">&nbsp;
+    </span>? [] , CH3 ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eeCO ? [] , H2CO<span style="mso-spacerun: yes">&nbsp;
+    </span>;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ? [] , H2COH .<br>
+    HCO::= eCH<span style="mso-spacerun: yes">&nbsp; </span>? [] , HCOH
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eeCO ? [] , COOH<span style="mso-spacerun: yes">&nbsp;
+    </span>;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , COHOH .<br>
+    HCOH::= eCH<span style="mso-spacerun: yes">&nbsp; </span>? [] , H2COH
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , HCOHOH .<br>
+    CO2::= breakCO ? [] , CO | o2_2#O
+    .<br>
+    COOH::= eCH ? [] , HCOOH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , COOHOH .<br>
+    COHOH::= eCH<span style="mso-spacerun: yes">&nbsp; </span>? [] , HCOHOH
+    ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eeCO ? [] ,
+    COOHOH<span style="mso-spacerun: yes">&nbsp; </span>;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ? [] ,
+    COHOHOH .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP50 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0279.htm');" onmouseover="Over(this)"
+  id=PPTL50 onmouseout="Out(this)">C + O + H</a></font></div>
+  <div id=PPTC50 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB50 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>CH3::= eCH<span style="mso-spacerun: yes">&nbsp;
+    </span>? [] , CH4 ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , H3COH .<br>
+    H2CO::= breakCH ? [] , HCO | h2_1#H
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>breakCO ? [] , CH2 | o2_2#O .<br>
+    H2COH::= eCH ? [] , H3COH
+    ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>eCOH ? [] ,
+    H2COHOH .<br>
+    HCOHOH::= eCH ? [] , H2COHOH ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , HCOHOHOH .<br>
+    COOHOH::= breakCO ? [] , COHOH |
+    o2_2#O ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>breakCOH
+    ? [] , COOH | o2_2#OH.<br>
+    COHOHOH::=<span style="mso-spacerun:
+    yes">&nbsp; </span>eCH ? [] , HCOHOHOH ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>eCOH ? [] , COHOHOHOH .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP51 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0280.htm');" onmouseover="Over(this)"
+  id=PPTL51 onmouseout="Out(this)">C + O + H</a></font></div>
+  <div id=PPTC51 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB51 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>CH4::= breakCH ? [] , CH3 | h2_1#H .<br>
+    H3COH::= breakCH ? [] , H2COH | h2_1#H ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>breakCOH ? []
+    , CH3 | o2_2#OH . H2COHOH::= breakCH ? [] , HCOHOH | h2_1#H ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>breakCOH ? [] , H2COH | o2_2#OH . HCOHOHOH::=<span
+    style="mso-spacerun: yes">&nbsp; </span>breakCH ? [] , COHOHOH | h2_1#H ;
+    <br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>breakCOH ? [] , HCOHOH | o2_2#OH .<span style="mso-spacerun:
+    yes">&nbsp; </span>COHOHOHOH::= breakCOH ? [] , COHOHOH | o2_2#OH.<br>
+    HCOOH::=
+    breakCH ? [] , COOH | h2_1#H ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>breakCO ? [] ,
+    HCOH | o2_2#OO ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>breakCOH ? []
+    , HCO | o2_2#OH .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP52 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0294.htm');" onmouseover="Over(this)"
+  id=PPTL52 onmouseout="Out(this)">C + O + H</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP53 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0230.htm');" onmouseover="Over(this)"
+  id=PPTL53 onmouseout="Out(this)">Exercise 3: Question 3</a></font></div>
+  <div id=PPTC53 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB53 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In the above C+H+O program, only the last step
+    was reversible</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Add reversibility also at the previous step
+    (univalent C radicals)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Bonus: Modify to yield a completely reversible
+    mechanism (i.e. for each step of bond formation allow a reverse step of
+    bond breakage as well).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Assume all bond breaking rates identical to
+    those in the final products.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP54 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0218.htm');" onmouseover="Over(this)"
+  id=PPTL54 onmouseout="Out(this)">Organic Compounds, Functional Groups and
+  Reactions</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP55 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0274.htm');" onmouseover="Over(this)"
+  id=PPTL55 onmouseout="Out(this)">Organic Compounds and Reactions</a></font></div>
+  <div id=PPTC55 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB55 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>So far, we have focused on reactions involving
+    atoms, and including atomization of compounds</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>From now on, we will focus on reactions
+    involving almost exclusively organic compounds and functional groups</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP56 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0254.htm');" onmouseover="Over(this)"
+  id=PPTL56 onmouseout="Out(this)">Some Functional Groups</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP57 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0255.htm');" onmouseover="Over(this)"
+  id=PPTL57 onmouseout="Out(this)">Condensation and hydrolysis</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP58 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0282.htm');" onmouseover="Over(this)"
+  id=PPTL58 onmouseout="Out(this)">Condensation and hydrolysis</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP59 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0281.htm');" onmouseover="Over(this)"
+  id=PPTL59 onmouseout="Out(this)">RNH<sub>2</sub> + RCOOH <font face=Symbol>«</font><font
+  face="Comic Sans MS"> RNHCOR + H<sub>2</sub>O</font></a></font></div>
+  <div id=PPTC59 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB59 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(amine(10),hydrolysis(1)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>R_Amine+eRN::= NH2(eRN) | R(eRN) .<br>
+    R_Carboxyl+eRC::=
+    R(eRC) | COOH(eRC) .<br>
+    NH2(eRN)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp; </span>amine
+    ? {eRC1} , Amide(eRN,eRC1) | H2O .<br>
+    Amide(eRN,eRC)::= <br>
+    <span style="mso-spacerun: yes">&nbsp; </span>hydrolysis
+    ? [] , COOH(eRC) |<span style="mso-spacerun: yes">&nbsp; </span>NH2(eRN)
+    .<br>
+    COOH(eRC)::= amine ! {eRC} , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>R(e)::= e ! [] , self .<br>
+    H2O::= hydrolysis
+    ! [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP60 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0283.htm');" onmouseover="Over(this)"
+  id=PPTL60 onmouseout="Out(this)">RNH<sub>2</sub> + RCOOH <font
+  face=Wingdings>&agrave;</font><font face="Comic Sans MS"> RNHCOR + H<sub>2</sub>O</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP61 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0285.htm');" onmouseover="Over(this)"
+  id=PPTL61 onmouseout="Out(this)">RNHCOR + H<sub>2</sub>O <font
+  face=Wingdings>&agrave;</font><font face="Comic Sans MS"> RNH<sub>2</sub> + RCOOH</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP62 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0292.htm');" onmouseover="Over(this)"
+  id=PPTL62 onmouseout="Out(this)">RNH<sub>2</sub> + RCOOH <font face=Symbol>«</font><font
+  face="Comic Sans MS"> RNHCOR + H<sub>2</sub>O</font></a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP63 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0286.htm');" onmouseover="Over(this)"
+  id=PPTL63 onmouseout="Out(this)">Exercise 3: Question 4</a></font></div>
+  <div id=PPTC63 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB63 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A similar condensation (hydrolysis) reaction
+    occurs between a carboxylic and alcohol groups, to create (break) an ester
+    bond</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	Write and run a program which includes both an
+    hydroxyl, carboxyl and amine compounds (where both esters and amides may be
+    formed)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP64 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0290.htm');" onmouseover="Over(this)"
+  id=PPTL64 onmouseout="Out(this)">Exercise 3: Instructions and Parameters</a></font></div>
+  <div id=PPTC64 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB64 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>As usual, submit program, .table and .names
+    files, and plot your results</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Use modules and rates files when convenient</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>You can zip all your files in one archive when
+    submitting via e-mail</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In programming assignments rates and quantities
+    are according to the following table</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP65 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0295.htm');" onmouseover="Over(this)"
+  id=PPTL65 onmouseout="Out(this)">Exercise 3: Instructions and Parameters</a></font></div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+</body>
+
+</html>

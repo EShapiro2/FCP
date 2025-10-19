@@ -1,0 +1,19 @@
+/api_includes.cp/1.1/Mon Sep 17 13:17:36 2007//
+/codes.cp/1.1/Mon Sep 17 13:17:36 2007//
+/copresence_events.cp/1.1/Mon Sep 17 13:17:36 2007//
+/copresence_room.cp/1.1/Mon Sep 17 13:17:36 2007//
+/doors_server.cp/1.1/Mon Sep 17 13:17:37 2007//
+/dump_cache/1.1/Mon Sep 17 13:17:37 2007//
+/dump_timers/1.1/Mon Sep 17 13:17:37 2007//
+/people_room.cp/1.1/Mon Sep 17 13:17:37 2007//
+/places_room.cp/1.1/Mon Sep 17 13:17:37 2007//
+/sci_room.cp/1.1/Mon Sep 17 13:17:37 2007//
+/self.cp/1.1/Mon Sep 17 13:17:38 2007//
+/server_api.cp/1.1/Mon Sep 17 13:17:38 2007//
+/server_includes.cp/1.1/Mon Sep 17 13:17:38 2007//
+/string_includes.cp/1.1/Mon Sep 17 13:17:38 2007//
+/strings.cp/1.1/Mon Sep 17 13:17:38 2007//
+/trace_off/1.1/Mon Sep 17 13:17:38 2007//
+/trace_on/1.1/Mon Sep 17 13:17:38 2007//
+D/Bin////
+D/logging_monitor////

@@ -1,0 +1,1944 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class9.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#FFFFFF",gOtlNormalClr="#000000",gOtlActiveClr="#FFFF00",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	padding-bottom:5px;}
+a
+	{color:white;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">&nbsp; </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0420.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">Unit 7: Signal Transduction</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0422.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">Multi-Step Regulation <br>
+  of Gene Expression</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0457.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Signal Transduction Pathways</a></font></div>
+  <div id=PPTC3 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB3 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Pathways of molecular interactions that provide
+    communication between the<br>
+    cell membrane and intracellular
+    endpoints, leading to some change in the cell</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0472.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Major themes in ST</a></font></div>
+  <div id=PPTC4 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB4 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The “internal complexity” of each interaction</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The combinatorial nature of each component
+    molecule (may receive and send multiple signals)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The integration of pathways and networks</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0462.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Signal source</a></font></div>
+  <div id=PPTC5 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB5 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A signaling cell produces a<span
+    style="mso-spacerun: yes">&nbsp; </span>particular particular type of signal
+    molecule</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This is detected in another target cell, by
+    means of a receptor protein, which recognizes and responds specifically to
+    its ligand</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We distinguish between Endocrine, paracrine and
+    autocrine signaling. The latter often occurs in a population of homogenous
+    cells.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Each cell responds to a limited set of signals,
+    and in a specific way</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0469.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Signaling<span style="mso-spacerun:
+  yes">&nbsp; </span>Molecule</a></font></div>
+  <div id=PPTC6 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB6 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The signal molecule is often secreted from
+    the<span style="mso-spacerun: yes">&nbsp; </span>signaling cell to the
+    extracellular space</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In some cases the signaling molecule is bound to
+    the cell surface of the signaling cell. Sometimes, a signal in both cells
+    will be initiated by such an event.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0470.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Receptors</a></font></div>
+  <div id=PPTC7 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB7 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Cell surface receptors detect hydrophilic
+    ligands that do not enter the cell</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Alternatively, a small hydrophobic ligand (e.g.
+    steroids) may cross the membrane, and bind to an intracellular receptor</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Cells may also be linked through a gap junction,
+    sharing small intracellular signaling molecules</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0471.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">Cell Surface Receptors</a></font></div>
+  <div id=PPTC8 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB8 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Ion channel linked: Binding of ligand causes
+    channel to open or close</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>G-protein linked:<br>
+    Binding of ligand activates
+    a G-protein which will activate a separate enzyme or ion channel</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme linked receptor: Binding of ligand activates
+    an enzyme domain on the receptor itself or on an associated molecule</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0473.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">Intracellular receptors</a></font></div>
+  <div id=PPTC9 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB9 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Small hydrophobic signaling molecules, such as
+    steroids, can cross the cell membrane (e.g. estrogen, vitamin D, thyroid
+    hormone, retinoic acid) and bind to intracellular receptors</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The hormone-receptor complex has an exposed DNA
+    binding site and can activate transcription directly (or, more typically as
+    a homo- or hetero-dimer)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This usually initiates a cascade of
+    transcription events</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0474.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">Regulating proteins</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0458.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">Molecular Interactions</a></font></div>
+  <div id=PPTC11 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB11 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Protein-protein interactions</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Binding or unbinding (formation or breaking of
+    complex)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Covalent modification:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>	phosphorylation (tyr, thr, ser)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Conformation changes</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Translocation</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Targeting for degradation</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Small molecule regulated events</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Binding or unbinding, resulting in conformation
+    change: Steroid ligand, nucleotide binding</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Production of second messengers (e.g. Ca+2)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0475.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Covalent and non-covalent association of
+  phosphate groups</a></font></div>
+  <div id=PPTC12 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB12 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The association (or absence) of a phosphate
+    group with a protein may affect its capability to interact or its activity</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Activate an enzymatic domain by conformation
+    change</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Enable or disable binding by structural change
+    in binding site</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Affect binding/unbinding of complex and release
+    of “active form” of a G-protein</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Both the covalent and non-covalent modifications
+    are reversible, and so are their effects.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0476.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Second messengers</a></font></div>
+  <div id=PPTC13 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB13 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In many pathways, enzymes are activated which
+    catalyze the formation of a large quantity of small molecules</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>These second messengers broadcast the signal by diffusing
+    widely to act on target proteins in various parts of the cell</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This may often result in the release of other
+    second messengers</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0477.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">Multi-state regulation of a single protein</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0478.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Integration of Signals</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0479.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Insulation by complex formation</a></font></div>
+  <div id=PPTC16 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB16 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The same signaling molecule may participate in
+    more than one pathway</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In such cases, it is sometimes insulated from
+    some of its potential inputs and outputs and sequestered (with specific up-
+    and downstream counterparts) by a specific scaffold molecule</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0480.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Amplification</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0481.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Intracellular target</a></font></div>
+  <div id=PPTC18 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB18 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Determining the “end” of a signaling pathway is
+    often difficult</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, after transcription, a phosphatase
+    may be synthesized that dephosphorylates one of the enzymes in the pathway</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>One approach is to consider an event that is
+    “biochemically different” (e.g. transcription, metabolism) as the
+    intracellular target</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0459.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Intracellular Endpoint</a></font></div>
+  <div id=PPTC19 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB19 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Three major molecular targets</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Regulation of gene expression (e.g. activate a
+    transcription factor and translocate it to the nucleus)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Changes in the cytoskeleton (e.g. induce
+    movement or reorganization of cell structure)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Affect metabolic pathways</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Many critical processes can occur in response to
+    external signals, without any new synthesis of RNA or proteins. The most
+    well known one is “cell suicide”, termed apoptosis</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0460.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Change in the cell</a></font></div>
+  <div id=PPTC20 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB20 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>An animal cell depends on multiple extracellular
+    signals</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Multiple signals are required to survive,
+    additional to divide and still others to differentiate</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>When deprived of appropriate signals most cells
+    undergo apoptosis</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0482.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">Change in the cell</a></font></div>
+  <div id=PPTC21 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB21 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The same signal molecule can induce different
+    responses in different target cells, which express different receptors or
+    signaling molecules</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, the neurotransmitter acetylcholine
+    induces contraction in skeletal muscle cells, relaxation in heart muscle
+    cells and secretion in salivary gland cells</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0483.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Slide 22</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0423.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">Two Views of Signaling</a></font></div>
+  <div id=PPTC23 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB23 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The biochemical view: What are the specific
+    biochemical events that mediate signals?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The logical view: Is a signal activatory or
+    inhibitory?</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0463.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">The RTK-MAPK pathway</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0484.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">The RTK-MAPK pathway</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0465.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)">Receptor-Ligand Binding</a></font></div>
+  <div id=PPTC26 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB26 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A dimeric ligand protein is formed by di-sulfide
+    bonds between two identical protein monomers</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The ligand has two identical receptor binding
+    sites and can cross link two adjacent receptors upon their binding</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This initiates the intracellular signaling<span
+    style="mso-spacerun: yes">&nbsp; </span>process</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>We assume that ligand-receptor binding is
+    irreversible</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0485.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">Receptor Activation</a></font></div>
+  <div id=PPTC27 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB27 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The cytoplasmic domain of the receptor has
+    intrinsic kinase activity</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Upon dimerization each receptor cross
+    phosphorylates a specific tyrosine residue on its counterpart, which fully
+    activates its kinase</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Then, each kinase autophosphorylates additional
+    tyrosine residues on it own cytoplasmic part</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0491.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">Ligand</a></font></div>
+  <div id=PPTC28 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB28 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>global(ligand_bind,dummy).<br>
+    <br>
+    LIGAND::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&lt;&lt; ligand .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>FREE_BD | FREE_BD .<br>
+    <br>
+    FREE_BD::= <br>
+    	ligand_bind ! {ligand} , BOUND_BD .<br>
+    	<br>
+    BOUND_BD::= <br>
+    	dummy ? [] , true &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0492.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">Receptor (Extracellular part)</a></font></div>
+  <div id=PPTC29 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB29 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>global(ligand_bind,tyr,p_tyr,met,atp,dummy).<br>
+    <br>
+    RTK(env)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&lt;&lt; backbone_extra, backbone_intra1,
+    backbone_intra2,<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>backbone_intra3,
+    tyr1162, atp_bs,sh2_tyr,sh2_tyr1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>EXTRACELLULAR | TRANSMEMBRANAL | INTRACELLULAR .<br>
+    <br>
+    EXTRACELLULAR::= <br>
+    	ligand_bind ? {lig} , backbone_extra ! {lig} ,<span style="mso-spacerun:
+    yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>BOUND_EXTRACELLULAR .<br>
+    <br>
+    BOUND_EXTRACELLULAR::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>dummy ? [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0493.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">Ligand-Receptor binding</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0494.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">Receptor (Transmembranal)</a></font></div>
+  <div id=PPTC31 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB31 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>TRANSMEMBRANAL::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&lt;&lt; cross_receptor .<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>backbone_extra ?
+    {cross_lig} ,<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>&lt;&lt;
+    cross_lig ! {tyr1162, cross_receptor} ,</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun: yes">&nbsp;
+    </span>cross_receptor ? {cross_tyr} , <br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>backbone_intra1 ! {cross_tyr} , 		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RTK_DIMERIZED ;<br>
+    	 cross_lig ? {cross_tyr, cross_rec} , 		<span style="mso-spacerun:
+    yes">&nbsp; </span>cross_rec ! {tyr1162} , <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>backbone_intra1 ! {cross_tyr} , 			 RTK_DIMERIZED &gt;&gt; .<br>
+    <br>
+    RTK_DIMERIZED:-<br>
+    	dummy ? [] | true &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0495.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">Receptor dimerization</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0499.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">Receptor dimerization</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0519.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)">Receptor Activation</a></font></div>
+  <div id=PPTC34 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB34 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The cytoplasmic domain of the receptor has
+    intrinsic kinase activity</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Upon dimerization each receptor cross
+    phosphorylates a specific tyrosine residue on its counterpart, which fully
+    activates its kinase</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Then, each kinase autophosphorylates additional
+    tyrosine residues on it own cytoplasmic part</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0504.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">Location and Chemical complementarity</a></font></div>
+  <div id=PPTC35 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB35 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>For one receptor to phosphorylate another (or
+    itself) the two must share</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Common complex (private channel)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Chemical complementarity (global channel)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>This creates a modeling difficulty, since we
+    cannot match two channels simultaneously</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>One option is to use a match construct</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>First communicate on the private channel and
+    send a global channel name (bind)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Then, match the global channels by comparing
+    them (react)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>If the second match does not work the
+    counterparts unbind (similar to a competitive inhibitor)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>An simpler alternative is to use only the
+    private channels, but this may create an “illegal” situation where the
+    kinase phosphorylates something it shouldn’t</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0500.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">Receptor (Cytoplasmic)</a></font></div>
+  <div id=PPTC36 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB36 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>INTRACELLULAR::=<br>
+    	RTK_SH_BS(tyr,met) | RTK_KINASE_CORE .<br>
+    <br>
+    RTK_KINASE_CORE::=<br>
+    	RTK_KINASE_SITE | <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RTK_REGULATORY_SITE(tyr)
+    |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>RTK_ATP_BS<span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0501.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">RTK Kinase – Phosphorylation – Option I</a></font></div>
+  <div id=PPTC37 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB37 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_KINASE_SITE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>CROSS_PHOSPHORYLATE +
+    FULL_PHOSPHORYLATE .<br>
+    <br>
+    CROSS_PHOSPHORYLATE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra1 ?
+    {cross_motif} , cross_motif ? {cross_res} , <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>&lt;&lt;
+    cross_res=?=tyr , cross_motif ! {p_tyr} , RTK_KINASE_SITE;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>otherwise , cross_motif ! {cross_res} , RTK_KINASE_SITE &gt;&gt;.
+    <br>
+    FULL_PHOSPHORYLATE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra3 ? [] ,
+    ACTIVE_FULL .<br>
+    <br>
+    ACTIVE_FULL::=<br>
+    <span style="mso-spacerun: yes">&nbsp;
+    </span>backbone_intra2 ? {cross_motif} , cross_motif ? {cross_res} , <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt;
+    cross_res=?=tyr<span style="mso-spacerun: yes">&nbsp; </span>, cross_motif
+    ! {p_tyr} , ACTIVE_FULL ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>otherwise , cross_motif ! {cross_res} , ACTIVE_FULL &gt;&gt; ;<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra3 ? [] ,
+    RTK_KINASE_SITE .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP38 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0502.htm');" onmouseover="Over(this)"
+  id=PPTL38 onmouseout="Out(this)">RTK Kinase – Regulation<span
+  style="mso-spacerun: yes">&nbsp; </span>- Option I</a></font></div>
+  <div id=PPTC38 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB38 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_REGULATORY_SITE(res)::=<br>
+    	tyr1162 ! {res} , tyr1162 ? {res1} ,</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt; res1 =?= res<span
+    style="mso-spacerun: yes">&nbsp; </span>, RTK_REGULATORY_SITE(res1) ;<br>
+    	<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>otherwise ,
+    backbone_intra3 ! [] , <br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>RTK_REGULATORY_SITE(res1) &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP39 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0503.htm');" onmouseover="Over(this)"
+  id=PPTL39 onmouseout="Out(this)">RTK Intracellular Tyr Phosphorylation Sites
+  - Option I</a></font></div>
+  <div id=PPTC39 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB39 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_SH_BS(res,side_res)::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra2 ! {sh2_tyr}
+    , sh2_tyr ! {res} ,<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>sh2_tyr ? {resa}
+    , RTK_SH_BS(resa, side_res) ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp; </span>res ! {sh2_tyr, sh2_tyr1, backbone_intra2, env,
+    side_res} ,<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>&lt;&lt;
+    sh2_tyr1 ? [] , BOUND_RTK_SH_BS ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>sh2_tyr ? {res1} , RTK_SH_BS(res,res1) &gt;&gt;.<br>
+    <br>
+    BOUND_RTK_SH_BS:-<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>dummy ? [] , true
+    .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP40 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0505.htm');" onmouseover="Over(this)"
+  id=PPTL40 onmouseout="Out(this)">RTK Kinase – Phosphorylation: Option II</a></font></div>
+  <div id=PPTC40 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB40 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_KINASE_SITE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>CROSS_PHOSPHORYLATE +
+    FULL_PHOSPHORYLATE .<br>
+    <br>
+    CROSS_PHOSPHORYLATE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra1 ?
+    {cross_motif} , cross_motif ! {p_tyr} , <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>RTK_KINASE_SITE. <br>
+    FULL_PHOSPHORYLATE::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra3 ? [] ,
+    ACTIVE_FULL .<br>
+    <br>
+    ACTIVE_FULL::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra2 ?
+    {cross_motif} , cross_motif ! {p_tyr} , <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>ACTIVE_FULL ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;</span>backbone_intra3 ? [] , RTK_KINASE_SITE .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP41 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0506.htm');" onmouseover="Over(this)"
+  id=PPTL41 onmouseout="Out(this)">RTK Kinase – Regulation - Option II</a></font></div>
+  <div id=PPTC41 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB41 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_REGULATORY_SITE(res)::=<br>
+    	tyr1162 ? {res1} ,</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt; res1 =?= res<span
+    style="mso-spacerun: yes">&nbsp; </span>, RTK_REGULATORY_SITE(res1) ;<br>
+    	<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>otherwise ,
+    backbone_intra3 ! [] , <br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>RTK_REGULATORY_SITE(res1) &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP42 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0507.htm');" onmouseover="Over(this)"
+  id=PPTL42 onmouseout="Out(this)">RTK Intracellular Tyr Phosphorylation Sites
+  - Option II</a></font></div>
+  <div id=PPTC42 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB42 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_SH_BS(res,side_res)::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra2 ! {sh2_tyr}
+    , sh2_tyr ? {resa} ,<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>RTK_SH_BS(resa, side_res) ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp; </span>res ! {sh2_tyr, sh2_tyr1, backbone_intra2, env,
+    side_res} ,<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>&lt;&lt;
+    sh2_tyr1 ? [] , BOUND_RTK_SH_BS ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>sh2_tyr ? {res1} , RTK_SH_BS(res,res1) &gt;&gt;.<br>
+    <br>
+    BOUND_RTK_SH_BS:-<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>dummy ? [] , true
+    .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP43 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0497.htm');" onmouseover="Over(this)"
+  id=PPTL43 onmouseout="Out(this)">Receptor <br>
+  (Trans-phosphorylation)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP44 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0508.htm');" onmouseover="Over(this)"
+  id=PPTL44 onmouseout="Out(this)">Receptor <br>
+  (Trans-phosphorylation)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP45 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0509.htm');" onmouseover="Over(this)"
+  id=PPTL45 onmouseout="Out(this)">Receptor <br>
+  (Trans-phosphorylation)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP46 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0498.htm');" onmouseover="Over(this)"
+  id=PPTL46 onmouseout="Out(this)">Receptor <br>
+  (Auto-phosphorylation)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP47 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0486.htm');" onmouseover="Over(this)"
+  id=PPTL47 onmouseout="Out(this)">The activated receptor</a></font></div>
+  <div id=PPTC47 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB47 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The phosphorylated tyrosines can be specifically
+    identified by SH2 and SH3 domains on other proteins, including adapter
+    proteins</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The activated receptor can then phosphorylate
+    these bound proteins</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP48 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0466.htm');" onmouseover="Over(this)"
+  id=PPTL48 onmouseout="Out(this)">Adapter proteins: <br>
+  Coupling receptor and Ras activation</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP49 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0510.htm');" onmouseover="Over(this)"
+  id=PPTL49 onmouseout="Out(this)">Binding SH2 domains</a></font></div>
+  <div id=PPTC49 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB49 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The SH2 domain is a compact module</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Each SH2 domain has distinct sites for
+    recognizing phosphotyrosine and for recognizing a particular amino acid
+    side chain</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Thus, different SH2 domains recognize pTyr in
+    the context of different flanking amino acids</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP50 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0511.htm');" onmouseover="Over(this)"
+  id=PPTL50 onmouseout="Out(this)">Simultaneous recognition in multiple sites</a></font></div>
+  <div id=PPTC50 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB50 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Correct identification of an SH2 domain requires
+    matching of two motifs (global channels)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>One approach is to combine communication with
+    the match construct</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Alternatively, we may treat each combined
+    tyr+flanking region as an independent motif.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In this case the phosphorylating kinase should
+    modify a more “specific” name</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP51 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0512.htm');" onmouseover="Over(this)"
+  id=PPTL51 onmouseout="Out(this)">RTK Intracellular Tyrosine Phosphorylation
+  Sites</a></font></div>
+  <div id=PPTC51 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB51 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>RTK_SH_BS(res,side_res)::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone_intra2 ! {sh2_tyr}
+    , sh2_tyr ? {resa} ,<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>RTK_SH_BS(resa, side_res) ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp; </span>res ! {sh2_tyr, sh2_tyr1, backbone_intra2, mem,
+    side_res} ,<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>&lt;&lt;
+    sh2_tyr1 ? [] , BOUND_RTK_SH_BS ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>sh2_tyr ? {res1} ,
+    RTK_SH_BS(res,res1) &gt;&gt;.<br>
+    <br>
+    BOUND_RTK_SH_BS:-<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>dummy ? [] | true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP52 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0513.htm');" onmouseover="Over(this)"
+  id=PPTL52 onmouseout="Out(this)">SHC</a></font></div>
+  <div id=PPTC52 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB52 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>SHC(env)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&lt;&lt; shc_tyr, shc_tyr1, shc_tyr2, backbone .
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>SHC_SH2(env) |
+    SHC_SH2_BS(env,tyr,glu)<span style="mso-spacerun: yes">&nbsp;
+    </span>.<br>
+    <br>
+    SHC_SH2(env)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;</span>p_tyr
+    ? {c_sh2,c_sh2a,c_backbone,c_env, c_res1} , <br>
+    <span style="mso-spacerun: yes">&nbsp; </span>&lt;&lt; c_res1 =?= met , backbone
+    ! {c_env} , c_backbone!{shc_tyr},<span style="mso-spacerun:
+    yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>c_sh2a ! [] , BOUND_SHC_SH2(c_env) ;<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>otherwise , c_sh2
+    ! {c_res1} , SHC_SH2(env) &gt;&gt; .<br>
+    	<br>
+    BOUND_SHC_SH2(cross_env)::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>dummy ? []
+    , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP53 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0514.htm');" onmouseover="Over(this)"
+  id=PPTL53 onmouseout="Out(this)">SHC</a></font></div>
+  <div id=PPTC53 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB53 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>SHC_SH2_BS(env,res,res1)::=<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>backbone
+    ? {cross_env} , SHC_SH2_BS(cross_env,res,res1);<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>shc_tyr
+    ? {resa} , SHC_SH2_BS(env,resa,res1);<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>res1<span
+    style="mso-spacerun: yes">&nbsp; </span>! {shc_tyr1, shc_tyr2, env, res} ,
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>&lt;&lt; shc_tyr1
+    ? [] , BOUND_SHC_SH2_BS ;<br>
+    	shc_tyr2 ? [] ,
+    SHC_SH2_BS(env,res,res1) &gt;&gt; .<br>
+    <br>
+    BOUND_SHC_SH2_BS:-<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>dummy ? [] , true &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP54 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0515.htm');" onmouseover="Over(this)"
+  id=PPTL54 onmouseout="Out(this)">SHC binding to receptor <br>
+  pTyr-met motif</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP55 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0518.htm');" onmouseover="Over(this)"
+  id=PPTL55 onmouseout="Out(this)">SHC binding to receptor <br>
+  pTyr-met motif</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP56 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0517.htm');" onmouseover="Over(this)"
+  id=PPTL56 onmouseout="Out(this)">SHC phosphorylation by RTK</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP57 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0487.htm');" onmouseover="Over(this)"
+  id=PPTL57 onmouseout="Out(this)">Ras Activation</a></font></div>
+  <div id=PPTC57 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB57 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>By these protein-protein interactions, the SOS
+    protein is brought close to the membrane, where is can activate Ras, that
+    is attached to the membrane</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>SOS activates Ras by exchanging Ras’s GDP with
+    GTP.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>GAP inactivates it by the reverse reaction</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP58 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0467.htm');" onmouseover="Over(this)"
+  id=PPTL58 onmouseout="Out(this)">Activation of the MAPK cascade</a></font></div>
+  <div id=PPTC58 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB58 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Active Ras interacts with the first kinase in
+    the MAPK cancade, Raf.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>It localizes Raf to the membrane, where it is
+    activated by an unknown mechanism</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This starts the cascade</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP59 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0490.htm');" onmouseover="Over(this)"
+  id=PPTL59 onmouseout="Out(this)">Activation of the MAPK cascade</a></font></div>
+  <div id=PPTC59 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB59 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Each kinase in the cascade is activated by
+    phosphorylation in<span style="mso-spacerun: yes">&nbsp; </span>a
+    regulatory site, called the t-loop</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>When T-loop is phosphorylated, a conformation
+    change occurs and the catalytic cleft is “opened” and active</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Each kinase is bound by modifying enzymes
+    (incoming signals) on its Nt lobe. It binds its substrate through its Ct
+    lobe.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The three kinases may be tethered together in
+    one complex with the MP1 scaffold protein</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP60 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0489.htm');" onmouseover="Over(this)"
+  id=PPTL60 onmouseout="Out(this)">Slide 60</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP61 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0468.htm');" onmouseover="Over(this)"
+  id=PPTL61 onmouseout="Out(this)">MAPK targets</a></font></div>
+  <div id=PPTC61 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB61 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The MAPK phosphorylates and activates many
+    different targets</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, after phosphorylation it may
+    translocate to the nucleus and activate transcription factors</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>It also phosphorylates the receptor kinase and
+    other enzymes in the pathway in an inhibitory fashion (negative feedback)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP62 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0410.htm');" onmouseover="Over(this)"
+  id=PPTL62 onmouseout="Out(this)">References</a></font></div>
+  <div id=PPTC62 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB62 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>General Introduction:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Alberts et al. (1994) Molecular Biology of the
+    Cell, Chapter 15</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Alberts et al. (1997) Essential Cell Biology,
+    Chapter 15</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Signal transduction:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Krauss (2000) Biochemistry of Signal
+    Transduction and Regulation</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Heldin and Purton (eds.) (1996) Signal
+    Transduction</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>RTK-MAPK pathways</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Lewis et al. (1998) Signal transduction through
+    MAP kinase cascades. Advances in Cancer Research 74: 49-139</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Widmann et al (1999) Mitogen activated protein
+    kinase: Conservation of a three kinase module from yeast to human.
+    Physiological Reviews 79:143-180</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Brunet et al (1997) Mammalian MAP kinase
+    modules: how to transduce specific signals. Essays in Biochemistry 32:
+    1-16.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+</body>
+
+</html>

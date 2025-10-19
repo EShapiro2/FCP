@@ -1,0 +1,5 @@
+#!/bin/sh
+cp -f ./Permanent/cygwin/*.o .
+./mkmk cygwin_nt_5d1 concatenate ctl file freeze_term \
+interface math timer tty ultrix posix short spi $@
+

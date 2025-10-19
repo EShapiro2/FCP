@@ -1,0 +1,2 @@
+#! /bin/sh
+cvs -z3 -d:ext:zevkaspi@cvs.savannah.nongnu.org:/sources/efcp -Q co ${1}

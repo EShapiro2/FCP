@@ -1,0 +1,79 @@
+     
+Assignment No. 2	Due Monday, November 24th, 1986.
+--------------------------------------------------------
+     
+The following is a pencil and paper exercise.
+For each logic program, specify its semantics (i.e.
+the relation it defineds.  If the program has more
+then one predicate, define the semantics of the first one
+only. For example:
+     
+P1 ::=
+	list([]).
+	list([X|Xs]) :- list(Xs).
+     
+[P1] = { list(X) | X is a list }
+     
+P2::=	
+	append([X|Xs],Ys,[X|Zs]) :- append(Xs,Ys,Zs).
+	append([],Xs,Xs) :- list(Xs).
+     
+[P2] = { append(L1,L2,L3) | the result of appending
+	  the list L3 to the list L1 is the list L3 }
+     
+P3::=	
+	prefix([],Xs) :- list(Xs)
+	prefix([X|Xs],[X|Ys]) :- prefix(Xs,Ys).
+     
+     
+[P3] = { prefix(L1,L2) | the list L1 is a prefix of the list L2 }
+     
+     
+Exercises:
+     
+     
+P4::=
+	p4(Xs,Xs) :- list(Xs).
+	p4(Xs,[Y|Ys]) :- p4(Xs,Ys).
+P5::=
+	p5([],Xs) :- list(Xs).
+	p5([X|Xs],[X|Ys]) :- p5(Xs,Ys).
+	p5(Xs,[Y|Ys]) :- p5(Xs,Ys).
+     
+P6::=
+	p6(Xs,Ys) :- p6'(Xs,[],Ys).
+     
+	p6'([X|Xs],Ys,Zs) :- p6'(Xs,[X|Ys],Zs).
+	p6'([],Ys,Ys) :- list(Ys).
+     
+P7::=
+	p7(X,[X|Xs],Xs) :- list(Xs).
+	p7(X,[Y|Ys],[Y|Zs]) :- p7(X,Ys,Zs).
+     
+     
+P8::=
+     
+	p8(X,X) :- tree(X).
+	p8(X,t(Y,Z)) :- p8(X,Y), tree(Z).
+	p8(X,t(Y,Z)) :- p8(X,Z), tree(Y).
+     
+	tree(void).
+	tree(t(X,Y)) :- tree(X), tree(Y).
+     
+P8a::=
+	p8a(t(X,Y),t(W,Z)) :- p8a(X,W), p8a(Y,Z).
+	p8a(t(X,Y),t(W,Z)) :- p8a(X,Z), p8a(Y,W).
+	p8a(X,X) :- tree(X).
+     
+P9::=
+	p9(Xs) :- p9(Xs,[]).
+     
+	p9([push(X)|Xs],Ys) :- p9(Xs,[X|Ys]).
+	p9([pop(X)|Xs],[X|Ys]) :- p9(Xs,Ys).
+	p9([],[]).
+P10::=
+	p10(Xs) :- p10(Xs,Ys,Ys).
+     
+	p10([enqueue(X)|Xs],Ys,[X|Zs]) :- p10(Xs,Ys,Zs).
+	p10([dequeue(X)|Xs],[X|Ys],Zs) :- p10(Xs,Ys,Zs).
+	p10([],[],[]).

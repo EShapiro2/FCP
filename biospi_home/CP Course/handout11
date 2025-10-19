@@ -1,0 +1,193 @@
+/*
+     
+CS 442: Concurrent Prolog Programming Techniques
+     
+Instructor:  Ehud Shapiro
+TAs:      Simran Singh,  Simran@sushi
+          Tom Strat, Strat@sri-ai
+     
+Handout No. 11,  Friday,  November 21th, 1986
+     
+Communication:  Unbounded distributed many-to-one communication
+     
+     
+Solution: dynamic, distributed construction of a merge tree.
+     
+Approach 1:  Client processes create their own merger
+when forking.  E.g.
+     
+          p(Out) :-
+                    merge(Out1?,Out2?,Out),
+                    p1(Out1),
+                    p2(Out2).
+     
+This is an unmodular approach, since it does not
+hide the merging technique used.
+     
+     
+Approach 2:  Have in front of each client a dynamic merger,
+that understands the special message merge(Stream),
+and merge Stream into the output stream.
+*/
+     
+merger3([X|In],[X|Out]) :-
+          X=\=merge(_) | merger3(In?,Out).
+merger3([merge(In1)|In2],Out) :-
+          dmerge(In1?,In2?,Out).
+merger3([],[]).
+     
+dmerge([X|Xs],Ys,[X|Zs]) :-
+          X=\=merge(_) |
+          dmerge(Xs?,Ys?,Zs).
+dmerge(Xs,[Y|Ys],[Y|Zs]) :-
+          Y=\=merge(_) |
+          dmerge(Xs?,Ys?,Zs).
+dmerge([merge(Xs1)|Xs1],Ys,Zs) :-
+          dmerge(Xs1?,Xs2?,Xs),
+          dmerge(Xs?,Ys,Zs).
+dmerge(Xs,[merge(Ys1)|Ys2],Zs) :-
+          dmerge(Ys1?,Ys2?,Ys),
+          dmerge(Xs?,Ys,Zs).
+dmerge([],[],[]).
+     
+/*
+This will generate a tree which might not be balanced.
+     
+     
+Approach 3: grow the merge tree in a balanced way,
+using the concept of two-three trees.
+Instead of growing the tree from the leaves, grow
+it from the root.
+*/
+     
+merger4([X|In],[X|Out]) :-
+          X=\=merge(_) | merger4(In?,Out).
+merger4([merge(In1)|In2],Out) :-
+          merge2(In1?,In2?,Out1),
+          merger4(Out1?,Out).
+merger4([],[]).
+     
+merge2([X|Xs],Ys,[X|Zs]) :-
+          X=\=merge(_) |
+          merge2(Xs?,Ys?,Zs).
+merge2(Xs,[Y|Ys],[Y|Zs]) :-
+          Y=\=merge(_) |
+          merge2(Xs?,Ys?,Zs).
+merge2([merge(Xs1)|Xs1],Ys,Zs) :-
+          merge3(Xs1?,Xs2?,Ys,Zs).
+merge2(Xs,[merge(Ys1)|Ys2],Zs) :-
+          merge3(Xs?,Ys1?,Ys2?,Zs).
+merge2([],[],[]).
+     
+merge3([W|Ws],Xs,Ys,[W|Zs]) :-
+          W=\=merge(_) |
+          merge3(Ws?,Xs?,Ys?,Zs).
+merge3(Ws,[X|Xs],Ys,[X|Zs]) :-
+          X=\=merge(_) |
+          merge3(Ws?,Xs?,Ys?,Zs).
+merge3(Ws,Xs,[Y|Ys],[Y|Zs]) :-
+          Y=\=merge(_) |
+          merge3(Ws?,Xs?,Ys?,Zs).
+merge3([merge(Ws1)|Ws],Xs,Ys,[merge(Zs1)|Zs]) :-
+          merge2(Ws1?,Ws?,Zs1),
+          merge2(Xs?,Ys?,Zs).
+merge3(Ws,[merge(Xs1)|Xs],Ys,[merge(Zs1)|Zs]) :-
+          merge2(Xs1?,Ws?,Zs1),
+          merge2(Xs?,Ys?,Zs).
+merge3(Ws,Xs,[merge(Ys1)|Ys],[merge(Zs1)|Zs]) :-
+          merge2(Ys1?,Ws?,Zs1),
+          merge2(Xs?,Ys?,Zs).
+merge3([],[],[],[]).
+     
+     
+/*
+The two-three tree grows nicely, but when it shrinks
+it may loose its balance.  The solution:
+implement a distributed version of two-three
+tree deletion algorithm.
+     
+Another solution: a multiple-writers stream
+*/
+     
+% write(X,Xs) :- X occurs in the stream Xs.
+     
+write(X,Xs) :- Xs? = [_|Xs1] | write(X,Xs1).
+write(X,[X1?|Xs]) :- X=X1.
+     
+/*
+A write operation on a multiple-writers stream may have
+unbounded delay.
+     
+An improvement: updating the tail of the stream
+after every write operation. Write operations by the same process
+can then be cascaded.
+*/
+     
+% write(X,Xs,Ys) :- X occurs in Xs, followed by Ys.
+     
+write(X,Xs,Ys) :- Xs? = [_|Xs1] | write(X,Xs1,Ys).
+write(X,[X1?|Xs],Xs) :- X=X1.
+     
+/*
+     
+The write operation can be used to implement a multiway merger as
+follows:
+     
+merge1(Xss,Ys) :-
+          merge the stream of elements and streams Xs into Ys.
+*/
+     
+     
+merge1([X|In],Out) :-
+          X=\=merge(_) |
+          write(X,Out,Out1),
+          merge1(In?,Out1).
+merge1([merge(In1)|In],Out) :-
+          merge1(In?,Out),
+          merge1(In1?,Out).
+merge1([],Out).
+     
+/*
+This merger has two problems:
+          1.Termination: it does not close the output stream
+                    upon termination of the input streams.
+          2. Complexity: merging N streams of length N requires
+                    N*N reductions.
+     
+The fairness of the merger is a consequence of the fairness
+of the scheduler.
+     
+To solve the first problem, we use the short-circuit technique
+to detect global termination.
+*/
+     
+merge2(Xss,Ys) :-
+          merge2sc(Xss?,Ys,Left-Right),
+          Left=done,
+          close(Right?,Ys).
+     
+merge2sc([X|In],Out,Left-Right) :-
+          X=\=merge(_) |
+          write(X,Out,Out1),
+          merge2sc(In?,Out1,Left-Right).
+merge2sc([merge(In1)|In],Out,Left-Right) :-
+          merge2sc(In?,Out,Left-Middle),
+          merge2sc(In1?,Out,Middle-Right).
+merge2sc([],Out,Done-Done).
+     
+close(done,[]).
+close(Done,Xs) :- Xs? = [_|Xs1] | close(Done?,Xs1).
+     
+/*
+The second problem, of performance, is solved by introducing
+an abstract data-type called a mutual-reference,
+which can be used by many merge processes to advance their
+pointer to the tail of the stream in unison.
+This solution also guarantees fairness under
+weaker requirements from the scheduler.
+See "Multiway merge with cnstant delay" in the collected papers.
+*/
+     
+     
+-------
+

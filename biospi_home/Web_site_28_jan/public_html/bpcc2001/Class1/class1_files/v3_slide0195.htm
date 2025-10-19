@@ -1,0 +1,196 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class1.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description
+content="19-Apr-01: Coupled chemical reactions as stochastic processes (Gillespie 76,77)*">
+<link rel=next href="v3_slide0137.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0195.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body bgcolor=white alink="#3333cc" link="#ccccff" vlink="#b2b2b2" text=black
+topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=305 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=100 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=33 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=25 height=56></td>
+  <td width=425 height=56 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=52 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=322 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=52 height=30></td>
+    <td width=322 height=30 align=center><font face="Comic Sans MS" size=4>Coupled
+    chemical reactions as</font><br>
+    </td>
+    <td width=51 height=30></td>
+   </tr>
+   <tr>
+    <td width=425 height=25 colspan=3 align=center><font face="Comic Sans MS"
+    size=4>stochastic processes (Gillespie 76,77)*</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=25 height=56></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=209 colspan=2></td>
+  <td width=405 height=209 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=73 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=34 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=186 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=34 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=15 height=23><font face="Comic Sans MS" color=black size=2>•</font></td>
+    <td width=390 height=24 colspan=11 rowspan=2><font face="Comic Sans MS"
+    size=2>N chemical species, each in quantity X<sub>i</sub> in volume V</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=15 height=1></td>
+   </tr>
+   <tr>
+    <td width=15 height=22><font face="Comic Sans MS" color=black size=2>•</font></td>
+    <td width=389 height=22 colspan=10><font face="Comic Sans MS" size=2>Can
+    participate in R reactions, each characterized</font><br>
+    </td>
+    <td width=1 height=22></td>
+   </tr>
+   <tr>
+    <td width=15 height=19></td>
+    <td width=327 height=19 colspan=5><font face="Comic Sans MS" size=2>by a
+    reaction parameter c</font><font face=Symbol size=2><sub>m </sub></font><font
+    face="Comic Sans MS" size=2>(similar to rate</font><br>
+    </td>
+    <td width=63 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=15 height=18></td>
+    <td width=74 height=18 colspan=2><font face="Comic Sans MS" size=2>constant)</font><br>
+    </td>
+    <td width=316 height=18 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=15 height=23><font face="Comic Sans MS" color=black size=2>•</font></td>
+    <td width=361 height=23 colspan=6><font face="Comic Sans MS" size=2>What is
+    the next time step and which reaction</font><br>
+    </td>
+    <td width=29 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=15 height=19></td>
+    <td width=141 height=19 colspan=4><font face="Comic Sans MS" size=2>would
+    occur in it ?</font><br>
+    </td>
+    <td width=249 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=15 height=23><font face="Comic Sans MS" color=black size=2>•</font></td>
+    <td width=368 height=24 colspan=7 rowspan=2><font face="Comic Sans MS"
+    size=2>h<sub>i</sub>c<sub>i</sub></font><font face=Symbol size=2>d</font><font
+    face="Comic Sans MS" size=2>t<span style="mso-spacerun: yes">&nbsp;
+    </span>- probability that the next reaction is R<sub>i</sub>,</font><br>
+    </td>
+    <td width=22 height=23 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=15 height=1></td>
+    <td width=22 height=1 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=15 height=19></td>
+    <td width=369 height=19 colspan=8><font face="Comic Sans MS" size=2>where h<sub>i</sub>
+    – number of combinations of reactants</font><br>
+    </td>
+    <td width=21 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=15 height=22><font face="Comic Sans MS" color=black size=2>•</font></td>
+    <td width=385 height=22 colspan=9><font face="Comic Sans MS" size=2>P(</font><font
+    face=Symbol size=2>t,m</font><font face="Comic Sans MS" size=2>) –
+    probability that the time step is </font><font face=Symbol size=2>t </font><font
+    face="Comic Sans MS" size=2>and the</font><br>
+    </td>
+    <td width=5 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=15 height=19></td>
+    <td width=108 height=19 colspan=3><font face="Comic Sans MS" size=2>reaction
+    is R</font><font face=Symbol size=2>m</font><br>
+    </td>
+    <td width=282 height=19 colspan=8></td>
+   </tr>
+  </table>
+  </td>
+  <td width=30 height=209 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=345 height=23 colspan=3><img src="v3_slide0195_image024.gif"
+  border=0 width=345 height=23></td>
+  <td width=130 height=23 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=5 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

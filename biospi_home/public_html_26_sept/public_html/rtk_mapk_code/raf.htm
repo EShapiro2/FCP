@@ -1,0 +1,214 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./raf_files/filelist.xml">
+<title>raf</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:LastAuthor>Shmulik Elmakias</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>0</o:TotalTime>
+  <o:Created>2000-10-08T15:35:00Z</o:Created>
+  <o:LastSaved>2000-10-08T15:35:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>240</o:Words>
+  <o:Characters>1369</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>11</o:Lines>
+  <o:Paragraphs>2</o:Paragraphs>
+  <o:CharactersWithSpaces>1681</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"Lucida Sans Unicode";
+	panose-1:2 11 6 2 3 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-2147476737 14699 0 0 63 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:#FF6600;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:red;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.Avivweb, li.Avivweb, div.Avivweb
+	{mso-style-name:Aviv_web;
+	mso-style-parent:"Normal \(Web\)";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Lucida Sans Unicode";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link="#ff6600" vlink=red style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoPlainText><span style='mso-fareast-font-family:"MS Mincho"'>-language([evaluate,psifcp,compound,colon]).<br>
+-export(&quot;RAF&quot;).<br>
+baserate(1).<br>
+global([switchI,raf_mp1,p_ser,ser,atp]).<br>
+<br>
+<br>
+<br>
+RAF(env):-<br>
+<span
+style='mso-tab-count:1'>      </span>&lt;&lt; backbone, backbone1, backbone2,
+backbone2a, backbone3, regulator_bs, atp_bs.<br>
+<span style='mso-tab-count:
+1'>      </span><span style="mso-spacerun: yes">   </span>RAF_Nt,
+RAF_ACTIVATOR_BS(env) , RAF_MP1_BS , INACTIVE_RAF_Ct , RAF_ATP_BS .<br>
+<br>
+RAF_Nt:-<br>
+<span
+style='mso-tab-count:1'>      </span>switchI ? {cross_env,cross_ras} | backbone
+! {cross_env} | cross_ras ? [] | RAF_Nt .<br>
+<br>
+RAF_ACTIVATOR_BS(env):-<br>
+<span
+style='mso-tab-count:1'>      </span>backbone ? {cross_env} | &lt;&lt;
+cross_env =?= env | RAF_ACTIVATOR_BS(cross_env) ;<br>
+<span style='mso-tab-count:
+4'>                        </span><span style="mso-spacerun: yes">   
+</span>otherwise | backbone1 ? [] | RAF_ACTIVATOR_BS(cross_env) &gt;&gt;
+.<br>
+<br>
+INACTIVE_RAF_Ct:- <br>
+<span style='mso-tab-count:1'>      </span>backbone1
+! [] | ACTIVE_RAF_Ct .<br>
+<span style='mso-tab-count:1'>      </span><br>
+<br>
+ACTIVE_RAF_Ct:-<br>
+<span
+style='mso-tab-count:1'>      </span>backbone3 ! [] | backbone2 ?
+{cross_motif1, cross_motif2} | cross_motif1 ? {cross_res1} | cross_motif2 ?
+{cross_res2} | <br>
+<span style='mso-tab-count:3'>                  </span><span
+style="mso-spacerun: yes"> </span>OCCUPIED_RAF_Ct(cross_motif1,cross_motif2,cross_res1,cross_res2)
+;<br>
+<span style='mso-tab-count:1'>      </span>backbone1 ! [] |
+INACTIVE_RAF_Ct .<br>
+<br>
+<span style='mso-tab-count:1'>      </span>OCCUPIED_RAF_Ct(cross_motif1,cross_motif2,cross_res1,cross_res2):-<span
+style="mso-spacerun: yes">  </span><br>
+<span style='mso-tab-count:3'>                  </span>cross_res1=?=ser<span
+style="mso-spacerun: yes">  </span>|<span style="mso-spacerun: yes"> 
+</span>atp_bs ? [] | cross_motif1 ! {p_ser} | <br>
+<span style='mso-tab-count:
+4'>                        </span>OCCUPIED_RAF_Ct(cross_motif1,cross_motif2,p_ser,cross_res2);<br>
+<span
+style='mso-tab-count:3'>                  </span>cross_res2=?=ser<span
+style="mso-spacerun: yes">  </span>|<span style="mso-spacerun: yes"> 
+</span>atp_bs ? [] | cross_motif2 ! {p_ser} | <br>
+<span style='mso-tab-count:
+4'>                        </span>OCCUPIED_RAF_Ct(cross_motif1,cross_motif2,cross_res1,p_ser);<br>
+<span
+style='mso-tab-count:3'>                  </span>otherwise<span
+style="mso-spacerun: yes">  </span>|<span style="mso-spacerun: yes"> 
+</span>backbone2a ! [] | ACTIVE_RAF_Ct .<br>
+<span style="mso-spacerun: yes"> 
+</span><br>
+RAF_MP1_BS:-<br>
+<br>
+<span style='mso-tab-count:1'>      </span>backbone3
+? [] | raf_mp1 ? {cross_mp1,cross_mp2} | BOUND_RAF_MP1_BS(cross_mp1,cross_mp2)
+.<br>
+<br>
+<span style='mso-tab-count:1'>      </span>BOUND_RAF_MP1_BS(site1,site2):-<br>
+<span
+style='mso-tab-count:2'>            </span>site1 ? {cross_motif1, cross_motif2}
+| backbone2 ! {cross_motif1, cross_motif2} | backbone2a ? [] |<br>
+<span
+style='mso-tab-count:3'>                  </span><span style="mso-spacerun:
+yes"> </span>site1 ? {cross_motif1, cross_motif2} | site2 ! [] | RAF_MP1_BS
+;<br>
+<span style='mso-tab-count:2'>            </span>site2 ! [] | RAF_MP1_BS
+.<br>
+<br>
+RAF_ATP_BS:-<br>
+<span style='mso-tab-count:2'>            </span>atp
+? {adp} | atp_bs ! [] | adp ! [] | RAF_ATP_BS <br>
+<br>
+&gt;&gt;<br>
+.<br>
+<br>
+<span
+style='mso-tab-count:1'>      </span><br>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

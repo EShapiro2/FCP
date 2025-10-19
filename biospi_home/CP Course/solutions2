@@ -1,0 +1,94 @@
+			Solutions to exercise2
+
+
+P4::=
+	p4(Xs,Xs) :- list(Xs).
+	p4(Xs,[Y|Ys]) :- p4(Xs,Ys).
+
+[P4] =	{ p4(Suffix,List) | list Suffix is the tail of list List }
+
+
+P5::=
+	p5([],Xs) :- list(Xs).
+	p5([X|Xs],[X|Ys]) :- p5(Xs,Ys).
+	p5(Xs,[Y|Ys]) :- p5(Xs,Ys).
+
+[P5] =	{ p5(Sublist,List) | list Sublist is an ordered sublist of list List }
+
+	The elements in Sublist appear in List in the same order, possibly
+	with other elements interspersed.
+
+
+P6::=
+	p6(Xs,Ys) :- p6'(Xs,[],Ys).
+     
+	p6'([X|Xs],Ys,Zs) :- p6'(Xs,[X|Ys],Zs).
+	p6'([],Ys,Ys) :- list(Ys).
+
+[P6] =	{ p6(Forward,Backward) | list Forward is list Backward, reversed }
+
+
+P7::=
+	p7(X,[X|Xs],Xs) :- list(Xs).
+	p7(X,[Y|Ys],[Y|Zs]) :- p7(X,Ys,Zs).
+
+[P7] =	{ p7(X,List,ListMinusX) | ListMinus is list List with one occurence
+				  of the element X deleted }
+
+
+P8::=
+	p8(X,X) :- tree(X).
+	p8(X,t(Y,Z)) :- p8(X,Y), tree(Z).
+	p8(X,t(Y,Z)) :- p8(X,Z), tree(Y).
+
+	tree(void).
+	tree(t(X,Y)) :- tree(X), tree(Y).
+
+[P8] =	{ p8(SubTree,Tree) | tree SubTree is a sub-tree of tree Tree }
+
+	Compare to problem 5 of Assignment 1 - this tree has anonymous nodes.
+
+
+P8a::=
+	p8a(t(X,Y),t(W,Z)) :- p8a(X,W), p8a(Y,Z).
+	p8a(t(X,Y),t(W,Z)) :- p8a(X,Z), p8a(Y,W).
+	p8a(X,X) :- tree(X).
+
+[P8a] =	{ p8a(Tree1,Tree2) | Tree1 is isomorphic to tree 2 }
+
+	The isomorphism is up to branch-order.
+
+
+P9::=
+	p9(Xs) :- p9(Xs,[]).
+
+	p9([push(X)|Xs],Ys) :- p9(Xs,[X|Ys]).
+	p9([pop(X)|Xs],[X|Ys]) :- p9(Xs,Ys).
+	p9([],[]).
+
+	{ p9(Requests) | Requests is a balanced list of pairs of 
+			 push(X),pop(X) requests for a LIFO stack manager }
+
+	The procedure p9/1 guarantees correct ordering of stack management
+	requests to a LIFO balanced-stack manager.  A push always precedes
+	the correspong pop, and they are separated only by other pairs of
+	requests.  Note that X may be variable for a pop(X), in which case
+	the variable will be unified with the Term supplied by the
+	corresponding push(Term), or vice versa (l'hefek)!
+
+
+P10::=
+	p10(Xs) :- p10(Xs,Ys,Ys).
+
+	p10([enqueue(X)|Xs],Ys,[X|Zs]) :- p10(Xs,Ys,Zs).
+	p10([dequeue(X)|Xs],[X|Ys],Zs) :- p10(Xs,Ys,Zs).
+	p10([],[],[]).
+
+[P10] =	{ p10(Requests) | Requests is a balanced list of requests to enqueue
+			  and dequeue elements of a FIFO queue }
+
+	The queue has the peculiar property that a dequeue request may precede
+	the corresponding enqueue request - the queue may have negative
+	content at some point.  In fact all this means is that for this queue
+	manager, enqueue and dequeue are completely symmetric operations.
+

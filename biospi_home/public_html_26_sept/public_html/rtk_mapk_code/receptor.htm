@@ -1,0 +1,265 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./receptor_files/filelist.xml">
+<title>receptor</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:LastAuthor>Shmulik Elmakias</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>0</o:TotalTime>
+  <o:Created>2000-10-08T15:35:00Z</o:Created>
+  <o:LastSaved>2000-10-08T15:35:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>324</o:Words>
+  <o:Characters>1852</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>15</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2274</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"Lucida Sans Unicode";
+	panose-1:2 11 6 2 3 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-2147476737 14699 0 0 63 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:#FF6600;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:red;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.Avivweb, li.Avivweb, div.Avivweb
+	{mso-style-name:Aviv_web;
+	mso-style-parent:"Normal \(Web\)";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Lucida Sans Unicode";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link="#ff6600" vlink=red style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoPlainText><span style='mso-fareast-font-family:"MS Mincho"'>-language([evaluate,psifcp,compound,colon]).<br>
+-export(&quot;RTK&quot;).<br>
+baserate(1).<br>
+global([ligand_bind,tyr,p_tyr,met,atp,dummy]).<br>
+<br>
+<br>
+RTK(env):-<br>
+<br>
+<span
+style='mso-tab-count:1'>      </span>&lt;&lt; backbone_extra, backbone_intra1,
+backbone_intra2, backbone_intra3, tyr1162, atp_bs, sh2_tyr , sh2_tyr1 . <br>
+<span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes">  
+</span>EXTRACELLULAR , TRANSMEMBRANAL , INTRACELLULAR .<br>
+<br>
+EXTRACELLULAR:-
+<br>
+<span style='mso-tab-count:1'>      </span>ligand_bind ?
+{ligand1,ligand2} | backbone_extra ! {ligand1,ligand2} | BOUND_EXTRACELLULAR
+.<br>
+<br>
+<span style='mso-tab-count:1'>      </span>BOUND_EXTRACELLULAR:-
+<br>
+<span style='mso-tab-count:2'>            </span>dummy ? [] | true
+.<br>
+TRANSMEMBRANAL:-<br>
+<span style='mso-tab-count:1'>      </span>backbone_extra
+? {cross_ligand1,cross_ligand2} | RTK_DIMERIZATION(cross_ligand1,cross_ligand2)
+.<br>
+<br>
+RTK_DIMERIZATION(cross_ligand1,cross_ligand2):-<br>
+<span
+style='mso-tab-count:1'>      </span>cross_ligand1 ! {tyr1162}<span
+style="mso-spacerun: yes">  </span>| cross_ligand2 ? {cross_tyr} |
+backbone_intra1 ! {cross_tyr} | RTK_DIMERIZED ;<br>
+<span style='mso-tab-count:
+1'>      </span>cross_ligand2 ? {cross_tyr}| cross_ligand1 ! {tyr1162}<span
+style="mso-spacerun: yes">   </span>| backbone_intra1 ! {cross_tyr} | true
+.<br>
+<br>
+RTK_DIMERIZED:-<br>
+<span style='mso-tab-count:1'>      </span>dummy
+? [] | true .<br>
+<span style='mso-tab-count:1'>      </span><br>
+INTRACELLULAR:-<br>
+<span
+style='mso-tab-count:1'>      </span>RTK_SH_BS(tyr,met), RTK_KINASE_CORE
+.<br>
+<br>
+RTK_KINASE_CORE:-<br>
+<span style='mso-tab-count:1'>      </span>RTK_KINASE_SITE
+, RTK_REGULATORY_SITE(tyr) ,<span style="mso-spacerun: yes"> 
+</span>RTK_ATP_BS<span style="mso-spacerun: yes">   </span>.<br>
+<br>
+<span
+style='mso-tab-count:1'>      </span>RTK_KINASE_SITE:-<br>
+<span
+style='mso-tab-count:2'>            </span>CROSS_PHOSPHORYLATE +
+FULL_PHOSPHORYLATE .<br>
+<br>
+<span style='mso-tab-count:1'>      </span>CROSS_PHOSPHORYLATE:-<br>
+<span
+style='mso-tab-count:2'>            </span>backbone_intra1 ? {cross_motif} |
+cross_motif ? {cross_res} | <br>
+<span style='mso-tab-count:3'>                  </span>&lt;&lt;
+cross_res=?=tyr<span style="mso-spacerun: yes">  </span>|<span
+style="mso-spacerun: yes">  </span>atp_bs ? [] | cross_motif ! {p_tyr} |
+RTK_KINASE_SITE ;<br>
+<span style='mso-tab-count:2'>            </span><span
+style="mso-spacerun: yes"> </span><span style='mso-tab-count:1'>     </span><span
+style="mso-spacerun: yes">   </span>otherwise | cross_motif ! {cross_res} |
+RTK_KINASE_SITE &gt;&gt; . <br>
+<br>
+<span style='mso-tab-count:1'>      </span>FULL_PHOSPHORYLATE:-<br>
+<span
+style='mso-tab-count:2'>            </span>backbone_intra3 ? [] | ACTIVE_FULL
+.<br>
+<br>
+<span style='mso-tab-count:1'>      </span>ACTIVE_FULL:-<br>
+<span
+style='mso-tab-count:2'>            </span>backbone_intra2 ? {cross_motif} |
+cross_motif ? {cross_res} | <br>
+<span style='mso-tab-count:3'>                  </span>&lt;&lt;
+cross_res=?=tyr<span style="mso-spacerun: yes">  </span>|<span
+style="mso-spacerun: yes">  </span>atp_bs ? [] | cross_motif ! {p_tyr} |
+ACTIVE_FULL ;<span style='mso-tab-count:1'>    </span><span
+style="mso-spacerun: yes">      </span><span style="mso-spacerun:
+yes">   </span><span style='mso-tab-count:3'>               </span><span
+style='mso-tab-count:1'>      </span><span style="mso-spacerun: yes"> </span><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun: yes"> </span><span
+style='mso-tab-count:1'>     </span><span style="mso-spacerun:
+yes">   </span>otherwise | cross_motif ! {cross_res} | ACTIVE_FULL &gt;&gt;
+;<br>
+<span style='mso-tab-count:2'>            </span>backbone_intra3 ? [] |
+RTK_KINASE_SITE .<br>
+<br>
+<span style='mso-tab-count:1'>      </span>RTK_REGULATORY_SITE(res):-<br>
+<span
+style='mso-tab-count:2'>            </span>tyr1162 ! {res} | tyr1162 ? {res1} |
+&lt;&lt; res1 =?= res<span style="mso-spacerun: yes">  </span>|
+RTK_REGULATORY_SITE(res1) ;<br>
+<span style='mso-tab-count:7'>                                          </span>otherwise
+| backbone_intra3 ! [] | RTK_REGULATORY_SITE(res1) &gt;&gt; . <br>
+<br>
+<span
+style='mso-tab-count:1'>      </span>RTK_SH_BS(res,res1):-<br>
+<span
+style='mso-tab-count:2'>            </span>backbone_intra2 ! {sh2_tyr} |
+sh2_tyr ! {res} | sh2_tyr ? {resa} | RTK_SH_BS(resa,res1) ;<br>
+<span
+style='mso-tab-count:2'>            </span>res ! {sh2_tyr, sh2_tyr1,
+backbone_intra2, env, res1} | &lt;&lt; sh2_tyr1 ? [] | BOUND_RTK_SH_BS ;<br>
+<span
+style='mso-tab-count:9'>                                                      </span><span
+style="mso-spacerun: yes">  </span>sh2_tyr ? {res1} | RTK_SH_BS(res,res1)
+&gt;&gt;.<br>
+<br>
+<span style='mso-tab-count:2'>            </span>BOUND_RTK_SH_BS:-<br>
+<span
+style='mso-tab-count:3'>                  </span>dummy ? [] | true . <br>
+<span
+style='mso-tab-count:2'>            </span><br>
+<br>
+<span style='mso-tab-count:
+1'>      </span>RTK_ATP_BS:-<br>
+<span style='mso-tab-count:2'>            </span>atp
+? {adp} | atp_bs ! [] | adp ! [] | RTK_ATP_BS <br>
+<br>
+<br>
+&gt;&gt;<br>
+.<br>
+<br>
+<span
+style='mso-tab-count:1'>      </span><br>
+<span style='mso-tab-count:2'>            </span><br>
+<span
+style='mso-tab-count:4'>                        </span><span
+style="mso-spacerun: yes">     </span><br>
+<br>
+<br>
+<br>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

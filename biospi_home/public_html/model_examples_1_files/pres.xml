@@ -1,0 +1,47 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+ <p:presentation>
+  <p:master id="3" type="main" href="master03.htm" xmlhref="master03.xml"
+   template="עיצוב ברירת מחדל" layout="title_body"
+   slots="title,body,dateTime,footer,slideNumber">
+   <p:schemes>
+    <p:colorscheme
+     colors="#0066CC,#FFFFFF,#000000,#CBCBCB,#009999,#FF9933,#330099,#CBCBCB"/>
+    <p:colorscheme
+     colors="#FFFFFF,#000000,#868686,#000000,#3366FF,#009900,#FF0033,#CCCCCC"/>
+    <p:colorscheme
+     colors="#FFFFFF,#000000,#868686,#000000,#EAEAEA,#5F5F5F,#969696,#CBCBCB"/>
+   </p:schemes>
+  </p:master>
+  <p:master id="4" type="title" href="master04.htm" xmlhref="master04.xml"
+   layout="title_subtitle"
+   slots="centerTitle,subTitle,dateTime,footer,slideNumber"/>
+  <p:master id="1" type="notes" href="master01.htm" layout="notes"
+   slots="header,dateTime,slideImage,body,footer,slideNumber"/>
+  <p:master id="2" type="handout" href="master02.htm" layout="handout"
+   slots="header,dateTime,footer,slideNumber"/>
+  <p:slide id="344" href="slide0344.htm"/>
+  <p:viewstate type="slideView" scale="75" sorterscale="100" vertbarstate="0"
+   horizbarstate="2"/>
+  <p:guide type="horizontal" position="2496"/>
+  <p:guide type="vertical" position="2880"/>
+  <p:kinsoku language="Japanese" level="levelOne"/>
+  <p:font name="Times New Roman" charset="0" type="6" family="18"/>
+  <p:font name="Times New Roman (Hebrew)" charset="177" type="4" family="26"/>
+  <p:font name="Comic Sans MS" charset="0" type="6" family="66"/>
+  <p:font name="Tahoma" charset="0" type="6" family="34"/>
+  <p:font name="Wingdings" charset="2" type="6" family="2"/>
+  <p:font name="Arial" charset="0" type="6" family="34"/>
+  <p:headersfooters slidenumber="t" nofooter="t" noheader="t" nodate="t"/>
+  <p:headersfooters notes="t" slidenumber="t"/>
+  <p:pptdocumentsettings framecolors="WhiteTextOnBlack" hideslideanimation="t"/>
+ </p:presentation>
+ <o:shapedefaults v:ext="edit" spidmax="262146" style='mso-wrap-style:none;
+  v-text-anchor:middle'>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrow="open"
+   weight="2pt"/>
+  <o:colormru v:ext="edit" colors="#c6f,#f9f,#f39,#c06,#ccecff,#6cf,#6f91ff,yellow"/>
+  <o:colormenu v:ext="edit" fillcolor="none" strokecolor="none"/>
+ </o:shapedefaults></xml>

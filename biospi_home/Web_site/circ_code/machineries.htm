@@ -1,0 +1,144 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./machineries_files/filelist.xml">
+<title>basal machineries</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Shmulik Elmakias</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>5</o:TotalTime>
+  <o:Created>2000-10-02T07:02:00Z</o:Created>
+  <o:LastSaved>2000-10-08T15:54:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>151</o:Words>
+  <o:Characters>864</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>7</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>1061</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoPlainText style='margin-bottom:12.0pt'><span style='mso-fareast-font-family:
+"MS Mincho"'>-language([evaluate,psifcp,compound,colon]).<br>
+-export([&quot;BASAL_TRANSCRIPTION&quot; , &quot;BASAL_TRANSLATION&quot; ,
+&quot;RNA_DEGRADATION&quot; , <br>
+&quot;PROTEIN_DEGRADATION&quot;]).<br>
+-include(rates).<br>
+stochastic.<br>
+global([bA(R2),bR(R8),utrA(R3),utrR(R9),degmA(R4),degmR(R10), <br>
+degpA(R12), degpR(R11)]).<br>
+<br>
+<br>
+BASAL_TRANSCRIPTION:-<br>
+<span style="mso-spacerun: yes">    </span>BASAL_TRANSCRIPTION_A,
+BASAL_TRANSCRIPTION_R .<br>
+<br>
+<a name="transcription_A">BASAL_TRANSCRIPTION_A:-</a><br>
+<span style="mso-spacerun: yes">    </span>bA ! [] | BASAL_TRANSCRIPTION_A .<br>
+<br>
+<a name="transcription_R">BASAL_TRANSCRIPTION_R:-</a><br>
+<span style="mso-spacerun: yes">    </span>bR ! [] | BASAL_TRANSCRIPTION_R .<br>
+<br>
+<br>
+BASAL_TRANSLATION:-<br>
+<span style="mso-spacerun: yes">    </span>BASAL_TRANSLATION_A,
+BASAL_TRANSLATION_R .<br>
+<br>
+<a name="translation_A">BASAL_TRANSLATION_A:-</a><br>
+<span style="mso-spacerun: yes">    </span>utrA ! [] | BASAL_TRANSLATION_A .<br>
+<br>
+<a name="translation_R">BASAL_TRANSLATION_R:-</a><br>
+<span style="mso-spacerun: yes">    </span>utrR ! [] | BASAL_TRANSLATION_R .<br>
+<br>
+<br>
+RNA_DEGRADATION:-<br>
+<span style="mso-spacerun: yes">    </span>RNA_DEGRADATION_A, RNA_DEGRADATION_R
+.<br>
+<br>
+<a name="RNA_degradation_A">RNA_DEGRADATION_A:-</a><br>
+<span style="mso-spacerun: yes">    </span>degmA ! [] | RNA_DEGRADATION_A .<br>
+<br>
+<a name="RNA_degradation_R">RNA_DEGRADATION_R:-</a><br>
+<span style="mso-spacerun: yes">    </span>degmR ! [] | RNA_DEGRADATION_R .<br>
+<br>
+<br>
+PROTEIN_DEGRADATION:-<br>
+<span style="mso-spacerun: yes">    </span>PROTEIN_DEGRADATION_A,
+PROTEIN_DEGRADATION_R .<br>
+<br>
+<a name="protein_degradation_A">PROTEIN_DEGRADATION_A</a>:-<br>
+<span style="mso-spacerun: yes">    </span>degpA ! [] | PROTEIN_DEGRADATION_A .<br>
+<br>
+<a name="protein_degradation_R">PROTEIN_DEGRADATION_R</a>:-<br>
+<span style="mso-spacerun: yes">    </span>degpR ! [] | PROTEIN_DEGRADATION_R .<br>
+<br>
+<br>
+<br>
+<br>
+<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

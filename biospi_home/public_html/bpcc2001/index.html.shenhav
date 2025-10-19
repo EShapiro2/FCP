@@ -1,0 +1,2736 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=us-ascii">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./index_files/filelist.xml">
+<link rel=Edit-Time-Data href="./index_files/editdata.mso">
+<link rel=OLE-Object-Data href="./index_files/oledata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>Biomolecular Processes as Concurrent Computation</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Barak Shenhav</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>Barak Shenhav</o:LastAuthor>
+  <o:Revision>57</o:Revision>
+  <o:TotalTime>10081</o:TotalTime>
+  <o:Created>2001-05-16T09:51:00Z</o:Created>
+  <o:LastSaved>2001-07-05T11:29:00Z</o:LastSaved>
+  <o:Pages>24</o:Pages>
+  <o:Words>2048</o:Words>
+  <o:Characters>11679</o:Characters>
+  <o:Company>Weizmann Institute of Science</o:Company>
+  <o:Lines>97</o:Lines>
+  <o:Paragraphs>23</o:Paragraphs>
+  <o:CharactersWithSpaces>14342</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+@font-face
+	{font-family:"Arial Unicode MS";
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:14337 134676480 16 0 131168 0;}
+@font-face
+	{font-family:"\@Arial Unicode MS";
+	panose-1:0 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:128;
+	mso-generic-font-family:modern;
+	mso-font-format:other;
+	mso-font-pitch:variable;
+	mso-font-signature:14337 134676480 16 0 131168 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:navy;}
+h1
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0cm;
+	margin-bottom:3.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	font-size:16.0pt;
+	font-family:Arial;
+	color:#993300;
+	mso-font-kerning:16.0pt;
+	font-weight:bold;}
+h2
+	{mso-style-next:Normal;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	margin-bottom:0cm;
+	margin-left:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:12.0pt;
+	font-family:Arial;
+	color:navy;
+	font-weight:bold;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:navy;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 207.65pt right 415.3pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:navy;}
+p.MsoCaption, li.MsoCaption, div.MsoCaption
+	{mso-style-next:Normal;
+	margin-top:6.0pt;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:navy;
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:#FF99CC;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:navy;}
+p.xl24, li.xl24, div.xl24
+	{mso-style-name:xl24;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	font-weight:bold;}
+p.xl25, li.xl25, div.xl25
+	{mso-style-name:xl25;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-top-alt:solid windowtext .5pt;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;
+	font-weight:bold;}
+p.xl26, li.xl26, div.xl26
+	{mso-style-name:xl26;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl27, li.xl27, div.xl27
+	{mso-style-name:xl27;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl28, li.xl28, div.xl28
+	{mso-style-name:xl28;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl29, li.xl29, div.xl29
+	{mso-style-name:xl29;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-top-alt:solid windowtext .5pt;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl30, li.xl30, div.xl30
+	{mso-style-name:xl30;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-top-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl31, li.xl31, div.xl31
+	{mso-style-name:xl31;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl32, li.xl32, div.xl32
+	{mso-style-name:xl32;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl33, li.xl33, div.xl33
+	{mso-style-name:xl33;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl34, li.xl34, div.xl34
+	{mso-style-name:xl34;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl35, li.xl35, div.xl35
+	{mso-style-name:xl35;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl36, li.xl36, div.xl36
+	{mso-style-name:xl36;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl37, li.xl37, div.xl37
+	{mso-style-name:xl37;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl38, li.xl38, div.xl38
+	{mso-style-name:xl38;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl39, li.xl39, div.xl39
+	{mso-style-name:xl39;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl40, li.xl40, div.xl40
+	{mso-style-name:xl40;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl41, li.xl41, div.xl41
+	{mso-style-name:xl41;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl42, li.xl42, div.xl42
+	{mso-style-name:xl42;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl43, li.xl43, div.xl43
+	{mso-style-name:xl43;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-bottom-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl44, li.xl44, div.xl44
+	{mso-style-name:xl44;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-top-alt:solid windowtext .5pt;
+	mso-border-left-alt:solid windowtext .5pt;
+	mso-border-right-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+p.xl45, li.xl45, div.xl45
+	{mso-style-name:xl45;
+	margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	border:none;
+	mso-border-left-alt:solid windowtext .5pt;
+	padding:0cm;
+	mso-padding-alt:0cm 0cm 0cm 0cm;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";
+	color:windowtext;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:137722729;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1697905920 2043321646 2043321646 0 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:31.2pt;
+	mso-level-number-position:left;
+	margin-left:31.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:31.2pt;
+	mso-level-number-position:left;
+	margin-left:31.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+@list l0:level3
+	{mso-level-start-at:2;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:29.35pt;
+	mso-level-number-position:left;
+	margin-left:29.35pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";}
+@list l1
+	{mso-list-id:161749356;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-46660154 2043321646 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:49.2pt;
+	mso-level-number-position:left;
+	margin-left:49.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:215044017;
+	mso-list-type:hybrid;
+	mso-list-template-ids:433342044 0 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l2:level1
+	{mso-level-start-at:2;
+	mso-level-number-format:bullet;
+	mso-level-text:-;
+	mso-level-tab-stop:29.35pt;
+	mso-level-number-position:left;
+	margin-left:29.35pt;
+	text-indent:-18.0pt;
+	font-family:"Times New Roman";}
+@list l2:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:47.35pt;
+	mso-level-number-position:left;
+	margin-left:47.35pt;
+	text-indent:-18.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l2:level3
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0A7;
+	mso-level-tab-stop:83.35pt;
+	mso-level-number-position:left;
+	margin-left:83.35pt;
+	text-indent:-18.0pt;
+	font-family:Wingdings;}
+@list l3
+	{mso-list-id:924069209;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1929085608 67698703 67698713 67698715 67698703 67698713 67698715 67698703 67698713 67698715;}
+@list l3:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level3
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:108.0pt;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+@list l3:level5
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:180.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level6
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:216.0pt;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+@list l3:level8
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:288.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;}
+@list l3:level9
+	{mso-level-number-format:roman-lower;
+	mso-level-tab-stop:324.0pt;
+	mso-level-number-position:right;
+	text-indent:-9.0pt;}
+@list l4
+	{mso-list-id:1103188117;
+	mso-list-type:hybrid;
+	mso-list-template-ids:1393559828 67960833 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:Symbol;}
+@list l5
+	{mso-list-id:1394545561;
+	mso-list-type:hybrid;
+	mso-list-template-ids:816318148 2043321646 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l5:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:31.2pt;
+	mso-level-number-position:left;
+	margin-left:31.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+@list l6
+	{mso-list-id:1601449905;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1761423758 2043321646 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l6:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:31.2pt;
+	mso-level-number-position:left;
+	margin-left:31.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+@list l7
+	{mso-list-id:1739402241;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1676001896 2043321646 67960835 67960837 67960833 67960835 67960837 67960833 67960835 67960837;}
+@list l7:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:31.2pt;
+	mso-level-number-position:left;
+	margin-left:31.2pt;
+	text-indent:-19.85pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1109">
+  <o:colormenu v:ext="edit" fillcolor="none"/>
+ </o:shapedefaults></xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor="#5e9eff" background="./index_files/image001.jpg" lang=EN-US
+link=blue vlink="#ff99cc" style='tab-interval:36.0pt'>
+<!--[if gte vml 1]><v:background id="_x0000_s1107" o:bwmode="white"
+ fillcolor="#5e9eff" o:targetscreensize="800,600">
+ <v:fill src="index_files\image001.jpg" color2="#ffebfa" colors="0 #5e9eff;26214f #85c2ff;45875f #c4d6eb;1 #ffebfa"
+  method="none" focus="100%" type="gradient"/>
+</v:background><![endif]-->
+
+<div class=Section1>
+
+<table border=0 cellspacing=0 cellpadding=0 width=575 style='width:430.9pt;
+ mso-cellspacing:0cm;margin-left:.75pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+ <tr style='height:68.7pt'>
+  <td width=122 style='width:91.6pt;padding:0cm 0cm 0cm 0cm;height:68.7pt'>
+  <p class=MsoNormal align=center style='text-align:center'><!--[if gte vml 1]><v:shapetype
+   id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t"
+   path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+    <v:f eqn="sum @0 1 0"/>
+    <v:f eqn="sum 0 0 @1"/>
+    <v:f eqn="prod @2 1 2"/>
+    <v:f eqn="prod @3 21600 pixelWidth"/>
+    <v:f eqn="prod @3 21600 pixelHeight"/>
+    <v:f eqn="sum @0 0 1"/>
+    <v:f eqn="prod @6 1 2"/>
+    <v:f eqn="prod @7 21600 pixelWidth"/>
+    <v:f eqn="sum @8 21600 0"/>
+    <v:f eqn="prod @7 21600 pixelHeight"/>
+    <v:f eqn="sum @10 21600 0"/>
+   </v:formulas>
+   <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" aspectratio="t"/>
+  </v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:90pt;
+   height:69pt'>
+   <v:imagedata src="./index_files/image002.png" o:title="trtree"/>
+  </v:shape><![endif]--><![if !vml]><img width=120 height=92
+  src="./index_files/image003.gif" v:shapes="_x0000_i1025"><![endif]><span
+  style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=10 style='width:7.2pt;padding:0cm 0cm 0cm 0cm;height:68.7pt'>
+  <p class=MsoNormal><span style='mso-fareast-language:EN-US'>&nbsp; &nbsp; <o:p></o:p></span></p>
+  </td>
+  <td width=443 style='width:332.55pt;padding:0cm 0cm 0cm 0cm;height:68.7pt'>
+  <h1><span style='font-size:24.0pt;mso-fareast-language:EN-US'>Biomolecular
+  Processes as Concurrent Computation<o:p></o:p></span></h1>
+  </td>
+ </tr>
+</table>
+
+<p><span style='mso-fareast-language:EN-US'>An interdisciplinary course at <a
+href="http://www.weizmann.ac.il/feinberg/">Feinberg Graduate School</a> of the </span><span
+class=MsoHyperlink><span style='mso-fareast-language:EN-US'><a
+href="http://www.weizmann.ac.il">Weizmann Institute of Science</a></span></span><span
+style='mso-fareast-language:EN-US'>, Israel <o:p></o:p></span></p>
+
+<p><span style='mso-fareast-language:EN-US'><a href="#_News">News</a>, <a
+href="#_Plan:_1">Plan</a>, <a href="#_Exercises:_1">Exercises</a>, <a
+href="#_Administrative_Staff:_1">Administrative Stuff</a>, <a
+href="#_Useful_Staff:_1">Useful Stuff</a><o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-size:13.5pt;color:green'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+
+<table border=1 cellpadding=0 width=654 style='width:490.2pt;mso-cellspacing:
+ 1.5pt;margin-left:2.25pt;mso-padding-alt:1.5pt 1.5pt 1.5pt 1.5pt'>
+ <tr style='height:32.2pt'>
+  <td width=210 style='width:157.15pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:32.2pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Lecture
+  hours</span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=438 style='width:328.55pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:32.2pt'>
+  <p><span style='font-size:13.5pt;mso-fareast-language:EN-US'>Thursday
+  11:00-13:00 (Wolfson lecture hall)<br>
+  First meeting &#8211; 19 April 2001</span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:24.85pt'>
+  <td width=210 style='width:157.15pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:24.85pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;color:red;mso-fareast-language:
+  EN-US'>Lecturers</span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=438 style='width:328.55pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:24.85pt'>
+  <p class=MsoNormal><span style='font-size:13.5pt;mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~udi">Prof. Ehud Shapiro</a><br>
+  Aviv Regev</span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:6.1pt'>
+  <td width=210 style='width:157.15pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:6.1pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Teaching
+  Assistant<o:p></o:p></span></p>
+  </td>
+  <td width=438 style='width:328.55pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:6.1pt'>
+  <p><span style='font-size:13.5pt;mso-fareast-language:EN-US'>Barak Shenhav<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:15.5pt'>
+  <td width=210 style='width:157.15pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:15.5pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Questions,&nbsp;comments,
+  etc.</span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=438 style='width:328.55pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:15.5pt'>
+  <p><span style='font-size:13.5pt;mso-fareast-language:EN-US'>Barak Shenhav, <a
+  href="mailto:barak.shenhav@weizmann.ac.il">barak.shenhav@weizmann.ac.il</a>,
+  Tel. 3098 </span><span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:16.1pt'>
+  <td width=210 style='width:157.15pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:16.1pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Credits</span><span
+  style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=438 style='width:328.55pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:16.1pt'>
+  <p><span style='font-size:13.5pt;mso-fareast-language:EN-US'>&nbsp;2</span><span
+  style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h1><a name="_News"></a><span style='mso-fareast-language:EN-US'>News<o:p></o:p></span></h1>
+
+<p style='margin-left:72.0pt;text-indent:-54.0pt'><span style='mso-fareast-language:
+EN-US'>15-Apr-2001<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Please
+</span><span style='font-size:16.0pt;color:red;mso-fareast-language:EN-US'><a
+href="#_Registration:_1">register</a> </span><span style='mso-fareast-language:
+EN-US'>as soon as possible.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-54.0pt'><span style='mso-fareast-language:
+EN-US'>3-June-2001<span style='mso-tab-count:1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>Please,
+note </span><span style='font-size:16.0pt;color:red;mso-fareast-language:EN-US'><a
+href="#_Requirements_and_Grading:_3">requirements</a></span><span
+style='mso-fareast-language:EN-US'>. <o:p></o:p></span></p>
+
+<h1><a name="_Plan:_1"></a><span style='mso-fareast-language:EN-US'>Plan:<o:p></o:p></span></h1>
+
+<table border=1 cellpadding=0 width=668 style='width:501.35pt;mso-cellspacing:
+ 1.5pt;margin-left:2.25pt;mso-padding-alt:1.5pt 1.5pt 1.5pt 1.5pt'>
+ <tr style='height:20.45pt'>
+  <td width=121 colspan=2 style='width:90.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:20.45pt'>
+  <p align=center style='text-align:center'><span style='font-size:13.5pt;
+  color:red;mso-fareast-language:EN-US'>Week</span><span style='mso-fareast-language:
+  EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:20.45pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Topic</span><span
+  style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:20.45pt'>
+  <p><span style='font-size:13.5pt;color:red;mso-fareast-language:EN-US'>Exercise</span><span
+  style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:20.95pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:20.95pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>1<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  20.95pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>19 April 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:20.95pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_1:_Introduction">Introduction</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:20.95pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_1:">The
+  reaction K + F =&gt; K<sup>+</sup> + F<sup>-</sup></a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>2<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>26 April 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'>No class<o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'>No exercise</span><span
+  class=MsoHyperlink><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>3<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>3 May 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_2:_The">The
+  electron theory of chemical bonds</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span class=MsoHyperlink><a href="#_Administrative_Staff:_1">Chemical
+  bonds</a></span><span class=MsoHyperlink><span style='mso-fareast-language:
+  EN-US'><o:p></o:p></span></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>4<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>10 May 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_3:_Molecules,">Molecules,
+  Radicals and Functional Groups</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_3:_Modular">Modular
+  representation of reactions</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>5<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>17 May 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_4:_Polymers">Polymers</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_4:_Proteins">Proteins</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>6<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>24 May 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_5:_Tracing">Tracing
+  and debugging</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_5:_Quantities">Quantities</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>7<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>31 May 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_6:_Enzymatic">Enzymatic
+  reactions</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_6:_Enzymes">Enzymes</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:21.1pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>8<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  21.1pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>7 June 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_7:_Molecular_1">Molecular
+  machines</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:21.1pt'>
+  <p><span style='mso-fareast-language:EN-US'>No exercise<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:1.0pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>9<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>14 June 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_8:_Regulatory_1">Regulatory
+  networks</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Exercise_7:_Enzymes">Regulatory
+  Circuits</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:1.0pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>10<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>21 June 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="#_Requirements_and_Grading:_3">Project guidelines</a> and <a
+  href="#_Class_X:_Molecular">Molecular computing</a> <o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'>No exercise<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:1.0pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>11<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>28 June 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'>No class<o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'>No exercise</span><span
+  class=MsoHyperlink><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='height:1.0pt'>
+  <td width=22 style='width:16.5pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>12<o:p></o:p></span></p>
+  </td>
+  <td width=97 style='width:72.65pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;height:
+  1.0pt'>
+  <p align=center style='text-align:center'><span style='mso-fareast-language:
+  EN-US'>5 July 2001<o:p></o:p></span></p>
+  </td>
+  <td width=309 style='width:232.1pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'><a href="#_Class_9:_Signal">Signal
+  transduction</a><o:p></o:p></span></p>
+  </td>
+  <td width=230 style='width:172.6pt;padding:1.5pt 1.5pt 1.5pt 1.5pt;
+  height:1.0pt'>
+  <p><span style='mso-fareast-language:EN-US'>No exercise<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h2 style='tab-stops:480.75pt'><a name="_Requirements:"></a><a
+name="_Requirements_and_Grading:"></a><a name="_Exercises:"></a><a
+name="_Class_1:_Introduction"></a><span style='mso-fareast-language:EN-US'>Class
+1: Introduction<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Short (class)
+version of slides (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/class1.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/class1.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Long version
+of the slides, combining class 1 and 2 with minor corrections (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/corr.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/corr.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>BioPSI
+appendices (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/appendix.ps">postscript</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The <a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/nacl_1.cp">NaCl</a>
+example.<o:p></o:p></span></p>
+
+<h2><a name="_Class_2:_The"></a><span style='mso-fareast-language:EN-US'>Class
+2: The electron theory of chemical bonds<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><a name="_Class_3:_Modular"></a><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/class2.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/class2.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/knacl_2.cp">K +
+Na + 2Cl</a> (knacl_2.cp)<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/mgcl2_3.cp">Mg +
+Cl</a> (mgcl2_3.cp) &#8211; Explicit intermediate state<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/mgcl2_4.cp">Mg
++ Cl</a> (mgcl2_4.cp) &#8211; Implicit intermediate state <o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/hcl_5.cp">H +
+Cl</a> (hcl_5.cp) &#8211; Local channel declaration<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/hcl_6.cp">H +
+Cl</a> (hcl_6.cp) &#8211; Local channel declaration, alternative<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/h2_7.cp">H + H</a>
+(h2_7.cp) &#8211; Symmetric interaction<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/o2_8.cp">O + O</a>
+(o2_8.cp) &#8211; Symmetric interaction, two electrons, naive approach<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/o2_9.cp">O + O</a>
+(o2_9.cp) &#8211; More complex approach<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class2/h2o_10.cp">H2O</a>
+(h2o_10.cp) &#8211; External calls<o:p></o:p></span></p>
+
+<h2><a name="_Class_3:_Modular_1"></a><a name="_Class_3:_Molecules,"></a><span
+style='mso-fareast-language:EN-US'>Class 3: Molecules, Radicals and Functional
+Groups<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><a name="_Class_4:_Enzymatic"></a><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides,
+slightly corrected (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/corr.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/corr.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/examples/coh_4.cp">C
++ O + H</a> (coh_4.cp) &#8211; Original version<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/examples/coh_new.cp">C
++ O + H</a> (coh_new.cp) &#8211; A slightly corrected version<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/examples/condensation_peptide_1.cp">Condensation
+and hydrolysis</a> (condensation_peptide_1.cp)<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class3/examples/">Other</a><o:p></o:p></span></p>
+
+<h2><a name="_Class_4:_Enzymatic_1"></a><a name="_Class_4:_Polymers"></a><span
+style='mso-fareast-language:EN-US'>Class 4: Polymers<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/new4.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/new4.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Long version
+of the slides, combining class 4 and 5 (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/class4.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/class4.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/examples/polyethylene_1.cp">Polyethylene</a>
+(polyethylene_1.cp)<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/examples/phosphodiester_sugar_phosphate_7a.cp">Nucleotides</a>
+(phosphodiester_sugar_phosphate_7a.cp)<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class4/examples/">More</a><o:p></o:p></span></p>
+
+<h2><a name="_Class_5:_Enzymatic"></a><a name="_Class_5:_Tracing"></a><span
+style='mso-fareast-language:EN-US'>Class 5: Tracing and debugging<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class5/class5.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class5/class5.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class5/examples/status.cp">Time</a>
+(status.cp) &#8211; retrieve simulated system time<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class5/examples/">More</a><o:p></o:p></span></p>
+
+<h2><a name="_Class_6:_Enzymatic"></a><span style='mso-fareast-language:EN-US'>Class
+6: Enzymatic reactions<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><a name="_Class_6:_Polymers"></a><a
+name="_Class_7:_Molecular"></a><![if !supportLists]><span style='font-family:
+Symbol;mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class6/class6.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class6/class6.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class6/examples/">Examples</a><o:p></o:p></span></p>
+
+<h2><a name="_Class_7:_Molecular_1"></a><span style='mso-fareast-language:EN-US'>Class
+7: Molecular machines<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class7/Class7.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class7/Class7.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class7/rnapol_1.cp">RNA</a>
+(rnapol_1.cp) &#8211; RNA polymerization<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><a name="_Class_8:_Regulatory"></a><![if !supportLists]><span
+style='mso-fareast-language:EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class7/glycogen_1.cp">Glycogen</a>
+(glycogen_1.cp) &#8211; Glycogen polymerization<o:p></o:p></span></p>
+
+<h2><a name="_Class_8:_Regulatory_1"></a><span style='mso-fareast-language:
+EN-US'>Class 8: Regulatory networks<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><a name="_Class_9:_Signal"></a><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class8/class8.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class8/class8.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class8/examples/">Examples</a><o:p></o:p></span></p>
+
+<h2><a name="_Class_X:_Regulatory"></a><a name="_Class_X:_Molecular"></a><span
+style='mso-fareast-language:EN-US'>Class X: Molecular computing<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/ClassX/YaaraYaki.ppt">PowerPoint</a>,
+<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/ClassX/YaaraYaki.htm">HTML</a>)<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Examples:<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/ClassX/eg.cp">Strings</a>
+(eg.cp) &#8211; String manipulation<o:p></o:p></span></p>
+
+<p style='margin-left:54.0pt;text-indent:-18.0pt;mso-list:l0 level3 lfo2;
+tab-stops:list 54.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'><a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/ClassX/Automaton.cp">Automaton</a>
+(automaton.cp) &#8211; Cellular automaton<o:p></o:p></span></p>
+
+<h2><span style='mso-fareast-language:EN-US'>Class 9: Signal transduction<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Slides, as
+presented in class (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class9/class9.ppt">PowerPoint</a>,
+<a href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class9/class9.htm">HTML</a>)<o:p></o:p></span></p>
+
+<h1><a name="_Exercises:_1"></a><span style='mso-fareast-language:EN-US'>Exercises:<o:p></o:p></span></h1>
+
+<h2><a name="_Exercise_1:"></a><a name="_Exercise_1:_The"></a><span
+style='mso-fareast-language:EN-US'>Exercise 1: The reaction K + F =&gt; K<sup>+</sup>
++ F</span><sup><span style='mso-fareast-language:EN-US;font-weight:normal'>-</span></sup><span
+style='mso-fareast-language:EN-US;font-weight:normal'> </span><span
+style='font-size:9.0pt;mso-fareast-language:EN-US;font-weight:normal'>(due by
+May 6<sup>rd</sup>)<o:p></o:p></span></h2>
+
+<p><span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1031" type="#_x0000_t75"
+  style='position:absolute;margin-left:59.55pt;margin-top:0;width:393pt;
+  height:270pt;z-index:2;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image004.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1042" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:393pt;height:270pt;z-index:7;
+  visibility:visible;mso-wrap-edited:f;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text' strokeweight="3pt">
+  <v:fill opacity=".5"/>
+  <v:imagedata src="./index_files/image005.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed" ProgID="Word.Picture.8"
+  ShapeID="_x0000_s1042" DrawAspect="Content" ObjectID="_1055848534">
+ </o:OLEObject>
+ <![endif]><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0>
+  <tr>
+   <td width=74 height=0></td>
+   <td width=534></td>
+   <td width=67></td>
+   <td width=524></td>
+  </tr>
+  <tr>
+   <td height=1></td>
+   <td rowspan=3 align=left valign=top><img width=534 height=370
+   src="./index_files/image006.gif" v:shapes="_x0000_s1031"></td>
+  </tr>
+  <tr>
+   <td height=360></td>
+   <td></td>
+   <td align=left valign=top><img width=524 height=360
+   src="./index_files/image007.gif" v:shapes="_x0000_s1042"></td>
+  </tr>
+  <tr>
+   <td height=9></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<a name="_Requirements_and_Grading:_1"></a><a name="_Administrative_Staff:"></a><span
+style='mso-fareast-language:EN-US'>Attached code (<a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/kf_spawn.cp">kf_spawn.cp</a>):<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'>% This piece of code serves to spawn off N1 &quot;K
+processes&quot; and N2 &quot;F processes&quot;.<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'>% Incorporate it into your program as one of the
+processes<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'>System(N1,N2)::= &lt;&lt; CREATE_K(N1) |
+CREATE_F(N2) .<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CREATE_K(C)::= {C =&lt; 0}
+, true ;<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'><span style='mso-tab-count:4'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{C &gt;
+0} , {C--} | K | self .<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CREATE_F(C)::= {C =&lt; 0}
+, true ;<o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;</span><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>{C &gt;
+0} , {C--} | F | self <o:p></o:p></span></p>
+
+<p style='margin-top:0cm;margin-right:0cm;margin-bottom:0cm;margin-left:53.85pt;
+margin-bottom:.0001pt'><span style='font-size:10.0pt;font-family:"Courier New";
+mso-fareast-language:EN-US'><span style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+style="mso-spacerun: yes">&nbsp;</span>&gt;&gt; .<o:p></o:p></span></p>
+
+<p><span style='mso-fareast-language:EN-US'>You should use the script <a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/psi2t">psi2t</a>
+in order to convert the record file to a .table and .names files.<o:p></o:p></span></p>
+
+<p><span style='mso-fareast-language:EN-US'>Sample of outputs:<o:p></o:p></span></p>
+
+<table border=0 cellspacing=0 cellpadding=0 style='border-collapse:collapse;
+ mso-padding-alt:0cm 5.4pt 0cm 5.4pt'>
+ <tr>
+  <td width=127 valign=top style='width:95.55pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/1.jpg"><span
+  style='color:navy;text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1028" type="#_x0000_t75" style='width:80.25pt;height:64.5pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image008.jpg" o:title="1"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=113 height=92
+  src="./index_files/image009.gif" v:shapes="_x0000_i1028"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=133 valign=top style='width:100.05pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/2a.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1029" type="#_x0000_t75" style='width:84.75pt;height:63.75pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image010.jpg" o:title="2a"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=119 height=91
+  src="./index_files/image011.gif" v:shapes="_x0000_i1029"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/2b.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1030" type="#_x0000_t75" style='width:87pt;height:65.25pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image012.jpg" o:title="2b"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=122 height=93
+  src="./index_files/image013.gif" v:shapes="_x0000_i1030"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=139 valign=top style='width:104.55pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/3a.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1031" type="#_x0000_t75" style='width:89.25pt;height:66.75pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image014.jpg" o:title="3a"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=125 height=95
+  src="./index_files/image015.gif" v:shapes="_x0000_i1031"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=138 valign=top style='width:103.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/3b.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1032" type="#_x0000_t75" style='width:88.5pt;height:66pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image016.jpg" o:title="3b"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=124 height=94
+  src="./index_files/image017.gif" v:shapes="_x0000_i1032"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/4a.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1033" type="#_x0000_t75" style='width:87pt;height:65.25pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image018.jpg" o:title="4a"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=122 height=93
+  src="./index_files/image019.gif" v:shapes="_x0000_i1033"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p><span style='mso-fareast-language:EN-US'><a
+  href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Exercise1/4b.jpg"><span
+  style='text-decoration:none;text-underline:none'><!--[if gte vml 1]><v:shape
+   id="_x0000_i1034" type="#_x0000_t75" style='width:87pt;height:65.25pt'
+   o:bordertopcolor="this" o:borderleftcolor="this" o:borderbottomcolor="this"
+   o:borderrightcolor="this">
+   <v:imagedata src="./index_files/image020.jpg" o:title="4b"/>
+   <w:bordertop type="single" width="18"/>
+   <w:borderleft type="single" width="18"/>
+   <w:borderbottom type="single" width="18"/>
+   <w:borderright type="single" width="18"/>
+  </v:shape><![endif]--><![if !vml]><img border=0 width=122 height=93
+  src="./index_files/image021.gif" v:shapes="_x0000_i1034"><![endif]></span></a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=127 valign=top style='width:95.55pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 1<o:p></o:p></span></b></p>
+  </td>
+  <td width=133 valign=top style='width:100.05pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 2a<o:p></o:p></span></b></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 2b<o:p></o:p></span></b></p>
+  </td>
+  <td width=139 valign=top style='width:104.55pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 3a<o:p></o:p></span></b></p>
+  </td>
+  <td width=138 valign=top style='width:103.8pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 3b<o:p></o:p></span></b></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 4a<o:p></o:p></span></b></p>
+  </td>
+  <td width=136 valign=top style='width:102.3pt;padding:0cm 5.4pt 0cm 5.4pt'>
+  <p align=center style='text-align:center'><b><span style='mso-fareast-language:
+  EN-US'>Question 4b<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Administrative_Staff:_1"></a><a name="_Exercise_2:_Chemical"></a><span
+style='mso-fareast-language:EN-US'>Exercise 2: Chemical bonds</span><span
+style='mso-fareast-language:EN-US;font-weight:normal'> </span><span
+style='font-size:9.0pt;mso-fareast-language:EN-US;font-weight:normal'>(due by
+May 13<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1035" type="#_x0000_t75"
+  style='position:absolute;margin-left:59.55pt;margin-top:0;width:390pt;
+  height:270pt;z-index:1;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image022.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1036" type="#_x0000_t75" style='position:absolute;
+  margin-left:500.55pt;margin-top:0;width:390pt;height:270pt;z-index:3;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image023.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=74 height=0></td>
+   <td width=530></td>
+   <td width=58></td>
+   <td width=530></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=530 height=370
+   src="./index_files/image024.gif" v:shapes="_x0000_s1035"></td>
+   <td></td>
+   <td align=left valign=top><img width=530 height=370
+   src="./index_files/image025.gif" v:shapes="_x0000_s1036"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1038" type="#_x0000_t75"
+  style='position:absolute;margin-left:59.55pt;margin-top:0;width:390pt;
+  height:270pt;z-index:4;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image026.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1039" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:390pt;height:270pt;z-index:5;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image027.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=74 height=0></td>
+   <td width=530></td>
+   <td width=70></td>
+   <td width=530></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=530 height=370
+   src="./index_files/image028.gif" v:shapes="_x0000_s1038"></td>
+   <td></td>
+   <td align=left valign=top><img width=530 height=370
+   src="./index_files/image029.gif" v:shapes="_x0000_s1039"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1040" type="#_x0000_t75"
+  style='position:absolute;margin-left:59.55pt;margin-top:0;width:390pt;
+  height:270pt;z-index:6;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image030.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1043" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:393pt;height:270pt;z-index:8;
+  visibility:visible;mso-wrap-edited:f;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text' strokeweight="3pt">
+  <v:fill opacity=".5"/>
+  <v:imagedata src="./index_files/image005.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed" ProgID="Word.Picture.8"
+  ShapeID="_x0000_s1043" DrawAspect="Content" ObjectID="_1055848535">
+ </o:OLEObject>
+ <![endif]><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=74 height=0></td>
+   <td width=530></td>
+   <td width=71></td>
+   <td width=524></td>
+  </tr>
+  <tr>
+   <td height=1></td>
+   <td rowspan=3 align=left valign=top><img width=530 height=370
+   src="./index_files/image031.gif" v:shapes="_x0000_s1040"></td>
+  </tr>
+  <tr>
+   <td height=360></td>
+   <td></td>
+   <td align=left valign=top><img width=524 height=360
+   src="./index_files/image032.gif" v:shapes="_x0000_s1043"></td>
+  </tr>
+  <tr>
+   <td height=9></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h2><a name="_Exercise_3:_(due"></a><a name="_Exercise_3:_Modular"></a><span
+style='mso-fareast-language:EN-US'>Exercise 3: Modular representation of
+reactions</span><span style='font-size:9.0pt;mso-fareast-language:EN-US;
+font-weight:normal'> (due by May 23<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1047" type="#_x0000_t75"
+  style='position:absolute;margin-left:68.55pt;margin-top:0;width:384pt;
+  height:266.25pt;z-index:9;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image033.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1048" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:355.75pt;height:271.3pt;z-index:10;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image034.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=86 height=0></td>
+   <td width=522></td>
+   <td width=66></td>
+   <td width=485></td>
+  </tr>
+  <tr>
+   <td height=365></td>
+   <td align=left valign=top><img width=522 height=365
+   src="./index_files/image035.gif" v:shapes="_x0000_s1047"></td>
+   <td></td>
+   <td rowspan=2 align=left valign=top><img width=485 height=372
+   src="./index_files/image036.gif" v:shapes="_x0000_s1048"></td>
+  </tr>
+  <tr>
+   <td height=7></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1049" type="#_x0000_t75"
+  style='position:absolute;margin-left:68.55pt;margin-top:0;width:384pt;
+  height:271.3pt;z-index:11;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image037.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1050" type="#_x0000_t75" style='position:absolute;
+  margin-left:518.55pt;margin-top:0;width:355.75pt;height:271.3pt;z-index:12;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image038.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=86 height=0></td>
+   <td width=522></td>
+   <td width=78></td>
+   <td width=485></td>
+  </tr>
+  <tr>
+   <td height=372></td>
+   <td align=left valign=top><img width=522 height=372
+   src="./index_files/image039.gif" v:shapes="_x0000_s1049"></td>
+   <td></td>
+   <td align=left valign=top><img width=485 height=372
+   src="./index_files/image040.gif" v:shapes="_x0000_s1050"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1051" type="#_x0000_t75"
+  style='position:absolute;margin-left:77.55pt;margin-top:0;width:375pt;
+  height:271.3pt;z-index:13;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image041.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1052" type="#_x0000_t75" style='position:absolute;
+  margin-left:518.55pt;margin-top:0;width:361.75pt;height:271.3pt;z-index:14;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image042.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=98 height=0></td>
+   <td width=510></td>
+   <td width=78></td>
+   <td width=493></td>
+  </tr>
+  <tr>
+   <td height=372></td>
+   <td align=left valign=top><img width=510 height=372
+   src="./index_files/image043.gif" v:shapes="_x0000_s1051"></td>
+   <td></td>
+   <td align=left valign=top><img width=493 height=372
+   src="./index_files/image044.gif" v:shapes="_x0000_s1052"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1053" type="#_x0000_t75"
+  style='position:absolute;margin-left:86.55pt;margin-top:0;width:361.75pt;
+  height:271.3pt;z-index:15;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image045.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1054" type="#_x0000_t75" style='position:absolute;
+  margin-left:518.55pt;margin-top:0;width:361.75pt;height:271.3pt;z-index:16;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image046.emz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=110 height=0></td>
+   <td width=493></td>
+   <td width=83></td>
+   <td width=493></td>
+  </tr>
+  <tr>
+   <td height=372></td>
+   <td align=left valign=top><img width=493 height=372
+   src="./index_files/image047.gif" v:shapes="_x0000_s1053"></td>
+   <td></td>
+   <td align=left valign=top><img width=493 height=372
+   src="./index_files/image048.gif" v:shapes="_x0000_s1054"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1059" type="#_x0000_t75"
+  style='position:absolute;margin-left:86.55pt;margin-top:0;width:366pt;
+  height:253.35pt;z-index:17;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image030.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1060" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:393pt;height:270pt;z-index:18;
+  visibility:visible;mso-wrap-edited:f;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text' strokeweight="3pt">
+  <v:fill opacity=".5"/>
+  <v:imagedata src="./index_files/image005.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![if gte mso 9]><o:OLEObject Type="Embed" ProgID="Word.Picture.8"
+  ShapeID="_x0000_s1060" DrawAspect="Content" ObjectID="_1055848536">
+ </o:OLEObject>
+ <![endif]><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=110 height=0></td>
+   <td width=498></td>
+   <td width=67></td>
+   <td width=524></td>
+  </tr>
+  <tr>
+   <td height=1></td>
+   <td rowspan=2 align=left valign=top><img width=498 height=348
+   src="./index_files/image049.gif" v:shapes="_x0000_s1059"></td>
+  </tr>
+  <tr>
+   <td height=347></td>
+   <td></td>
+   <td rowspan=2 align=left valign=top><img width=524 height=360
+   src="./index_files/image050.gif" v:shapes="_x0000_s1060"></td>
+  </tr>
+  <tr>
+   <td height=13></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h2><a name="_Exercise_4:_Proteins"></a><span style='mso-fareast-language:EN-US'>Exercise
+4: Proteins</span><span style='font-size:9.0pt;mso-fareast-language:EN-US;
+font-weight:normal'> (due by May 30<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1061" type="#_x0000_t75"
+  style='position:absolute;margin-left:77.55pt;margin-top:0;width:5in;height:270pt;
+  z-index:19;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image051.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1062" type="#_x0000_t75" style='position:absolute;
+  margin-left:491.55pt;margin-top:0;width:5in;height:270pt;z-index:20;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image052.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=98 height=0></td>
+   <td width=490></td>
+   <td width=62></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image053.gif" v:shapes="_x0000_s1061"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image054.gif" v:shapes="_x0000_s1062"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1063" type="#_x0000_t75"
+  style='position:absolute;margin-left:77.55pt;margin-top:0;width:5in;height:270pt;
+  z-index:21;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image055.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1064" type="#_x0000_t75" style='position:absolute;
+  margin-left:491.55pt;margin-top:0;width:5in;height:270pt;z-index:22;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image056.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=98 height=0></td>
+   <td width=490></td>
+   <td width=62></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image057.gif" v:shapes="_x0000_s1063"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image058.gif" v:shapes="_x0000_s1064"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h2><a name="_Requirements_and_Grading:_2"></a><a name="_Exercise_5:_Quantities"></a><span
+style='mso-fareast-language:EN-US'>Exercise 5: Quantities</span><span
+style='font-size:9.0pt;mso-fareast-language:EN-US;font-weight:normal'> (due by
+June 6<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1072" type="#_x0000_t75"
+  style='position:absolute;margin-left:86.55pt;margin-top:0;width:5in;height:270pt;
+  z-index:23;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image059.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1073" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:5in;height:270pt;z-index:24;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image060.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=110 height=0></td>
+   <td width=490></td>
+   <td width=74></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image061.gif" v:shapes="_x0000_s1072"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image062.gif" v:shapes="_x0000_s1073"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1091" type="#_x0000_t75"
+  style='position:absolute;margin-left:505.5pt;margin-top:0;width:5in;height:270pt;
+  z-index:30;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image063.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1093" type="#_x0000_t75" style='position:absolute;
+  margin-left:91.5pt;margin-top:0;width:5in;height:270pt;z-index:31;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image064.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=117 height=0></td>
+   <td width=490></td>
+   <td width=62></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image065.gif" v:shapes="_x0000_s1093"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image066.gif" v:shapes="_x0000_s1091"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h2><a name="_Exercise_6:_Enzymes"></a><span style='mso-fareast-language:EN-US'>Exercise
+6: Enzymes</span><span style='font-size:9.0pt;mso-fareast-language:EN-US;
+font-weight:normal'> (due by June 20<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1077" type="#_x0000_t75"
+  style='position:absolute;margin-left:86.55pt;margin-top:0;width:5in;height:270pt;
+  z-index:25;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image067.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1082" type="#_x0000_t75" style='position:absolute;
+  margin-left:509.55pt;margin-top:0;width:5in;height:270pt;z-index:26;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image068.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=110 height=0></td>
+   <td width=490></td>
+   <td width=74></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image069.gif" v:shapes="_x0000_s1077"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image070.gif" v:shapes="_x0000_s1082"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1086" type="#_x0000_t75"
+  style='position:absolute;margin-left:91.5pt;margin-top:0;width:5in;height:270pt;
+  z-index:27;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image071.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1087" type="#_x0000_t75" style='position:absolute;
+  margin-left:514.5pt;margin-top:0;width:5in;height:270pt;z-index:28;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image072.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=117 height=0></td>
+   <td width=490></td>
+   <td width=74></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image073.gif" v:shapes="_x0000_s1086"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image074.gif" v:shapes="_x0000_s1087"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1094" type="#_x0000_t75"
+  style='position:absolute;margin-left:91.5pt;margin-top:0;width:5in;height:270pt;
+  z-index:32;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image075.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1095" type="#_x0000_t75" style='position:absolute;
+  margin-left:523.5pt;margin-top:0;width:5in;height:270pt;z-index:33;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image076.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=117 height=0></td>
+   <td width=490></td>
+   <td width=86></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image077.gif" v:shapes="_x0000_s1094"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image078.gif" v:shapes="_x0000_s1095"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1089" type="#_x0000_t75"
+  style='position:absolute;margin-left:91.5pt;margin-top:0;width:5in;height:270pt;
+  z-index:29;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image079.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=117 height=0></td>
+  </tr>
+  <tr>
+   <td></td>
+   <td><img width=490 height=370 src="./index_files/image080.gif" v:shapes="_x0000_s1089"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h2><a name="_Exercise_7:_Enzymes"></a><span style='mso-fareast-language:EN-US'>Exercise
+7: Regulatory Circuits</span><span style='font-size:9.0pt;mso-fareast-language:
+EN-US;font-weight:normal'> (due by July 4<sup>th</sup>)<o:p></o:p></span></h2>
+
+<p><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<p><!--[if gte vml 1]><o:wrapblock><v:shape id="_x0000_s1103" type="#_x0000_t75"
+  style='position:absolute;margin-left:95.55pt;margin-top:0;width:5in;height:270pt;
+  z-index:34;mso-wrap-style:square;mso-wrap-distance-left:9pt;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:9pt;
+  mso-wrap-distance-bottom:0;mso-position-horizontal:absolute;
+  mso-position-horizontal-relative:text;mso-position-vertical:top;
+  mso-position-vertical-relative:text;v-text-anchor:top' stroked="t"
+  strokeweight="3pt">
+  <v:imagedata src="./index_files/image081.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><v:shape id="_x0000_s1104" type="#_x0000_t75" style='position:absolute;
+  margin-left:527.55pt;margin-top:0;width:5in;height:270pt;z-index:35;
+  mso-wrap-style:square;mso-wrap-distance-left:9pt;mso-wrap-distance-top:0;
+  mso-wrap-distance-right:9pt;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:top;mso-position-vertical-relative:text;
+  v-text-anchor:top' stroked="t" strokeweight="3pt">
+  <v:imagedata src="./index_files/image082.wmz" o:title=""/>
+  <w:wrap type="topAndBottom" anchorx="page"/>
+ </v:shape><![endif]--><![if !vml]><span style='mso-ignore:vglayout'>
+ <table cellpadding=0 cellspacing=0 align=left>
+  <tr>
+   <td width=122 height=0></td>
+   <td width=490></td>
+   <td width=86></td>
+   <td width=490></td>
+  </tr>
+  <tr>
+   <td height=370></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image083.gif" v:shapes="_x0000_s1103"></td>
+   <td></td>
+   <td align=left valign=top><img width=490 height=370
+   src="./index_files/image084.gif" v:shapes="_x0000_s1104"></td>
+  </tr>
+ </table>
+ </span><![endif]><!--[if gte vml 1]></o:wrapblock><![endif]--><br
+style='mso-ignore:vglayout' clear=ALL>
+<span style='mso-fareast-language:EN-US'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<br style='mso-ignore:vglayout' clear=ALL>
+
+<h1><span style='mso-fareast-language:EN-US'>Administrative Stuff:<o:p></o:p></span></h1>
+
+<h2><a name="_Requirements_and_Grading:_3"></a><span style='mso-fareast-language:
+EN-US'>Requirements<a name="_Grade:"></a> and Grading:<o:p></o:p></span></h2>
+
+<p style='margin-left:49.2pt;text-indent:-19.85pt;mso-list:l1 level1 lfo4;
+tab-stops:list 49.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Exercises:
+Weekly. Write and execute pi-calculus programs - 60%<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The best six submission
+of each student will be considered for the final grade.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The grade of
+each exercise will mostly refer to correctness, though other aspects such as
+clarity and submission will be considered.<o:p></o:p></span></p>
+
+<p style='margin-left:49.2pt;text-indent:-19.85pt;mso-list:l1 level1 lfo4;
+tab-stops:list 49.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Project: Model
+and analyze by simulation a larger system (other formats or types of projects
+can also be considered upon early approval) - 40%<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level2 lfo6;
+tab-stops:list 47.35pt'><![if !supportLists]><span style='font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman";mso-fareast-language:EN-US'>o<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+style='mso-fareast-language:EN-US'>Projects should be conducted by
+interdisciplinary groups of up to 3 students or non-interdisciplinary groups of
+up to 2 students.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level2 lfo6;
+tab-stops:list 47.35pt'><![if !supportLists]><span style='font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman";mso-fareast-language:EN-US'>o<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+style='mso-fareast-language:EN-US'>A typical submission will include:<o:p></o:p></span></p>
+
+<p style='margin-left:90.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>A short
+presentation of the question that motivates the study.<o:p></o:p></span></p>
+
+<p style='margin-left:90.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>A short
+description of the model underlying the simulation.<o:p></o:p></span></p>
+
+<p style='margin-left:90.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The output/s
+of the simulation presented in comprehendible form.<o:p></o:p></span></p>
+
+<p style='margin-left:90.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>A short
+account explaining the essence of the results and how they enlighten the
+motivating question.<o:p></o:p></span></p>
+
+<p style='margin-left:90.0pt;text-indent:-18.0pt;mso-list:l2 level1 lfo6;
+tab-stops:list 29.35pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>-<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The &#8216;source&#8217;
+of the simulation and instructions how to &#8217;use&#8217; it.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level2 lfo6;
+tab-stops:list 47.35pt'><![if !supportLists]><span style='font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman";mso-fareast-language:EN-US'>o<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+style='mso-fareast-language:EN-US'>To make sure the planned project meets the
+course's requirements, please, be sure to get approval for the project in
+advance from the course staff.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level2 lfo6;
+tab-stops:list 47.35pt'><![if !supportLists]><span style='font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman";mso-fareast-language:EN-US'>o<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+style='mso-fareast-language:EN-US'>The projects should be submitted by <a
+href="mailto:barak.shenhav@weizmann.ac.il">e-mail</a>.<o:p></o:p></span></p>
+
+<p style='margin-left:72.0pt;text-indent:-18.0pt;mso-list:l2 level2 lfo6;
+tab-stops:list 47.35pt'><![if !supportLists]><span style='font-family:"Courier New";
+mso-bidi-font-family:"Times New Roman";mso-fareast-language:EN-US'>o<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+style='mso-fareast-language:EN-US'>Deadline for projects submission is August
+31<sup>st</sup>.<o:p></o:p></span></p>
+
+<h2><a name="_Registration:"></a><a name="_Syllabus:"></a><span
+style='mso-fareast-language:EN-US'>Syllabus:<o:p></o:p></span></h2>
+
+<p style='margin-left:18.0pt'>In this course we will learn how to model,
+program, and simulate biochemical and molecular processes using computer
+science tools developed originally for the specification of concurrent computer
+processes. The course will include frontal lectures, programming/simulation
+exercises, and a final multidisciplinary team project. Topics: <span
+style='mso-fareast-font-family:"Arial Unicode MS"'><o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l3 level1 lfo8;
+tab-stops:list 36.0pt'><![if !supportLists]>1.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><![endif]>An introduction to modeling molecular systems as concurrent
+systems</p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l3 level1 lfo8;
+tab-stops:list 36.0pt'><![if !supportLists]>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><![endif]>Modeling and simulation of coupled chemical reactions:
+pi-calculus and stochastic pi-calculus, Gillespie's Monte-Carlo algorithm. </p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l3 level1 lfo8;
+tab-stops:list 36.0pt'><![if !supportLists]>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><![endif]>Biochemistry: modular models for enzymatic reactions,
+compartmentalization and transport. Metabolic pathways</p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l3 level1 lfo8;
+tab-stops:list 36.0pt'><![if !supportLists]>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span><![endif]>Molecular machines: polymerization reactions, transcription
+and translation as stochastic processes</p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l3 level1 lfo8;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='mso-fareast-language:
+EN-US'>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Regulatory networks and signal transduction pathways:
+molecular and modular approaches<span style='mso-fareast-language:EN-US'><o:p></o:p></span></p>
+
+<h2><a name="_Registration:_1"></a><span style='mso-fareast-language:EN-US'>Registration:<o:p></o:p></span></h2>
+
+<p style='margin-left:18.0pt'><span style='mso-fareast-language:EN-US'>If you
+are considering attending this course (even not for credits), please assist us
+by sending e-mail to <a
+href="mailto:barak.shenhav@weizmann.ac.il?subject=BPCC%20course">Barak Shenhav</a>,
+with the following details:<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Last name<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>First Name<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>E-mail<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Faculty and
+department<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>M.Sc. / Ph.D.
+/ other<o:p></o:p></span></p>
+
+<p style='margin-left:36.0pt;text-indent:-18.0pt;mso-list:l4 level1 lfo10;
+tab-stops:list 36.0pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Credit / Free
+student<o:p></o:p></span></p>
+
+<p style='margin-left:18.0pt'><span style='mso-fareast-language:EN-US'>Thanks
+for your collaboration.<o:p></o:p></span></p>
+
+<h2><a name="_Plan:"></a><a name="_MATLAB:"></a><a name="_Useful_Staff:"></a><a
+name="_Pre-requisites:"></a><span style='mso-fareast-language:EN-US'>Pre-requisites:<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l6 level1 lfo12;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Some
+programming background (e.g. 'Introduction to CS' or any undergraduate level
+programming course).<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l6 level1 lfo12;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>An
+introductory level course in molecular biology is recommended. <o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l6 level1 lfo12;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Attendance of
+last year's course by Barkai and Alon is an asset but not required. <o:p></o:p></span></p>
+
+<h1><a name="_Useful_Staff:_1"></a><span style='mso-fareast-language:EN-US'>Useful
+Stuff:<o:p></o:p></span></h1>
+
+<h2><span style='mso-fareast-language:EN-US'>Links<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l7 level1 lfo14;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The <a
+href="http://www.wisdom.weizmann.ac.il/~aviv/">BioPSI Project</a> homepage.</span></p>
+
+<h2><span style='mso-fareast-language:EN-US'>Downloads<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l0 level1 lfo2;
+tab-stops:list 31.2pt'><a name="_Group_1:_Lotka-Volterra,"></a><![if !supportLists]><span
+style='font-family:Symbol;mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>The BioPSI
+manual - <a
+href="http://www.wisdom.weizmann.ac.il/~shenhav/bpcc2001/Class1/appendix.ps">Appendices</a><o:p></o:p></span></p>
+
+<h2><span style='mso-fareast-language:EN-US'>Books<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Communication
+and mobile systems: The pi-calculus, Robin Milner, Cambridge University Press,
+1999.</span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Molecular
+Biology of the Cell (3rd edition), Alberts et al., Garland Publishing Inc.,
+1994.</span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Essential Cell
+Biology, Alberts et al., Garland Publishing Inc., 1998.</span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>University Chemistry (4th edition), Mahan and Myers,
+Addison-Wesley, 1987 (chapters 2, 6 and 9).</p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Chemistry, Change R., McGraw-Hill, 1991 (chapters 3.1,
+9 and 13).</p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol'>&middot;<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]>Fundamentals of Biochemistry, Voet D, Voet J.G. and
+Pratt C. W, Wiley and Sons, 1999.</p>
+
+<h2><span style='mso-fareast-language:EN-US'>Papers<o:p></o:p></span></h2>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Gillespie D.T.
+(1976) A general method for numerically simulating the stochastic time
+evolution of coupled chemical reactions. Journal of Computational Physics 22:
+403-434.<o:p></o:p></span></p>
+
+<p style='margin-left:31.2pt;text-indent:-19.85pt;mso-list:l5 level1 lfo16;
+tab-stops:list 31.2pt'><![if !supportLists]><span style='font-family:Symbol;
+mso-fareast-language:EN-US'>&middot;<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span><![endif]><span style='mso-fareast-language:EN-US'>Gillespie D.
+T. (1977) Exact stochastic simulation of coupled chemical reactions. Journal of
+physical chemistry 81: 2340-2361.<o:p></o:p></span></p>
+
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='color:black'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+
+<p class=MsoNormal><span style='font-size:10.0pt;color:black;mso-fareast-language:
+EN-US'>Last updated on </span><!--[if supportFields]><span style='font-size:
+10.0pt;color:black;mso-fareast-language:EN-US'><span style='mso-element:field-begin'></span><span
+style="mso-spacerun: yes">&nbsp;</span>DATE \@ &quot;d MMMM yyyy&quot; <span
+style='mso-element:field-separator'></span></span><![endif]--><span
+style='font-size:10.0pt;color:black;mso-fareast-language:EN-US'>5 July 2001</span><!--[if supportFields]><span
+style='font-size:10.0pt;color:black;mso-fareast-language:EN-US'><span
+style='mso-element:field-end'></span></span><![endif]--><span style='mso-fareast-language:
+EN-US'><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

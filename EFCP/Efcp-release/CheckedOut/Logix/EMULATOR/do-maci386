@@ -1,0 +1,4 @@
+#!/bin/sh
+cp -f Permanent/maci386/*.o .
+./mkmk ./maci386_BSD concatenate ctl file freeze_term \
+interface math timer tty ultrix short posix spi $@

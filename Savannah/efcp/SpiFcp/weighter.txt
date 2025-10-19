@@ -1,0 +1,49 @@
+By default, processes of this implementation of Stochastic Pi
+Calculus, run with a base rate "infinite" - i.e. communication
+is instantaneous, whenever a send and receive are active for
+the same channel.
+
+To set the default base rate for all of the processes in a module
+include the spifcp attribute:
+
+    baserate(<default rate>).
+
+Declared channels may be specified with explicit base rates
+(see BNF.txt).
+
+See the modules in Examples/circadian.
+
+
+Channels with finite rates are weighted for selection using the
+following default computations.  When a multiplier is not specified
+explicitly in a <transmission>, it defaults to 1.
+
+  bimolecular weight =
+                (baserate of channel) *
+          (sum of <send> multipliers) * (sum of <receive> multipliers)
+
+  homodimerized weight =
+                (baserate of channel) *
+        ((sum of <dimer> multipliers) * (sum of <dimer> multipliers - 1))/2
+
+These computations are based on the analysis in "Exact stochastic
+simulation of coupled chemical reaction", D.T. Gillespie, Journal of
+Physical Chemistry, volume 81, pps 2340-2361.
+
+
+The user may specify custom computations using the notation for
+<weighter_declaration> in BNF.txt; the computation must be explicitly 
+coded in the module Logix/<emulator name>/spiweight.c .
+
+
+The default <weighter_declaration> for a Stochastic Pi Calculus session
+may be changed dynamically by a user macro call:
+
+    weighter(<weighter_declaration>)
+
+See user_macros.txt for details.
+
+
+This document is licensed under Gnu General Public License - Version 3
+
+    http://www.nongnu.org/efcp/gnu-gpl3.html

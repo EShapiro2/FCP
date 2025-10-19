@@ -1,0 +1,736 @@
+Script started on Sat Jan 28 09:11:25 2006
+101% logix
+
+Weizmann Institute Logix 2.2 28/01/06 - 09:11:02
+Copyright (C) 1991, Weizmann Institute of Science - Rehovot, ISRAEL
+Welcome to LINUX Logix !
+28/01/06 - 09:11:29
+ to_context(reserved_text#string(ResText))
+ cd(system#compile)
+ to_context(string(ResText,[],_^))
+_ / 1 = library
+_ /   = []
+ unbind(ResText)
+ cd(super#super)
+ 
+@i(makeall)
+ compile(boot)
+<1> started
+<1> source : /Logix/boot.cp - 19990709100252
+<1> system : 
+<1> file : /Logix/Bin/boot.bin - written
+<1> terminated
+ compile(boot_terminal)
+<2> started
+<2> source : /Logix/boot_terminal.cp - 19990709100251
+<2> trust : export([io / 2]), import([processor])
+<2> file : /Logix/Bin/boot_terminal.bin - written
+<2> terminated
+ compile(computation_server)
+<3> started
+<3> source : /Logix/computation_server.cp - 20040622143234
+<3> trust : export([computation / 4])
+<3> file : /Logix/Bin/computation_server.bin - written
+<3> terminated
+ compile(domain_server)
+<4> started
+<4> source : /Logix/domain_server.cp - 20040625073300
+<4> trust : export([domain / 4, process_dictionary / 2])
+<4> file : /Logix/Bin/domain_server.bin - written
+<4> terminated
+ compile(doors_terminal)
+<5> started
+<5> source : /Logix/doors_terminal.cp - 19990709100251
+<5> trust : export([io / 2]), import([processor])
+<5> file : /Logix/Bin/doors_terminal.bin - written
+<5> terminated
+ compile(fault_server)
+<6> started
+<6> source : /Logix/fault_server.cp - 19990709100251
+<6> trust : export([serve / 2]), import([computation])
+<6> file : /Logix/Bin/fault_server.bin - written
+<6> terminated
+ compile(hierarchy_server)
+<7> started
+<7> source : /Logix/hierarchy_server.cp - 19990709100250
+<7> trust : export([start / 1]), import([processor, domain_server])
+<7> file : /Logix/Bin/hierarchy_server.bin - written
+<7> terminated
+ compile(log_terminal)
+<8> started
+<8> source : /Logix/log_terminal.cp - 19990709100251
+<8> trust : export([io / 2]), import([processor, utils])
+<8> file : /Logix/Bin/log_terminal.bin - written
+<8> terminated
+ compile(monitor_functions)
+<9> started
+<9> source : /Logix/monitor_functions.cp - 19990709100252
+<9> trust : export([monitor_events / 1, monitor_events / 2, choke_stream / 3, 
+    choke_stream / 4]), import([computation])
+<9> file : /Logix/Bin/monitor_functions.bin - written
+<9> terminated
+ compile(processor)
+<10> started
+<10> source : /Logix/processor.cp - 19990709100250
+<10> system : export(monitor(serve)), import([processor_server])
+<10> file : /Logix/Bin/processor.bin - written
+<10> terminated
+ compile(processor_server)
+<11> started
+<11> includes : processor_server # self
+<11> includes : processor_server # device_server
+<11> includes : processor_server # dlv_server
+<11> includes : processor_server # doors_api_server
+<11> includes : processor_server # file_server
+<11> includes : processor_server # interface_server
+<11> includes : processor_server # link_server
+<11> includes : processor_server # machine_server
+<11> includes : processor_server # math_server
+<11> includes : processor_server # terminal_server
+<11> includes : processor_server # room_server
+<11> includes : processor_server # time_server
+<11> includes : processor_server # machine_timer
+<11> trust : export([start / 2]), import([dlv, processor, stream, computation
+    , system])
+<11> file : /Logix/processor_server/Bin/self.bin - written
+<11> terminated
+ compile(reserved_text)
+<12> started
+<12> source : /Logix/reserved_text.cp - 20040625073553
+<12> trust : export([string / 1])
+<12> file : /Logix/Bin/reserved_text.bin - written
+<12> terminated
+ compile(stream)
+<13> started
+<13> source : /Logix/stream.cp - 20060122122849
+<13> failsafe : export([merger / 2, distributor / 2, hash_table / 1])
+<13> file : /Logix/Bin/stream.bin - written
+<13> terminated
+ compile(system#ndg#assemble)
+<14> started
+<14> includes : assemble # self
+<14> includes : assemble # offsets
+<14> includes : assemble # procedures
+<14> includes : assemble # aux
+<14> includes : assemble # arguments
+<14> includes : assemble # assign
+<14> trust : export([ctl / 2, ctl / 4]), import([processor, computation, 
+    guardtable])
+<14> file : /Logix/system/ndg/assemble/Bin/self.bin - written
+<14> terminated
+ compile(system#ndg#guards)
+<15> started
+<15> source : /Logix/system/ndg/guards.cp - 19990709100257
+<15> trust : export([server / 1]), import([self, computation])
+<15> file : /Logix/system/ndg/Bin/guards.bin - written
+<15> terminated
+ compile(system#ndg#pretty_ctl)
+<16> started
+<16> source : /Logix/system/ndg/pretty_ctl.cp - 19990709100257
+<16> interrupt : export([pretty / 3]), import([utils, file, computation, 
+    processor, terms_to_string])
+<16> file : /Logix/system/ndg/Bin/pretty_ctl.bin - written
+<16> terminated
+ compile(system#ndg#phase2)
+<17> started
+<17> includes : phase2 # self
+<17> includes : phase2 # ctl_pe # self
+<17> includes : phase2 # ctlopt # self
+<17> includes : phase2 # ctl_pe # ctls
+<17> includes : phase2 # ctlopt # ctlopt
+<17> includes : phase2 # ctl_pe # ctl
+<17> includes : phase2 # ctlopt # ctlopt1
+<17> includes : phase2 # ctlopt # peephole
+<17> includes : phase2 # ctl_pe # phase2_dic
+<17> includes : phase2 # ctl_pe # case_psi
+<17> includes : phase2 # ctl_pe # ask_guard
+<17> includes : phase2 # ctl_pe # tells_bodies
+<17> includes : phase2 # ctl_pe # ask_type_check
+<17> includes : phase2 # ctl_pe # ask_binary
+<17> includes : phase2 # ctl_pe # ask_arithmetic
+<17> includes : phase2 # ctl_pe # ask_term_creation
+<17> includes : phase2 # ctl_pe # bodies
+<17> includes : phase2 # ctl_pe # tell_body
+<17> includes : phase2 # ctl_pe # ask_utils
+<17> includes : phase2 # ctl_pe # ground_check
+<17> includes : phase2 # ctl_pe # immediate # self
+<17> includes : phase2 # ctl_pe # build_dic
+<17> includes : phase2 # ctl_pe # body_term_creation
+<17> includes : phase2 # ctl_pe # iterate_term_creation
+<17> includes : phase2 # ctl_pe # unsafe_term_creation
+<17> includes : phase2 # ctl_pe # new_term_creation
+<17> includes : phase2 # ctl_pe # tell_term_creation
+<17> includes : phase2 # ctl_pe # immediate # immediate_activation
+<17> trust : export([ctls / 5, ctlopts / 3]), import([utils, screen])
+<17> file : /Logix/system/ndg/phase2/Bin/self.bin - written
+<17> terminated
+ compile(system#ndg#phase1)
+<18> started
+<18> includes : ndg # phase1 # self
+<18> includes : ndg # guards
+<18> includes : ndg # phase1 # decision_graph
+<18> includes : ndg # phase1 # body
+<18> includes : ndg # phase1 # tell
+<18> includes : ndg # phase1 # indexing_function
+<18> includes : ndg # phase1 # compile_node
+<18> includes : ndg # phase1 # residuals
+<18> includes : ndg # phase1 # guard_residuals
+<18> includes : ndg # substitute
+<18> trust : export([dgs / 4, dts / 4]), import([decision_tree, self, 
+    computation])
+<18> file : /Logix/system/ndg/phase1/Bin/self.bin - written
+<18> terminated
+ compile(system#ndg#phase0)
+<19> started
+<19> includes : ndg # phase0 # self
+<19> includes : ndg # phase0 # preproc
+<19> includes : ndg # phase0 # flow_analysis
+<19> includes : ndg # substitute
+<19> trust : export([preproc / 2, flow_analysis / 2]), import([stream])
+<19> file : /Logix/system/ndg/phase0/Bin/self.bin - written
+<19> terminated
+ compile(system#ndg#pretty_dg)
+<20> started
+<20> source : /Logix/system/ndg/pretty_dg.cp - 19990709100257
+<20> trust : export([pretty / 4]), import([utils, file, computation, compile, 
+    widgets, processor])
+<20> file : /Logix/system/ndg/Bin/pretty_dg.bin - written
+<20> terminated
+ compile(system#ndg#substitute)
+<21> started
+<21> source : /Logix/system/ndg/substitute.cp - 20060127122215
+<21> trust : export([substitute / 3, replace_reals / 6]), import([stream])
+<21> file : /Logix/system/ndg/Bin/substitute.bin - written
+<21> terminated
+ compile(system#ndg#self)
+<22> started
+<22> source : /Logix/system/ndg/self.cp - 19990709100258
+<22> trust : export([context / 4, encode / 2, file / 3, characters / 3, string
+     / 3, parsed / 3]), import([computation, computation_utils, compile, utils
+    , phase0, file, phase1, phase2, screen])
+<22> file : /Logix/system/ndg/Bin/self.bin - written
+<22> terminated
+ compile(system#parse#syntax#fcp)
+<23> started
+<23> source : /Logix/system/parse/syntax/fcp.cp - 20040622151133
+<23> trust : export([serve / 2])
+<23> file : /Logix/system/parse/syntax/Bin/fcp.bin - written
+<23> terminated
+ compile(system#parse#syntax#sub)
+<24> started
+<24> source : /Logix/system/parse/syntax/sub.cp - 19990709100309
+<24> trust : export([serve / 2])
+<24> file : /Logix/system/parse/syntax/Bin/sub.bin - written
+<24> terminated
+ compile(system#parse)
+<25> started
+<25> includes : parse # self
+<25> includes : parse # tokenize
+<25> includes : parse # error
+<25> trust : export([string / 3, characters / 3, tokens / 3, tokenize / 2]), 
+    import([computation_utils, self, computation, monitor_functions, 
+    terms_to_string, processor])
+<25> file : /Logix/system/parse/Bin/self.bin - written
+<25> terminated
+ compile(system#resolvent)
+<26> started
+<26> source : /Logix/system/resolvent.cp - 19990709100252
+<26> trust : export([extract / 3]), import([computation])
+<26> file : /Logix/system/Bin/resolvent.bin - written
+<26> terminated
+ compile(system#checkpoint)
+<27> started
+<27> source : /Logix/system/checkpoint.cp - 19990709100252
+<27> trust : export([checkpoint / 3]), import([processor])
+<27> file : /Logix/system/Bin/checkpoint.bin - written
+<27> terminated
+ compile(system#dictionary_server)
+<28> started
+<28> includes : dictionary_server # self
+<28> includes : dictionary_server # basic
+<28> trust : export([start / 1]), import([processor, computation])
+<28> file : /Logix/system/dictionary_server/Bin/self.bin - written
+<28> terminated
+ compile(system#lint)
+<29> started
+<29> includes : lint # self
+<29> includes : lint # main
+<29> includes : lint # dict
+<29> includes : lint # tree
+<29> includes : lint # cross
+<29> includes : lint # defs
+<29> trust : export([lint / 1, lint / 2, lint1 / 3]), import([computation, 
+    get_source, transform, processor, compile, stream, guardtable])
+<29> file : /Logix/system/lint/Bin/self.bin - written
+<29> terminated
+ compile(system#block)
+<30> started
+<30> includes : block # self
+<30> includes : block # tree # self
+<30> includes : block # auxils
+<30> includes : block # pretty_printer
+<30> includes : block # tree # graph
+<30> includes : block # tree # parser
+<30> includes : block # tree # rename # self
+<30> includes : block # tree # rename # clause
+<30> trust : export([compose / 1, compose / 2]), import([computation_utils, 
+    file, get_source, computation, system, transform, self])
+<30> file : /Logix/system/block/Bin/self.bin - written
+<30> terminated
+ compile(system#trap)
+<31> started
+<31> source : /Logix/system/trap.cp - 19990709100253
+<31> failsafe : export([suspend / 2, unify / 2, filter / 3, interrupt / 3]), 
+    import([computation_utils, computation])
+<31> file : /Logix/system/Bin/trap.bin - written
+<31> terminated
+ compile(system#array)
+<32> started
+<32> source : /Logix/system/array.cp - 19990709100253
+<32> failsafe : export([make / 3])
+<32> file : /Logix/system/Bin/array.bin - written
+<32> terminated
+ compile(system#get_module)
+<33> started
+<33> source : /Logix/system/get_module.cp - 19991128143729
+<33> interrupt : export([binary / 3, cdg / 4, ndg / 4, ccdg / 4, nccdg / 4, 
+    compile / 4, compile_module / 4, update / 5]), import([file, processor, 
+    computation, block, compile])
+<33> file : /Logix/system/Bin/get_module.bin - written
+<33> terminated
+ compile(system#display_server)
+<34> started
+<34> source : /Logix/system/display_server.cp - 19990709100253
+<34> trust : export([initial / 1, initial / 2]), import([computation])
+<34> file : /Logix/system/Bin/display_server.bin - written
+<34> terminated
+ compile(system#screen)
+<35> started
+<35> source : /Logix/system/screen.cp - 19990709100253
+<35> trust : export([display / 1, display_stream / 1, display / 2, 
+    display_stream / 2, ask / 2, ask / 3, option / 1, option / 2, option / 3, 
+    options / 1]), import([computation])
+<35> file : /Logix/system/Bin/screen.bin - written
+<35> terminated
+ compile(system#start)
+<36> started
+<36> source : /Logix/system/start.cp - 19990709100253
+<36> trust : export([dlv / 3]), import([processor, computation])
+<36> file : /Logix/system/Bin/start.bin - written
+<36> terminated
+ compile(system#h2fcp)
+<37> started
+<37> source : /Logix/system/h2fcp.cp - 19990709100254
+<37> trust : export([xci / 0, file / 1, prefix / 3, transform / 2]), import([
+    computation, computation_utils, utils, file, parse])
+<37> file : /Logix/system/Bin/h2fcp.bin - written
+<37> terminated
+ compile(system#mailrc)
+<38> started
+<38> source : /Logix/system/mailrc.cp - 19990709100254
+<38> trust : export([find / 3, tokens / 2, name / 2, aliases / 1]), import([
+    processor, utils, file])
+<38> file : /Logix/system/Bin/mailrc.bin - written
+<38> terminated
+ compile(system#transform#lpi)
+<39> started
+<39> includes : lpi # self
+<39> includes : lpi # servers
+<39> includes : lpi # module
+<39> includes : lpi # remote
+<39> includes : lpi # rename
+<39> trust : export([transform / 5]), import([computation, stream, file, 
+    get_source, transform])
+<39> file : /Logix/system/transform/lpi/Bin/self.bin - written
+<39> terminated
+ compile(system#transform#inherit)
+<40> started
+<40> includes : inherit # self
+<40> includes : inherit # complete
+<40> includes : inherit # utilities
+<40> includes : inherit # edit
+<40> includes : inherit # probate
+<40> includes : inherit # rename
+<40> includes : inherit # unparse
+<40> includes : inherit # source
+<40> includes : inherit # dictionary
+<40> includes : inherit # graph
+<40> includes : inherit # global
+<40> trust : export([transform / 5]), import([evaluate, computation_utils, 
+    utils, file, computation, stream, screen, get_source, transform])
+<40> file : /Logix/system/transform/inherit/Bin/self.bin - written
+<40> terminated
+ compile(system#transform#compound)
+<41> started
+<41> source : /Logix/system/transform/compound.cp - 19990709100315
+<41> trust : export([transform / 5]), import([stream])
+<41> file : /Logix/system/transform/Bin/compound.bin - written
+<41> terminated
+ compile(system#transform#dguards)
+<42> started
+<42> source : /Logix/system/transform/dguards.cp - 19990709100315
+<42> trust : export([transform / 5]), import([utils])
+<42> file : /Logix/system/transform/Bin/dguards.bin - written
+<42> terminated
+ compile(system#transform#evaluate)
+<43> started
+<43> source : /Logix/system/transform/evaluate.cp - 20040622151517
+<43> trust : export([clauses / 3, transform / 5]), import([stream])
+<43> file : /Logix/system/transform/Bin/evaluate.bin - written
+<43> terminated
+ compile(system#transform#dfcp)
+<44> started
+<44> source : /Logix/system/transform/dfcp.cp - 20040622151437
+<44> trust : export([clauses / 3, clauses / 4, transform / 5])
+<44> file : /Logix/system/transform/Bin/dfcp.bin - written
+<44> terminated
+ compile(system#transform#typed)
+<45> started
+<45> source : /Logix/system/transform/typed.cp - 19990709100316
+<45> trust : export([transform / 5]), import([type_check])
+<45> file : /Logix/system/transform/Bin/typed.bin - written
+<45> terminated
+ compile(system#transform#syntax)
+<46> started
+<46> source : /Logix/system/transform/syntax.cp - 19990709100316
+<46> trust : export([transform / 5])
+<46> file : /Logix/system/transform/Bin/syntax.bin - written
+<46> terminated
+ compile(system#transform#nil)
+<47> started
+<47> source : /Logix/system/transform/nil.cp - 19990709100317
+<47> trust : export([transform / 5])
+<47> file : /Logix/system/transform/Bin/nil.bin - written
+<47> terminated
+ compile(system#transform#self)
+<48> started
+<48> source : /Logix/system/transform/self.cp - 20040622151559
+<48> trust : export([languages / 8, language / 8, language_names / 4]), 
+    import([computation_utils, self, computation])
+<48> file : /Logix/system/transform/Bin/self.bin - written
+<48> terminated
+ compile(system#transform#colon)
+<49> started
+<49> source : /Logix/system/transform/colon.cp - 19990709100317
+<49> trust : export([transform / 5])
+<49> file : /Logix/system/transform/Bin/colon.bin - written
+<49> terminated
+ compile(system#debug)
+<50> started
+<50> includes : debug # self
+<50> includes : debug # reduce
+<50> includes : debug # user
+<50> includes : debug # breaks
+<50> trust : export([start / 1, start / 2, interpret / 2, adb / 3, read / 6, 
+    print_response / 6]), import([computation, processor, file, parse, 
+    goal_compiler, computation_utils])
+<50> file : /Logix/system/debug/Bin/self.bin - written
+<50> terminated
+ compile(system#widgets#alias)
+<51> started
+<51> source : /Logix/system/widgets/alias.cp - 19990709100322
+<51> system : export(monitor(initial))
+<51> file : /Logix/system/widgets/Bin/alias.bin - written
+<51> terminated
+ compile(system#widgets#rtimer)
+<52> started
+<52> source : /Logix/system/widgets/rtimer.cp - 19990709100322
+<52> trust : export([goal / 2]), import([computation_utils, computation, 
+    processor])
+<52> file : /Logix/system/widgets/Bin/rtimer.bin - written
+<52> terminated
+ compile(system#widgets#dohier)
+<53> started
+<53> source : /Logix/system/widgets/dohier.cp - 19990709100322
+<53> interpret : export([modules / 3, directors / 3])
+<53> file : /Logix/system/widgets/Bin/dohier.bin - written
+<53> terminated
+ compile(system#widgets#trace)
+<54> started
+<54> source : /Logix/system/widgets/trace.cp - 19990709100322
+<54> interrupt : export([tree / 2, profile / 4, close / 1]), import([widgets, 
+    computation])
+<54> file : /Logix/system/widgets/Bin/trace.bin - written
+<54> terminated
+ compile(system#widgets#pretty)
+<55> started
+<55> source : /Logix/system/widgets/pretty.cp - 20040622151929
+<55> interrupt : export([context / 3, module / 2, intermediate / 2, term / 2])
+    , import([computation_utils, parse, computation, utils, terms_to_string])
+<55> file : /Logix/system/widgets/Bin/pretty.bin - written
+<55> terminated
+ compile(system#widgets#typed)
+<56> started
+<56> source : /Logix/system/widgets/typed.cp - 19990709100323
+<56> user : export(monitor(alter)), import([trap, transform, self, computation
+    ])
+<56> file : /Logix/system/widgets/Bin/typed.bin - written
+<56> terminated
+ compile(system#widgets#vanilla)
+<57> started
+<57> source : /Logix/system/widgets/vanilla.cp - 19990709100323
+<57> interrupt : export([tree / 3, tree / 4, trace / 3, trace / 4, tree_trace
+     / 2]), import([computation_utils])
+<57> file : /Logix/system/widgets/Bin/vanilla.bin - written
+<57> terminated
+ compile(system#widgets#user_macros)
+<58> started
+<58> source : /Logix/system/widgets/user_macros.cp - 20050501180039
+<58> trust : export([expand / 2]), import([computation, utils, 
+    computation_utils, resolvent, processor])
+<58> file : /Logix/system/widgets/Bin/user_macros.bin - written
+<58> terminated
+ compile(system#widgets#linear_dictionary)
+<59> started
+<59> source : /Logix/system/widgets/linear_dictionary.cp - 19990709100323
+<59> trust : export([requests / 2])
+<59> file : /Logix/system/widgets/Bin/linear_dictionary.bin - written
+<59> terminated
+ compile(system#widgets#flatten_library)
+<60> started
+<60> source : /Logix/system/widgets/flatten_library.cp - 19990709100323
+<60> interrupt : export(all)
+<60> file : /Logix/system/widgets/Bin/flatten_library.bin - written
+<60> terminated
+ compile(system#sio_server)
+<61> started
+<61> includes : sio_server # self
+<61> includes : sio_server # server
+<61> includes : sio_server # line_editor
+<61> includes : sio_server # ring
+<61> trust : export([serve / 4]), import([processor, stream])
+<61> file : /Logix/system/sio_server/Bin/self.bin - written
+<61> terminated
+ compile(system#timer)
+<62> started
+<62> source : /Logix/system/timer.cp - 19990709100254
+<62> trust : export([rpc / 2, time / 2]), import([computation_utils, processor
+    , computation])
+<62> file : /Logix/system/Bin/timer.bin - written
+<62> terminated
+ compile(system#incremental_display)
+<63> started
+<63> source : /Logix/system/incremental_display.cp - 19990709100254
+<63> trust : export([display / 1, display / 2, display / 3, display_stream / 1
+    , display_stream / 2, display_stream / 3, ground / 2, ground / 3, ground
+     / 4]), import([computation])
+<63> file : /Logix/system/Bin/incremental_display.bin - written
+<63> terminated
+ compile(system#computation_utils)
+<64> started
+<64> source : /Logix/system/computation_utils.cp - 19990709100254
+<64> failsafe : export([call_output / 3, call_output / 4, call_list / 2, goal
+     / 3, path_context / 3, call_context_goal / 4, path_id / 3, call_id_goal
+     / 4]), import([computation])
+<64> file : /Logix/system/Bin/computation_utils.bin - written
+<64> terminated
+ compile(system#save)
+<65> started
+<65> source : /Logix/system/save.cp - 19990709100254
+<65> trust : export([save / 3, quiet / 2]), import([processor, computation, 
+    super, self])
+<65> file : /Logix/system/Bin/save.bin - written
+<65> terminated
+ compile(system#hierarchy)
+<66> started
+<66> source : /Logix/system/hierarchy.cp - 19990709100254
+<66> interrupt : export([update / 1, compile / 1, lint / 1, type_check / 1, 
+    update / 2, compile / 2, lint / 2, source_tree / 3]), import([
+    computation_utils, file, computation, utils, processor])
+<66> file : /Logix/system/Bin/hierarchy.bin - written
+<66> terminated
+ compile(system#cache_link)
+<67> started
+<67> source : /Logix/system/cache_link.cp - 19990709100255
+<67> trust : export([stream / 5, named / 4]), import([self, computation])
+<67> file : /Logix/system/Bin/cache_link.bin - written
+<67> terminated
+ %compile(system#validate)
+ compile(system#dg_opcodes)
+<68> started
+<68> source : /Logix/system/dg_opcodes.cp - 19990709100255
+<68> system : 
+<68> file : /Logix/system/Bin/dg_opcodes.bin - written
+<68> terminated
+ compile(system#guardtable)
+<69> started
+<69> source : /Logix/system/guardtable.cp - 20000123105608
+<69> trust : export([dictionary / 1])
+<69> file : /Logix/system/Bin/guardtable.bin - written
+<69> terminated
+ compile(system#shell_server)
+<70> started
+<70> includes : shell_server # self
+<70> includes : shell_server # control
+<70> includes : shell_server # sub_computation
+<70> inherit_member : Response = true
+<70> inherit_member : Response = true
+<70> inherit_member : Response = true
+<70> inherit_member : Response = true
+<70> inherit_member : Response = true
+<70> inherit_member : Response = true
+<70> includes : shell_server # delegates
+<70> includes : shell_server # system_macros
+<70> trust : export([serve / 4, compile / 2, root / 7, user / 2, user / 3, 
+    delegates / 2, delegates / 3, shell / 3]), import([computation, 
+    goal_compiler, user_macros, utils, stream, incremental_display, 
+    dictionary_server, display_server, processor, file, computation_server, 
+    library_server, input_server, parse, sio_server, computation_utils])
+<70> file : /Logix/system/shell_server/Bin/self.bin - written
+<70> terminated
+ compile(system#canvascodes)
+<71> started
+<71> source : /Logix/system/canvascodes.cp - 19990709100255
+<71> interpret : export(all)
+<71> file : /Logix/system/Bin/canvascodes.bin - written
+<71> terminated
+ compile(system#compile#precompile)
+<72> started
+<72> includes : precompile # self
+<72> includes : precompile # graph
+<72> includes : precompile # code
+<72> includes : precompile # rpc
+<72> trust : export([deadcode / 2, library / 3, transform / 8]), import([
+    computation, utils, guardtable])
+<72> file : /Logix/system/compile/precompile/Bin/self.bin - written
+<72> terminated
+ compile(system#compile#control)
+<73> started
+<73> includes : control # self
+<73> includes : control # run
+<73> includes : control # meta
+<73> trust : export([boot / 3, system / 3, user / 3, monitor / 5, trust / 3, 
+    failsafe / 3, interrupt / 3, interpret / 3]), import([stream])
+<73> file : /Logix/system/compile/control/Bin/self.bin - written
+<73> terminated
+ compile(system#compile#self)
+<74> started
+<74> source : /Logix/system/compile/self.cp - 19990709100335
+<74> trust : export([context / 4, file / 3, characters / 3, string / 3, parsed
+     / 3, deadcode / 2]), import([precompile, monitor_functions, get_source, 
+    computation_utils, computation, transform, file])
+<74> file : /Logix/system/compile/Bin/self.bin - written
+<74> terminated
+ compile(system#xcicodes)
+<75> started
+<75> source : /Logix/system/xcicodes.cp - 19990709100255
+<75> system : 
+<75> file : /Logix/system/Bin/xcicodes.bin - written
+<75> terminated
+ compile(system#terms_to_string)
+<76> started
+<76> source : /Logix/system/terms_to_string.cp - 20041221200317
+<76> failsafe : export([acyclic_grounded_terms_to_string / 3, 
+    acyclic_grounded_terms_to_string / 4]), import([processor, computation])
+<76> file : /Logix/system/Bin/terms_to_string.bin - written
+<76> terminated
+ compile(system#user_macros)
+<77> started
+<77> source : /Logix/system/user_macros.cp - 19990709100256
+<77> failsafe : export([expand / 2]), import([computation])
+<77> file : /Logix/system/Bin/user_macros.bin - written
+<77> terminated
+ compile(system#xlibcodes)
+<78> started
+<78> source : /Logix/system/xlibcodes.cp - 19990709100256
+<78> system : 
+<78> file : /Logix/system/Bin/xlibcodes.bin - written
+<78> terminated
+ compile(system#goal_compiler)
+<79> started
+<79> source : /Logix/system/goal_compiler.cp - 19990709100256
+<79> failsafe : export([term / 2, term / 3, display / 4]), import([computation
+    ])
+<79> file : /Logix/system/Bin/goal_compiler.bin - written
+<79> terminated
+ compile(system#get_source)
+<80> started
+<80> source : /Logix/system/get_source.cp - 20050614180400
+<80> trust : export([characters / 4, context / 5, file / 4, parsed / 4, string
+     / 4]), import([file, computation_utils, monitor_functions, parse, 
+    computation, self])
+<80> file : /Logix/system/Bin/get_source.bin - written
+<80> terminated
+ compile(system#library_server)
+<81> started
+<81> includes : library_server # self
+<81> trust : export([serve / 1, serve / 2]), import([utils, self, computation]
+    )
+<81> file : /Logix/system/library_server/Bin/self.bin - written
+<81> terminated
+ compile(system#library_server#system_text)
+<82> started
+<82> source : /Logix/system/library_server/system_text.cp - 20000222151830
+<82> trust : export([string / 1])
+<82> file : /Logix/system/library_server/Bin/system_text.bin - written
+<82> terminated
+ compile(system#file)
+<83> started
+<83> source : /Logix/system/file.cp - 19990709100256
+<83> interrupt : export([execute_in_context / 2, get_source / 5, get_file / 4
+    , put_file / 4, put_module / 2, put_module / 3, fileinfo / 2, 
+    working_directory / 1, isdirectory / 2, pwd / 1, bread / 3, bwrite / 3, 
+    bappend / 3]), import([computation, processor, computation_utils, self])
+<83> file : /Logix/system/Bin/file.bin - written
+<83> terminated
+ compile(system#self)
+<84> started
+<84> source : /Logix/system/self.cp - 20000123105608
+<84> interrupt : export([arity / 2, arg / 3, length / 2, string_hash / 2, 
+    string_length / 2, nth_char / 3, make_tuple / 2, copy_skeleton / 2, 
+    string_to_dlist / 3, list_to_string / 2, tuple_to_dlist / 3, list_to_tuple
+     / 2, convert_to_integer / 2, convert_to_real / 2, convert_to_string / 2, 
+    convert_if_integer / 2, freeze / 3, freeze / 4, freeze / 6, melt / 3 | ...
+    ]), import([processor, utils])
+<84> file : /Logix/system/Bin/self.bin - written
+<84> terminated
+ compile(system#xevent_masks)
+<85> started
+<85> source : /Logix/system/xevent_masks.cp - 19990709100257
+<85> system : 
+<85> file : /Logix/system/Bin/xevent_masks.bin - written
+<85> terminated
+ compile(system#profile)
+<86> started
+<86> includes : profile # self
+<86> includes : profile # interpret
+<86> interrupt : export([profile / 3, interpret / 3, prepare / 3]), import([
+    monitor_functions, computation_utils, self, computation])
+<86> file : /Logix/system/profile/Bin/self.bin - written
+<86> terminated
+ compile(system#input_server)
+<87> started
+<87> source : /Logix/system/input_server.cp - 19990709100257
+<87> interrupt : export([serve / 1]), import([computation_utils, file, 
+    computation, self])
+<87> file : /Logix/system/Bin/input_server.bin - written
+<87> terminated
+ compile(system#repeat)
+<88> started
+<88> source : /Logix/system/repeat.cp - 20050501175358
+<88> interrupt : export([run / 1]), import([computation])
+<88> file : /Logix/system/Bin/repeat.bin - written
+<88> terminated
+ compile(utils)
+<89> started
+<89> source : /Logix/utils.cp - 19990709100252
+<89> interrupt : export([append_strings / 2, chars_to_lines / 2, evaluate / 2
+    , ground / 2, ground_stream / 2, unparse / 2, binary_merge / 2, 
+    binary_sort_merge / 2, binary_merge / 3, binary_sort_merge / 3, 
+    tuple_to_dlist / 3, list_to_tuple / 2, integer_to_dlist / 3, list_length
+     / 2, freeze_term / 3]), import([processor, self, computation])
+<89> file : /Logix/Bin/utils.bin - written
+<89> terminated
+@^G
+Creations    : 19483076
+Suspensions  : 7766753
+Activations  : 7766753
+Switches     : 3772
+Reductions   : 81177381
+Terminations : 19483076
+Collections  : 95
+
+Reductions Time is 445640 milliseconds, 182159.10 RPS
+Used Total of 354896090 Heap Words
+102% ^D
+Script done on Sat Jan 28 09:37:05 2006

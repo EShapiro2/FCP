@@ -1,0 +1,190 @@
+#!/usr/bin/perl
+
+#  This module is part of EFCP.
+#
+# Copyright (C) 2007  William Silverman
+# Weizmann Institute of Science - Rehovot, ISRAEL
+# 
+# EFCP is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+# 
+# EFCP is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see http://www.gnu.org/licenses/.
+# 
+
+my $Period = 1;
+
+my %Processes = ();
+
+my $item;
+my $type = 0;
+my $rescale = 0;
+my %Subs = ();
+
+sub normalize {
+  my $other;
+  ($item, $other) = split /\.+/, shift(@_);
+# Skip multiple leading dots.
+  if ($item eq "") {
+    $item = $other;
+  }
+  ($item, $other) = split /\s+/, $item;
+# Skip leading white space.
+  if ($item eq "") {
+    $item = $other;
+  }
+  my $substitute = $Subs{$item};
+  if ($substitute) {
+    $item = $substitute;
+  }
+}
+
+    
+# MAIN
+
+my $record = shift @ARGV;
+open RECORD, "$record" or die "Can't open input $record\n";
+
+my $substitute;
+
+while ($substitute = shift(@ARGV)) {
+  if ($substitute > 0) {
+    $Period = $substitute;
+  }
+  elsif ($substitute < 0) {
+    $rescale = -$substitute;
+  }
+  else {
+    $substitute =~ s/\s+//;
+    my @tmp = split(/\+=/, $substitute);
+    my ($name, $equal) = @tmp;
+    if (@tmp != 2 || !($name && $equal)) {
+      die "invalid substitution - '$substitute'";
+    }
+    $Subs{$equal} = $name;
+  }
+}
+
+my $names = $record . ".names";
+open NAMES, ">$names" or die "Can't open output $names\n";
+
+my $table = $record . ".table";
+open TABLE, ">$table" or die "Can't open output $table\n";
+
+my $temp = $record . ".tmp";
+open TEMP, ">$temp" or die "Can't open temporary $temp for output\n";
+
+my $line;
+my $lasttime = 0.0;
+my $nexttime = 0;
+my $transmissions = 0;
+my $internaltime = 0.0;
+
+while ($line = <RECORD>) {
+
+  chomp $line;
+
+  if ($line =~ /^\+(.*)$/) {
+    normalize($1);
+    if (not $Processes{$item}) {
+      $Processes{$item} = 1;
+    }
+    $type = "+1";
+  }
+  elsif ($line =~ /^-(.*)$/) {
+    normalize($1);
+    if ($item ne "" and not $Processes{$item}) {
+      die "'$item' terminated before it started\n";
+    }
+    $transmissions++;
+    $type = "-1";
+  }
+  elsif ($line =~ /^!(.*)$/) {
+    $item = $1;
+    $type = "xx";
+  }
+  elsif ($line =~ /^\s*\d+(\.){0,1}\d+([eE][+-]{0,1}\d+){0,1}\s*$/) {
+    $internaltime = $line;
+    next if $type eq "00";
+    next if $line < $nexttime;
+    $item = sprintf "%-8.12e", $line;
+    next if $internaltime == $lasttime;
+    $lasttime = $internaltime;
+    $nexttime = int($lasttime) + $Period;
+    if ($nexttime <= $lasttime) {
+      $nexttime = $lasttime + $Period;
+    }
+    $type = "00";
+  }
+  elsif (line =~ /^\s*$/) {
+    next;
+  }
+  else {print "note: $line\n"; next};
+
+  print TEMP "$type$item\n";
+}
+
+print "transmissions($transmissions)\n";
+print "internaltime($internaltime)\n";
+close TEMP or die "Can't close temporary $temp output\n";
+
+print NAMES "   time";
+my $process;
+my $counter = 1;
+my @Processes = sort(keys(%Processes));
+
+foreach $process (@Processes) {
+  $Processes{$process} = $counter;
+  print NAMES "   $process";
+  $counter++;
+}
+
+print NAMES "\n\n\n";
+
+$counter = 1;
+foreach $process (@Processes) {
+  $Processes{$process} = $counter;
+  $counter++;
+  print NAMES "$counter   $process\n";
+}
+close NAMES or die "Can't close $names\n";
+
+my @Columns = (0) x $counter;
+
+open TEMP, "$temp" or die "Can't open temporary $temp for input\n";
+while ($line = <TEMP>) {
+  $line =~ /^(..)(.*)\n$/;
+  my $k = $1;
+  my $j = $2;
+  my $l = length($j);
+  if ($k eq "xx") {
+    foreach $process (@Processes) {
+      if ($j eq substr($process, 0, $l)) {
+	$Columns[$Processes{$process}] = 0;
+      }
+    }
+  }
+  elsif ($k ne "00") {
+    $Columns[$Processes{$j}] += $k;
+  }
+  else {
+    $Columns[0] = $rescale ? $j/$rescale : $j;
+    while ($k < $counter) {
+      print TABLE $Columns[$k++], "   ";
+    }
+    print TABLE "\n";
+  }
+}
+
+close TEMP or die "Can't close temporary $temp input\n";
+
+unlink $temp or die "Can't unlink temporary $temp\n";
+
+close TABLE or die "Can't close $table\n";

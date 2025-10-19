@@ -1,0 +1,172 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./repressor_files/filelist.xml">
+<title>repressor</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>aviv</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>1</o:TotalTime>
+  <o:Created>2000-10-02T06:59:00Z</o:Created>
+  <o:LastSaved>2000-10-02T06:59:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>120</o:Words>
+  <o:Characters>688</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>5</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>844</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoPlainText><span style='mso-fareast-font-family:"MS Mincho"'>-language([evaluate,psifcp,compound,colon]).<br>
+-export([&quot;R_GENE&quot;
+, &quot;R_RNA&quot; , &quot;R_PROTEIN&quot;]).<br>
+-include(rates).<br>
+stochastic.<br>
+global([bR(R8),t6a(Think6a),utrR(R9),degmR(R10),degpR(R11),pR(R5),rbs(R6)]).<br>
+<br>
+<a
+name="R_gene">R_GENE:-<br>
+</a><br>
+&lt;&lt; PROMOTED_R , BASAL_R .<br>
+<br>
+PROMOTED_R:-<br>
+<span
+style="mso-spacerun: yes">    </span>pR ? {e} | ACTIVATED_TRANSCRIPTION_R(e)
+.<br>
+<br>
+BASAL_R:-<br>
+<span style="mso-spacerun: yes">    </span>bR ? []
+| BASAL_R , R_RNA .<br>
+<br>
+<br>
+ACTIVATED_TRANSCRIPTION_R(e):-<br>
+<span
+style="mso-spacerun: yes">    </span>t6a ? [] | R_RNA ,
+ACTIVATED_TRANSCRIPTION_R ;<br>
+<span style="mso-spacerun: yes">   
+</span>e<span style="mso-spacerun: yes">   </span>? [] | PROMOTED_R <br>
+<br>
+&gt;&gt;<br>
+.<br>
+<br>
+<a
+name="R_RNA">R_RNA:-<br>
+</a><br>
+&lt;&lt; TRANSLATION_R + DEGRADATION_mR
+<br>
+<br>
+.<br>
+<br>
+TRANSLATION_R:-<br>
+<span style="mso-spacerun:
+yes">    </span>utrR ? [] | R_RNA , R_PROTEIN <br>
+.<br>
+<span
+style='mso-tab-count:1'>      </span><br>
+DEGRADATION_mR:-<br>
+<span
+style='mso-tab-count:1'>      </span>degmR ? [] | true <br>
+&gt;&gt;<br>
+.<br>
+<br>
+<a
+name="R_protein">R_PROTEIN:-<br>
+</a><br>
+&lt;&lt;<br>
+<br>
+BINDING_A +
+DEGRADATION_R <br>
+<br>
+.<br>
+<br>
+BINDING_A :-<br>
+<span
+style="mso-spacerun: yes">    </span>rbs ? {e1} | BOUND_R_PROTEIN(e1)<br>
+<br>
+.<br>
+<br>
+BOUND_R_PROTEIN(e):-<br>
+<span
+style="mso-spacerun: yes">    </span>e ? []<span style="mso-spacerun: yes"> 
+</span>| R_PROTEIN ;<br>
+<span style="mso-spacerun: yes">    </span>degpR ? []
+| e ! [] | true <br>
+<br>
+.<br>
+<br>
+DEGRADATION_R:-<br>
+<span
+style="mso-spacerun: yes">    </span>degpR ? [] | true <br>
+<br>
+&gt;&gt;<br>
+.<br>
+<br>
+<br>
+<br>
+<br>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

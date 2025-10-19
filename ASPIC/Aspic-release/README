@@ -1,0 +1,25 @@
+The SpiFcp directory supports applications written in dialect"spifcp"
+of Stochastic Pi Calculus.  Its Source sub-directory contains the
+source of the implementation.  The Examples sub-directory contains
+examples of programs written in language(spifcp) .  The Documentation
+sub-directory contains the BNF of Stochastic Pi Calculus and other
+notes specific to it.
+
+The BioSpi directory supports applications written in dialect biospi
+of Ambient Stochastic Pi Calculus.  Its Source sub-directory contains
+the source of the extension to Ambient Stochasic Pi Calculus.  The
+sub-directory contains examples of programs written in language(biospi).
+The Documentation sub-directory contains the BNF of Ambient Stochastic
+Pi Calculus and other notes specific to it.
+
+The files in bin are used to extract tabular information from a
+(Ambient) Stochastic Pi Calculus application session (see record.txt
+in sub-directory SpiFcp/Documentation).  You may find it useful to
+copy or to link them to your ~/bin directory.
+
+The Tutorial directory contains a tutorial of the system.  It also
+contains some simple examples which are referenced in the tutorial.
+
+The Logix directory contains the operating syatem which underlies the
+BioSpi system.  To complete installation, follow the directions in
+Logix/README.

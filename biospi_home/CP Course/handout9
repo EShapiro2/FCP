@@ -1,0 +1,215 @@
+Handout No. 9,  Thursday,  November 20th, 1986
+     
+Communication:
+          One-to-one
+          One-to-many
+          Bounded many-to-one (number of senders known in advance).
+          Unbounded centralized many-to-one (number of senders
+                    is not known in advance, but is given incrementally to
+                    one central process).
+     
+     
+One-to-one: Single producer, single consumer stream.
+          (we have seen many examples before).
+     
+One-to-many: Single producer, multiple consumers stream.
+          Producer may protect the stream from "buggy" consumers.
+     
+E.g. producer of a protected stream of inetegers.
+*/
+     
+integers(N,N,[]).
+integers(N,M,[N|Ns?]) :-
+          N<M | N1:=N+1, integers(N1?,M,Ns).
+     
+/*
+     
+Deterministic bounded many-to-one communication:
+          Multiple producers produce with streams,
+          one consumer reads them synchronously.
+     
+E.g. summing two streams
+*/
+     
+sum([X|In1],[Y|In2],[Z?|Out?]) :-
+          Z:=X+Y,
+          sum(In1?,In2?,Out).
+sum([],[],[]).
+     
+     
+/*
+     
+Noneterministic bounded many-to-one communication:
+          Nondeterministically merge streams into one,
+          and consume them.
+     
+E.g. of a binary merger
+*/
+     
+% merge(Xs,Ys,Zs) :- Zs is an order-preserving interleaving of the
+%         elements of Xs and Ys.
+     
+merge([X|Xs],Ys,[X|Zs]) :-
+          merge(Xs?,Ys?,Zs).
+merge(Xs,[Y|Ys],[Y|Zs]) :-
+          merge(Xs?,Ys?,Zs).
+merge([],[],[]).
+     
+/*
+A fair merge on a stable machine
+*/
+     
+fsmerge([X|Xs],Ys,[X|Zs]) :-
+          fsmerge(Ys?,Xs?,Zs).
+fsmerge(Xs,[Y|Ys],[Y|Zs]) :-
+          fsmerge(Ys?,Xs?,Zs).
+fsmerge([],[],[]).
+     
+     
+/*
+A biased merge using 'unknown'
+*/
+     
+bmerge([X|Xs],Ys,[X|Zs]) :-
+          bmerge(Xs?,Ys?,Zs).
+bmerge(Xs,[Y|Ys],[Y|Zs]) :-
+          unknown(Xs) |
+          bmerge(Xs?,Ys?,Zs).
+bmerge([],[],[]).
+     
+/*
+A fair merge using 'unknown'
+*/
+     
+fmerge([X|Xs],[Y|Ys],[X,Y|Zs]) :-
+          fmerge(Xs,Ys,Zs).
+fmerge([X|Xs],Ys,[X|Zs]) :-
+          unknown(Ys) |
+          bmerge(Xs?,Ys?,Zs).
+fmerge(Xs,[Y|Ys],[Y|Zs]) :-
+          unknown(Xs) |
+          fmerge(Xs?,Ys?,Zs).
+fmerge([],[],[]).
+     
+
+% when one stream ends the result is just the other one
+fmerge(Xs,[],Xs).
+fmerge([],Ys,Ys).
+     
+/*
+An application: the msg operating system
+     
+msg(Kbd1,Scr1,Kbd2,Scr2) :-
+          are the streams of two users, connected to
+          an operating system which echoes commands,
+          and sends message(X) to the other user
+          whenever a user gives the command send(X).
+*/
+     
+msg(Kbd1,Scr1,Kbd2,Scr2) :-
+          distribute(Kbd1?,Scr11,Scr12),
+          distribute(Kbd2?,Scr22,Scr21),
+          merge(Scr11?,Scr21?,Scr1),
+          merge(Scr22?,Scr12?,Scr2).
+     
+% Note: any of the above mergers can be used, depending on
+% the desired behavior (i.e. priority of echoing  vs. messages)
+     
+distribute([X|In],[X|Out1],Out2) :-
+          X=\=send(_) |
+          distribute(In?,Out1,Out2).
+distribute([send(X)|In],[send(X)|Out1],[message(X)|Out2]) :-
+          distribute(In?,Out1,Out2).
+distribute([],[],[]).
+     
+     
+test_msg(Out1,Out2) :-
+          In1=[hi,ho,send(shalom),send(manishma)],
+          In2=[ehm,aham,send(uvracha),ahaaa,send(toda)],
+          msg(In1?,In2?,Out1,Out2).
+     
+/*
+Of course, if you are not lazy msg is best tested interactively,
+by providing the input streams incrementally.
+*/
+     
+/*
+Binary (or ternary, etc.) merge operators can be defined
+for merging any fixed number of input streams.
+What about merging an unbounded number of streams?
+     
+One solution: a dynamic tree of binary mergers
+     
+     
+merger(Xss,Ys) :-
+          merging the stream of streams Xss gives Ys
+*/
+     
+merger([Xs1,Xs2|Xss],Ys) :-
+          fmerge(Xs1?,Xs2?,Xs12),
+          merger([Xs12?|Xss],Ys).
+merger([Xs],Xs).
+     
+     
+/*
+This program generates a tree of binary mergers:
+     
+     
+               /
+     
+             /\ ...
+            /\
+           /\ Xs4
+          /\ Xs3
+     Xs1  Xs2
+     
+Its problem as long as  the stream of streams  is incomplete,
+the merge tree  will not produce any output.
+     
+Another alternative: build the merge tree top down.
+*/
+     
+     
+merger1([Xs|Xss],Ys) :-
+          merger1(Xss?,Ys1),
+          merge(Xs?,Ys1?,Ys).
+merger1([],[]).
+     
+     
+/*
+This will result in the following merge tree:
+     
+             /\
+          Xs1 /\
+         Xs2 /\
+            Xs3 /\
+                 ...
+                    \
+     
+which may produce output immediately.
+     
+Both trees are imbalanced.  Their delay is linear in the number
+of streams; their waiting could be exponential.
+     
+An alternative: generate a balanced merge tree
+Note: the program is isomorphic to the sum_tree program
+in handout no. 5.
+*/
+     
+merger2([Xs1,Xs2|Xss],Ss) :-
+          merge_layer([Xs1,Xs2|Xss?],Yss),
+          merger2(Yss?,Ss).
+merger2([Xs],Xs).
+     
+merge_layer([Xs1,Xs2|In],[Ys|Out?]) :-
+          merge(Xs1?,Xs2?,Ys),
+          merge_layer(In?,Out).
+merge_layer([Xs],[Xs]).
+merge_layer([],[]).
+     
+/*
+This merger creates a balanced tree.  It does, however,
+block output if called with an incomplete list of streams,
+thus preventing a truely dynamic stream merging.
+*/
+

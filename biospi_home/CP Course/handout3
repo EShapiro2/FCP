@@ -1,0 +1,191 @@
+/*
+     
+Concurrent Prolog Programming Techniques
+     
+Instructor:  William Silverman
+     
+Handout No. 3,  Monday, December 9
+     
+     
+Streams:  Producers, Consumers, and Transducers
+     
+*/
+     
+     
+% Unbounded Producers
+
+-export([zeroes/1,integers/2,fib/1,integers/3,sum/2,ip/3,copy/2,append/3,
+	 edit_line/3,line/1]
+).
+     
+/*
+Note: To terminate execution of an unbounded producer, use
+the abort mechanism.  If you want to display the output of
+the producer using the  ^  annotation, you can discard any
+execess output by entering "break", which will halt the
+diplay stream.  Alternatively, you can examine the output
+by displaying it after the computation has been aborted or
+suspended.
+
+To examine the output, say, of
+
+	@fib(Xs)
+type
+
+	@Xs^
+
+which will show some prefix of the stream Xs.
+*/
+     
+     
+% zeroes(Xs) :- Xs is a stream of zeroes.
+     
+zeroes([0|Xs]) :- zeroes(Xs).
+     
+% integers(N,Xs) :- Xs is a stream of integers, in unary notation,
+% starting from N.
+     
+integers(N,[N|Ns]) :- integers(s(N),Ns).
+     
+% fib(Xs) :- Xs is the Fibonacci sequence.
+     
+fib(Xs) :-
+	fib(0,1,Xs).
+     
+fib(N1,N2,[N1|Ns]) :-
+	fib(N2,N3,Ns),
+	N3:=N1+N2.
+     
+% Bounded Producers
+     
+% integers((N1,N2,Ns) :- Ns are the integers between N1 and N2.
+     
+integers(N,N,[]).
+integers(N1,N3,[N1|Ns]) :-
+	N1<N3 | N2:=N1+1, integers(N2?,N3?,Ns).
+     
+% Consumers
+     
+% sum(Xs,S) :- S is the sum of elements in Xs.
+     
+sum([],0).
+sum([X|Xs],S) :-
+	sum(Xs?,S1), S:=S1+X.
+     
+% ip(Xs,Ys,S) :- the inner product of the streams of integers Xs and Ys is S.
+%	Note: ip fails if the streams are of unequal length.
+	
+ip([X|Xs],[Y|Ys],S) :-
+	ip(Xs?,Ys?,S1),
+	S:=S1+X*Y.
+ip([],[],0).
+     
+% Transducers
+     
+% copy(Xs,Ys) :- Ys is the stream Xs.
+     
+copy([X|Xs],[X|Ys]) :- copy(Xs?,Ys).
+copy([],[]).
+     
+% append(Xs,Ys,Zs) :- appending Ys to the stream Xs gives Zs.
+     
+append([X|Xs],Ys,[X|Zs]) :- append(Xs?,Ys,Zs).
+append([],Xs,Xs).
+
+/*     
+   
+Example of a stream transducer: A Line Editor
+				
+
+The problem:
+
+Input: a stream of characters, including line-editing commands.
+
+Output: an edited stream and an echoed stream of characters.
+
+The line editor can handle on its input stream:
+
+	-- End-of-line character
+	-- Delete-character character
+	-- Delete-line character ('Control-U')
+	-- Other characters
+
+It maintains a stack of characters read so far on the current line.
+
+Note: This is a simplified version of the line-editor of the FCP
+system.  It operates on a symbolic stream of 'characters',
+rather then on ascii values, for readability.
+
+
+Rules for line editing:
+
+Initialization:  initialize the stack to be empty.
+*/
+
+edit_line(KbdIn,Echo,KbdOut) :-
+	edit_line(KbdIn?,[],Echo,KbdOut).
+/*
+Termination: If the end-of-stream was reached, close the echo stream,
+reverse the stack into the output stream, and terminate.
+*/
+
+edit_line([],Stack,[],Out) :-
+	reverse(Stack?,[],Out).
+/*
+If a carriage-return was received, reverse the stack into the output
+stream, and send carriage-return into the echo stream.
+*/
+
+edit_line([cr|In],Stack,[cr|Echo],Out) :-
+	reverse([cr|Stack],Out1,Out),
+	edit_line(In?,[],Echo,Out1).
+/*
+If a delete-character was received, then pop an element from the
+stack, and send backspace, space, and backspace to the echo stream.
+*/
+
+edit_line([del|In],[C|Stack],[bs,' ',bs|Echo],Out) :-
+	edit_line(In?,Stack,Echo,Out).
+
+/*
+If a delete-character was received and the stack is empty,
+send a bell-character to the echo stream.
+*/
+
+edit_line([del|In],[],[bell|Echo],Out) :-
+	edit_line(In?,[],Echo,Out).
+					
+/*
+If a delete-line character was receives, then send backspace, space,
+and backspace to the echo stream for every character in the stack,
+and empty the stack.
+*/
+
+edit_line(['^U'|In],Stack,Echo,Out) :-
+	delete_stack(Stack?,Echo,Echo1),
+	edit_line(In?,[],Echo1,Out).
+/*
+If another character was received, then send it on the echo stream,
+and add it to the stack.
+*/
+
+edit_line([C|In],Stack,[C|Echo],Out) :-
+    otherwise |
+	edit_line(In?,[C|Stack],Echo,Out).
+
+
+reverse([],Out,Out).
+reverse([C|Stack],Out,Out1) :-
+	reverse(Stack?,[C|Out],Out1).
+
+delete_stack([],Echo,Echo).
+delete_stack([C|Stack],[bs,' ',bs|Echo],Echo1) :-
+	delete_stack(Stack?,Echo,Echo1).
+
+
+/*
+To test the program, use
+line_edit(L,E,S), where L is bound to the line below.
+*/
+
+line([a,b,del,del,del,a,b,c,cr,a,b,'^U',d,e,cr,f]).

@@ -1,0 +1,72 @@
+     
+Abstract
+     
+     
+Concurrent Prolog is a logic programming language designed for
+concurrent programming and parallel execution.  It is a process
+oriented language, which embodies dataflow synchronization and
+guarded-command indeterminacy as the basic control mechanisms.
+     
+The course reviews the basic concepts of logic programming;
+outlines the definition of the Concurrent Prolog;
+surveys general concurrent programming techniques,
+and programming techniques idiosyncratic to Concurrent Prolog;
+reviews the language applications to date;
+provides some details of its implementation techniques on
+a uni- and  multiprocessor; and describes the design of Logix,
+its programming environment and operating system.
+     
+The course requirements include programming assignments and
+a programming project, which will be done using the Logix system.
+     
+Course prerequisites include familiarity with a conventional recursive
+programming language (e.g. Pascal or Lisp), and basic knowledge
+of data-structures and algorithms.  Knowledge of concurent
+programming concepts and of sequential Prolog is an asset, but is not
+necessary.
+     
+     
+     
+Course Outline
+     
+Note: This is a preliminary schedule.
+Relevant literature for the first two weeks is preceeded by an "-".
+     
+Week 1: The logic programs computation model
+                - Part I of "The Art of Prolog"
+     
+Week 2: The concurrent logic programming model
+                - Concurrent Prolog: A Progress Report, Sect. 1-3.
+        Concurrent logic programming languages
+                - A subset of Concurrent Prolog and Its
+                  Interpreter, Sect. 1-3.
+                - Guarded Horn Clauses, Sect. 1-3.
+        Flat Concurrent Prolog, and using the Logix system
+                - The Logix system user manual
+     
+Week 3: Basic Programming Techniques: Iteration, recursion, communication.
+        Streams: producers, consumers, and transducers.
+     
+Weeks 4-5: Algorithmic programming
+     
+     
+Week 4: Constructing recursive process networks:
+        Tree, matrix, quadtree, and pyramid algorithms.
+     
+Week 5: Systolic programming and process-to-processor mapping
+     
+Weeks 6-7: Systems programming
+     
+Week 6: Stream merging techniques, and the mail system example.
+        Difference-streams.
+        Incomplete messages, perpetual processes, monitors, and queues.
+Week 7: Object oriented programming and Vulcan.
+        Synchronization techniques: bounded-buffers and the
+        short-circuit.  Application to hardware simulation.
+     
+Week 8: Meta-interpreters and partial-evaluation.
+     
+Week 9: The design and implementation of the Logix system.
+     
+Week 10: Sequential and parallel implementations of
+        Flat Concurrent Prolog.

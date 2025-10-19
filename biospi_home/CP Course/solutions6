@@ -1,0 +1,202 @@
+Cs442: Concurrent Prolog Programming Techniques                       Fall, 1986
+     
+Instructor: Ehud Shapiro
+     
+Tas: Simran Singh (Simran@sushi), Tom Strat (Strat@sri-ai)
+     
+     
+Status: R
+
+Assignment No. 6 Solutions
+     
+     
+Give a direct behavioral definition of the following circuits.
+You may use auxiliary processes which have no direct
+'circuitry' equivalent.
+     
+%-------------------------------------------------------------------------------
+-
+     
+% half_adder(In1,In2,Out1,Out1) :-
+%         Out1 is the 'xor' and Out2 is the 'and' of In1 and In2.
+     
+     
+half_adder([],[],[],[]) .
+half_adder([0|In1],[0|In2],[0|Out1],[0|Out2]) :-
+          half_adder(In1?,In2?,Out1,Out2) .
+half_adder([0|In1],[1|In2],[1|Out1],[0|Out2]) :-
+          half_adder(In1?,In2?,Out1,Out2) .
+half_adder([1|In1],[0|In2],[1|Out1],[0|Out2]) :-
+          half_adder(In1?,In2?,Out1,Out2) .
+half_adder([1|In1],[1|In2],[0|Out1],[1|Out2]) :-
+          half_adder(In1?,In2?,Out1,Out2) .
+     
+     
+@#half_adder([0,1,0,1,1],[0,0,1,1,1],Out1,Out2)
+<2> started
+<2> ended
+@Out1^
+Out1 = [0, 1, 1, 0, 0]
+@Out2^
+Out2 = [0, 0, 0, 1, 1]
+     
+     
+%-------------------------------------------------------------------------------
+-
+     
+% full_adder(In1,In2,Cin,Out,Cout) :-
+%         Out is the result of adding In1, In2, and Cin,
+%         with carry Cout.
+     
+     
+full_adder([],[],[],[],[]) .
+full_adder([B|In1],[0|In2],[0|Cin],[B|Out],[0|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+full_adder([0|In1],[B|In2],[0|Cin],[B|Out],[0|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+full_adder([0|In1],[0|In2],[B|Cin],[B|Out],[0|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+full_adder([B|In1],[1|In2],[1|Cin],[B|Out],[1|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+full_adder([1|In1],[B|In2],[1|Cin],[B|Out],[1|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+full_adder([1|In1],[1|In2],[B|Cin],[B|Out],[1|Cout]) :-
+          full_adder(In1?,In2?,Cin?,Out,Cout) .
+     
+     
+     
+@#full_adder([0,0,0,0,1,1,1,1],[0,0,1,1,0,0,1,1],[0,1,0,1,0,1,0,1],O1,C1)
+<1> started
+<1> ended
+@O1^
+O1 = [0, 1, 1, 0, 1, 0, 0, 1]
+@C1^
+C1 = [0, 0, 0, 1, 0, 1, 1, 1]
+     
+     
+% Test your programs using (and modifying, if needed) the word_adder.
+     
+% word_adder(As,Bs,Cin,Os,Cout) :-
+%         Out is the result of adding the word As to the word Bs
+%         given carry Cin, with resulting carry Cout.
+     
+word_adder([A|As],[B|Bs],Cin,[Out|Os],Cout) :-
+          full_adder(A?,B?,Cin?,Out,Cint),
+          word_adder(As?,Bs?,Cint?,Os,Cout).
+word_adder([],[],C,[],C).
+     
+a_word(a,[[0],[1],[1],[1]]).
+a_word(b,[[1],[1],[01],[1]]).
+     
+     
+@#test_adder(a,b,O2,C2)
+<2> started
+<2> ended
+@O2^
+O2 = [[1], [0], [1], [1]]
+@C2^
+C2 = [1]
+@#test_adder(b,b,O3,C3)
+<3> started
+<3> ended
+@O3^
+O3 = [[0], [1], [1], [1]]
+@C3^
+C3 = [1]
+@#test_adder(a,a,O4,C4)
+<4> started
+<4> ended
+@O4^
+O4 = [[0], [0], [1], [1]]
+@C4^
+C4 = [1]
+     
+%-------------------------------------------------------------------------------
+-
+     
+test_adder(Wa,Wb,Out,Cout) :-
+          a_word(Wa?,As),
+          a_word(Wb?,Bs),
+          word_adder(As?,Bs?,[0],Out,Cout).
+     
+%===============================================================================
+=
+     
+% Implement a 3-way fair merger,
+%         1) assuming a stable machine
+     
+     
+fmerge([],[],[],[]) .
+fmerge([X|Xs],Ys,Zs,[X|Ws]) :- fmerge(Ys?,Zs?,Xs?,Ws) .
+fmerge(Xs,[Y|Ys],Zs,[Y|Ws]) :- fmerge(Zs?,Xs?,Ys?,Ws) .
+fmerge(Xs,Ys,[Z|Zs],[X|Ws]) :- fmerge(Xs?,Ys?,Zs?,Ws) .
+     
+     
+@#fmerge([a1,a2,a3,a4,a5],[b1,b2,b3,b4],[c1,c2,c3,c4],M1)
+<5> started
+<5> ended
+@M1^
+M1 = [a1, b1, c1, a2, b2, c2, a3, b3, c3, a4, b4, c4, a5]
+     
+@#fmerge([a1],[b1,b2,b3,b4,b5,b6],[c1,c2,c3],M2)
+<6> started
+<6> ended
+@M2^
+M2 = [a1, b1, c1, b2, c2, b3, c3, b4, _, _]
+     
+     
+;-------------------------------------------------------------------------------
+-
+     
+     
+%         2) Using unknown
+     
+     
+     
+fmerge3([],[],[],[]) .
+     
+fmerge3([],Xs,Ys,Zs) :- fmerge2(Xs?,Ys?,Zs) .
+fmerge3(Ws,[],Ys,Zs) :- fmerge2(Ws?,Ys?,Zs) .
+fmerge3(Ws,Xs,[],Zs) :- fmerge2(Ws?,Xs?,Zs) .
+     
+fmerge3([W|Ws],[X|Xs],[Y|Ys],[W,X,Y|Zs]):-fmerge3(Ws?,Xs?,Ys?,Zs) .
+     
+fmerge3([W|Ws],Xs,Ys,[W|Zs]) :- unknown(Xs), unknown(Ys) | fmerge3(Ws?,Xs?,Ys?,Z
+s) .
+fmerge3(Ws,[X|Xs],Ys,[X|Zs]) :- unknown(Ws), unknown(Ys) | fmerge3(Ws?,Xs?,Ys?,Z
+s) .
+fmerge3(Ws,Xs,[Y|Ys],[Y|Zs]) :- unknown(Ws), unknown(Xs) | fmerge3(Ws?,Xs?,Ys?,Z
+s) .
+     
+fmerge3([W|Ws],[X|Xs],Ys,[W,X|Zs]) :- unknown(Ys) | fmerge3(Ws?,Xs?,Ys?,Zs) .
+fmerge3([W|Ws],Xs,[Y|Ys],[W,Y|Zs]) :- unknown(Xs) | fmerge3(Ws?,Xs?,Ys?,Zs) .
+fmerge3(Ws,[X|Xs],[Y|Ys],[X,Y|Zs]) :- unknown(Ws) | fmerge3(Ws?,Xs?,Ys?,Zs) .
+     
+     
+     
+%   2-way fair merger using unknown
+     
+fmerge2([],[],[]) .
+fmerge2([],Ys,Ys) .
+fmerge2(Xs,[],Xs) .
+     
+fmerge2([X|Xs],[Y|Ys],[X,Y|Zs]) :- fmerge2(Xs?,Ys?,Zs) .
+fmerge2([X|Xs],Ys,[X|Zs]) :- unknown(Ys) | fmerge2(Xs?,Ys?,Zs) .
+fmerge2(Xs,[Y|Ys],[Y|Zs]) :- unknown(Xs) | fmerge2(Xs?,Ys?,Zs) .
+     
+     
+     
+@#fmerge3([a1],[b1,b2,b3,b4,b5,b6],[c1,c2,c3],M3)
+<7> started
+<7> ended
+@M3^
+M3 = [a1, b1, c1, b2, c2, b3, c3, b4, b5, b6]
+     
+     
+@#fmerge3([a1,a2,a3,a4,a5],[b1,b2,b3,b4],[c1,c2,c3,c4],M4)
+<8> started
+<8> ended
+@M4^
+M4 = [a1, b1, c1, a2, b2, c2, a3, b3, c3, a4, b4, c4, a5]
+     
+

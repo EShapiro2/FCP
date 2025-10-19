@@ -1,0 +1,206 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../long1.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description
+content="19-Apr-01: Gillespie’s Algorithm for Exact Stochastic Simulation of Coupled Chemical Reactions">
+<link rel=Stylesheet href="master03_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0137.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="268,308"/>
+</o:shapelayout>
+</head>
+
+<body lang=HE style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2"
+ masterhref="master03.xml">
+ <p:shaperange href="master03.xml#_x0000_s1025"/><![if !ppt]><p:shaperange
+  href="master03.xml#_x0000_s1028"/><p:shaperange
+  href="master03.xml#_x0000_s1029"/><![endif]><p:shaperange
+  href="master03.xml#_x0000_m1026"/><v:shape id="_x0000_s274434" type="#_x0000_m1026"
+  style='position:absolute;left:54pt;top:48pt;width:9in;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master03.xml#_x0000_m1027"/><v:shape id="_x0000_s274435" type="#_x0000_m1027"
+  style='position:absolute;left:54pt;top:156pt;width:612pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s274434" class=T><span style='position:absolute;
+ top:9.25%;left:0%;width:105.43%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:80%'>Gillespie’s Algorithm for
+ Exact Stochastic </span></span><span style='position:absolute;top:16.25%;
+ left:1.12%;width:102.99%'><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:80%'>Simulation of Coupled Chemical Reactions</span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:80%;mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ <div v:shape="_x0000_s274435">
+ <div class=B1 style='mso-margin-left-alt:624'></div>
+ <div class=B2 style='mso-margin-left-alt:864'></div>
+ <div class=B3 style='mso-margin-left-alt:1104'></div>
+ <div class=B4 style='mso-margin-left-alt:1392'></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384'><span
+ style='position:absolute;top:28.5%;left:15.16%;width:76.4%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;position:absolute;
+ left:-8.82%'>•</span></span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>A Monte-Carlo technique
+ to simulate the </span></span><span style='position:absolute;top:33.25%;
+ left:15.16%;width:76.4%'><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%'>stochastic process described by P(</span><span
+ style='font-family:Symbol;mso-ascii-font-family:Symbol;mso-hansi-font-family:
+ Symbol;font-size:75%'>t,m</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>)&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384'><span
+ style='position:absolute;top:39.0%;left:8.42%;width:96.62%'><span
+ style='mso-special-format:nobullet;display:none'>•</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;color:red'>0)<span style="mso-spacerun: yes">&nbsp;&nbsp;
+ </span></span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%;color:red'><u>Initialization</u></span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;color:red'>:</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'><span
+ style="mso-spacerun: yes">&nbsp; </span>Set t</span><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:50%;
+ position:relative;top:.37em;mso-text-raise:-25%'>0</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>, t</span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>stop</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>, reaction parameters </span></span><span style='position:absolute;
+ top:44.0%;left:15.16%;width:77.15%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>c</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>1</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>-c</span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>M</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'><span style="mso-spacerun: yes">&nbsp;</span>and types, species
+ quantities X</span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>1</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>-X</span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>N</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>. </span></span><span style='position:absolute;top:48.75%;
+ left:15.16%;width:76.4%'><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%'>Calculate h</span><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:50%;
+ position:relative;top:.37em;mso-text-raise:-25%'>i</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>c</span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>i&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384'><span
+ style='position:absolute;top:54.5%;left:15.16%;width:76.4%'><span
+ style='font-size:75%;color:red'><span style='mso-special-format:"numbullet2\,1";
+ position:absolute;left:-8.82%'>1)</span></span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;color:red'><u>Monte-Carlo
+ step</u></span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%;color:red'>:</span><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:75%'> Select
+ random </span><span style='font-family:Symbol;mso-ascii-font-family:Symbol;
+ mso-hansi-font-family:Symbol;font-size:75%'>t</span><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:75%'> and </span><span
+ style='font-family:Symbol;mso-ascii-font-family:Symbol;mso-hansi-font-family:
+ Symbol;font-size:75%'>m </span></span><span style='position:absolute;
+ top:59.25%;left:15.16%;width:76.4%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>according to P(</span><span
+ style='font-family:Symbol;mso-ascii-font-family:Symbol;mso-hansi-font-family:
+ Symbol;font-size:75%'>t,m</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>) &#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384'><span
+ style='position:absolute;top:65.25%;left:15.16%;width:88.38%'><span
+ style='font-size:75%;color:red'><span style='mso-special-format:"numbullet2\,1";
+ position:absolute;left:-7.62%'>2)</span></span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;color:red'><u>Update
+ system:</u></span><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%'> Advance t and update products </span></span><span
+ style='position:absolute;top:70.0%;left:15.16%;width:88.95%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>and reactant species to reflect one R</span><span
+ style='font-family:Symbol;mso-ascii-font-family:Symbol;mso-hansi-font-family:
+ Symbol;font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>m</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'><span style="mso-spacerun: yes">&nbsp;</span>reaction. </span></span><span
+ style='position:absolute;top:74.75%;left:15.16%;width:87.64%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'>Re-calculate h</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:50%;position:relative;
+ top:.37em;mso-text-raise:-25%'>i</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%'>c</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:50%;position:relative;top:.37em;mso-text-raise:-25%'>i</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'><span style="mso-spacerun: yes">&nbsp;</span>for reactions
+ whose reactants </span></span><span style='position:absolute;top:79.5%;
+ left:15.16%;width:76.4%'><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:75%'>have changed&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384;
+ position:absolute;top:85.5%;left:8.42%;width:83.14%;height:6.5%'><span
+ style='position:absolute;top:0%;left:8.1%;width:91.89%'><span
+ style='font-size:75%;color:red'><span style='mso-special-format:"numbullet2\,1";
+ position:absolute;left:-8.82%'>3)</span></span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;color:red'><u>Repeat</u></span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%'> 1-2 until t &gt;= t</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:50%;position:relative;
+ top:.37em;mso-text-raise:-25%'>stop&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:384;
+ position:absolute;top:91.25%;left:8.42%;width:83.14%;height:6.5%'><span
+ style='mso-special-format:nobullet;display:none'>•</span><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

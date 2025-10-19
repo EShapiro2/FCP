@@ -1,0 +1,142 @@
+Assignment No. 5    Due Monday, December 29
+     
+This is a programming assignment.  It should be handed in
+together with a script of its execution.
+     
+     
+Define the relation
+          life(Matrix,N,Matrix1) :-
+                    Matrix1 is the result of performing N
+                    cycles of the game of life on initial matrix Matrix.
+     
+     
+     
+     
+          Matrix and Matrix1 are represented as lists of lists of zeroes
+          and ones, where a one indicates a position to be "alive".
+     
+          Implement the game by a torus of processes,
+          each with bidirectional streams to its eight immediate
+          neighbors.  On each cycle each process receives
+          the current values of all eight neighbours, computes
+          its new value, and broadcasts the result to its
+          neighbours.
+     
+Rules of the Game:
+           The game is played on an infinite two dimensional grid where
+           little bitty creatures live. They are all quite similiar to
+           each other and live according to strict rules governing their
+           social circumstances. These rules regulate whether they will
+           live or die on any given day depending on how many immediate
+           neighbors they have. (Immediate neighbors count as left,
+           right, up, and down as well as all four diagonals).
+
+           These creatures can also be generated in a cell if that cell
+           has the proper number of neighbors. None of these beasts can
+           ever move, and must depend on their neighbors to find out if
+           they will survive to the next day.
+     
+           The rules for birth and death in this strange world are:
+             * If a cell has 0 or 1 neighbor, the creature dies. (if
+                 no one lives there, then I guess no one dies).
+             * If a cell has 2 neighbors, it remains as it is.
+             * If a cell has 3 neighbors, then a beastie is born there.
+                (If there is one there already, then it stays).
+             * If a cell has 4 or more neighbors, then its occupant
+                 dies of suffocation (or overcrowding, or too much
+                 partying, or whatever)
+     
+    For example: given the situation:
+          123456      the cells (4a) and (4c) have 3 neighbors each
+          ------      (3b,4b,and 5b) so a new creature is born there.
+       a! 000000
+       b! 001110    the cells (3b) and (5b) have only one neighbor each,
+       c! 000000    so they die.
+                    the cell (4b) has two neighbors, so it remains
+                    alive, while (3a,5a,3c,and 5c) each have two
+                    neighbors, and thus remain "dead."
+     
+   The resulting neighborhood is
+     
+       123456
+     a 000100
+     b 000100
+     c 000100
+     
+  It should be fairly easy to see that after the next cycle, the
+  neighborhood will be restored to it's original condition.
+     
+/*  Here are a few test cases.
+    More will come later.
+*/
+     
+neighborhood(1, [ [0,0,0,0,0,0],
+                  [0,0,1,1,1,0],
+                  [0,0,0,0,0,0] ]).
+     
+neighborhood(2, [ [0,0,0,0,0,0,0],  % an interesting variant of 1.
+                  [0,0,1,1,1,0,0],
+                  [0,1,0,0,0,1,0],
+                  [0,1,0,0,0,1,0],
+                  [0,1,0,0,0,1,0],
+                  [0,0,1,1,1,0,0],
+                  [0,0,0,0,0,0,0]  ]).
+     
+neighborhood(3, [ [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [1,1,1,1,1,1,1,1,1],
+                  [0,0,0,0,0,0,0,0,0],
+                  [1,1,1,1,1,1,1,1,1],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0] ]).
+     
+neighborhood(4, [ [0,0,0,0,0,0,0,0,0,],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [1,1,1,1,1,1,1,1,1],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [1,1,1,1,1,1,1,1,1],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0],
+                  [0,0,0,0,0,0,0,0,0] ]).
+     
+Free hints:
+          (The suggested method is not the only way to solve the problem;
+          if you have a different approach, try it!).
+          Use the  array relaxation program as a model for
+          spawning a torus, and for broadcasing the output
+          to neighbours.
+          Do not use unification to unify the top of one row
+          with the bottom of the remaining torus.
+          Rather let each cell instantiate its top
+          and bottom links to a triple,  triple(UpLeft,Up,Upright)
+          or triple(DownLeft,Down,DownRight), and write
+          a special procedure for connecting the lists of triples,
+          rather then using unification, as in the relaxation
+          program.
+          Remember that each element of the triple
+          should eventually fork into a bidirectional communication
+          link.
+     
+          Use the sum_tree program from Handout 5 to sum
+          the input streams of the neighbours.  Each cell
+          should have eventually only one input and one output
+          stream.
+     
+Other hints:
+          If you fail to spawn the network correctly, you
+          can "buy" the connecting routine.  It costs 10%
+          of your grade.
+     
+     
+     
+Note:  If you prefer a different representation
+of the input and output (e.g. the one
+used in the relaxation program) this is OK too.

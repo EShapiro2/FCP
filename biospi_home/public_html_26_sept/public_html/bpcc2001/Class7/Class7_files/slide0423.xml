@@ -1,0 +1,346 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint">
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="647"/>
+  <o:rules v:ext="edit">
+   <o:r id="V:Rule2" type="connector" idref="#_x0000_s662585">
+    <o:proxy start="" idref="#_x0000_s662583" connectloc="2"/>
+    <o:proxy end="" idref="#_x0000_s662584" connectloc="2"/>
+   </o:r>
+  </o:rules>
+  <o:regrouptable v:ext="edit">
+   <o:entry new="1" old="0"/>
+   <o:entry new="2" old="0"/>
+   <o:entry new="3" old="0"/>
+   <o:entry new="4" old="0"/>
+  </o:regrouptable>
+ </o:shapelayout><p:shaperange id="_x0000_s662530">
+  <v:shape id="_x0000_s662530" type="#_x0000_m1026" style='position:absolute;
+   left:54pt;top:48pt;width:612pt;height:90pt'>
+   <v:fill o:detectmouseclick="f"/>
+   <v:stroke o:forcedash="f"/>
+   <p:placeholder type="title"/>
+  </v:shape><v:shape id="_x0000_s662531" type="#_x0000_m1027" style='position:absolute;
+   left:54pt;top:127pt;width:612pt;height:260pt'>
+   <v:fill o:detectmouseclick="f"/>
+   <v:stroke o:forcedash="f"/>
+   <p:placeholder type="body" position="1"/>
+  </v:shape><v:group id="_x0000_s662598" style='position:absolute;left:217.5pt;
+   top:386pt;width:295pt;height:132pt' coordorigin="1140,3128" coordsize="2360,1056">
+   <v:oval id="_x0000_s662555" style='position:absolute;left:1928;top:3128;
+    width:784;height:1056;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+    fillcolor="#0c9 [4]" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:fill color2="white [0]"/>
+    <v:shadow color="gray [2]"/>
+   </v:oval><v:group id="_x0000_s662552" style='position:absolute;left:2684;
+    top:3580;width:816;height:224' coordorigin="1236,3672" coordsize="816,224">
+    <v:line id="_x0000_s662542" style='position:absolute;mso-wrap-style:none;
+     v-text-anchor:middle' from="1236,3672" to="2052,3672" strokecolor="black [1]"
+     strokeweight="2.25pt">
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662543" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1236,3896" to="2052,3896"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662544" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1312,3704" to="1312,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662545" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1409,3704" to="1409,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662546" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1506,3704" to="1506,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662547" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1603,3704" to="1603,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662548" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1700,3704" to="1700,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662549" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1797,3704" to="1797,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662550" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1894,3704" to="1894,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662551" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1992,3704" to="1992,3864"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line></v:group><v:rect id="_x0000_s662554" style='position:absolute;
+    left:1896;top:3592;width:832;height:200;mso-wrap-style:none;
+    v-text-anchor:middle' fillcolor="white [0]" stroked="f" strokecolor="black [1]"
+    strokeweight="2.25pt">
+    <v:shadow color="gray [2]"/>
+   </v:rect><v:group id="_x0000_s662553" style='position:absolute;left:1140;
+    top:3580;width:816;height:224' coordorigin="1140,3576" coordsize="816,224">
+    <v:line id="_x0000_s662532" style='position:absolute;mso-wrap-style:none;
+     v-text-anchor:middle' from="1140,3576" to="1956,3576" strokecolor="black [1]"
+     strokeweight="2.25pt">
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662533" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1140,3800" to="1956,3800"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662534" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1216,3608" to="1216,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662535" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1313,3608" to="1313,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662536" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1410,3608" to="1410,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662537" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1507,3608" to="1507,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662538" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1604,3608" to="1604,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662539" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1701,3608" to="1701,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662540" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1798,3608" to="1798,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line><v:line id="_x0000_s662541" style='position:absolute;
+     mso-wrap-style:none;v-text-anchor:middle' from="1896,3608" to="1896,3768"
+     strokecolor="black [1]" strokeweight="2.25pt">
+     <v:stroke dashstyle="1 1"/>
+     <v:shadow color="gray [2]"/>
+    </v:line></v:group><v:line id="_x0000_s662556" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="1968,3408" to="2064,3496"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662557" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2016,3336" to="2112,3424"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662559" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2080,3272" to="2168,3360"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662561" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2232,3160" to="2232,3320"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662566" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2584,3408" to="2680,3496"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662567" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2536,3336" to="2632,3424"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662568" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2480,3272" to="2568,3360"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662569" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2440,3168" to="2440,3328"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662571" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2336,3128" to="2336,3288"
+    o:regroupid="4" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662574" style='position:absolute;flip:y;
+    mso-wrap-style:none;v-text-anchor:middle' from="1960,3768" to="2056,3856"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662575" style='position:absolute;flip:y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2008,3840" to="2104,3928"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662576" style='position:absolute;flip:y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2056,3920" to="2144,4008"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662577" style='position:absolute;flip:y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2224,3992" to="2224,4152"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662578" style='position:absolute;flip:x y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2576,3744" to="2672,3832"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662579" style='position:absolute;flip:x y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2528,3848" to="2624,3936"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662580" style='position:absolute;flip:x y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2472,3936" to="2560,4024"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662581" style='position:absolute;flip:x y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2432,3984" to="2432,4144"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662582" style='position:absolute;flip:x y;
+    mso-wrap-style:none;v-text-anchor:middle' from="2328,4024" to="2328,4184"
+    o:regroupid="3" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:rect id="_x0000_s662583" style='position:absolute;left:2008;
+    top:3432;width:160;height:176;mso-wrap-style:none;v-text-anchor:middle'
+    stroked="f" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:rect><v:rect id="_x0000_s662584" style='position:absolute;left:2512;
+    top:3432;width:160;height:176;mso-wrap-style:none;v-text-anchor:middle'
+    stroked="f" strokecolor="black [1]" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:rect><v:shapetype id="_x0000_t38" coordsize="21600,21600" o:spt="38"
+    o:oned="t" path="m0,0c@0,0@1,5400@1,10800@1,16200@2,21600,21600,21600e"
+    filled="f">
+    <v:formulas>
+     <v:f eqn="mid #0 0"/>
+     <v:f eqn="val #0"/>
+     <v:f eqn="mid #0 21600"/>
+    </v:formulas>
+    <v:path arrowok="t" fillok="f" o:connecttype="none"/>
+    <v:handles>
+     <v:h position="#0,center"/>
+    </v:handles>
+    <o:lock v:ext="edit" shapetype="t"/>
+   </v:shapetype><v:shape id="_x0000_s662585" type="#_x0000_t38" style='position:absolute;
+    left:2339;top:3357;width:1;height:504;rotation:90;flip:x;mso-wrap-style:none;
+    v-text-anchor:middle' o:connectortype="curved" adj="3110400,154629,-45100800"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke endarrow="open"/>
+    <v:shadow color="gray [2]"/>
+   </v:shape><v:line id="_x0000_s662586" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2064,3688" to="2120,3760"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662590" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2112,3720" to="2176,3832"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662591" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2152,3752" to="2232,3896"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662592" style='position:absolute;flip:x;
+    mso-wrap-style:none;v-text-anchor:middle' from="2232,3760" to="2256,3960"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662593" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2328,3752" to="2328,3992"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662594" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2392,3752" to="2424,3976"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662595" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2456,3736" to="2480,3920"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662596" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2504,3728" to="2536,3840"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line><v:line id="_x0000_s662597" style='position:absolute;
+    mso-wrap-style:none;v-text-anchor:middle' from="2536,3688" to="2568,3744"
+    strokecolor="red" strokeweight="2.25pt">
+    <v:stroke dashstyle="1 1"/>
+    <v:shadow color="gray [2]"/>
+   </v:line></v:group><v:rect id="_x0000_s662599" style='position:absolute;
+   left:440pt;top:399pt;width:155pt;height:38pt;mso-wrap-style:none;
+   v-text-anchor:middle' stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662600" style='position:absolute;left:443pt;
+   top:477pt;width:155pt;height:38pt;mso-wrap-style:none;v-text-anchor:middle'
+   stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662601" style='position:absolute;left:346pt;
+   top:434pt;width:42pt;height:32pt;mso-wrap-style:none;v-text-anchor:middle'
+   filled="f" stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662602" style='position:absolute;left:194.5pt;
+   top:427pt;width:19pt;height:25pt;mso-wrap-style:none;v-text-anchor:middle'
+   stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662603" style='position:absolute;left:194.5pt;
+   top:458pt;width:19pt;height:25pt;mso-wrap-style:none;v-text-anchor:middle'
+   stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662604" style='position:absolute;left:516pt;
+   top:458pt;width:19pt;height:25pt;mso-wrap-style:none;v-text-anchor:middle'
+   stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662605" style='position:absolute;left:516pt;
+   top:431pt;width:19pt;height:25pt;mso-wrap-style:none;v-text-anchor:middle'
+   stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect><v:rect id="_x0000_s662606" style='position:absolute;left:324pt;
+   top:431pt;width:19pt;height:25pt;mso-wrap-style:none;v-text-anchor:middle'
+   filled="f" stroked="f" strokecolor="red" strokeweight="2.25pt">
+   <v:stroke dashstyle="1 1"/>
+   <v:shadow color="gray [2]"/>
+  </v:rect></p:shaperange>
+</xml>

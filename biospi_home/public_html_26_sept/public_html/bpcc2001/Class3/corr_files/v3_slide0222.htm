@@ -1,0 +1,167 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../corr.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description content="16-May-01: Timer Processes">
+<link rel=next href="v3_slide0269.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0222.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body bgcolor=white alink="#3333cc" link="#ccccff" vlink="#b2b2b2" text=black
+topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=86 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=223 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=31 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=49 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=41 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=126 height=38 colspan=2></td>
+  <td width=223 height=38>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=223 height=38 align=center><font face="Comic Sans MS" size=5>Timer
+    Processes</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=126 height=38 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=193></td>
+  <td width=389 height=193 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=113 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=186 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=38 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=135 height=14 colspan=2><font face="Courier New" size=1><b>-language(psifcp).</b></font><br>
+    </td>
+    <td width=254 height=14 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=373 height=13 colspan=5><font face="Courier New" size=1><b>global(breakOH(0.25),
+    breakHOH(0.25),breakOO(0.2),</b></font><br>
+    </td>
+    <td width=16 height=13 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=321 height=12 colspan=3><font face="Courier New" size=1><b>breakHH(0.25),
+    breakCO(0.1), breakCOH(0.3),</b></font><br>
+    </td>
+    <td width=68 height=12 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=113 height=13><font face="Courier New" size=1><b>breakCH(0.37)).</b></font><br>
+    </td>
+    <td width=276 height=13 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=389 height=20 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=359 height=19 colspan=4><font face="Courier New" size=2><b>Timer_OH::=
+    breakOH ! [] , Timer_OH.</b></font><br>
+    </td>
+    <td width=30 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=379 height=17 colspan=6><font face="Courier New" size=2><b>Timer_HOH::=
+    breakHOH ! [] , Timer_OH.</b></font><br>
+    </td>
+    <td width=10 height=17></td>
+   </tr>
+   <tr>
+    <td width=359 height=17 colspan=4><font face="Courier New" size=2><b>Timer_OO::=
+    breakOO ! [] , Timer_OO.</b></font><br>
+    </td>
+    <td width=30 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=359 height=17 colspan=4><font face="Courier New" color=red
+    size=2><b>Timer_HH::= breakHH ! [] , Timer_HH.</b></font><br>
+    </td>
+    <td width=30 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=359 height=17 colspan=4><font face="Courier New" size=2><b>Timer_CO::=
+    breakCO ! [] , Timer_CO.</b></font><br>
+    </td>
+    <td width=30 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=359 height=17 colspan=4><font face="Courier New" size=2><b>Timer_CH::=
+    breakCH ! [] , Timer_CH.</b></font><br>
+    </td>
+    <td width=30 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=389 height=17 colspan=7><font face="Courier New" size=2><b>Timer_COH::=
+    breakCOH ! [] , Timer_COH.</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=46 height=193 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=32 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=380 height=14 colspan=4></td>
+  <td width=55 height=14 colspan=2><img src="v3_slide0222_image037.gif"
+  border=0 width=55 height=14></td>
+  <td width=40 height=14></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class8.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description content="19-Jun-01: The Circadian Clock: “Protein R”">
+<link rel=next href="v3_slide0465.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0464.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body bgcolor=white alink="#3333cc" link="#ccccff" vlink="#b2b2b2" text=black
+topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=343 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=60 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=41 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=22 height=38></td>
+  <td width=431 height=38 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=431 height=38 align=center><font face="Comic Sans MS" size=5>The
+    Circadian Clock: “Protein R”</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=22 height=38></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=185 colspan=2></td>
+  <td width=403 height=185 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=90 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=75 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=52 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=90 height=14><font face="Courier New" color=red size=1><b>R_PROTEIN::=</b></font><br>
+    </td>
+    <td width=313 height=14 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=403 height=14 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=224 height=14 colspan=5><font face="Courier New" size=1><b>&lt;&lt;
+    BINDING_A + DEGRADATION_R .</b></font><br>
+    </td>
+    <td width=179 height=14 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=403 height=15 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=113 height=14 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>BINDING_A::=</b></font><br>
+    </td>
+    <td width=290 height=14 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=403 height=14 colspan=8><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>rbs ?
+    {release_A} , BOUND_R_PROTEIN(release_A) .</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=403 height=15 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=224 height=14 colspan=5><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>BOUND_R_PROTEIN(release)::=</b></font><br>
+    </td>
+    <td width=179 height=14 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=254 height=14 colspan=6><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>release ? []<span style="mso-spacerun: yes">&nbsp; </span>,
+    R_PROTEIN ;</b></font><br>
+    </td>
+    <td width=149 height=14 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=306 height=14 colspan=7><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>degpR
+    ? [] , release ! [] , true .</b></font><br>
+    </td>
+    <td width=97 height=14></td>
+   </tr>
+   <tr>
+    <td width=403 height=15 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=142 height=14 colspan=3><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>DEGRADATION_R::=</b></font><br>
+    </td>
+    <td width=261 height=14 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=217 height=14 colspan=4><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>degpR
+    ? [] , true &gt;&gt; .</b></font><br>
+    </td>
+    <td width=186 height=14 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=32 height=185 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=383 height=14 colspan=3></td>
+  <td width=61 height=14 colspan=2><img src="v3_slide0464_image036.gif"
+  border=0 width=61 height=14></td>
+  <td width=31 height=14 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

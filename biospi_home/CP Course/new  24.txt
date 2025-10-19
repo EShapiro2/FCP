@@ -1,0 +1,7 @@
+ofirr@math102-lx.wisdom.weizmann.ac.il
+Passowrd: peta2drs
+
+
+zsh
+cd ~/s/igor20/bill_home/Course
+exec /home/bill/Efcp-release/Logix/EMULATOR/fcp $* /home/bill/Efcp-release/Logix/saved_linux_spifcp

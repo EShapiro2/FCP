@@ -1,0 +1,123 @@
+The run macro can run a quantified set of repeated goals, including
+Ambient Stochastic Pi Calculus (biospi, spifcp) processes.
+
+    run(<quantified_process_set>)
+
+where:
+
+    <quantified_process_set> ::=
+        <repeated goal>
+        <repeated goal> , <quantified_process_set>
+
+    <repeated goal> ::=
+        <goal>
+        <repetition>*<goal>
+
+    <goal> ::=
+        <remote procedure call>
+        (<quantified_process_set>)
+        [<quantified_process_set>]
+        <predicate>
+
+    <remote procedure call> ::=
+        <service name> # <repeated goal>
+        <service name> # (<quantified_process_set>)
+	<service name> # [<quantified_process_set>]
+
+    <repetition> ::= <integer>
+
+    <predicate> ::=
+        <functor>
+        <functor>(<argument_list>)
+
+    <argument_list> ::=
+        <logix_term>
+        <logix_term> , <argument_list>
+
+The repeat service can be called to run a quantified set of repeated goals.
+
+    repeat#run(<quantified_process_set> [, <user variable names>])
+
+The second argument (default "true") specifies that an undefined variable 
+<service name> or <functor> within the <quantified_process_set> should be 
+replaced by the name of the variable.
+
+Two additional calls to repeat are:
+
+    repeat#list(<quantified_process_set>, <list of calls>
+			 [, <user variable names>])
+
+    repeat#path(<quantified_process_set>, <remote procedure call>,
+			 [, <user variable names>])
+
+The call to list returns a list of <remote procedure calls>; the RPCs:
+
+    repeat#list(QPS, List)
+    computation#List
+
+is equivalent to:
+
+    repeat#run(QPS)
+
+The call to path returns a normalized <remote procedure call> .  This
+is useful for instantiating the undefined <service name>s and <functor>s
+in the (copied) <quantified_process_set> .
+
+
+Notes:
+-----
+
+A negative <repetition> is treated as zero.
+
+The logix system provides several standard predicates.  These
+include:
+
+    true
+    string_length(<string>, <positive_integer>)
+    string_to_dlist(<string>, <character_list>, <logix_term>)
+    list_to_string(<character_list>, <string>)
+    nth_char(<integer>, <string>, <character>)
+
+    all of the standard system functions, where the function reply is an
+    additional argument - e.g. cos(<number>, Cosine_of_number);
+
+    standard user functions, where the function reply is an additional
+    argument, such as the "C" string functions - e.g.
+    strcat(<string1>, <string2>, <concatenated strings>).
+
+For a complete list of standard system functions, enter:
+
+    l/50;at(system)
+
+or examine Logix/system/self.cp .
+
+For a complete list of standard user functions, enter:
+
+    l/50;at(Logix_Users)
+
+or examine Logix/system/Logix_Users/self.cp
+
+
+Examples:
+--------
+
+1. run(64*dimerization#A_PROTEIN)
+
+2. run([activator#6*(A_PROTEIN, A_GENE), repressor#R_GENE])
+
+3. run([2*(activator#A_GENE,3*repressor#R_GENE), hysteresis#MODULE])
+
+The repeat process is also used by the run, record and atrace macros of
+subsytems spifcp and biospi (see SpiFcp/record.txt).
+
+4. record(AVIV#receptor_endo#System,"recording.txt")
+
+5. atrace(porin#SYSTEM, traced, 10)
+
+   (See efcp/SpiFcp/[BioSpi/]   Examples & user_macros.txt).
+
+
+
+This document is licensed under Gnu General Public License - Version 3 
+
+     http://www.nongnu.org/efcp/gnu-gpl3.html

@@ -1,0 +1,109 @@
+-export([hanoi/4,sum/2,test_sum/1,number/2,test_number/1,value/2]).
+
+/*
+     
+Concurrent Prolog Programming Techniques
+     
+Instructor:  William Silverman
+     
+Handout No. 2
+     
+     
+Divide-and-conquer programming examples
+     
+     
+Note: these are programs shown in class.  The file
+can be directly compiled and executed under Logix.
+     
+     
+1. hanoi(N,From,To,Moves) :-
+	Moves is a sequence of operations to move N disks
+	from peg From to peg To.
+*/
+     
+     
+hanoi(0,From,To,(From,To)).
+hanoi(N1,From,To,(Before,(From,To),After)):-
+	N1>0 |
+	N:=N1-1,
+	free(From?,To?,Free),
+	hanoi(N?,From?,Free?,Before),
+	hanoi(N?,Free?,To?,After).
+     
+free(a,b,c).
+free(a,c,b).
+free(b,a,c).
+free(b,c,a).
+free(c,a,b).
+free(c,b,a).
+     
+/*
+sum(Tree,Sum) :- Sum is the sum of the leaves
+	in the tree of integers Tree
+*/
+     
+     
+sum(leaf(N),N).
+sum(tree(L,R),S) :-
+	sum(L?,S1),
+	sum(R?,S2),
+	S:=S1+S2.
+     
+     
+tree_of_integers(
+	tree(
+		tree(	leaf(3),leaf(5) ),
+		tree(	leaf(7),
+			tree(leaf(4),leaf(3)) ) ) ).
+     
+test_sum(S) :-
+	tree_of_integers(Tree), sum(Tree?,S).
+     
+     
+/*
+number(Tree,N) :-
+	Number the leaves of Tree from 1 to N.
+*/
+     
+number(Tree,N) :-
+	number(Tree,0,N).
+     
+number(leaf(N1),N,N1) :-
+	N1:=N?+1.
+number(tree(L,R),N,N2) :-
+	number(L?,N?,N1),
+	number(R?,N1?,N2).
+     
+tree_of_unknowns(
+	tree(
+		tree(	leaf(_),leaf(_) ),
+		tree(	leaf(_),
+			tree(leaf(_),leaf(_)) ) ) ).
+     
+test_number(Tree) :-
+	tree_of_unknowns(Tree), number(Tree?,N).
+     
+     
+     
+/*
+value(X,E) :- The value of the arithmetic expression E is X.
+	Note: the Logix system predicate X:=E can evaluate
+	E only if compile-time variables are bound
+	at runtime to integers.
+	value/2 does not have this restriction.
+	The library module 'utils' supports
+	a predicate similar to 'value', called 'evaluate'.
+*/
+     
+value(X,Y) :- integer(Y) | X=Y.
+value(X,Y+Z) :- value(Y1,Y?), value(Z1,Z?), plus(Y1?,Z1?,X).
+value(X,Y*Z) :- value(Y1,Y?), value(Z1,Z?), times(Y1?,Z1?,X).
+value(X,Y-Z) :- value(Y1,Y?), value(Z1,Z?), diff(Y1?,Z1?,X).
+value(X,abs(Y)) :- value(Y1,Y?), abs(Y1?,X).
+     
+/*
+abs(X,Y) :- the absolute value of integer X is Y.
+*/
+     
+abs(X,Y) :- X>=0 | X=Y.
+abs(X,Y) :- X<0 | diff(0,X?,Y).

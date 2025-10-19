@@ -1,0 +1,71 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint">
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="3,4,6,8,141"/>
+ </o:shapelayout><p:colorscheme
+  colors="#FFFFFF,#000000,#868686,#000000,#3366FF,#009900,#0000CC,#CCCCCC"/>
+ <v:background id="_x0000_s3073" o:bwmode="white" fillcolor="white [0]"/>
+ <p:shaperange id="_x0000_s3074">
+  <v:shapetype id="_x0000_s3074" style='position:absolute;left:108pt;top:108pt;
+   width:612pt;height:138pt;v-text-anchor:middle' coordsize="21600,21600"
+   o:master="" o:spt="1" path="m0,0l0,21600,21600,21600,21600,0xe" filled="f"
+   fillcolor="#36f [4]" stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#868686 [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <v:textbox inset="7.25pt,46038emu,7.25pt,46038emu"/>
+   <p:placeholder type="centerTitle" size="quarter"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s3075">
+  <v:shapetype id="_x0000_s3075" style='position:absolute;left:162pt;top:324pt;
+   width:7in;height:138pt' coordsize="21600,21600" o:master="" o:spt="1"
+   path="m0,0l0,21600,21600,21600,21600,0xe" filled="f" fillcolor="#36f [4]"
+   stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]" o:detectmouseclick="t"/>
+   <v:stroke joinstyle="miter" o:forcedash="t"/>
+   <v:shadow color="#868686 [2]"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+   <o:lock v:ext="edit" grouping="t"/>
+   <v:textbox inset="7.25pt,46038emu,7.25pt,46038emu"/>
+   <p:placeholder type="subTitle" position="1" size="quarter"/>
+  </v:shapetype></p:shaperange>
+ <p:shaperange id="_x0000_s3084">
+  <v:group id="_x0000_s3084" style='position:absolute;left:65.75pt;top:6.125pt;
+   width:6.125pt;height:222.75pt' coordorigin="526,49" coordsize="49,1782">
+   <v:rect id="_x0000_s3076" style='position:absolute;left:527;top:1783;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3077" style='position:absolute;left:527;top:1287;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3078" style='position:absolute;left:527;top:1535;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3079" style='position:absolute;left:527;top:1039;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3080" style='position:absolute;left:527;top:791;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3081" style='position:absolute;left:527;top:544;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3082" style='position:absolute;left:526;top:49;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect><v:rect id="_x0000_s3083" style='position:absolute;left:526;top:297;
+    width:48;height:48;flip:x;mso-wrap-style:none;v-text-anchor:middle'
+    o:bwmode="inverseGray" fillcolor="black [3]" stroked="f" strokecolor="black [1]">
+    <v:shadow color="#868686 [2]"/>
+   </v:rect></v:group></p:shaperange>
+</xml>

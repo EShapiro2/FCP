@@ -1,0 +1,2 @@
+#! /bin/sh
+cvs -z3 -d:pserver:anonymous@cvs.savannah.nongnu.org:/web/efcp -Q co ${1}

@@ -1,0 +1,1385 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class8.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#FFFFFF",gOtlNormalClr="#000000",gOtlActiveClr="#FFFF00",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	padding-bottom:5px;}
+a
+	{color:white;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">&nbsp; </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0420.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">Unit 6: Regulatory Circuits</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0432.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">Gene Expression:<br>
+  From DNA to Protein</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0421.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Gene Expression: <br>
+  From DNA to Protein</a></font></div>
+  <div id=PPTC3 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB3 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>We will shift our level of abstraction</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Before, we treated each DNA, RNA or amino acid
+    monomer as our essential process</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=3><font size=2>Now, we will treat functional units as essential
+    processes</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Genes</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>RNA molecules</font></td>
+   </tr>
+   <tr>
+    <td colspan=3></td>
+    <td colspan=1><font size=2>Proteins</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0422.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Multi-Step Regulation <br>
+  of Gene Expression</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0423.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Two Views of Regulation</a></font></div>
+  <div id=PPTC5 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB5 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The biochemical view: What are the specific
+    biochemical events that regulate gene expression? E.g. how is transcription
+    regulated?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The logical view: What is the functional outcome
+    of a regulatory event: up-regulation (activation) or down-regulation
+    (inhibition)?</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0433.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Basal Transcription</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0424.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Regulation of Transcription: Biochemical View</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0434.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">Transcription Factors</a></font></div>
+  <div id=PPTC8 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB8 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Most transcription factors are DNA-binding
+    proteins</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>They recognize and bind regulatory DNA motifs: relatively
+    specific short sequences of DNA</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>These regulatory sequences may be in the
+    vicinity of the promoter (RNAPII binding site) or at a distance (enhancers)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0435.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">Transcription Factors</a></font></div>
+  <div id=PPTC9 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB9 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Transcription factors modulate basal
+    transcription levels, either activating or repressing it</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In many cases this is mediated by facilitating
+    (positive control) or hindering (negative control) the assembly of the
+    general transcription complex</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The ability of the regulatory protein to bind to
+    DNA is often regulated as well</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0446.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">The Principles: <br>
+  Prokaryotic Regulation of Transcription</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0440.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">Example: The Tryptophan Repressor</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0441.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Activators and Repressors</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0442.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Activator and Repressor</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0445.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">Activator and Repressor</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0444.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Multiple Controls:<br>
+  The lac Operon “logic”</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0447.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Regulation At a Distance: Enhances</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0436.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Eukaryotic Transcription</a></font></div>
+  <div id=PPTC17 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB17 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Most prokaryotic genes are controlled by only
+    one or two gene regulatory proteins</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The regulation of higher eukaryotic genes is
+    much more complex, where tens of transcriptional activators and repressors
+    may bind to a large regulatory region</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, the control region of the eve gene
+    of the fruit fly (Drosophila) is 20,000 nt long, and has binding sites for
+    over 20 proteins</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0448.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Gene Control Region</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0449.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Eukaryotic Activators</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0450.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Eukaryotic Repressors</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0437.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">Combinatorial Regulation</a></font></div>
+  <div id=PPTC21 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB21 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This combination of multiple regulatory sites
+    (and proteins) for a single gene allows fine-tuning of transcription and
+    its levels</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The action of many transcription factors depends
+    on the formation of the correct complex at the regulatory site.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For example, some factors do not bind to DNA
+    directly but are recruited by binding to other DNA binding proteins.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The same protein may serve as an activator or
+    repressor, depending on the context in which it is present</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0451.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Context-Dependent Function</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0452.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">Combinatorial Regulation</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0438.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">Combinatorial Regulation</a></font></div>
+  <div id=PPTC24 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB24 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>The activity of a gene regulatory protein can
+    itself be regulated, e.g.</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Transcriptionally – control over the quantity of
+    proteins</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Post-translationally – control over the quantity
+    of active (binding-enabled) protein in the nucleus</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>This leads to the formation of complex regulatory
+    circuits</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0439.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">Regulating regulatory proteins</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0443.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)">The lac Operon “logic”</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0453.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">The Lysis/lysogeny logic<br>
+  (Shapiro and
+  McAdams, 1995; Arkin et al 1998)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0454.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">The Cell Cycle “logic”</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0455.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">The Cell Cycle Logic (cont)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0456.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">Modeling Approaches</a></font></div>
+  <div id=PPTC30 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB30 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Logical – treat as Boolean (AND, OR, NOT etc)
+    system</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Biochemical – model biochemical events as
+    accurately as possible</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hybrid – Abstract some of the biochemical
+    details away while modeling others in detail</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0427.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">Example: The Circadian Clock</a></font></div>
+  <div id=PPTC31 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB31 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Many organisms (including humans),<span
+    style="mso-spacerun: yes">&nbsp; </span>employ different “programs” in
+    light and dark conditions</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The switch between the two programs is the
+    result of the entrainment of an internal oscillator by external conditions
+    (light and dark)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The internal oscillator is termed the circadian
+    clock</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0458.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">The Circadian clock</a></font></div>
+  <div id=PPTC32 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB32 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Circadian clock can be found in many organisms
+    including cyanobacteria, fungi, flies, mouse and humans</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>They may have evolved more than once in
+    evolution</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>While they differ in the biochemical detail, it
+    appears there is an underlying “design principle” in their regulatory logic</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>This logic allows faithful intrinsic oscillation
+    of these molecular clocks</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0459.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">The Circadian Clock</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0460.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)">The Circadian Model <br>
+  (Barkai and
+  Leibler, 2000)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0461.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">The Circadian Model: Dependency on
+  Differential Rates</a></font></div>
+  <div id=PPTC35 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB35 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Oscillations will be achieved only if there is a
+    certain “imbalance” in the rates in the system</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>“A” related processes are fast (basal and
+    activated transcription, translation, and RNA and protein degradation)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>“R” related processes are significantly slower
+    (e.g. almost no basal transcription)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>A-R binding is extremely fast</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>A hybrid approach: A “logical” model is not
+    enough, but a full biochemical one is currently impossible</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0462.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">The Circadian Clock: System</a></font></div>
+  <div id=PPTC36 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB36 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    -include(rates).<br>
+    global(pA(R1),bA(R2),transcribeA(R13),utrA(R3),
+    degmA(R4),degpA(R12),pR(R5),rbs(R6),bR(R8),
+    transcribeR(R14),utrR(R9),degmR(R10),degpR(R11)).<br>
+    <br>
+    System::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>activator#A_GENE | <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>repressor#R_GENE
+    |<span style="mso-spacerun: yes">&nbsp;&nbsp; </span><br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>timer#Timer(transcribeA) | <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>timer#Timer(transcribeR) |<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp; </span>machineries#BASAL_TRANSCRIPTION | <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>machineries#BASAL_TRANSLATION |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>machineries#RNA_DEGRADATION
+    |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>machineries#PROTEIN_DEGRADATION .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0463.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">The Circadian Clock: <br>
+  “Gene A”, “RNA A”</a></font></div>
+  <div id=PPTC37 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB37 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    -include(rates).<br>
+    global(pA(R1),bA(R2),transcribeA(R13),utrA(R3),<br>
+    degmA(R4),degpA(R12),pR(R5),rbs(R6)).<br>
+    <br>
+    A_GENE::=
+    &lt;&lt; PROMOTED_A + BASAL_A .<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>PROMOTED_A::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>pA ?
+    {unbind_A} , ACTIVATED_TRANSCRIPTION_A(unbind_A) .<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>BASAL_A::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>bA ? [] ,
+    A_GENE | A_RNA .<br>
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>ACTIVATED_TRANSCRIPTION_A(unbind)::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>transcribeA ? [] , A_RNA | ACTIVATED_TRANSCRIPTION_A ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>unbind<span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>? [] , A_GENE &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A_RNA::= &lt;&lt; TRANSLATION_A + DEGRADATION_mA
+    .<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>TRANSLATION_A::= utrA
+    ? [] , A_RNA | A_PROTEIN<span style="mso-spacerun: yes">&nbsp;
+    </span>.<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>DEGRADATION_mA::= degmA
+    ? [] , true &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP38 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0473.htm');" onmouseover="Over(this)"
+  id=PPTL38 onmouseout="Out(this)">Syntax Note: Summing Processes</a></font></div>
+  <div id=PPTC38 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB38 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Processes with a guarded choice construct are
+    called normal processes</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Such processes may be summed together, to create
+    a third process, with a combined choice construct, e.g.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP39 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0472.htm');" onmouseover="Over(this)"
+  id=PPTL39 onmouseout="Out(this)">The Circadian Clock: “Protein A”</a></font></div>
+  <div id=PPTC39 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB39 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A_PROTEIN::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>&lt;&lt; release_AR(infinite),unbind_A_pA(R7a),unbind_A_pR(R7b).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>PROMOTION_AR + BINDING_R + DEGRADATION_A
+    .<br>
+    <br>
+    PROMOTION_AR::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>pA !
+    {unbind_A_pA} , unbind_A_pA ! [] , A_PROTEIN ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>pR !
+    {unbind_A_pR} , unbind_A_pR ! [] , A_PROTEIN .<br>
+    <br>
+    BINDING_R::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>rbs !
+    {release_AR} , BOUND_A_PROTEIN .<br>
+    <br>
+    BOUND_A_PROTEIN::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degpA ? [] , release_AR
+    ! [] , true ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>release_AR ? []
+    , A_PROTEIN .<br>
+    <br>
+    DEGRADATION_A::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degpA ? [] , true
+    &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP40 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0474.htm');" onmouseover="Over(this)"
+  id=PPTL40 onmouseout="Out(this)">The Circadian Clock: <br>
+  “Gene R”, “RNA R”</a></font></div>
+  <div id=PPTC40 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB40 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    -include(rates).<br>
+   
+    global(bR(R8),transcribeR(R14),utrR(R9),degmR(R10),degpR(R11),pR(R5),rbs(R6)).<br>
+    <br>
+    R_GENE::=
+    &lt;&lt; PROMOTED_R + BASAL_R .<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>PROMOTED_R::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>pR ?
+    {unbind_A} , ACTIVATED_TRANSCRIPTION_R(unbind_A) .<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>BASAL_R::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>bR ?
+    [] , R_GENE | R_RNA .<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>ACTIVATED_TRANSCRIPTION_R(unbind)::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>transcribeR ? [] , R_RNA | ACTIVATED_TRANSCRIPTION_R ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>unbind<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>? [] ,
+    R_GENE &gt;&gt; .<br>
+    <br>
+    R_RNA::= &lt;&lt; TRANSLATION_R +
+    DEGRADATION_mR .<br>
+    TRANSLATION_R::= utrR ? [] , R_RNA | R_PROTEIN<span style="mso-spacerun:
+    yes">&nbsp; </span>.<br>
+    DEGRADATION_mR::= degmR ? [] , true &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP41 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0464.htm');" onmouseover="Over(this)"
+  id=PPTL41 onmouseout="Out(this)">The Circadian Clock: “Protein R”</a></font></div>
+  <div id=PPTC41 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB41 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>R_PROTEIN::= <br>
+    <br>
+    &lt;&lt; BINDING_A + DEGRADATION_R .<br>
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>BINDING_A::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>rbs
+    ? {release_A} , BOUND_R_PROTEIN(release_A) .<br>
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>BOUND_R_PROTEIN(release)::=<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>release ? []<span style="mso-spacerun: yes">&nbsp; </span>,
+    R_PROTEIN ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>degpR ? [] , release ! [] , true .<br>
+    <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>DEGRADATION_R::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>degpR
+    ? [] , true &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP42 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0465.htm');" onmouseover="Over(this)"
+  id=PPTL42 onmouseout="Out(this)">The Circadian Clock: Machineries</a></font></div>
+  <div id=PPTC42 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB42 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    -include(rates).<br>
+    global(bA(R2),bR(R8),utrA(R3),utrR(R9),degmA(R4),degmR(R10), degpA(R12),
+    degpR(R11)).<br>
+    <br>
+    BASAL_TRANSCRIPTION::= <br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>bA ! [] ,
+    BASAL_TRANSCRIPTION ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>bR ! [] ,
+    BASAL_TRANSCRIPTION .<br>
+    <br>
+    BASAL_TRANSLATION::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>utrA ! [] ,
+    BASAL_TRANSLATION ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>utrR ! [] , BASAL_TRANSLATION .<br>
+    <br>
+    RNA_DEGRADATION::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degmA ! [] ,
+    RNA_DEGRADATION ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degmR ! [] ,
+    RNA_DEGRADATION .<br>
+    <br>
+    PROTEIN_DEGRADATION::=<br>
+    <span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degpA ! [] ,
+    PROTEIN_DEGRADATION ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>degpR ! [] ,
+    PROTEIN_DEGRADATION .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP43 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0466.htm');" onmouseover="Over(this)"
+  id=PPTL43 onmouseout="Out(this)">The Circadian Clock: Rates</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP44 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0467.htm');" onmouseover="Over(this)"
+  id=PPTL44 onmouseout="Out(this)">Basal Transcription</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP45 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0469.htm');" onmouseover="Over(this)"
+  id=PPTL45 onmouseout="Out(this)">Translation and RNA degradation</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP46 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0476.htm');" onmouseover="Over(this)"
+  id=PPTL46 onmouseout="Out(this)">Protein A and R</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP47 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0468.htm');" onmouseover="Over(this)"
+  id=PPTL47 onmouseout="Out(this)">Activated Transcription</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP48 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0478.htm');" onmouseover="Over(this)"
+  id=PPTL48 onmouseout="Out(this)">Activated Transcription</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP49 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0470.htm');" onmouseover="Over(this)"
+  id=PPTL49 onmouseout="Out(this)">A-R Binding</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP50 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0477.htm');" onmouseover="Over(this)"
+  id=PPTL50 onmouseout="Out(this)">The Circadian Model <br>
+  (Barkai and
+  Leibler, 2000)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP51 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0475.htm');" onmouseover="Over(this)"
+  id=PPTL51 onmouseout="Out(this)">Circadian Clock: Results</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP52 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0457.htm');" onmouseover="Over(this)"
+  id=PPTL52 onmouseout="Out(this)">Exercise 7</a></font></div>
+  <div id=PPTC52 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB52 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Modify the circadian clock program in the
+    following ways:</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(a) Run the same system but with the same rates
+    for the transcription of R and A (basal=2; activated=40) (1000 units)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(b) Abolish the negative feedback of R (600
+    units) <br>
+    (no binding between A and R)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(c) Abolish the positive feedback of A on its
+    own transcription (no binding of A to its promoter) (2000 units)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(d) Abolish the positive feedback of A
+    completely <br>
+    (no binding of A to any promoter) (1000 units)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>(e) The R repression mechanism is mediated by
+    competing with A on the promoter (rather than by binding the A protein).
+    R’s binding rate to pA and pR is 100. Its unbinding rate is 10 (800 units)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP53 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0479.htm');" onmouseover="Over(this)"
+  id=PPTL53 onmouseout="Out(this)">Exercise 7</a></font></div>
+  <div id=PPTC53 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB53 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In each case, run the clock program for the
+    noted time units, and plot (scale 1) the behavior of the protein and RNA
+    molecules of each species (note: for the total protein you must sum the
+    free and bound processes).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Submit code and plots.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Explain the difference in the results between
+    these runs and the “original” one. If A control “light genes” and R
+    controls “day genes” what is the effect of each of these changes on the
+    organism?</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Note: these runs take significantly longer than
+    previous programs. Submission in 3 weeks.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP54 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0431.htm');" onmouseover="Over(this)"
+  id=PPTL54 onmouseout="Out(this)">Biochemical Model: Arkin’s Stochastic Model</a></font></div>
+  <div id=PPTC54 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB54 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A detailed stochastic model of the kinetics of
+    transcription and translation and degradation (in prokaryotes)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Includes initiation, propagation and termination
+    stages in each of these processes</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Was used as an underlying biochemical model of
+    the transcription, translation and degradation events in the lysis/lysogeny
+    circuit</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP55 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0410.htm');" onmouseover="Over(this)"
+  id=PPTL55 onmouseout="Out(this)">References</a></font></div>
+  <div id=PPTC55 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB55 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>General Introduction: Alberts et al. (1994)
+    Molecular Biology of the Cell, Chapter 9, pp.401-433</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The Circadian Clock: Barkai and Leibler (2000)
+    Circadian clocks limited by noise. Nature 403:267-268</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Stochastic mechanism of gene expression: McAdams
+    and Arkin (1997) Stochastic mechanisms in gene expression. PNAS 94:814-819</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Lysis/Lysogeny: Arkin et al (1998) Stochastic
+    kinetic analysis of developmental pathway bifurcation in phage lambda
+    infected Escherichia coli.<span style="mso-spacerun: yes">&nbsp;
+    </span>Genetics 149: 1633-1648</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Cell cycle: Kohn (1999) Molecular interaction
+    map of the mammalian cell cycle control and DNA repair systems</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The tryptophan operon: Santillian and Mackey
+    (2001) Dynamic regulation of the tryptophan operon: A modeling study and
+    comparison with experimental data. PNAS 98: 1364-1369</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+</body>
+
+</html>

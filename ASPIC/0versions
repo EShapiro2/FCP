@@ -1,0 +1,116 @@
+Version Spi-release.24-03-2003.tar.gz
+
+Added macro get_channel_status - see Documentation/program_macros.txt.
+Fixed problem with suspend (see Documentation/user_macros.txt, s(N)).
+Fixed spi2t to ignore annotations in record.
+
+Version Spi-release.01-04-2003.tar.gz
+
+Corrected some problems with program macros.
+Updated debugger (pdb) to exclude system processes from display.
+
+Version Spi-release.04-05-2003.tar.gz
+
+Recognize "public" instead of "global".
+Fixed bugs in use of user_macros following Limit exceeded.
+Updated and added documentation.
+
+Version Spi-release.20-06-2003.tar.gz
+
+Fixed timing bug. 
+Completed "global"->"public" change.
+Added "note" option.
+
+Version Spi-release.05-08-2003.tar.gz
+
+Fixed bug in "all" for channel_attributes.
+Moved cta definition from "H" to "ph" in SpiFcp user_macros.
+Implemented public variables.
+Added public_variables.txt; modified BNF.txt.
+
+Version Spi-release.31-08-2003.tar.gz
+
+Added diagnostics for various errors in referencing public variables.
+Added Tutorial to release.
+
+Version Spi-release.26-12-2003.tar.gz
+
+Fixed references to ctype.h.
+Improved core dump.
+Revised README, install; added INSTALL.
+
+Version Aspic-release.2004-05-28.tar.gz
+
+Fixed various bugs.
+Improved Channel formatting.
+Constructed Aspic-release.
+
+Version Aspic-release.2004-10-24.tar.gz
+
+Improved work area allocation (fcp.?); permit up to -h120000.
+Compiles biospi modules in interpret mode.
+Added randomize and serialize.
+Edited spidbg help text.
+
+Version Aspic-release.2005-01-01.tar.gz
+
+Updated user_macros: removed prgcs,spgcs; added reset.
+Fixed bug in use of repeat (esp. in record and run).
+Updated Documentation: added randomize, serialize, reset; changed some
+nomenclature.
+Added automatic randomization of selection among multiple instantaneous
+offers within a simultaneous set of offers (e.g. in one procedure).
+Fixed some bugs.
+
+Version Aspic-release.2005-04-22.tar.gz
+
+Updated user_macros: removed "t".
+Added atrace to BioSpi/user_macros, and removed reset for run, record, etc.
+Fixed some bugs in ambient_server and added synchronization and ambient(_,_)
+record items.
+Added vesicle and complex sub-directories to BioSpi/Examples; also added README.
+Added trace.txt to BioSpi/Documents; modified user_macros.txt & record.txt.
+Added idle(Number) item to monitor's record output stream.
+
+Version Aspic-release.2005-05-07.tar.gz
+
+Restructured Aspic-release, moved Documentation and Examples to new first
+level directory, SpiFcp.  Added source to SpiFcp and to BioSpi.  Hard-linked
+most of the .bin files (not user_macros nor library_server#spi_library).
+Added recognition and processing of <service>#[<predicates>] to repeat.
+Revised both versions of user_macros.cp for release to users.  Fixed various
+bugs in ambient_server, ambient_trace, repeat, spi_utils, user_macros (both).
+Updated SpiFcp/Documentation/repeat.txt .
+
+Version Aspic-release.2005-07-17.tar.gz
+
+Revised documents for restructured release; binary up-to-date; added
+ambient_list, and revised atrace; fixed some minor bugs; fixed bug in send
+channel code generation (spifcp/servers.cp).
+
+Version Aspic-release.2005-10-27.tar.gz
+
+Added support for Macintosh OSX BSD 10.4 and forward; fixed some minor bugs;
+added module multiple.cp; added documents CONSTANTS.txt, multiple.txt,
+multiple_bnf.txt; updated and edited various other documents.
+
+Version Aspic-release.2006-02-02.tar.gz
+
+Much improved multiple; fixed real value handling; fixed stream.cp; revised
+various documents, particulary CONSTANTS.txt, multiple.txt, multiple_bnf.txt;
+updated spi_monitor et al to use real numbers directly (quoted reals still
+work as previously).
+
+Version Aspic-release.2006-03-25.tar.gz
+
+Added support for PC under CYGWIN.
+
+Version Aspic-release.2006-10-24.tar.gz
+
+Added support for "object"s; fixed some bugs in handling user <weighter>s.
+
+Version Aspic-release.2007-02-22.tar.gz
+
+Added support for Macintosh with i386 architecture; revised spi_record to
+go 15% faster; fixed some minor bugs; revised BNF.txt; simplified Logix
+guards and library goal reference.

@@ -1,0 +1,249 @@
+The spi_record process can run a Stochastic Pi Calculus (spifcp) process
+and record its behavior.
+
+   spi_record#run(<RPC>, <time limit>)
+or
+   spi_record#run(<RPC>, <file_name>[, <time limit>[, <convert>[, <format>]]])
+   
+RPC is a Logix remote procedure call, Path#Goal
+(see supplement.txt for details).
+
+The time limit forces termination of the run, after that much internal time has
+elapsed.  If the run becomes idle, or terminates with a "done" or "closed"
+indicator, before the the time limit is reached, you will usually want to abort
+the run (enter: abort<cr>) to avoid excessive diagnostic output.
+
+The <convert> argument may be a C-format specification for recording internal
+time values - default "%.7G".  Alternatively it may be a positive value by
+which you may scale the internal time values in the File Output and in the
+Standard Output.
+
+You may also format the File Output, which is written to the named file,
+specifying one of the types:
+
+   none, process, creator, full
+
+The default is "none".  The others add information to the formatted output.
+One additional format string is "ambient" - see BioSpi/record.txt for a
+description of its File Output.
+
+You may also use the macros:
+
+    run(<quantified process set>[, <time limit>])
+or
+    run(<quantified process set>, <file_name>
+		[, <time limit>[, <convert>[, <format>]]])
+
+See repeat.txt for the definitition of <quantified process set>.
+
+Note that <file name> may be the token [] ,specifying that there is no file.
+
+
+Examples
+--------
+
+1. run(hysteresis#MODULE, 100)
+
+   start the process  MODULE  in program module  hysteresis  and
+   terminate the run after 100 internal time units have elapsed.  To 
+   terminate the run prematurely, abort the run or enter  <control>C 
+   to kill the Logix system.
+
+2. run(hysteresis#MODULE, fff, 100)
+
+   does the same thing, and records the events of the run on file 
+   fff.
+
+3. run(hysteresis#MODULE, fff, 100, 10)
+
+   does the same thing, and records the events of the run on file 
+   fff with internal time values scaled times 10.
+
+4. run(hysteresis#MODULE, fff, 100, 1, full)
+
+   does the same thing as 2, recording on fff with fully annotated output.
+
+5. run(hysteresis#MODULE, fff, 100, "%E")
+
+   does the same thing as 3, except that internal time values are not 
+   scaled and are output in standard floating format.
+
+
+Additional Macros
+-----------------
+
+Several shell and user macros are available during a run.  In all cases,
+the Reply variable is set "true" when the corresponding request is presented
+to spi_monitor.
+
+1. pause or pause(Reply)
+   causes the processing of communications to wait.  Successive "pause" 
+   macros step the communications.
+
+2. continue or continue(Reply) causes the processing of communications to 
+   proceed, following a pause.
+
+3. note(<term>) or note(<term>, Reply) causes the <term> to appear in the
+   Standard Output.
+
+4. item(<term>) or item(<term>, Reply) causes the <term> to appear in both
+   the File Output and the Standard Output.
+
+5. data(<term>) or data(<term>, Reply) causes the <term> to be inserted in
+   the Record Output stream of the spi_monitor.
+
+
+File Output
+-----------
+
+The output file is a transformation of the Record Output stream generated
+by spi_monitor.
+
+The elements of the output file are lines which have one of several forms.
+
+   a. A positive real-valued internal time.
+
+   b. +<process name>, which records the start of a communication.
+
+   c. -<process name>, which records the end of a communication.
+   
+   d. <completion status>(<number>), a note that the run ended at internal
+      time <number>, where <completion status> is one of:
+
+	  "done" - the process exceeded the specified time limit,
+	  "terminated" - the process ended normally,
+	  "aborted" - the process ended abnormally (due to "abort" signal),
+	  "closed" - the spi_monitor closed its Record Output stream.
+   
+   e. seconds(<non-negative integer>), the charge time in seconds of run
+      execution.
+	  
+   f. arbitrary strings, designated by call:
+   
+          spi_monitor#record_item(<term>)
+		  
+	  where <term> is any Logix term.
+
+Annotation
+----------
+
+Annotation appears on "c." lines:
+
+1. The "none" format is unannotated.
+
+   14.00782
+   -PROMOTION_AR.1
+   -ACTIVATED_TRANSCRIPTION_A
+
+2. The "process" format includes an arrow, indicating whether the
+   process sent (->) or received (<-) a message, followed by the name
+   within the process of the channel which transmitted the message.
+
+   14.01351
+   -PROMOTION_AR.1 -> e2
+   -ACTIVATED_TRANSCRIPTION_A <- e
+
+3. The "creator" format is similar, but with the created identifier of
+   the channel instead of its name - this includes a unique index for
+   each instance of a local channel.
+
+   14.13352
+   -PROMOTION_AR.1 -> A_PROTEIN.1.e2(4169)
+   -ACTIVATED_TRANSCRIPTION_A <- A_PROTEIN.1.e2(4169)
+
+4. The "full" format is similar, providing both the name and the created
+   identifier the channel,  separated by a colon (:).
+   
+   14.00782
+   -PROMOTION_AR.1 -> e2: A_PROTEIN.1.e2(4112)
+   -ACTIVATED_TRANSCRIPTION_A <- e: A_PROTEIN.1.e2(4112)
+
+Real time between pause and continue operations, or while the sytem is idle
+is not included in the "seconds" file output line, nor in the completion
+status nor in any Standard Output line.
+
+
+Standard Output
+---------------
+
+The following lines appear in the Standard Output:
+
+1. idle @ <internal time>: time <charge time>
+
+   whenever the system blocks, or there is nothing for the spi_monitor to do.
+
+2. pause @ <internal time>: time <charge time>
+
+   in response to a "pause" request directed to the spi_monitor.
+
+3. arbitrary string, designated by the calls:
+
+       spi_monitor#record_note(<arbitrary term>)
+       spi_monitor#record_item(<arbitrary term>)
+
+4. <completion status> @ <internal time>: time <charge time>
+
+5. ~ followed by an arbitrary string, representing an unrecognised arbitrary
+   term in the spi_monitor Record Output stream. This might result from call:
+   
+       spi_monitor#record_data(<arbitrary term>)
+
+<charge time> is formatted [[[<days>:]<hours>:]<minutes>:]<seconds> .
+
+
+File Output Analysis
+--------------------
+
+To analyze the output file, producing a table suitable for plotting with
+Matlab or gnuplot, use the PERL program "spi2t" - e.g.
+
+   % spi2t fff
+
+creates a table, where column 1 is time, and columns 2...n are totals
+of active processes.  A short file, with one long line, listing the
+column (process) names, and n-1 lines associating process names with
+array columns is also produced.  For example:
+
+  fff.table  and  fff.names
+
+Column one of the .table file is incremented approximately by 1 between
+rows (lines).  To change the increment to another positive number, N,
+add the argument N to the call to spi2t - e.g.
+
+  % spi2t fff 0.1
+
+To combine column sums add terms of the form:
+
+    <summed_column_name>+=<absorbed_column_name>
+
+e.g.
+
+  % spi2t fff A_GENE+=BASAL_A+=PROMOTED_A A_GENE+=ACTIVATED_TRANSCRIPTION_A
+
+To rescale the output times, specify negative rescale value - e.g.
+
+  % spi2t fff -10
+
+to rescale output by 1/10.
+
+Arguments following the file name may appear in any order.
+
+Lines in the file other than internal times and communication starts and
+ends are printed (e.g. a line resulting from a call spi_monitor#item(<term>)).
+
+
+To split the table into multiple 2-column files, suitable for gnuplot, use the
+PERL program "t2xys" - e.g.
+
+  % t2xys fff
+  % gnuplot
+  gnuplot> plot "fff.3" smooth unique
+
+A short shell script, spixys, combines the functions with a call to gnuplot.
+
+
+
+
+This document is licensed under Gnu General Public License - Version 3
+
+    http://www.nongnu.org/efcp/gnu-gpl3.html

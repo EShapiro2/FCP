@@ -1,0 +1,4 @@
+#!/bin/sh
+cp -f ./Permanent/sgi/*.o .
+./mkmk sgi_irix_5d2 concatenate ctl file freeze_term \
+interface math timer tty spi $@

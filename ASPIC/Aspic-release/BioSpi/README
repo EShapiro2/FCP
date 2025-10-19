@@ -1,0 +1,29 @@
+This directory may be used as a base for the development of Ambient
+Stochastic Pi Calculus Programs.source
+
+The "executable" of the user macros for the ambient version is in Bin.
+If you need to use another directory for development, link or copy the
+module Bin/user_macros.bin to that directory (or its Bin sub-directory),
+or to a directory which is between the scopes of that directory
+and your home directory,
+
+The Source directory contains the source of the additions to aspic which
+implement Ambients.
+
+The module Source/user_macros.cp defines the user macros of BioSpi.  Try
+command "ph" for a list of user macros.  These user macros apply to
+source files written in language(biospi).  For further information about
+the user macros see the documents named user_macros.txt in Documentation
+sub-directories.
+
+The other modules in Source are the service that manages the Ambient
+tree (ambient_server.cp) and a module which implements the user macro
+"atrace" (ambient_list.cp) - see Documentation/trace.txt for details.
+
+The biospi sub-directory of Source contains the program which transforms
+modules written in language(spifcp) into Logix source programs written
+in language(compound).
+
+Some examples of Ambient Stochastic Pi Calculus programs are included in
+sub-directory, Examples.
+

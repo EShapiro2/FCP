@@ -1,0 +1,170 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../YaaraYaki.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Modeling a Molecular Computing Device using &Otilde;-Calculus</title>
+<meta name=Description content="21-Jun-01: …The Automaton Code ">
+<link rel=next href="v3_slide0042.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0041.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master11_background.gif" bgcolor=black alink="#9933ff"
+link=aqua vlink="#0099cc" text="#f8f8f8" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=218 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=181 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=25 height=27></td>
+  <td width=233 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=233 height=27><font face="Times New Roman" color=yellow size=4>…</font><font
+    face=Tahoma color=yellow size=4>The Automaton Code</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=217 height=27 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=180 colspan=2></td>
+  <td width=399 height=180 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=120 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=49 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=46 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=64 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=38 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=169 height=17 colspan=2><font face=Tahoma color=lime size=1><b>Extract</b></font><font
+    face=Tahoma color=white size=1><b>(State,Input) ::=</b></font><br>
+    </td>
+    <td width=230 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=399 height=1 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=399 height=17 colspan=8><font face=Tahoma color=white size=1><b><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>{ string_to_dlist(
+    Input, [Character | Tail], []) } |</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=399 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=279 height=17 colspan=4><font face=Tahoma color=white size=1><b><span
+    style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{ list_to_string( Tail, Input' ) } |</b></font><br>
+    </td>
+    <td width=120 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=399 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=343 height=17 colspan=7><font face=Tahoma color=white size=1><b><span
+    style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{ list_to_string( [Character], Symbol ) } |</b></font><br>
+    </td>
+    <td width=56 height=17></td>
+   </tr>
+   <tr>
+    <td width=399 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=120 height=17><font face=Tahoma color=white size=1><b><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span><span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span></b></font><font face=Tahoma
+    color=lime size=1><b>Branch </b></font><font face=Tahoma color=white
+    size=1><b>.</b></font><br>
+    </td>
+    <td width=279 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=399 height=22 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=283 height=20 colspan=5><font face=Tahoma color="#9933ff" size=2><b>Extract
+    breaks the input into two.</b></font><br>
+    </td>
+    <td width=116 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=399 height=3 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=215 height=20 colspan=3><font face=Tahoma color="#9933ff" size=2><b>Head
+    of Input </b></font><font face=Wingdings color="#9933ff" size=2><b>&agrave;</b></font><font
+    face=Tahoma color="#9933ff" size=2><b> Symbol .</b></font><br>
+    </td>
+    <td width=184 height=20 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=399 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=305 height=20 colspan=6><font face=Tahoma color="#9933ff" size=2><b>The
+    Rest Symbols of Input </b></font><font face=Wingdings color="#9933ff"
+    size=2><b>&agrave;</b></font><font face=Tahoma color="#9933ff" size=2><b> Input .</b></font><br>
+    </td>
+    <td width=94 height=20 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=180></td>
+ </tr>
+ <tr>
+  <td width=475 height=87 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

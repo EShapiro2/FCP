@@ -1,0 +1,6 @@
+
+/*-export([string/1]).*/
+-mode(trust).
+-language(compound).
+
+w4(Fw44):- true : Fw44=1118 .

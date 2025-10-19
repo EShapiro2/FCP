@@ -1,0 +1,184 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./pi_files/filelist.xml">
+<title>The pi-calculus</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>aviv</o:Author>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>qbi</o:LastAuthor>
+  <o:Revision>56</o:Revision>
+  <o:TotalTime>99</o:TotalTime>
+  <o:Created>2000-10-03T14:47:00Z</o:Created>
+  <o:LastSaved>2001-11-18T18:25:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>326</o:Words>
+  <o:Characters>1862</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>15</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>2286</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Lucida Sans Unicode";
+	panose-1:2 11 6 2 3 5 4 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:-2147476737 14699 0 0 63 0;}
+@font-face
+	{font-family:"Gill Sans Light";
+	mso-font-alt:Arial;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:7 0 0 0 147 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h2
+	{mso-style-next:Normal;
+	margin:0cm;
+	margin-bottom:.0001pt;
+	text-align:center;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	mso-bidi-font-size:12.0pt;
+	font-family:"Gill Sans Light";
+	color:#0066CC;
+	font-weight:bold;
+	font-style:italic;}
+a:link, span.MsoHyperlink
+	{color:#FF6600;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:red;
+	mso-text-animation:none;
+	font-weight:bold;
+	text-decoration:none;
+	text-underline:none;
+	text-decoration:none;
+	text-line-through:none;}
+p
+	{margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.Avivweb, li.Avivweb, div.Avivweb
+	{mso-style-name:Aviv_web;
+	mso-style-parent:"Normal \(Web\)";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Lucida Sans Unicode";
+	mso-fareast-font-family:"Times New Roman";
+	mso-bidi-font-family:"Times New Roman";}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US link="#ff6600" vlink=red style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=Avivweb align=center style='text-align:center'><span style='font-size:
+11.0pt;mso-bidi-font-size:9.0pt'>THE PI-CALCULUS AND RELATED PROCESS ALGEBRAS</span><span
+style='font-size:14.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:9.0pt;font-family:"Gill Sans Light";
+color:#0066CC'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>The
+pi-calculus was developed by Robin Milner as a formal language for concurrent computational
+processes, such as mobile telephone systems. The pi-calculus provides a
+framework for the representation, simulation, analysis and verification of
+mobile communication systems.<span style="mso-spacerun: yes">  </span></span><span
+style='font-size:10.0pt'>A typical system in the pi-calculus consists of
+multiple concurrent processes. Pairs of processes interact with each other by
+sending and receiving messages in a synchronized way. This communication is
+done on complementary (input and output) channels. The content of messages is
+also channels. As a result of such a communication event, the recipient process
+may now use the received channel for further communication.<span
+style="mso-spacerun: yes">  </span>This feature, called mobility, allows the
+network “wiring” to change with interaction. Note, that the calculus is non-deterministic.<span
+style="mso-spacerun: yes">  </span>Thus, when several options are available,
+the actual interaction that occurs is chosen on a completely random basis.<o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:7.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:10.0pt'>A concise and simple <a
+href="pi.ps"><b>syntax</b></a> is all is needed in order to specify a system in
+the pi-calculus. Several <a href="pi.ps"><b>congruence laws</b></a> determine
+when two syntactically different expressions are in fact equivalent. Four <a
+href="pi.ps"><b>reduction rules</b></a> specify when and how communication
+occurs. <o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:7.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:10.0pt;mso-bidi-font-size:12.0pt'>The
+pi-calculus belongs to a family of concise languages called <a
+href="http://www.cs.auc.dk/mobility/" target="_blank"><b>mobile calculi</b></a>
+(or: process algebras). Two such calculi, the stochastic pi-calculus and the
+ambient calculus are particularly important for our needs. The former, </span><span
+style='font-size:10.0pt'>developed by <a
+href="http://profs.sci.univr.it/~priami/" target="_blank"><b>Corrado Priami</b></a>,
+allows us to assign rates to communication actions, and is essential for
+accurate modeling of biochemical systems. The latter, developed by <a
+href="http://www.luca.demon.co.uk/" target="_blank"><b>Luca Cardelli</b></a>, </span><span
+style='font-size:10.0pt;mso-bidi-font-family:"Lucida Sans Unicode"'>facilitates
+the specification of process location and movement through domains, and can be
+used for the representation of <span style="mso-spacerun: yes"> </span>various
+aspects of molecular localization and compartmentalization</span><span
+style='font-size:10.0pt'>. <span style="mso-spacerun: yes"> </span><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:7.0pt'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=Avivweb><span style='font-size:10.0pt'>A simple description of the
+syntax and semantics of the pi calculus can be found in our <a
+href="posters.htm" target=Frame2><b>posters</b></a>, <a href="presentations.htm"
+target=Frame2><b>presentations</b></a>, and <a href="papers.htm"><b>papers</b></a>.
+Complete information on the original pi-calculus and the stochastic variant is
+available <a href="pi_links.htm" target=Frame2><b>here</b></a>. </span><span
+style='font-size:10.0pt;mso-bidi-font-size:12.0pt'><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

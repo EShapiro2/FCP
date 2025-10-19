@@ -1,0 +1,73 @@
+/*
+     
+Concurrent Prolog Programming Techniques
+     
+Instructor:  William Silverman
+     
+Handout No. 4,  Monday, December 8
+     
+
+Recursive process networks - 1    
+    
+*/
+
+-export([reverse/2,isort/2,primes/2]).
+
+% Linear pipes
+
+% (1) Naive Reverse
+% reverse(Xs,Ys) :- reversing the list Xs gives Ys.
+
+reverse([X|Xs],Ys) :- reverse(Xs?,Zs), append(Zs?,[X],Ys).
+reverse([],[]).
+
+% append(Xs,Ys,Zs) :- appending Ys to the stream Xs gives Zs.
+
+append([X|Xs],Ys,[X|Zs]) :- append(Xs?,Ys,Zs).
+append([],Xs,Xs).
+
+
+% (2) Insertion Sort
+% isort(Xs,Ys) :- sorting the list of integers Xs gives Ys.
+
+isort([X|Xs],Ys) :- isort(Xs?,Zs), insert(X,Zs?,Ys).
+isort([],[]).
+
+% insert(X,Xs,Ys) :- inserting the integer X to the ordered list of
+%	integers Ys gives the ordered list of integers Zs.
+
+insert(X,[],[X]).
+insert(X,[Y|Ys],[X,Y|Ys]) :- X =< Y | true.
+insert(X,[Y|Ys],[Y|Zs]) :- X > Y | insert(X,Ys?,Zs).
+
+% (3) Sieve of Eratosthenes
+% primes(N,Ps) :- Ps are the primes smaller then N.
+
+primes(N,Ps) :-
+	integers(2,N,Ns), sift(Ns?,Ps).
+
+% sift(Ns,Ps) :- Ps are the numbers in Ns which are relatively
+%	prime with respect to their predecessors.
+
+
+sift([P|Ns],[P|Ps]) :- filter(Ns?,P,Ns1), sift(Ns1?,Ps).
+sift([],[]).
+
+
+% filter(In,X,Out) :-
+
+filter([X|In],P,[X|Out]) :-
+	Rem := X \ P, Rem =\= 0 | filter(In?,P,Out).
+filter([X|In],P,Out) :-
+	Rem := X \ P, Rem =:= 0 | filter(In?,P,Out).
+filter([],_,[]).
+
+% integers((N1,N2,Ns) :- Ns are the integers between N1 and N2.
+
+integers(N,N,[]).
+integers(N1,N3,[N1|Ns]) :-
+	N1 < N3 |
+	N2 := N1+1,
+	integers(N2?,N3?,Ns).
+
+

@@ -1,0 +1,238 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class2.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description
+content="2-May-01: Multiple Process Calls: Arithmetics and Logix Commands">
+<link rel=next href="v3_slide0175.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0172.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0172_background.gif" bgcolor=white alink="#3333cc"
+link="#ccccff" vlink="#b2b2b2" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=328 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=31 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=24 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=119 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=43 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=72 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=47 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=50 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=31 height=64></td>
+  <td width=438 height=64 colspan=11>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=91 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=255 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=438 height=35 colspan=3 align=center><font face="Comic Sans MS"
+    size=5>Multiple Process Calls: Arithmetics</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=91 height=29></td>
+    <td width=255 height=29 align=center><font face="Comic Sans MS" size=5>and
+    Logix Commands</font><br>
+    </td>
+    <td width=92 height=29></td>
+   </tr>
+  </table>
+  </td>
+  <td width=6 height=64></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=56 height=102 colspan=3></td>
+  <td width=397 height=102 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=140 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=43 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=43 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=140 height=20><font face="Courier New" size=3><b>System</b></font><font
+    face="Courier New" color="#009900" size=3><b>(N1)</b></font><font
+    face="Courier New" color=black size=3><b>::=</b></font><br>
+    </td>
+    <td width=257 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=397 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=183 height=20 colspan=2><font face="Courier New" size=3><b><span
+    style="mso-spacerun: yes">&nbsp;</span>&lt;&lt; CREATE_H</b></font><font
+    face="Courier New" color="#009900" size=3><b>(N1)</b></font><font
+    face="Courier New" color=black size=3><b>.</b></font><br>
+    </td>
+    <td width=214 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=194 height=20 colspan=3><font face="Courier New" size=3><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CREATE_H</b></font><font
+    face="Courier New" color="#009900" size=3><b>(C)</b></font><font
+    face="Courier New" color=black size=3><b>::=</b></font><br>
+    </td>
+    <td width=203 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=237 height=20 colspan=4><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span></b></font><font
+    face="Courier New" color=red size=3><b>{C =&lt; 0}</b></font><font
+    face="Courier New" color=black size=3><b> , </b></font><font
+    face="Courier New" color="#ff6600" size=3><b>true</b></font><font
+    face="Courier New" color=black size=3><b> ;</b></font><br>
+    </td>
+    <td width=160 height=20></td>
+   </tr>
+   <tr>
+    <td width=397 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=397 height=20 colspan=5><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span></b></font><font
+    face="Courier New" color=red size=3><b>{C &gt; 0}</b></font><font
+    face="Courier New" color=black size=3><b><span style="mso-spacerun:
+    yes">&nbsp; </span>, </b></font><font face="Courier New" color="#3333cc"
+    size=3><b>{C--}</b></font><font face="Courier New" color=black size=3><b> |
+    H | </b></font><font face="Courier New" color=purple size=3><b>self</b></font><font
+    face="Courier New" color=black size=3><b> &gt;&gt; .</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=22 height=102 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=15 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=337 height=13 colspan=7></td>
+  <td width=67 height=21 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=67 height=21 align=center><font face="Comic Sans MS"
+    color=purple size=2>iteration</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=71 height=13 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=32 height=8 colspan=2></td>
+  <td width=143 height=39 colspan=2 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=41 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=61 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=143 height=21 colspan=3 align=center><font face="Comic Sans MS"
+    color="#ff6600" size=2>The empty process</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=41 height=18></td>
+    <td width=61 height=18 align=center><font face="Comic Sans MS"
+    color="#ff6600" size=2><span style="mso-spacerun: yes">&nbsp;</span>(also
+    0)</font><br>
+    </td>
+    <td width=41 height=18></td>
+   </tr>
+  </table>
+  </td>
+  <td width=162 height=8 colspan=3></td>
+  <td width=71 height=8 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=32 height=3 colspan=2></td>
+  <td width=300 height=3 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=32 height=21 colspan=2></td>
+  <td width=43 height=21></td>
+  <td width=72 height=21>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=72 height=21><font face="Comic Sans MS" color="#3333cc" size=2>Logix
+    goal</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=185 height=21 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=32 height=7 colspan=2></td>
+  <td width=300 height=7 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=475 height=25 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=387 height=14 colspan=8></td>
+  <td width=50 height=14 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=50 height=14 align=center><font face=Tahoma size=1>h2_7*.cp</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=38 height=14 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=13></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

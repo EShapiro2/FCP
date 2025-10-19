@@ -1,0 +1,494 @@
+BNF for BioFcp - see CONSTANTS.txt for the BNF of Logix constants.
+
+<program>              ::= <bio_attributes> . <process_definitions> .
+                           <process_definitions> .
+
+<bio_attributes>       ::= <bio_attribute>
+                           <bio_attribute> . <bio_attributes>
+
+<bio_attribute>        ::= <export_declaration>
+                           <public_declaration>
+                           <default_baserate_declaration>
+                           <default_weighter_declaration>
+
+<export_declaration>   ::= export(<process_names>)
+
+<public_declaration>   ::= public(<parameters>)
+
+<default_baserate_declaration>
+                       ::= baserate(<base_rate>)
+
+<default_weighter_declaration>
+                       ::= weighter(<weighter_declaration>)
+
+<process_names>        ::= <process_name>
+                           <process_name> , <process_names>
+
+<weighter_declaration> ::= <weighter>
+                           <weighter>(<weighter_parameters>)
+
+<weighter_parameters>  ::= <weighter_parameter>
+                           <weighter_parameter> , <weighter_parameters>
+
+<parameters>           ::= <parameter>
+                           <parameter> , <parameters>
+
+<parameter>            ::= <channel_declaration>
+                           <logix_variable>
+
+<channel_declaration>  ::= <channel>
+                           <channel>(<base_rate>)
+                           <channel>(<base_rate> , <weighter_declaration>)
+
+<base_rate>            ::= <number>
+                           infinite
+
+<process_definitions>  ::= <process>
+                           <process> . <process_definitions>
+
+<process>              ::= <biospi_process>
+                           <logix_process>
+
+<biospi_process>       ::= <left_hand_side> ::= <biospi_clauses>
+
+<logix_process>        ::= <left_hand_side> :- <logix_clauses>
+
+<left_hand_side>       ::= <atom>
+                           <atom>+<parameter>
+                           <atom>+(<parameters>)
+
+<atom>                 ::= <process_name>
+                           <process_name>(<arguments>)
+
+<arguments>            ::= <argument>
+                           <argument> , <arguments>
+
+<argument>             ::= <channel>
+                           <logix_variable>
+
+<biospi_clauses> ::=       <communication_clauses>
+                           <comparison_clauses>
+                           <biospi_guard_clauses>
+                           <biospi_body>                           
+
+<communication_clauses> ::=
+                           <communication_clause> 
+                           <communication_clause> ; <communication_clauses>
+
+<communication_clause> ::= <communication> , <biospi_clauses>
+
+<communication>        ::= <receive>
+                           <send>
+                           <delay>
+                           <capability>
+
+<receive>              ::= <directed channel> ? <transmission>
+                           ? <directed channel>
+
+<send>                 ::= <directed channel> ! <transmission>
+                           <directed channel> !
+
+<directed channel>     ::= <direction> <channel>
+                           <channel>
+
+<delay>                ::= delay(<base_rate>)
+                           delay(<base_rate>, <weighter_declaration>)
+
+<direction>            ::=  local
+                            p2c
+                            c2p
+                            s2s
+
+<transmission>         ::= <message>
+                           <multiplier> * <message>
+                           <message> * <multiplier>
+
+<message>              ::= []
+                           {<parameters>}
+
+<multiplier>           ::= <positive_integer>
+
+<capability>           ::= enter <channel>
+                           accept <channel>
+                           exit <channel>
+                           expel <channel>
+                           merge - <channel>
+                           merge + <channel>
+                           <logix_variable>
+
+<comparison_clauses>   ::= <comparisons>
+                           <comparisons> ; otherwise , <biospi_clauses>
+
+<comparisons>          ::= <comparison_clause>
+                           <comparison_clause> ; <comparisons>
+
+<comparison_clause>    ::= <comparison> , <biospi_clauses>
+
+<comparison>           ::= <compare>
+                           <compare> & <comparison>
+
+<compare>              ::= <channel> =?= <channel>
+                           <channel> =\= <channel>
+
+
+<biospi_guard_clauses> ::=
+                           <biospi_guard_clause> 
+                           <biospi_guard_clause> ; <biospi_guard_clauses>
+
+<biospi_guard_clause>  ::= <biospi_logix_guard> , <biospi_clauses>
+
+<biospi_logix_guard>   ::= {<logix_ask>}
+                           (<logix_ask> , <logix_asks>)
+                           (<logix_asks> : <logix_tells>)
+
+<logix_clauses>        ::= <logix_clause>
+                           <logix_clause> ; <logix_clauses>
+
+<logix_clause>         ::= <logix_guard>
+                           <logix_guard> , <logix_body>
+                           <logix_body>
+
+<logix_guard>          ::= <logix_asks>
+                           <logix_asks> : <logix_tells>
+
+<logix_asks>           ::= <logix_ask_guard>
+                           <logix_ask_guard> , <logix_asks>
+
+<logix_tells>          ::= <logix_tell_guard>
+                           <logix_tell_guard> , <logix_tells>
+
+<logix_body>           ::= <call>
+                           <call> , <logix_body>
+
+<biospi_body>          ::= <call>
+                           <call> | <biospi_body>
+
+<logix_body>           ::= <call>
+                           <call> , <logix_body>
+
+<call>                 ::= <local_call>
+                           <local_call_sum>
+                           <nested_scope>
+                           <ambient>
+                           <external_call>
+                           <macro_call>
+                           <object_call>
+                           <logix_goal>
+                           true
+                           0
+
+<local_call_sum>       ::= <local_call> + <local_sum>
+
+<local_sum>            ::= <local_call>
+                           <local_call> + <local_sum>
+
+<local_call>           ::= <local_process_name>
+                           <local_process_name>(<call_arguments>)
+
+<local_process_name>   ::= <process_name>
+                           self
+
+<call_arguments>       ::= <arguments>
+                           <substitutions>
+
+<substitutions>        ::= <substitution>
+                           <substitution> , <substitutions>
+
+<substitution>         ::= <channel> = <channel>
+                       ::= <logix_variable> = <logix_variable>
+
+<nested_scope>         ::= << <new_scope> >>
+
+<ambient>              ::= <ambient_name>(<< <new_scope> >>)
+
+<new_scope>            ::= <parameters> . <scope_content>
+                           <scope_content>
+
+<scope_content>        ::= <biospi_clauses>
+                           <biospi_clauses> . <process_definitions>
+
+<external_call>        ::= <logix_path_term>#<atom>
+                           <logix_path_term>#<logix_term>
+                           <logix_path_term>#<external_call>
+
+<macro_call>           ::= set_base_rate(<base_rate>, <channels_and_reply>)
+                           randomize_messages(<channels_and_reply>)
+                           serialize_messages(<channels_and_reply>)
+                           get_channel_status(<channel> , <channel_attributes>
+                                                        , <logix_variable>)
+                           object(<logix_variable>)
+                           object(<logix term>, <logix_variable>)
+
+<object_call>          ::= <logix_variable> ! <object_request>
+
+<object_request>       ::= close
+                           close(<reply>)
+                           name(<logix_variable>)
+                           name(<logix_variable>, <reply>)
+                           read(<logix_variable>)
+                           read(<logix_variable>, <reply>)
+                           store(<logix term>)
+                           store(<logix term>, <reply>)
+                           values(<logix_variable>)
+                           values(<logix_variable>, <reply>)
+
+
+<channels_and_reply>   ::= <reply>
+                           <channel> , <channels_and_reply>
+
+<channel_attributes>   ::= <logix_variable>
+                           <channel_attribute> , <channel_attributes>
+
+<reply>                ::= <logix_variable>
+
+Primitives:
+----------
+
+
+
+A <process_name> is an alpha-numeric string, which may contain underscore
+characters, beginning with an upper-case letter for an <spifcp_process> ,
+or with a lower-case letter for a <logix_process> .
+
+A <channel> is an alpha-numeric string, which may contain underscore
+characters, beginning with a lower-caseletter.  It represents a Pi Calculus
+channel.
+
+
+A <weighter> is an alpha-numeric string, which may contain underscore
+characters, beginning with a lower-case letter.  The currently acceptable
+values of <weighter> are "default" and "michaelis" - additional values may
+be defined - see weighter.txt .
+
+
+A <logix_variable> is an alpha-numeric string, which may contain underscore
+characters, beginning with an upper-case letter, or it may be a single
+underscore character.  The string may be followed by optional single-quote
+characters.  By convention the single underscore character is an anonymous
+<logix_variable>; it may not appear in place of an <argument> in a
+<left_hand_side>.
+
+
+A <base_rate> is a non-negative real number, which is a factor in the
+stochastic weighting of a <channel>.  When the <base_rate> of a
+<channel> is 0, the channel acts as a sink - all messages on that
+channel are discarded.
+
+
+A <weighter> is an alpha-numeric string, beginning with a lower-case
+alphabetic character; the string may contain underscore (_)
+characters.  The currently acceptable values of <weighter> are
+"default" and "michaelis"; additional values may be defined - see
+SpiFcp/weighter.txt.
+
+
+An <ambient_name> is an alpha-numeric string, which may contain underscore
+characters, beginning with a lower-case letter.
+
+
+The <direction>s are:
+
+    local designating a normal within-ambient channel
+          (equivalent to no direction);
+    p2c   designating a parent-to-child communication;
+    c2p   designating a child-to-parent communication;
+    s2s   designating a sibling-to-sibling communication.
+
+
+Semantics:
+---------
+
+A <parameter> in a <public_declaration> is an implicit argument of every
+process in the program.
+
+
+Any argument of a <process> may be  provided by a caller in a
+<call_arguments>, replacing any implicit argument of the same name.  An
+argument  may be "extruded" from a <process> by a <send>.  An argument
+may also be replaced in a <parameter> which is added to the <atom> in
+the <left_hand_side> of a <process_declaration>.
+
+
+A <base_rate> may be specified by a <logix_variable> in the
+<default_baserate_declaration> or in a <channel_declaration>.  In the
+former case, or when the <channel_declaration> is within a
+<public_declaration>, the <logix_variable> itself must be declared in
+a <public_declaration>; in the latter case, when the channel is a
+<parameter> which is added in the <process_declaration>, the
+<logix_variable> may be declared in a containing scope, as an argument
+of the process or in a <public_declaration>.  In any case, the
+<logix_variable> should be instantiated to a non-negative number.
+
+
+A <weighter> may be specified by a <logix_variable> in the
+<default_weighter_declaration> or in a <channel_declaration>.  In the
+former case, or when the <channel_declaration> is within a
+<public_declaration>, the <logix_variable> itself must be declared in
+a <public_declaration>; in the latter case, when the channel is a
+<parameter> which is added in the <process_declaration>, the
+<logix_variable> may be declared in a containing scope, as an argument
+of the process or in a <public_declaration>.  In any case, the
+<logix_variable> should be instantiated to a string (see above).
+
+A <weighter_parameter> should be a number to be used in calculating the
+value of the <weighter_declaration>.  A <weighter_parameter>  may be
+specified by a <logix_variable>, whose value is a number (as above for
+a <base_rate>) or by an object.  When that <logix_variable> is an object,
+its monitor's current value should be a number, which is used in
+calculating the value of the <weighter_declaration>.
+
+
+An argument in a <macro_call> which precedes the <channels_and_reply> or
+which is a <channel_attribute> may be a read-only-variable (<logix_variable>?).
+The <logix_variable> must be instantiated before the <macro_call> can
+be completed.
+
+When a <macro_call> is completed, the trailing <logix_variable> is
+instantiated - its value is usually the string "true", but it may vary in
+some cases.
+
+The program macro  get_channel_status  instantiates the trailing
+<logix_variable> to the values of the named <channel_attributes> -
+see SpiFcp/program_macros.txt for details regarding <channel_attribute>
+values.
+
+
+A <reply> is a <logix_variable> which is instantiated at the
+conclusion of the request; if the request succeeded, it is instantiated 
+to the the string "true", or if the request failed, it is instantiated
+to a diagnostic, explaining the failure.
+
+Logix Terms:
+-----------
+
+A <logix_ask_guard> is any predicate permitted in the ask of a guard in
+Logix language(compound).
+
+A <logix_tell_guard> is any predicate permitted in the tell of a guard in
+Logix language(compound).
+
+A <library_goal> is any predicate defined by the Logix system library
+or by the SpiFcp or BioSpi system library.
+
+A <logix_goal> is a <library_goal> or any predicate defined by a
+<logix_process>.
+
+A <logix_path_term> is any term permitted in the path specification of a remote
+procedure call in logix language(compound).
+
+
+Notes:
+-----
+
+The "new" predicate has been subsumed into a prefix <parameters>
+of a <new_scope> and the added <parameters> of a <process>.
+
+
+A <process> which is declared at level one of a <program> definition, may
+be called by an external process, if it is exported explicitly in an
+<export_declaration>, or if there is no <export_declaration> in the <program>,
+in which case all level one processes are exported.
+
+
+Nested "new" processes are scoped with double angle brackets (see definition
+of <new_scope>).
+
+
+Each <local_call> in a <local_call_sum> must be to a <process> whose
+<biospi_clauses> consists of <communication_clauses>.
+
+
+The reserved words are "self", "true", "otherwise", "enter", "accept",
+"exit", "expel", "merge", "p2c", "c2p", "s2s".
+
+"self" may be used to iterate any process, including anonymous processes.
+"true" is an alternative name for process 0.
+"otherwise" appears as the guard of the last clause of <comparisons>.
+
+The first three are reserved in context, and may be used as channel names.
+The remaining words are prefix operators in capabilities and directions.
+
+
+An argument which is declared as a <logix_variable> in the added
+<parameters> of a <left_hand_side> is initially uninstantiated.
+
+
+Within a <logix_term>, normal logix recognition of variables applies - i.e.
+variable names all begin with a capital letter or underscore; to reference a
+<channel>, whose name begins with a lower case letter, within a 
+<logix_term>, refer to '_var'(<channel>).
+
+
+A <logix_variable> may have a value which is an arbitrary Logix term.
+Such a value may be tested by an <logix_ask_guard>, instantiated or used as
+an argument in a <library_goal>, a <logix_term> or in a <tell_guard>.
+An arbitrary <logix_term> may be sent in a <message> by the <library_goal>
+spi_send/2, or received by the <library_goal> spi_receive/2:
+
+    spi_send(<message_content>, <channel>)
+    spi_receive(<channel>, <message_content>)
+
+e.g.
+
+    spi_send({"A string", a(Tuple), [A, list | Tail]}, '_var'(channel))
+
+    spi_receive('_var'(channel), {Arg1, String(f(x)), Arg3})
+
+
+The <library_goal>s spi_send/3, spi_receive/3, spi_send/4, spi_receive/4
+may be used as well, where the third argument is a multiplier (default 1), and
+the fourth argument is an identifier (default string "sender" or "receiver").
+
+A <logix_variable> may be instantiated by an assignment in a <library_goal>
+within a <call> :
+
+    <logix_variable> = <logix_term>
+
+A <logix_term> may also be used to initialise an object, or as a "value"
+stored by an <object_call>.
+
+
+The additive definition of <left_hand_side> is syntactic sugar - e.g.
+
+    P+(<parameters>) ::= <biospi_clauses>.
+
+is equivalent to:
+
+    P ::= << <parameters> . P1 . P1 ::= <biospi_clauses> >> .
+
+The recursive definition of <biosp_clauses> is syntactic sugar - e.g.
+
+    P ::= <communication1> , {<logix_ask_guard>} , Q;
+          <communication2> , (<comparison> , R; otherwise , S).
+
+is equivalent to:
+
+    P ::= <communication1> , << P1 . P1 ::= {<logix_ask_guard>} , Q >>;
+          <communication2> , << P2 . P2 ::= <comparison> , R ; otherwise , S >>.
+
+and
+
+    P ::= <communication> , ( {<logix_ask_guard1>} , Q ;
+                              {<logix_ask_guard2>} , R ) .
+
+is equivalent to:
+
+    P ::= <communication> , << P1 . P1 ::= {<logix_ask_guard1>} , Q ;
+                                           {<logix_ask_guard2>} , R >> .
+
+
+
+The <receive> term   ? <directed channel>  is syntactic sugar for: 
+
+    <directed channel> ? []
+
+The <send> term   <directed channel> !  is syntactic sugar for:
+
+    <directed channel> ! []
+
+
+
+
+This document is licensed under Gnu General Public License - Version 3 
+
+    http://www.nongnu.org/efcp/gnu-gpl3.html

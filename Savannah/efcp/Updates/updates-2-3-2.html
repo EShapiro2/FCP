@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html dir="ltr">
+<title>BioSpi : Update - 2.3.2</title>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+
+</head>
+<body>
+<span class="postbody"><ul><span style="font-size: 32px; line-height: normal">Release 2.3.2</span>
+ (September 27, 2009)<br>
+<br>
+<br>
+
+<span style="color: blue">Minor modification</span>
+<br>
+<span style="color: red">Functional change</span>
+<br>
+<span style="color: darkred">Significant change</span>
+<br>
+<span style="color: green">Revision identifier</span>
+<br>
+<br>
+
+<span style="font-size:24px; line-height: normal">Source Updates</span>
+<br>
+<br>
+
+<span style="color:blue">Logix/rcs_document_editor</span> -
+  <span style="color: green">r 1.2</span> :
+  Added comment (#) marks.
+<br>
+
+<span style="color:blue">Logix/install</span> -
+  <span style="color: green">r 2.9</span> :
+  Updated version number.
+<br>
+
+<span style="color:red">Logix/utils.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Added export convert_seconds.
+<br>
+
+<span style="color:red">Logix/system/display_server.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Added abilty to "copy" (to string) formatted lists.
+<br>
+
+<span style="color:red">Logix/system/library_server/spi_library.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Added is_channel/3, isnt_channel/3 and user_event/2 for dynamic parameter
+  type check.
+<br>
+
+<span style="color:red">Logix/system/transform/self.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Fixed &lt;language&gt;#&lt;sublanguage&gt; attribute.
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/bio_constants.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:darkred">Logix/system/transform/biospi/call.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Added user macros pause, continue, record_data, record_item, record_note.
+<br>
+
+<span style="color:red">Logix/system/transform/biospi/call.cp</span> -
+  <span style="color: green">r 1.6</span> :
+  Added caller/callee compile-time parameter type mismatch check.
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/call.cp</span> -
+  <span style="color: green">r 1.7</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/optimize.cp</span> -
+  <span style="color: green">r 1.2</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:red">Logix/system/transform/biospi/self.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:darkred">Logix/system/transform/biospi/self.cp</span> -
+  <span style="color: green">r 1.6</span> :
+  Added guard predicates delay(Rate) and delay(Rate, Weighter).
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/servers.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/servers.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Changed some comments.
+<br>
+
+<span style="color:red">Logix/system/transform/biospi/spc.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Added check for &lt;receive&gt; argument mismatch; added calls to library
+  tests for parameter type mismatch; unwrap &lt;channel&gt; and &lt;variable&gt;.
+<br>
+
+<span style="color:blue">Logix/system/transform/biospi/spc.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Renamed strings and variables.
+<br>
+
+<span style="color:red">Logix/system/transform/biospi/spc.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Corrected minor bug resulting from user error in specification of a channel
+  rate or weighter.
+<br>
+
+<span style="color:red">Logix/system/transform/biospi/utilities.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Wrap &lt;channel&gt; and &lt;variable&gt; &lt;transmission&gt; &lt;arguments&gt;. 
+ <br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/spi_monitor.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Added record_item, record_note, continue (replaces resume); renaming; minor
+  debug stream element changes.
+<br>
+
+<span style="color:darkred">Logix/system/Logix_Users/SpiFcp_Users/spi_record.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Complete revision correcting pause, idle, completions handling; changed
+  spi_monitor interface.
+<br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/user_macros.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Added run macros; removed record help lines.
+ <br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/ambient_list.cp</span> -
+  <span style="color: green">r 1.3</span> :
+  Added handling for pause, note and item; use server's Events stream.
+ <br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/ambient_server.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Additional run exports; special handling of Events (particularly terminated);
+  added record_note;
+  interchanged record_item and record_data (use latter for reset, et al).
+ <br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/ambient_server.cp</span> -
+  <span style="color: green">r 1.5</span> :
+  Unwrap &lt;channel&gt; and &lt;variable&gt;
+  &lt;transmission&gt; &lt;arguments&gt; for &lt;direction&gt; and
+  &lt;capability&gt;.
+ <br>
+
+<span style="color:red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/user_macros.cp</span> -
+  <span style="color: green">r 1.4</span> :
+  Ammended ambient_server interface (use run with Events).
+ <br>
+
+<br>
+<br>
+
+<span style="font-size:24px; line-height: normal">New Binary Files</span>
+<br>
+<br>
+
+<span style="color: red">Logix/Bin/utils.bin</span> - 
+   <span style="color: green">r 1.4</span>
+<br>
+
+<span style="color: red">Logix/system/Bin/display.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/library_server/Bin/spi_library.bin</span> - 
+   <span style="color: green">r 1.2</span>
+<br>
+
+<span style="color: red">Logix/system/transform/Bin/self.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/transform/biospi/Bin/self.bin</span> - 
+   <span style="color: green">r 1.10</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/Bin/spi_record.bin</span> - 
+   <span style="color: green">r 1.5</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.5</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/Bin/ambient_list.bin</span> - 
+   <span style="color: green">r 1.3</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/Bin/ambient_server.bin</span> - 
+   <span style="color: green">r 1.6</span>
+<br>
+
+<span style="color: red">Logix/system/Logix_Users/SpiFcp_Users/BioSpi_Users/Bin/user_macros.bin</span> - 
+   <span style="color: green">r 1.5</span>
+
+<br>
+<br>
+This script may be used to update the Logix and bin file content,
+starting in Efcp-release.
+<br>
+<br>
+<hr>
+<font face="courier new, courier, mono">
+<br>
+pushd Logix/Bin
+<br>
+cvs update
+<br>
+cd ../system/Bin
+<br>
+cvs update
+<br>
+cd ../library_server/Bin
+<br>
+cvs update
+<br>
+cd ../../transform/Bin
+<br>
+cvs update
+<br>
+cd ../biospi/Bin
+<br>
+cvs update
+<br>
+cd ../../../Logix_Users/SpiFcp_Users/Bin
+<br>
+cvs update
+<br>
+cd ../BioSpi_Users/Bin
+<br>
+cvs update
+<br>
+popd
+<br>
+<spacer type="horizontal" size="1">
+<br>
+</font>
+<hr>
+<br>
+
+Suggested method:
+<br>
+<br>
+<blockquote>
+	<font face="courier new, courier, mono">cd Efcp-release</font><br>
+	copy the script to 
+		<font face="courier new, courier, mono">updater</font><br>
+	<font face="courier new, courier, mono">source updater</font>
+</blockquote>
+Possibly due to a recent crash related to nongnu.org, you may see an error
+diagnostic, including:
+<blockquote>
+	CVS update: conflicts found in spi_record.bin<br>
+</blockquote>
+To correct this problem:
+<blockquote>
+	cd Logix/system/Logix_Users/SpiFcp_Users/Bin<br>
+    rm spi_record.bin<br>
+	cvs update
+</blockquote>
+
+
+<b>Next:</b> <A NAME = "Next" HREF="updates-2-3-3.html">2.3.3</A>
+<b>Previous</b>: <A NAME = "Previous" HREF="updates-2-3-1.html">2.3.1</A>
+<b>Up: </b> <A NAME = "Up" HREF="index.html">Index</A>
+
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+Assignment No. 4	Due Monday, December, 22
+     
+This is a programming assignment.  It should be handed in
+together with a script of its execution.
+     
+     
+(1) Sieve of Eratosthenes: The program shown in handout no. 4
+ 	uses division, whereas the standard sequential implementation
+	(in Fortran, say) would use only addition.  Modify the
+	program shown in the handout to use only addition.
+	Hint: adding one argument to `filter' is enough.
+     
+(2) Merge sort:
+    Define  	
+	msort(ListOfXs,Ys) :-
+	ListOfXs is a list of sorted lists (initially singleton
+	lists), and Ys is the sorted list of their elements.
+	Use a variant of opmerge (handout no. 5) to merge the sorted
+	(sub)lists.
+     
+	E.g. msort([[2],[4],[3]],[2,3,4]).
+     
+(3) Matrix multiplication: modify the program shown in handout no. 5
+	to pipeline both matrices between the inner-product processes.
+	Hint: define an inner product process with five arguments:
+	two input streams, two output streams, and a result.
+
+	(You may wish to wait until after the class discussion of
+	matrix multiply and pipelines before attempting this one.)

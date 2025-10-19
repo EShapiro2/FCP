@@ -1,0 +1,2633 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class6.htm">
+<link rel=Preview href=preview.wmf>
+<meta name=Robots content=NoIndex>
+<script src=script.js></script><script><!--
+
+if( !(IsWin("PPTOtl")||IsWin("PPTNav")||IsWin("PPTOtlNav")) )
+{
+	obj = document.all.item("Main-File")
+	parent.location.href=obj.href
+}
+
+var gOtlHiliteClr="#FFFFFF",gOtlNormalClr="#000000",gOtlActiveClr="#FFFF00",gSelected="",gTxtState=false,gChildEntryTable=new Array()
+
+function Load()
+{
+	if( IsWin("PPTOtl" ) ){ LoadOtl(); parent.gOtlLoaded=true; return }
+	if( IsWin("PPTNav" ) ){ LoadNav("NavObj",UpdNav); parent.gNavLoaded=true; return }
+	if( IsWin("PPTOtlNav" ) ){ LoadNav("OtlNavObj",UpdOtlNav); parent.gOtlNavLoaded=true; return }
+}
+function Upd(){ if( IsWin("PPTNav") ) LoadNav("NavObj",UpdNav) }
+function LoadNav( oId,UpdFunc )
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	document.body.style.margin=2
+	UpdFunc()
+	obj=document.all.item(oId)
+	obj.style.display="block"
+	obj.style.visibility="visible"
+	document.bgColor="threedface"
+}
+function LoadOtl()
+{
+	document.ondragstart=CancelDrag
+	document.onselectstart=CancelDrag
+	OtlObj.style.display="block"
+	OtlObj.style.visibility="visible"
+	if( gOtlActiveClr == "" ) gOtlActiveClr=document.linkColor
+	if( gOtlHiliteClr == "" ) gOtlHiliteClr=document.fgColor
+	if( gOtlNormalClr == "" )
+		gOtlNormalClr=document.bgColor
+	else
+		document.bgColor=gOtlNormalClr  
+
+	InitArray()
+
+	if( ObjExists( parent.gCurSld ) ) {
+		ChangeState( parent.gCurSld,gOtlNormalClr,gOtlHiliteClr )
+		gSelected=parent.gCurSld
+	}
+	else gSelected = -1
+
+	UpdOtl()
+}
+function UpdOtl(){ UpdIdx(parent.gCurSld) }
+function UpdIdx( idx )
+{
+	if( gSelected != idx ) {
+		if( gSelected > 0 )
+			ChangeState( gSelected,gOtlHiliteClr,gOtlNormalClr )
+
+		if( ObjExists( idx ) ) {
+			gSelected = idx
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+		}
+		else gSelected = -1
+	}
+
+	if( gTxtState != parent.gOtlTxtExp ) {
+		state = "block"
+		if( !parent.gOtlTxtExp )
+			state="none"
+
+		for(ii=0; ii<gChildEntryTable.length; ii++) {
+			obj=gChildEntryTable[ii];
+			if( obj.id == null ) continue;
+
+			if( obj.id.indexOf("PPTC") >= 0 )
+				obj.style.display=state;
+		} 
+		gTxtState=parent.gOtlTxtExp
+		if( ObjExists( gSelected ) )
+			ChangeState( gSelected,gOtlNormalClr,gOtlHiliteClr )
+	}
+}
+function InitArray()
+{
+	count=0
+	for(ii=0; ii<document.all.tags("DIV").length; ii++) {
+		obj=document.all.tags("DIV").item(ii)
+		if( obj.id == null ) continue
+
+		if( obj.id.indexOf("PPTC") >= 0 ) {   
+			gChildEntryTable[count++]=obj
+			obj.children.tags("TABLE").item(0).style.borderColor=gOtlNormalClr
+		}
+	}
+}
+function ChangeState( idx,fgColor,bgColor )
+{
+	obj=document.all.item("PPTL"+idx)
+	obj.style.color=fgColor
+
+	obj=document.all.item("PPTP"+idx)
+	obj.style.backgroundColor=bgColor
+
+	obj=document.all.item("PPTB"+idx)
+	if( obj )
+		obj.style.borderLeftColor=obj.style.borderBottomColor=bgColor
+}
+function ChgClr( o,clr ){ if( o.id != "PPTL"+gSelected ) o.style.color=clr }
+function Over( obj ){ ChgClr(obj,gOtlActiveClr) }
+function Out( obj ){ ChgClr(obj,gOtlHiliteClr) }
+function ObjExists( ii ) { obj=document.all("PPTP"+ii ); return( obj ) }
+function GoToSld( href ){ UpdIdx(parent.GetSldNum(href)); parent.GoToSld( href ) }
+function CancelDrag(){ window.event.cancelBubble=true;window.event.returnValue=false}
+
+function UpdNav()
+{
+	txt = "<center>";
+	if( parent.GetHrefObj( parent.gCurSld ).mOrigVis == 1 )
+		txt += "Slide " + parent.GetCurSldNum() + " of " + parent.GetNumSlds()
+	else
+		txt += "Hidden Slide"
+	txt += "</center>";
+	nav_text.innerHTML = txt;
+
+	if( !parent.HasPrevSld() )
+		gBtnArr["nb_prev"].Enabled(0)
+	else
+		gBtnArr["nb_prev"].Enabled(1)
+
+	if( !parent.HasNextSld() )
+		gBtnArr["nb_next"].Enabled(0)
+	else
+		gBtnArr["nb_next"].Enabled(1)
+	gBtnArr["nb_nts"].SetEnabled()
+	gBtnArr["nb_nts"].SetFlag( parent.gHasNts )
+
+	gBtnArr["nb_sldshw"].Enabled(1)
+	gBtnArr["nb_voice"].Enabled(1)
+}
+
+function UpdOtlNav()
+{
+	gBtnArr["nb_otl"].SetEnabled();
+
+	if( parent.gOtlOpen )
+		gBtnArr["nb_otlTxt"].Enabled( true );
+	else
+		document.all.item("nb_otlTxtBorder").style.visibility = "hidden";
+}
+
+
+
+//-->
+</script>
+<style>
+<!--.PTxt
+	{position:relative;
+	width:100%;
+	margin-top:5px;
+	padding-left:5px;
+	font-weight:bold;}
+.CTxt
+	{position:relative;
+	width:100%;
+	padding-left:10px;}
+.CBorder
+	{position:relative;
+	width:100%;
+	border-style:solid;
+	border-width:1px;
+	border-color:black;
+	padding-bottom:5px;}
+a
+	{color:white;
+	text-decoration:none;}
+.button
+	{position:absolute;
+	width:32px;
+	height:20px;
+	border-style:solid;
+	border-width:1px;
+	border-color:threedface;}
+-->
+</style>
+</head>
+
+<body onload="Load()">
+
+<div id=NavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:absolute;width:70px;visibility:hidden' align=left
+ cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_ntsElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'><img src="notes_flag.gif"
+ border=0 id="notes_flag" style='display:none'><span style="mso-spacerun:
+ yes">&nbsp; </span>Notes</div>
+ <div title="Show/Hide Notes" id="nb_nts" style='position:absolute;top:0%;
+ left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=right cellpadding=0 cellspacing=0>
+ <td>
+ <div id="nb_sldshwBorder" style='position:absolute;left:-20px;width:20px;
+ height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_sldshw" title="Full Screen Slide Show"
+ style='position:relative;left:-254px'></div>
+ </div>
+ </td>
+ <td>
+ <div id="nb_voiceBorder" style='display:none;position:absolute;left:-40px;
+ width:20px;height:20px'>
+ <div style='position:absolute;clip:rect(0px, 18px, 18px, 0px)'><img
+ src=buttons.gif id="nb_voice" title="Pause/Play Narration" style='position:
+ relative;left:-290px'></div>
+ </div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td nowrap>
+ <div id="nb_prevBorder" class=button style='left:-30px'>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_prev" title="Previous Slide" style='position:relative;
+ left:0px'></div>
+ </div>
+ <span id="nav_text" style='position:relative;top:3px;width:100px;font-family:
+ Arial;color:buttontext;font-size:9pt'></span>
+ <div id="nb_nextBorder" class=button>
+ <div style='position:absolute;clip:rect(0px, 30px, 18px, 0px)'><img
+ src=buttons.gif id="nb_next" title="Next Slide" style='position:relative;
+ left:-90px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlNavObj onload="Load()" onmouseover="BtnOnOver()"
+onmousedown="BtnOnDown()" onmouseout="BtnOnOut()" onmouseup="BtnOnUp()"
+onkeypress="_KPH()" style='display:none;visibility:hidden'>
+
+<table style='position:relative;width:70px' align=left cellpadding=0
+ cellspacing=0>
+ <td nowrap>
+ <div id="nb_otlElem" align=center style='position:relative;padding:3px;
+ font-family:Arial;color:buttontext;font-size:9pt'>Outline</div>
+ <div title="Show/Hide Outline" id="nb_otl" style='position:absolute;
+ top:0%;left:0%;width:100%;height:100%'></div>
+ </td>
+</table>
+
+<table style='position:relative' align=center cellpadding=0 cellspacing=0>
+ <td>
+ <div style='position:absolute;left:-18px;width:24px;height:20px;border-style:
+ solid;border-width:1px;border-color:threedface' id="nb_otlTxtBorder">
+ <div style='position:absolute;clip:rect(0px, 22px, 18px, 0px)'><img
+ src=buttons.gif id="nb_otlTxt" title="Expand/Collapse Outline"
+ style='position:relative;left:-157px'></div>
+ </div>
+ </td>
+</table>
+
+</div>
+
+<div id=OtlObj style='display:none;visibility:hidden'>
+
+<table width="100%" style='font-family:Arial;font-size:9pt'>
+ <tr>
+  <td>
+  <div id=PPTP1 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0405.htm');" onmouseover="Over(this)"
+  id=PPTL1 onmouseout="Out(this)">Unit 4: Enzymatic Reactions</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP2 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0406.htm');" onmouseover="Over(this)"
+  id=PPTL2 onmouseout="Out(this)">Catalysis</a></font></div>
+  <div id=PPTC2 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB2 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A catalyst is a substance that increases the
+    rate of a chemical reaction without itself being consumed</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The catalyst may react to form an intermediate
+    but it is regenerated in a subsequent step of the reaction</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP3 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0407.htm');" onmouseover="Over(this)"
+  id=PPTL3 onmouseout="Out(this)">Catalysis</a></font></div>
+  <div id=PPTC3 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB3 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A catalyst speeds up a reaction by providing a
+    set of elementary steps with more favorable kinetics than those that exist
+    in its absence</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The rate constant largely depends on the
+    activation energy of a reaction (the minimum amount of energy required to
+    initiate reaction)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP4 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0408.htm');" onmouseover="Over(this)"
+  id=PPTL4 onmouseout="Out(this)">Catalysis</a></font></div>
+  <div id=PPTC4 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB4 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In many cases, a catalyst increases the reaction
+    rate by lowering the activation energy: In lowers it both for the forward
+    and the reverse reaction</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP5 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0409.htm');" onmouseover="Over(this)"
+  id=PPTL5 onmouseout="Out(this)">Enzyme Catalysis</a></font></div>
+  <div id=PPTC5 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB5 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzymes are biological catalysts</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>They are typically large protein molecules</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>They differ from chemical catalysts in four
+    important aspects</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP6 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0411.htm');" onmouseover="Over(this)"
+  id=PPTL6 onmouseout="Out(this)">Enzyme Catalysis</a></font></div>
+  <div id=PPTC6 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB6 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Higher reaction rates: enzymes increase the
+    rates of biochemical reactions by 10<sup>6</sup>-10<sup>12</sup></font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Milder reaction conditions: Enzymatically
+    catalyzed reactions occur at mild temperature, pressure, and nearly neutral
+    pH.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Greater reaction specificity: Enzymes are
+    typically highly specific, acting only on certain reactant molecules,
+    called substrates, and rarely have side products</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Capacity for regulation: The catalytic
+    activities of many enzymes are affected by substances other than their
+    substrates, by various mechanisms.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP7 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0412.htm');" onmouseover="Over(this)"
+  id=PPTL7 onmouseout="Out(this)">Enzyme Nomenclature</a></font></div>
+  <div id=PPTC7 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB7 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Alcohol dehydrogenase</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP8 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0413.htm');" onmouseover="Over(this)"
+  id=PPTL8 onmouseout="Out(this)">Substrate Specificity</a></font></div>
+  <div id=PPTC8 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB8 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A variety of non-covalent bonds are involved in
+    the binding of substrates to enzymes</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>The “Lock-and-Key Model:<br>
+    A complementarity exists between enzymes and their substrates</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP9 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0421.htm');" onmouseover="Over(this)"
+  id=PPTL9 onmouseout="Out(this)">Substrate Specificity</a></font></div>
+  <div id=PPTC9 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB9 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Geometric complementarity: A substrate-binding
+    site on the enzyme consists of an indentation or cleft that is
+    complementary in shape to the substrate</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Electronic complementarity: The amino acids at
+    the binding site are arranged to interact specifically with the substrate
+    in an “attractive” manner</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Induced-fit: The substrate-binding sites of most
+    enzymes are largely preformed but undergo some conformational change on
+    substrate binding</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP10 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0417.htm');" onmouseover="Over(this)"
+  id=PPTL10 onmouseout="Out(this)">Enzyme Kinetics: Single Substrate Reactions</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP11 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0449.htm');" onmouseover="Over(this)"
+  id=PPTL11 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Private Channels</a></font></div>
+  <div id=PPTC11 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB11 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s_bind(20),e_p_bind(10)).<br>
+    System(N1,N2)::= &lt;&lt; CREATE_ENZYME(N1) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			CREATE_SUBSTRATE(N2) .<br>
+    <span style="mso-spacerun: yes">&nbsp; </span>CREATE_ENZYME(C)::= {C =&lt;
+    0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 	<span style="mso-spacerun: yes">&nbsp;
+    </span>{C &gt; 0} , {C--} | Enzyme | self .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_SUBSTRATE(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 	 {C &gt; 0} , {C--} | Substrate | self</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>&gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP12 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0450.htm');" onmouseover="Over(this)"
+  id=PPTL12 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Private Channels</a></font></div>
+  <div id=PPTC12 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB12 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme+(es_unbind(0.8),es_react(0.1))::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	&lt;&lt; e_s_bind ! {es_unbind,es_react} , ES ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>e_p_bind ! {es_unbind,es_react} , ES .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>ES::= es_unbind ? [] , Enzyme ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>es_react ? []
+    , Enzyme</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::= e_s_bind ? {unbind,react} ,
+    Bound_S(unbind,react).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= e_p_bind<span style="mso-spacerun:
+    yes">&nbsp; </span>? {unbind,react} , Bound_S(unbind,react).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Bound_S(unbind,react)::= unbind ! [] , Substrate
+    ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>react ! [] , Product .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP13 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0451.htm');" onmouseover="Over(this)"
+  id=PPTL13 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Private Channels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP14 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0453.htm');" onmouseover="Over(this)"
+  id=PPTL14 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Private Channels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP15 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0447.htm');" onmouseover="Over(this)"
+  id=PPTL15 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Private Channels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP16 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0454.htm');" onmouseover="Over(this)"
+  id=PPTL16 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Timers (modular)</a></font></div>
+  <div id=PPTC16 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB16 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s_bind(20),es_unbind(0.8),es_react(0.1),e_p_bind(10)).<br>
+    System(N1,N2)::= &lt;&lt; CREATE_ENZYME(N1) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_SUBSTRATE(N2) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(es_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(es_react) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp; </span>…</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP17 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0455.htm');" onmouseover="Over(this)"
+  id=PPTL17 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Timers (modular)</a></font></div>
+  <div id=PPTC17 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB17 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme::= e_s_bind ! [] , ES ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>e_p_bind ! [] , ES .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ES::= es_unbind ? [] , Enzyme | Substrate
+    ;<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>es_react ? [] , Enzyme | Product .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::= e_s_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= e_p_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP18 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0456.htm');" onmouseover="Over(this)"
+  id=PPTL18 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Timers (modular)</a></font></div>
+  <div id=PPTC18 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB18 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Timer(channel)::= channel ! [] , Timer .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP19 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0452.htm');" onmouseover="Over(this)"
+  id=PPTL19 onmouseout="Out(this)">Single Substrate (reversible) reaction:
+  Timers (modular)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP20 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0457.htm');" onmouseover="Over(this)"
+  id=PPTL20 onmouseout="Out(this)">Single Substrate (irreversible)</a></font></div>
+  <div id=PPTC20 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB20 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>global(e_s_bind(20), dummy(1)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme+(es_unbind(0.8),es_react(0.1))::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	&lt;&lt; e_s_bind ! {es_unbind,es_react} , ES .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>ES::= es_unbind ? [] , Enzyme ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>es_react ? []
+    , Enzyme</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>&gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>e_s_bind ? {unbind,react} , Bound_S(unbind,react).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Bound_S(unbind,react)::= unbind ! [] , Substrate
+    ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>react ! [] , Product .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP21 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0448.htm');" onmouseover="Over(this)"
+  id=PPTL21 onmouseout="Out(this)">Single Substrate (irreversible) reaction</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP22 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0422.htm');" onmouseover="Over(this)"
+  id=PPTL22 onmouseout="Out(this)">Citrate 		Isocitrate</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP23 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0458.htm');" onmouseover="Over(this)"
+  id=PPTL23 onmouseout="Out(this)">Exercise 6 – Question 1</a></font></div>
+  <div id=PPTC23 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB23 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Write two programs for the aconitase reversible
+    single substrate reaction (ignore the water molecules)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Using private channels</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Using timers</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Run each program with the following parameters
+    (below), and provide the usual output (you may prepare .names, .table,
+    plots etc only for the first program).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>What can you conclude by comparing the E, S, and
+    ES quantities in the different runs?</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP24 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0459.htm');" onmouseover="Over(this)"
+  id=PPTL24 onmouseout="Out(this)">Exercise 6 – Question 1</a></font></div>
+  <div id=PPTC24 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB24 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In all runs:<br>
+    k<sub>1</sub> =<span
+    style="mso-spacerun: yes">&nbsp; </span>30 ; k<sub>-1</sub> =<span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>10 ; k<sub>2</sub> =<span
+    style="mso-spacerun: yes">&nbsp;&nbsp; </span>1 ; k<sub>-2</sub> = 0.5	;
+    [P]=0</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP25 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0460.htm');" onmouseover="Over(this)"
+  id=PPTL25 onmouseout="Out(this)">Co-factors</a></font></div>
+  <div id=PPTC25 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB25 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>In some reactions, enzymes are associated with
+    small molecule co-factors, which act as the enzyme’s “chemical teeth”.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>There are two types of co-factors</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Metal ions (e.g. Cu<sup>+2</sup>, Fe<sup>+3</sup>)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Organic molecules = co-enzymes (e.g. NAD+)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP26 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0461.htm');" onmouseover="Over(this)"
+  id=PPTL26 onmouseout="Out(this)">Co-enzymes</a></font></div>
+  <div id=PPTC26 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB26 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Co-enzymes are also distinguished by their type
+    of association</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Co-substrates are only transiently associated
+    with a given enzyme molecule (e.g. NAD<sup>+</sup>)</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Prosthetic groups are permanently associated
+    with the protein, often by covalent bonds (e.g. heme group of cytochrome c)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP27 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0462.htm');" onmouseover="Over(this)"
+  id=PPTL27 onmouseout="Out(this)">Co-enzymes</a></font></div>
+  <div id=PPTC27 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB27 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Co-enzymes are chemically changed by the
+    enzymatic reaction in which they participate</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In order to complete the catalytic cycle, the
+    coenzyme must be regenerated to its original state</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For prosthetic groups regeneration occurs in a
+    separate phase of the enzymatic reaction sequence</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>For co-substrates the regeneration reaction may
+    be catalyzed by a different enzyme</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP28 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0424.htm');" onmouseover="Over(this)"
+  id=PPTL28 onmouseout="Out(this)">Enzyme Kinetics:<br>
+  Bi-substrate Reactions</a></font></div>
+  <div id=PPTC28 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB28 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Sequential reactions</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Ordered</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Random</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Ping-pong reactions</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP29 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0425.htm');" onmouseover="Over(this)"
+  id=PPTL29 onmouseout="Out(this)">Sequential Reactions</a></font></div>
+  <div id=PPTC29 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB29 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Reactions in which all substrates must combine
+    with the enzyme before a reaction can occur and products released</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Ordered mechanism: Compulsory order of substrate
+    addition to the enzyme</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Random order: No preference to the order of
+    substrate addition</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP30 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0426.htm');" onmouseover="Over(this)"
+  id=PPTL30 onmouseout="Out(this)">Sequential Reactions: Ordered</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP31 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0463.htm');" onmouseover="Over(this)"
+  id=PPTL31 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Private
+  Channels</a></font></div>
+  <div id=PPTC31 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB31 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s1_bind(20), es1_s2_bind(20), dummy(1)).<br>
+    System(N1,N2,N3)::= <br>
+    &lt;&lt; CREATE_E(N1) | CREATE_S1(N2) | CREATE_S2(N3) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_E(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{C &gt; 0} , {C--} | E | self .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_S1(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 	{C &gt; 0} , {C--} | S(e_s1_bind) | self .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_S2(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 	{C &gt; 0} , {C--} | S(es1_s2_bind) | self.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP32 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0465.htm');" onmouseover="Over(this)"
+  id=PPTL32 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Private
+  Channels</a></font></div>
+  <div id=PPTC32 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB32 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E+(es1_unbind(0.8), s1s2_react(0.1))::= &lt;&lt;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>e_s1_bind ! {es1_unbind, s1s2_react} , E_bound_S1 . E_bound_S1+(es1_s2_unbind(0.8),
+    ep2_unbind(1))::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;</span>&lt;&lt;<span style="mso-spacerun: yes">&nbsp;
+    </span>es1_unbind ? [] , E ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>es1_s2_bind ! {es1_s2_unbind,
+    ep2_unbind} ,<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>		E_bound_S1_S2.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>E_bound_S1_S2::= <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>es1_s2_unbind ? [] , E_bound_S1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>s1s2_react ? [] ,
+    E_Bound_P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>E_Bound_P2::= ep2_unbind ? [] , E
+    &gt;&gt; &gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S(bind)::= bind ? {unbind,react} ,
+    Bound_S(unbind,react).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Bound_S(bind,unbind,react)::= unbind ! [] ,
+    S(bind);</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>	<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>react ! [] , P
+    .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP33 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0468.htm');" onmouseover="Over(this)"
+  id=PPTL33 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Private
+  Channels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP34 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0469.htm');" onmouseover="Over(this)"
+  id=PPTL34 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Private
+  Channels</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP35 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0464.htm');" onmouseover="Over(this)"
+  id=PPTL35 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Modular</a></font></div>
+  <div id=PPTC35 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB35 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s1_bind(20), es1_s2_bind(20), es1_unbind(0.8),
+    s1s2_react(0.1), es1_s2_unbind(0.8), ep2_unbind(1), dummy(1)).<br>
+    System(N1,N2,N3)::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>&lt;&lt; CREATE_E(N1) | CREATE_S1(N2) |
+    CREATE_S2(N3) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>Timer(es1_unbind) | Timer(es1_s2_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>Timer(s1s2_react) | Timer(ep2_unbind) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_E(C)::= {C =&lt; 0} , true ;<br>
+    <span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | E | self .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_S1(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | S1 | self<span style="mso-spacerun: yes">&nbsp;
+    </span>.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_S2(C)::= {C =&lt; 0} , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{C &gt; 0} , {C--} | S2 | self<span style="mso-spacerun: yes">&nbsp;
+    </span>&gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP36 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0466.htm');" onmouseover="Over(this)"
+  id=PPTL36 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Modular</a></font></div>
+  <div id=PPTC36 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB36 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E::= e_s1_bind ! [] , E_bound_S1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_bound_S1::= es1_unbind ? [] , E | S1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun: yes">&nbsp;
+    </span>es1_s2_bind ! , E_bound_S1_S2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_bound_S1_S2::=</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>es1_s2_unbind ? [] , E_bound_S1 | S2 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>s1s2_react ? [] , E_Bound_P2 | P1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_Bound_P2::= ep2_unbind ? [] , E | P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S1::= e_s1_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S2::= es1_s2_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P1::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P2::= dummy ? [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP37 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0467.htm');" onmouseover="Over(this)"
+  id=PPTL37 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Modular</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP38 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0470.htm');" onmouseover="Over(this)"
+  id=PPTL38 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Modular</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP39 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0471.htm');" onmouseover="Over(this)"
+  id=PPTL39 onmouseout="Out(this)">Bi-Substrate ordered (irreversible): Modular</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP40 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0427.htm');" onmouseover="Over(this)"
+  id=PPTL40 onmouseout="Out(this)">Biochemical Example (reversible): <br>
+  Lactate dehydrogenase</a></font></div>
+  <div id=PPTC40 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB40 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme = Lactate dehydrogenase (LDH)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S1 (leading) = Pyruvate</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S2 (following) = NADH</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP41 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0472.htm');" onmouseover="Over(this)"
+  id=PPTL41 onmouseout="Out(this)">Exercise 6: Question 2</a></font></div>
+  <div id=PPTC41 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB41 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Write a program for the LDH reversible reaction,
+    using a modular approach.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Use the following parameters</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP42 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0428.htm');" onmouseover="Over(this)"
+  id=PPTL42 onmouseout="Out(this)">Sequential Reactions: Random</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP43 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0473.htm');" onmouseover="Over(this)"
+  id=PPTL43 onmouseout="Out(this)">Sequential random: Modular</a></font></div>
+  <div id=PPTC43 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB43 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s1_bind(20), e_s2_bind(20), es1_unbind(0.8), es2_unbind(0.8),
+    s1s2_react(0.1), ep1_unbind(1), ep2_unbind(1), dummy(1)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>System(N1,N2,N3)::= <br>
+    &lt;&lt; CREATE_E(N1) | CREATE_S1(N2) | CREATE_S2(N3) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>Timer(es1_unbind) | Timer(es2_unbind) |<br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Timer(s1s2_react) |
+    Timer(ep1_unbind) | <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>Timer(ep2_unbind)
+    .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp; </span>…
+    &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP44 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0474.htm');" onmouseover="Over(this)"
+  id=PPTL44 onmouseout="Out(this)">Sequential random: Modular</a></font></div>
+  <div id=PPTC44 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB44 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E::= e_s1_bind ! [] , E_bound_S1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>e_s2_bind ! [] , E_bound_S2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_Bound_S1::= es1_unbind ? [] , E | S1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 e_s2_bind ! [] , E_bound_S1_S2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_Bound_S2::= es2_unbind ? [] , E | S2 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		 e_s1_bind ! [] , E_bound_S1_S2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_bound_S1_S2::= es2_unbind ? [] , E_Bound_S1 |
+    S2;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>es1_unbind ? [] , E_Bound_S2 | S1;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>s1s2_react ? [] , E_Bound_P1_P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_Bound_P1_P2::= ep1_unbind ? [] , E_P2 | P1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>ep2_unbind ? [] , E_P1 | P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_P2::= ep2_unbind ? [] , E | P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_P1::= ep1_unbind ? [] , E | P1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S1::= e_s1_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S2::= e_s2_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P1::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P2::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP45 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0485.htm');" onmouseover="Over(this)"
+  id=PPTL45 onmouseout="Out(this)">Sequential Random: Modular</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP46 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0429.htm');" onmouseover="Over(this)"
+  id=PPTL46 onmouseout="Out(this)">Biochemical Example: Hexokinase</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP47 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0430.htm');" onmouseover="Over(this)"
+  id=PPTL47 onmouseout="Out(this)">Ping-pong Reactions</a></font></div>
+  <div id=PPTC47 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB47 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Reactions in which one or more products are
+    released before all substrates have been added.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>In ping-pong reactions the substrates A and B do
+    not encounter each other on the surface of the enzyme</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP48 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0431.htm');" onmouseover="Over(this)"
+  id=PPTL48 onmouseout="Out(this)">Ping-pong Reactions</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP49 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0475.htm');" onmouseover="Over(this)"
+  id=PPTL49 onmouseout="Out(this)">Ping Pong Reactions (Irreversible)</a></font></div>
+  <div id=PPTC49 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB49 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s1_bind(20), f_s2_bind(20),
+    es1_unbind(0.8), fs2_unbind(0.8), es1_react(0.1), fs2_react(1), dummy(1)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>System(N1,N2,N3)::= &lt;&lt; <br>
+    <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CREATE_E(N1) |
+    CREATE_S1(N2) | CREATE_S2(N3) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>Timer(es1_unbind) | Timer(es2_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>Timer(fs2_react) | Timer(es1_react) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>…<span style="mso-spacerun: yes">&nbsp;
+    </span>&gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP50 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0476.htm');" onmouseover="Over(this)"
+  id=PPTL50 onmouseout="Out(this)">Ping Pong Reactions (Irreversible)</a></font></div>
+  <div id=PPTC50 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB50 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E::= e_s1_bind ! [] , E_bound_S1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>E_bound_S1::= es1_unbind ? [] , E | S1 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun: yes">&nbsp;
+    </span>es1_react ? [] , EX | P1 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>EX::= f_s2_bind ! [] , EX_bound_S2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>EX_bound_S2::= fs2_unbind ? [] , EX | S2 ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>fs2_react ? [] , E | P2 .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S1::= e_s1_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>S2::= f_s2_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P1::= dummy ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>P2::= dummy ? [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP51 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0486.htm');" onmouseover="Over(this)"
+  id=PPTL51 onmouseout="Out(this)">Ping-pong (irreversible)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP52 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0432.htm');" onmouseover="Over(this)"
+  id=PPTL52 onmouseout="Out(this)">Biochemical Example: <br>
+  Succinyl CoA Synthetase (SCS)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP53 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0414.htm');" onmouseover="Over(this)"
+  id=PPTL53 onmouseout="Out(this)">Regulation of Enzymes</a></font></div>
+  <div id=PPTC53 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB53 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Many substances alter the activity of an enzyme
+    by reversibly combining with it in the way that influences the binding of
+    substrate or its turnover to product</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Sunstances that reduce an enzyme’s activity in
+    this way are termed reversible inhibitors</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP54 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0435.htm');" onmouseover="Over(this)"
+  id=PPTL54 onmouseout="Out(this)">Enzyme Inhibitors</a></font></div>
+  <div id=PPTC54 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB54 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Enzyme inhibitors act through a variety of
+    mechanisms, for example</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Structurally resemble the substrate but either
+    do not react or react very slowly</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Affect catalytic activity without interfering
+    with substrate binding.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP55 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0436.htm');" onmouseover="Over(this)"
+  id=PPTL55 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  <div id=PPTC55 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB55 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Competitive inhibitor: A substance that competes
+    directly with a normal substrate for an enyzme’s substrate-binding site</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Usually resembles the substrate so that it can
+    specifically bind to the active site…</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>But differs from the substrate so that it cannot
+    react as the substrate does</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP56 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0438.htm');" onmouseover="Over(this)"
+  id=PPTL56 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP57 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0477.htm');" onmouseover="Over(this)"
+  id=PPTL57 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  <div id=PPTC57 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB57 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s_bind(20),es_unbind(0.8),e_i_bind(20),
+    ei_unbind(0.8),es_react(0.1),e_p_bind(10)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>System(N1,N2,N3)::= &lt;&lt; CREATE_ENZYME(N1) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>CREATE_SUBSTRATE(N2) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>CREATE_INHIBITOR(N3) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>timer#Timer(es_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>timer#Timer(ei_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>timer#Timer(es_react) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>… &gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP58 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0479.htm');" onmouseover="Over(this)"
+  id=PPTL58 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  <div id=PPTC58 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB58 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme::= e_s_bind ! [] , ES ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>e_i_bind ! [] , EI .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ES::= es_unbind ? [] , Enzyme | Substrate ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	es_react ? [] , Enzyme | Product .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>EI::= ei_unbind ? [] , Enzyme | Inhibitor .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::= e_s_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= e_p_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Inhibitor::= e_i_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP59 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0481.htm');" onmouseover="Over(this)"
+  id=PPTL59 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP60 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0480.htm');" onmouseover="Over(this)"
+  id=PPTL60 onmouseout="Out(this)">Competitive Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP61 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0437.htm');" onmouseover="Over(this)"
+  id=PPTL61 onmouseout="Out(this)">Biochemical Example: <br>
+  Succinate Dehydrogenase (SDH)</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP62 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0478.htm');" onmouseover="Over(this)"
+  id=PPTL62 onmouseout="Out(this)">Exercise 6: Question 3</a></font></div>
+  <div id=PPTC62 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB62 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ATP is a competitive inhibitor for hexokinase
+    (as opposed to the substrate ATP-Mg). Using a modular approach write a
+    program for the hexokinase reactions. Assume a random mechanism, and an
+    irreversible catalysis. Assume that the binding of ATP, MgATP and Glucose
+    to their binding site is independent of whether the other binding site is
+    occupied (e.g. MgATP binds at the same rate to the free enzyme and to a
+    glucose-bound one. It does not bind of course to an ATP-bound enzyme. Thus,
+    only a single pair of hex_mgatp_bind and unbind channels are necessary (see
+    list of reactions below)</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP63 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0488.htm');" onmouseover="Over(this)"
+  id=PPTL63 onmouseout="Out(this)">Exercise 6 – Question 3</a></font></div>
+  <div id=PPTC63 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB63 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Note that as a competitive inhibitor ATP may
+    bind the enzyme at any stage that ATP_Mg would. However, no catalytic event
+    will take place when ATP is bound to the enzyme.</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Run the program in the presence and absence of
+    the ATP competitor. In addition to the usual output, compare and discuss
+    the results</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP64 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0489.htm');" onmouseover="Over(this)"
+  id=PPTL64 onmouseout="Out(this)">Exercise 6 - Question 3</a></font></div>
+  <div id=PPTC64 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB64 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexokinase + MgATP </font><font face=Symbol
+    size=2>«</font><font face="Comic Sans MS" size=2> Hexo:MgATP</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo-MgATP + Glucose </font><font face=Symbol
+    size=2>«</font><font face="Comic Sans MS" size=2> Hexo:MgATP:Glucose</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo + Glucose </font><font face=Symbol size=2>«</font><font
+    face="Comic Sans MS" size=2> Hexo:Glucose</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:Glucose + MgATP </font><font face=Symbol
+    size=2>«</font><font face="Comic Sans MS" size=2> Hexo:MgATP:Glucose</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:MgATP:Glucose </font><font face=Wingdings
+    size=2>&agrave;</font><font face="Comic Sans MS" size=2> Hexo:ADP:G6P</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:ADP:G6P</font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2>Hexo:ADP + G6P</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:ADP:G6P</font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2>Hexo:G6P + ADP</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:ADP </font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2> Hexokinase + ADP</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Hexo:G6P </font><font face=Wingdings size=2>&agrave;</font><font
+    face="Comic Sans MS" size=2> Hexokinase + G6P</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP65 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0487.htm');" onmouseover="Over(this)"
+  id=PPTL65 onmouseout="Out(this)">Exercise 6: Question 3</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP66 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0439.htm');" onmouseover="Over(this)"
+  id=PPTL66 onmouseout="Out(this)">Uncompetitive Inhibition</a></font></div>
+  <div id=PPTC66 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB66 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>An uncompetitive inhibitor binds directly to the
+    enzyme-substrate complex but not to the free enzyme</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>It need not resemble the substrate, and
+    presumably distorts the active site, thereby rendering the enzyme
+    catalytically inactive</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP67 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0440.htm');" onmouseover="Over(this)"
+  id=PPTL67 onmouseout="Out(this)">Uncompetitive Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP68 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0441.htm');" onmouseover="Over(this)"
+  id=PPTL68 onmouseout="Out(this)">Uncompetitive Inhibition</a></font></div>
+  <div id=PPTC68 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB68 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s_bind(20), es_unbind(0.8), es_i_bind(20),
+    esi_unbind(0.8), es_react(0.1), e_p_bind(10)).</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>System(N1,N2,N3)::= &lt;&lt; CREATE_ENZYME(N1) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_SUBSTRATE(N2) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_INHIBITOR(N3) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(es_unbind) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>			<span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(es_react) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;&nbsp;
+    </span>			<span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(esi_unbind) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>…</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>&gt;&gt; .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP69 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0482.htm');" onmouseover="Over(this)"
+  id=PPTL69 onmouseout="Out(this)">Uncompetitive Inhibition</a></font></div>
+  <div id=PPTC69 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB69 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme::= e_s_bind ! [] , ES .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ES::= es_unbind ? [] , Enzyme | Substrate ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	es_react ? [] , Enzyme | Product ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	es_i_bind ! [] , ESI .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ESI::= esi_unbind ? [] , ES | Inhibitor .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::= e_s_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= e_p_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Inhibitor::= es_i_bind ? [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP70 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0483.htm');" onmouseover="Over(this)"
+  id=PPTL70 onmouseout="Out(this)">Uncompetitive Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP71 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0442.htm');" onmouseover="Over(this)"
+  id=PPTL71 onmouseout="Out(this)">Mixed (non-competitive) Inhibition</a></font></div>
+  <div id=PPTC71 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB71 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>A mixed (non-competitive) inhibitor binds both
+    the free enzyme and the enzyme-substrate complex</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Presumably, it binds to enzyme sites that
+    participate in both substrate binding and catalysis.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP72 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0443.htm');" onmouseover="Over(this)"
+  id=PPTL72 onmouseout="Out(this)">Mixed Inhibition</a></font></div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP73 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0444.htm');" onmouseover="Over(this)"
+  id=PPTL73 onmouseout="Out(this)">Mixed Inhibition</a></font></div>
+  <div id=PPTC73 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB73 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>-language(psifcp).<br>
+    global(e_s_bind(20),es_unbind(0.8),e_i_bind,ei_unbind,
+    es_i_bind(20),esi_unbind(0.8),es_react(0.1),e_p_bind(10)).<br>
+    System(N1,N2,N3)::= &lt;&lt;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>CREATE_ENZYME(N1) | CREATE_SUBSTRATE(N2) | CREATE_INHIBITOR(N3)|</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(es_unbind) | timer#Timer(es_react) |</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp;
+    </span>timer#Timer(esi_unbind) | timer#Timer(ei_unbind) .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2><span style="mso-spacerun: yes">&nbsp; </span>…</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>		<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>&gt;&gt; .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP74 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0484.htm');" onmouseover="Over(this)"
+  id=PPTL74 onmouseout="Out(this)">Mixed Inhibition</a></font></div>
+  <div id=PPTC74 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB74 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Enzyme::= e_s_bind ! [] , ES ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp; </span>e_i_bind ! [] , EI .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>EI::= ei_unbind ? [] , Enzyme | Inhibitor .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ES::= es_unbind ? [] , Enzyme | Substrate ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	es_react ? [] , Enzyme | Product ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	es_i_bind ! [] , ESI .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>ESI::= esi_unbind ? [] , ES | Inhibitor .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Substrate::= e_s_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Product::= e_p_bind ? [] , true .</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Inhibitor::= es_i_bind ? [] , true ;</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>	<span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e_i_bind ? [] , true .</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP75 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0445.htm');" onmouseover="Over(this)"
+  id=PPTL75 onmouseout="Out(this)">Irreversible Inactivation</a></font></div>
+  <div id=PPTC75 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB75 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>An inhibitor which binds irreversibly to an
+    enzyme is an inactivator</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Irreversible inactivation kinetically resembles
+    noncompetitive inhibition</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP76 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0446.htm');" onmouseover="Over(this)"
+  id=PPTL76 onmouseout="Out(this)">Regulation of Enzyme Activity</a></font></div>
+  <div id=PPTC76 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB76 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width=20 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Control of enzyme availability: How much enzyme
+    is present in the cell</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Enzyme synthesis rate</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Enzyme degradation rate</font></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=2><font size=2>Control of enzyme activity: Structural
+    alterations (allosteric effects) in enzymes influence their substrate
+    binding rates</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Covalent modification</font></td>
+   </tr>
+   <tr>
+    <td colspan=2></td>
+    <td colspan=1><font size=2>Small molecules binding (allosteric effectors)</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+ <tr>
+  <td>
+  <div id=PPTP77 class=PTxt><font size=2><a
+  href="javascript:GoToSld('slide0410.htm');" onmouseover="Over(this)"
+  id=PPTL77 onmouseout="Out(this)">References</a></font></div>
+  <div id=PPTC77 class=CTxt style='display:none'>
+  <table style='color:white' id=PPTB77 class=CBorder>
+   <tr>
+    <td width=5 nowrap></td>
+    <td width="100%"></td>
+   </tr>
+   <tr>
+    <td colspan=1></td>
+    <td colspan=1><font size=2>Voet D., Voet J.G. and Pratt C.W. (1999)
+    Fundamentals of Biochemistry. Wiley. Chapters 11-12.</font></td>
+   </tr>
+  </table>
+  </div>
+  </td>
+ </tr>
+</table>
+
+</div>
+
+</body>
+
+</html>

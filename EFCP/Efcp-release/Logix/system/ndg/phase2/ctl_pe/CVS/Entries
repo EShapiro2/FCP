@@ -1,0 +1,22 @@
+/ask_arithmetic.cp/1.1/Mon Sep 17 13:17:59 2007//
+/ask_binary.cp/1.1/Mon Sep 17 13:17:59 2007//
+/ask_guard.cp/1.1/Mon Sep 17 13:18:00 2007//
+/ask_term_creation.cp/1.1/Mon Sep 17 13:18:00 2007//
+/ask_type_check.cp/1.1/Mon Sep 17 13:18:00 2007//
+/ask_utils.cp/1.1/Mon Sep 17 13:18:00 2007//
+/bodies.cp/1.1/Mon Sep 17 13:18:00 2007//
+/body_term_creation.cp/1.1/Mon Sep 17 13:18:00 2007//
+/build_dic.cp/1.1/Mon Sep 17 13:18:00 2007//
+/case_psi.cp/1.1/Mon Sep 17 13:18:00 2007//
+/ctl.cp/1.1/Mon Sep 17 13:18:00 2007//
+/ctls.cp/1.1/Mon Sep 17 13:18:01 2007//
+/ground_check.cp/1.1/Mon Sep 17 13:18:01 2007//
+/iterate_term_creation.cp/1.1/Mon Sep 17 13:18:01 2007//
+/new_term_creation.cp/1.1/Mon Sep 17 13:18:01 2007//
+/phase2_dic.cp/1.1/Mon Sep 17 13:18:01 2007//
+/self.cp/1.1/Mon Sep 17 13:18:01 2007//
+/tell_body.cp/1.1/Mon Sep 17 13:18:01 2007//
+/tell_term_creation.cp/1.1/Mon Sep 17 13:18:02 2007//
+/tells_bodies.cp/1.1/Mon Sep 17 13:18:02 2007//
+/unsafe_term_creation.cp/1.1/Mon Sep 17 13:18:02 2007//
+D

@@ -1,0 +1,526 @@
+body
+	{width:534px;
+	height:400px;}
+.T
+	{text-align:left;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:yellow;
+	font-size:171%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.BB
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.B
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:152%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.B1B
+	{mso-special-format:bullet–;
+	color:aqua;
+	mso-color-index:6;}
+.B1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:133%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.B2B
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.B2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:114%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.B3B
+	{mso-special-format:bullet–;
+	color:#0099CC;
+	mso-color-index:7;}
+.B3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:95%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.B4B
+	{mso-special-format:bullet»;
+	color:#6699FF;
+	mso-color-index:4;}
+.B4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:95%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.N
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Arial;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:black;
+	mso-color-index:1;
+	font-size:57%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.N1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Arial;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:black;
+	mso-color-index:1;
+	font-size:57%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.N2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Arial;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:black;
+	mso-color-index:1;
+	font-size:57%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.N3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Arial;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:black;
+	mso-color-index:1;
+	font-size:57%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.N4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Arial;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:black;
+	mso-color-index:1;
+	font-size:57%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.O
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	color:#F8F8F8;
+	mso-color-index:1;
+	font-size:114%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.O1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.O2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.O3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.O4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	layout-flow:vertical;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CBB
+	{mso-special-format:nobullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.CB
+	{text-align:center;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	font-size:133%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CB1B
+	{mso-special-format:nobullet–;
+	color:aqua;
+	mso-color-index:6;}
+.CB1
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CB2B
+	{mso-special-format:nobullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.CB2
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CB3B
+	{mso-special-format:nobullet–;
+	color:#0099CC;
+	mso-color-index:7;}
+.CB3
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CB4B
+	{mso-special-format:nobullet»;
+	color:#6699FF;
+	mso-color-index:4;}
+.CB4
+	{font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.CT
+	{text-align:left;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#F8F8F8;
+	mso-color-index:1;
+	font-size:190%;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.HBB
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.HB
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.HB1B
+	{mso-special-format:bullet–;
+	color:aqua;
+	mso-color-index:6;}
+.HB1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.HB2B
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.HB2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.HB3B
+	{mso-special-format:bullet–;
+	color:#0099CC;
+	mso-color-index:7;}
+.HB3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.HB4B
+	{mso-special-format:bullet»;
+	color:#6699FF;
+	mso-color-index:4;}
+.HB4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.QBB
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.QB
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.QB1B
+	{mso-special-format:bullet–;
+	color:aqua;
+	mso-color-index:6;}
+.QB1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.QB2B
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.QB2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.QB3B
+	{mso-special-format:bullet–;
+	color:#0099CC;
+	mso-color-index:7;}
+.QB3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.QB4B
+	{mso-special-format:bullet»;
+	color:#6699FF;
+	mso-color-index:4;}
+.QB4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.TblB
+	{mso-special-format:nobullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.Tbl
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.Tbl1B
+	{mso-special-format:nobullet–;
+	color:aqua;
+	mso-color-index:6;}
+.Tbl1
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.Tbl2B
+	{mso-special-format:nobullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.Tbl2
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.Tbl3B
+	{mso-special-format:nobullet–;
+	color:#0099CC;
+	mso-color-index:7;}
+.Tbl3
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.Tbl4B
+	{mso-special-format:nobullet»;
+	color:#6699FF;
+	mso-color-index:4;}
+.Tbl4
+	{text-align:right;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	color:#FFFF99;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:rtl;}
+.defaultB
+	{mso-special-format:bullet•;
+	color:#6699FF;
+	mso-color-index:4;}
+.default
+	{text-align:left;
+	font-family:"Times New Roman \(Hebrew\)";
+	mso-ascii-font-family:Tahoma;
+	mso-bidi-font-family:"Times New Roman \(Hebrew\)";
+	mso-hansi-font-family:"Times New Roman";
+	font-weight:normal;
+	font-style:normal;
+	text-decoration:none;
+	text-shadow:none;
+	text-effect:none;
+	mso-fareast-hint:no;
+	layout-flow:horizontal;
+	color:#FFFF99;
+	font-size:152%;
+	mso-text-raise:0%;
+	mso-line-spacing:"100 20 0";
+	mso-margin-left-alt:216;
+	mso-text-indent-alt:0;
+	mso-char-wrap:1;
+	mso-kinsoku-overflow:1;
+	direction:ltr;
+	mso-word-wrap:1;
+	mso-vertical-align-special:baseline;
+	mso-ansi-language:EN-US;}
+a:link
+	{color:aqua !important;}
+a:active
+	{color:#9933FF !important;}
+a:visited
+	{color:#0099CC !important;}

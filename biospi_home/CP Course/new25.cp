@@ -1,0 +1,2 @@
+-mode(trust).
+-language(compound).

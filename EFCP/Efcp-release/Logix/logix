@@ -1,0 +1,2 @@
+#! /bin/sh
+exec /Users/udi/Dropbox/Concurrent Prolog/EFCP/Efcp-release/Logix/EMULATOR/fcp $* /Users/udi/Dropbox/Concurrent Prolog/EFCP/Efcp-release/Logix/saved_logix

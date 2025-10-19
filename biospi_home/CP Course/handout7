@@ -1,0 +1,80 @@
+/*
+
+Concurrent Prolog Programming Techniques
+
+Instructor:  William Silverman
+
+Handout No. 7,  Monday, December 29, 1986
+
+
+Recursive process networks (D)
+
+Circuit simulation
+
+
+*/
+
+% and(In1,In2,Out) :- Out is the 'and' of In1 and In2.
+
+and([1|In1],[1|In2],[1|Out]) :-
+	and(In1?,In2?,Out).
+and([0|In1],[X|In2],[0|Out]) :-
+	and(In1?,In2?,Out).
+and([X|In1],[0|In2],[0|Out]) :-
+	and(In1?,In2?,Out).
+and([],[],[]).
+
+% or(In1,In2,Out) :- Out is the 'or' of In1 and In2.
+
+or([0|In1],[0|In2],[0|Out]) :-
+	or(In1?,In2?,Out).
+or([1|In1],[X|In2],[1|Out]) :-
+	or(In1?,In2?,Out).
+or([X|In1],[1|In2],[1|Out]) :-
+	or(In1?,In2?,Out).
+or([],[],[]).
+
+
+% xor(In1,In2,Out) :- Out is the 'xor' of In1 and In2.
+
+xor([X|In1],[Y|In2],[1|Out]) :-
+	X=\=Y |
+	xor(In1?,In2?,Out).
+xor([X|In1],[Y|In2],[0|Out]) :-
+	X=?=Y |
+	xor(In1?,In2?,Out).
+xor([],[],[]).
+
+% half_adder(In1,In2,Out1,Out1) :-
+%	Out1 is the 'xor' and Out2 is the 'and' of In1 and In2.
+
+half_adder(In1,In2,Out1,Out2) :-
+	xor(In1?,In2?,Out1),
+	and(In1?,In2?,Out2).
+
+% full_adder(In1,In2,Cin,Out,Cout) :-
+%	Out is the result of adding In1, In2, and Cin,
+%	with carry Cout.
+
+full_adder(In1,In2,Cin,Out,Cout) :-
+	half_adder(In1?,In2?,Out1,C1),
+	half_adder(Cin?,Out1?,Out,C2),
+	or(C1?,C2?,Cout).
+
+% word_adder(As,Bs,Cin,Os,Cout) :-
+%	Out is the result of adding the word As to the word Bs
+%	given carry Cin, with resulting carry Cout.
+
+word_adder([A|As],[B|Bs],Cin,[Out|Os],Cout) :-
+	full_adder(A?,B?,Cin?,Out,Cint),
+	word_adder(As?,Bs?,Cint?,Os,Cout).
+word_adder([],[],C,[],C).
+
+a_word(a,[[0],[1],[1],[1]]).
+a_word(b,[[1],[1],[0],[1]]).
+
+
+test_adder(Wa,Wb,Out,Cout) :-
+	a_word(Wa?,As),
+	a_word(Wb?,Bs),
+	word_adder(As?,Bs?,[0],Out,Cout).

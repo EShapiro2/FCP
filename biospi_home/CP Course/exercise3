@@ -1,0 +1,59 @@
+Assignment No. 3	Due Monday, December 8
+     
+This is a programming assignment.  It should be handed in
+together with a script of its execution.  Getting a script of
+the execution into a file 'foo' is best achieved by the command:
+     
+	logix | tee foo
+     
+Note that interactive line editing commands (e.g. backspace,
+Control-B etc.) appear in the script verbatim,
+so try and avoid them (or edit them out later)
+when preparing the final sample run.
+     
+The assignment contains mostly bounded producers (except for powers).
+To stop the output of an unbounded producer, use the abort command.
+Note that Logix represents integers using 24 bits only,
+and gets confused when adding or multiplying large numbers.
+     
+     
+     
+(1) Define:
+	(a) fib(N,Fs) :- Fs are the first N elements of the Fibonacci
+		series, N >= 2.
+	This can be done by changing the program shown in
+	class to a bounded producer, having four arguments (easy),
+	or by having a bounded producer with only two arguments
+	(tricky).
+     
+	(b) factorials(N,Fs) :- Fs is a stream of the first N factorials.
+	(Same trick in (a) can be used to reduce number of arguments).
+     
+(2) Define:
+	(a) mult(Xs,M) :- M is the result of multiplying all Xs.
+	(b) preds(N,Xs) :- Xs are the predecessors of N, inclusive.
+	(c) fact(N,F) :- F is the factorial of N,
+		using (a) and (b).
+     
+(3) Define an efficient inner product, ip(Xs,Ys,S),
+    using an accumulator.  Xs and Ys are streams of integers, you can
+    think of them as vectors. The inner product of two vectors is defined as:
+    ip([a1,...,aN],[b1,...,bN],S) if S = a1*b1 + a2*b2 + ... + aN*bN.
+     
+(4) Define:
+	(a) mult(Xs,N,Ys) :-  Multiplying each element in the stream Xs
+                by N gives the stream Ys.
+	(b) powers(N,Ns) :- Ns is the powers of N,
+		using mult/3.
+	    Hint: One axiom is enough.
+     
+     
+(5) Define:
+	(a) bbl(Xs,Y,Ys) :-
+		Y is the smallest element in Xs, and Ys
+		are the rest (not necessarily in the original order).
+	Hint:
+	bbl([X|Xs],Y,Ys) :- bbl1(X,Xs?,Y,Ys).
+     
+	(b) sort(Xs,Ys) :- Sorting Xs gives Ys,
+		using bbl (or bbl1).

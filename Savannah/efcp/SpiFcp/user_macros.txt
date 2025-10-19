@@ -1,0 +1,348 @@
+User macros are available as command line entries during a SpiFcp session.
+
+The user macro commands supplied for Stochastic Pi Calculus include and 
+in some cases replace the user macros of the Logix system.  They fall
+into three major categories:
+
+  * Channel management and message transmission;
+
+  * Program execution;
+
+  * Debugging.
+
+In the discussion below, refer to BNF.txt for syntactic definition of
+most bracketed terms, such as <logix_variable>.  Other bracketed
+terms, such as <goals>, are defined in explicitly specified documents.
+
+Channel Management and Message Transmission
+-------------------------------------------
+
+The user macros:
+
+    pc(C)
+    pc(C,S,B)
+    pc(C,S,B,W)
+
+are used to create channels.  The first user macro creates an "instantaneous"
+(infinite rate) channel C.  The latter two create "based" channel C,whose
+name is derived from the string S, and whose base rate is specified by
+the non-negative number B (When B is 0, the created channel is a "sink" -
+i.e. all sends and receives on the channel are discarded, and no actual
+transmission occurs.).  The third specifies a <weighter_declaration> in
+addition.
+
+
+The user macros:
+
+    ps(M,C)
+    ps(M,C,N)
+
+offer to send message M on channel C, where N is a positive integer multiplier;
+the likelihood that C will be selected for transmission increases with N.
+
+
+The user macros:
+
+    pr(C,M)
+    pr(C,M,N)
+
+offer to receive message M on channel C, where N is a positive integer
+multiplier, as above.
+
+
+The user macro:
+
+    weighter(W)
+
+alters the system's default weight computation, where the new default
+weight  W  is a <weighter_declaration>.  The initial default weight is 1.
+
+
+The user macros:
+
+    randomize
+    serialize
+
+alter the system's state to set the status of each subsequently
+created file so that messages for transmision by that file are
+selected randomly or on a first-come-first-served basis.  The initial
+system state is  serialize .  The program macros  randomize_messages 
+and  serialize_messages  may be used to change the status of specified
+files (see program_macros.txt: M2 and M3)
+
+
+Program Execution
+-----------------
+
+The basic Logix command to execute a program has the form:
+
+    <logix_path>#<goal>
+
+The system creates a computation, uniquely identified by a positive
+integer, its "computation number", throughout the session.  The command
+starts a Logix computation, redefining the "current computation" and
+the "current computation number".
+
+
+To execute a Stochastic Pi Calculus program, e.g. RunTT in module booland
+in directory boolean, call:
+
+    boolean#booland#"RunTT"
+
+The call above is an example of a Remote Process Call (RPC), similarly
+defined as an  <external_call>  in  BNF.txt .
+
+The quotation marks around RunTT are necessary, since the Logix system
+treats  a name which begins with a capital letter or an underscore as
+a  <logix_variable> .
+
+
+The user macros:
+
+    run(<quantified process set>)
+    run(<quantified process set>, <limit>)
+
+execute all of the RPCs in the  <quantified process set>  as a single
+computation: the first form continues indefinitely; the second continues 
+until  <limit>  units of internal time have elapsed.  See  repeat.txt  for 
+details on specification of multiple RPCs by a  <quantified process set> .
+The simplest form of a  <quantified process set>  is a single RPC, as in
+the example above -
+
+    run(boolean#booland#RunTT)
+
+Qutation marks are unnecessary, since the run macro substitutes the name
+of an uninstantiated <logix_variable> for the <logix_variable> in the
+derived call(s).
+
+
+The user macro:
+
+    run(<quantified process set>, <file name>, <limit>)
+
+executes all of the RPCs in the  <quantified process set>  as a single
+computation and records their activity on the named file until  <limit>
+units of internal time have elapsed.  See  repeat.txt  for details on
+specification of multiple RPCs by a <quantified process set>.  See
+record.txt  for details about the file and about the other arguments
+of this user macro.
+
+
+A computation may be  suspended ,  resumed  or  aborted.  You may also
+inspect its resolvent - the set of unterminated processes (see Debugging
+below).
+
+The user macros:
+
+    s
+    suspend
+    s(all)
+    suspend(all)
+    s(N)
+    suspend(N)
+
+suspend the current or the specified computation(s) (N or all).  The last
+two forms also set the current computation number.
+
+
+The user macros:
+
+    re
+    resume
+    re(all)
+    resume(all)
+    re(N)
+    resume(N)
+
+resume the current or the specified computation(s), as above.
+
+
+The user macros:
+
+    a
+    abort
+    a(all)
+    abort(all)
+    a(N)
+    abort(N)
+    
+abort the current or the specified computation(s), as above.
+
+
+
+The user macro:
+
+    reset
+
+discards all channels, private and public; it preserves the states of
+randomize/serialize and the default weighter, but resets the private
+channel ordinal to 1.  To complete entire system  reset, use the
+commands  abort(all)  and  forward(reset) .
+
+
+Debugging
+---------
+
+Debugging aids consist of inspection and execution control user macros.
+
+
+The user macros:
+
+    options(New)
+    options(New,Old)
+
+set new display control options and (optionally) return old ones.
+New  may be a single option or a Logix list of options.
+
+  * none	Don't annotate any channels.
+  * active	only annotate channels with both sends and receives.
+  * messages    Display each transmitting channel with a list of messages.
+                The messages option may be useful for debugging.
+  * note        annotate channels which are transmitting;
+		this is the usual default.
+
+  * base        show channel name * base.
+  * creator     show the creator of the channel and its unique index (if any).
+  * full        combines base and creator
+  * short       just show channel name; this is the usual default.
+
+An example list is:
+
+    [active,full]
+
+In the user macros below, options may be specified explicitly in one variant
+of most groups.  When the options are specified, they override the
+global options set by the options user macro above.
+
+
+The user macros:
+
+   spg
+   spg(N)
+   spg(N,Options)
+
+display the goals of the current or of the specified computation.  The last
+two forms also set the current computation number.
+
+
+The user macros:
+
+   spr
+   spr(N)
+   spr(N,Options)
+
+display the resolvent of the current or of the specified computation, as above.
+
+
+The user macros:
+
+    spc(C)
+    spc(C,Options)
+
+display the channel C.
+
+
+The user macros:
+
+    pdb(RPC)
+    pdb(RPC,Options)
+
+start debugging of the Remote Process Call (e.g. hysteresis#MODULE).
+The debugger provides help in reponse to the command "help".
+
+
+The user macro:
+
+    vtree(Path,Goal,Tree)
+
+executes Goal, with respect to Path and prepares Tree, which may be
+displayed using user macros below.  For example, if Path is boolean#booland
+and goal is RunTT, Tree represents the execution of the RPC:
+
+    boolean#booland#RunTT
+
+Ordinarily, you should wait until the system becomes idle, or the
+computation has been suspended before attempting to view Tree.
+
+To view Tree, use either of the user macros:
+
+    ptree(Tree)
+    ptree(Tree,Options)
+
+The default option for annotations to be displayed is "none" instead of "note".
+Additional options which may be specified are:
+
+  * prefix	Display Tree in prefix order; this is the default.
+  * execute	Display Tree in execution order.
+
+
+The user macro:
+
+    ctree(Tree)
+
+may be used to close the execution tree; this terminates the system's
+participation in the execution of the computation.
+
+
+Miscellaneous User Macros
+-------------------------
+
+The user macros:
+
+    i(Path)
+    input(Path)
+
+Input the command file designated by Path.  For example to execute
+the commands contained in the file test in sub-directory scripts:
+
+    input(scripts#test)
+
+
+The user macro:
+
+    {<logix string>}
+
+may be used to execute a UNIX command directly.  Examples:
+
+    {ls}
+    {"cat notes"}
+
+
+The user macro:
+
+    ^
+
+may be used to display all named Logix variables.
+
+
+The user macro:
+
+    <logix_variable>^
+
+may be used to display a named variable.
+
+
+The user macro:
+
+    ^^
+
+may be used to display automatically named Logix variables.
+
+
+The user macro:
+
+    unbind
+
+may be used to remove the current definitions of all Logix variables.
+
+
+The user macro:
+
+    unbind(<logix_variable>)
+
+may be used to remove the current definition of the named <logix_variable>.
+
+
+This document is licensed under Gnu General Public License - Version 3
+
+    http://www.nongnu.org/efcp/gnu-gpl3.html

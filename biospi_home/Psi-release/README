@@ -1,0 +1,28 @@
+To install the Logix system:
+
+    % cd Logix
+    % install LINUX -h20000
+
+The generated file, Logix/linux_logix, may be used to start a Logix
+session - e.g.
+
+    % Logix/linux_logix
+
+Within the Logix system, enter:
+
+    @h
+
+for Logix help, or:
+
+    @ph
+
+for Pi Calculus help.
+
+The Documentation file includes Stochastic Pi Calculus BNF and
+various notes.
+
+The files in bin are used to extract tabular information from a
+Stochastic Pi Calculus application session (see record.txt).
+
+Some examples of Stochastic Pi Calculus programs are included
+in sub-directory Examples.

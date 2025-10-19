@@ -1,0 +1,120 @@
+/*
+
+Concurrent Prolog Programming Techniques
+
+Instructor:  William Silverman
+
+Handout No. 5,  Monday, December 8
+
+
+Recursive process networks - 2
+
+*/
+
+-export([vm/3,vm1/3,matrix/2,hamming/1,sum_tree/2,streams/1,mm/3]).
+
+% (1) Vector-Matrix multiplication
+%	(a) Without pipelining
+
+% vm(Xv,Ym,Zv) :- multiplying the vector Xv by the matrix Ym gives
+%	the vector Zv
+
+vm(_,[],[]).
+vm(Xv,[Yv|Ym],[Z|Zv]) :-
+	ip(Xv?,Yv?,Z), vm(Xv?,Ym?,Zv).
+
+
+% ip(Xv,Yv,Z) :- Z is the inner propduct of Xv and Yv.
+
+ip([X|Xv],[Y|Yv],S) :-
+	ip(Xv?,Yv?,S1),
+	S := S1+X*Y.
+ip([],[],0).
+
+matrix(a22,[[1,2],[3,4]]).
+matrix(b22,[[2,1],[2,1]]).
+
+
+% (b) With pipelining
+
+% vm(Xv,Ym,Zv) :- multiplying the vector Xv by the matrix Ym gives
+%	the vector Zv
+
+vm1(_,[],[]).
+vm1(Xv,[Yv|Ym],[Z|Zv]) :-
+	ip1(Xv?,Yv?,Z,Xv1), vm1(Xv1?,Ym?,Zv).
+
+% ip(Xv,Yv,Z,Xv1) :- Z is the inner propduct of Xv and Yv,
+%	and Xv1 is a copy of Xv.
+ip1([X|Xv],[Y|Yv],S,[X|Xv1]) :-
+	ip1(Xv?,Yv?,S1,Xv1),
+	S := S1+X*Y.
+ip1([],[],0,[]).
+
+
+% Circular pipes
+
+% (2) Hamming's Problem
+% hamming(Xs) :- Xs is the sorted list of numbers of
+% the form (2**i)*(3**j)*(5**k)
+
+hamming(Xs) :-
+	multiply(2, [1|Xs?], X2),
+	multiply(3, [1|Xs?], X3),
+	multiply(5, [1|Xs?], X5),
+	opmerge(X2?, X3?, X23),
+	opmerge(X5?, X23?, Xs).
+
+multiply(N, [U|X], [V?|Z?]) :-
+V := N*U, multiply(N, X?, Z).
+
+opmerge([U|X], [U|Y], [U|Z]) :- opmerge(X?, Y?, Z).
+opmerge([U|X], [V|Y], [U|Z]) :- U < V | opmerge(X?, [V|Y], Z).
+opmerge([U|X], [V|Y], [V|Z]) :- V < U | opmerge([U|X], Y?, Z).
+
+
+% Trees
+
+% Summing trees
+
+% (3) sum(Xss,Ss) :- Ss is the stream of the
+% element-wise summation of the list of streams Xs.
+
+sum_tree(Xss,Ss) :-
+	Xss =\= [], Xss =\= [_] |
+	sum_layer(Xss?,Yss),
+	sum_tree(Yss?,Ss).
+sum_tree([Xs],Xs).
+
+sum_layer([Xs1,Xs2|In],[Ys|Out?]) :-
+	sum(Xs1?,Xs2?,Ys),
+	sum_layer(In?,Out).
+sum_layer([Xs],[Xs]).
+sum_layer([],[]).
+
+sum([X|Xs],[Y|Ys],[Z|Zs]) :-
+	Z := X+Y,
+	sum(Xs?,Ys?,Zs).
+sum([],[],[]).
+
+streams([[1,2,3,4],[1,2,3,4],[1,2,3,4],[1,2,3,4]]).
+
+% Merge trees will be studied separately
+
+%  Arrays
+
+% (4) Matrix-Matrix multiplication
+% (a) Without pipelining
+
+% mm(Xm,Ym,Zm) :- Zm is the result of multiplying the matrix Xm
+%	with the transposed matrix Ym.
+
+mm([],_,[]).
+mm([Xv|Xm],Ym,[Zv|Zm]) :-
+	vm(Xv?,Ym?,Zv), mm(Xm?,Ym?,Zm).
+
+% (b) With pipelining
+
+% mm1(Xm,Ym,Zm) :- Zm is the result of multiplying the matrix Xm
+%	with the transposed matrix Ym.
+% (an exercise)

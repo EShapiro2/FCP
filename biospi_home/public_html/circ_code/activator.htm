@@ -1,0 +1,179 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./activator_files/filelist.xml">
+<title>activator</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Template>Normal</o:Template>
+  <o:LastAuthor>aviv</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>2</o:TotalTime>
+  <o:Created>2000-10-02T06:59:00Z</o:Created>
+  <o:LastSaved>2000-10-02T06:59:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>144</o:Words>
+  <o:Characters>823</o:Characters>
+  <o:Company>Q.B.I.</o:Company>
+  <o:Lines>6</o:Lines>
+  <o:Paragraphs>1</o:Paragraphs>
+  <o:CharactersWithSpaces>1010</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"\FF2D\FF33 \660E\671D";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+@font-face
+	{font-family:"\@MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:1 134676480 16 0 131072 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 65.95pt 1.0in 65.95pt;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoPlainText><span style='mso-fareast-font-family:"MS Mincho"'>-language([evaluate,psifcp,compound,colon]).<br>
+-export([&quot;A_GENE&quot;
+, &quot;A_RNA&quot; , &quot;A_PROTEIN&quot;]).<br>
+-include(rates).<br>
+stochastic.<br>
+global([pA(R1)
+, bA(R2) , t2a(Think2a) , utrA(R3) , degmA(R4) , degpA(R12,0) , pR(R5) ,
+rbs(R6)]).<br>
+<br>
+<br>
+<a name="a_gene">A_GENE:-<br>
+</a><br>
+&lt;&lt;
+PROMOTED_A , BASAL_A .<br>
+<br>
+PROMOTED_A:-<br>
+<span style="mso-spacerun:
+yes">    </span>pA ? {e} | ACTIVATED_TRANSCRIPTION_A(e) .<br>
+<br>
+BASAL_A:-<br>
+<span
+style="mso-spacerun: yes">    </span>bA ? [] | BASAL_A , A_RNA .<br>
+<br>
+ACTIVATED_TRANSCRIPTION_A(e):-<br>
+<span
+style="mso-spacerun: yes">    </span>t2a ? [] | A_RNA ,
+ACTIVATED_TRANSCRIPTION_A ;<br>
+<span style="mso-spacerun: yes">   
+</span>e<span style="mso-spacerun: yes">   </span>? [] | PROMOTED_A<span
+style="mso-spacerun: yes">   </span><br>
+&gt;&gt;<br>
+.<br>
+<br>
+<a
+name="a_RNA">A_RNA:-</a><br>
+<br>
+&lt;&lt; TRANSLATION_A + DEGRADATION_mA
+.<br>
+<br>
+TRANSLATION_A:-<br>
+<span style="mso-spacerun: yes">   
+</span>utrA ? [] | A_RNA , A_PROTEIN<span style="mso-spacerun: yes"> 
+</span>.<br>
+<br>
+DEGRADATION_mA:-<br>
+<span style="mso-spacerun: yes">   
+</span>degmA ? [] | true<br>
+<br>
+&gt;&gt;<br>
+.<br>
+<br>
+<br>
+<a
+name="a_protein">A_PROTEIN:-</a><br>
+<br>
+&lt;&lt; e1(infinite) , e2(R7a) ,
+e3(R7b) . PROMOTION_AR + BINDING_R + DEGRADATION_A .<br>
+<br>
+PROMOTION_AR
+:-<br>
+<span style="mso-spacerun: yes">    </span>pA ! {e2} | e2 ! [] |
+A_PROTEIN ;<br>
+<span style="mso-spacerun: yes">    </span>pR ! {e3} | e3 ! []
+| A_PROTEIN <br>
+<br>
+.<br>
+<br>
+BINDING_R :-<br>
+<span
+style="mso-spacerun: yes">    </span>rbs ! {e1} | BOUND_A_PROTEIN<br>
+<br>
+.<br>
+<br>
+BOUND_A_PROTEIN:-<br>
+<span
+style="mso-spacerun: yes">    </span>degpA ? [] | e1 ! [] | true ;<br>
+<span
+style="mso-spacerun: yes">    </span>e1 ? [] | A_PROTEIN <br>
+<br>
+.<br>
+<br>
+DEGRADATION_A:-<br>
+<span
+style="mso-spacerun: yes">    </span>degpA ? [] | true <br>
+<span
+style='mso-tab-count:1'>      </span>&gt;&gt;<br>
+<br>
+.<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

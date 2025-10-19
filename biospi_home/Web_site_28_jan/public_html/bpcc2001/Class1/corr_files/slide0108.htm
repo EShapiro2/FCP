@@ -1,0 +1,379 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../corr.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description
+content="16-May-01: Implicit representation of states: Sequential Guards">
+<link rel=Stylesheet href="master03_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0108.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="302"/>
+</o:shapelayout>
+</head>
+
+<body lang=HE style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#808080,#000000,#00CC99,#3333CC,#CCCCFF,#B2B2B2"
+ masterhref="master03.xml">
+ <p:shaperange href="master03.xml#_x0000_s1025"/><![if !ppt]><p:shaperange
+  href="master03.xml#_x0000_s1028"/><p:shaperange
+  href="master03.xml#_x0000_s1029"/><![endif]><p:shaperange
+  href="master03.xml#_x0000_m1026"/><v:shape id="_x0000_s218114" type="#_x0000_m1026"
+  style='position:absolute;left:0;top:24pt;width:10in;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master03.xml#_x0000_m1027"/><v:shape id="_x0000_s218115" type="#_x0000_m1027"
+  style='position:absolute;left:24pt;top:120pt;width:696pt;height:402pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><v:rect id="_x0000_s218116"
+  style='position:absolute;left:-18pt;top:402pt;width:276pt;height:48pt;
+  mso-wrap-style:none' filled="f" fillcolor="#0c9 [4]" stroked="f"
+  strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218117" style='position:absolute;left:450pt;
+  top:402pt;width:276pt;height:48pt;mso-wrap-style:none' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218118" style='position:absolute;left:168pt;
+  top:366pt;width:108pt;height:96pt;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218119" style='position:absolute;left:642pt;
+  top:378pt;width:108pt;height:96pt;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218120" style='position:absolute;left:-18pt;
+  top:462pt;width:276pt;height:48pt;mso-wrap-style:none' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218121" style='position:absolute;left:450pt;
+  top:462pt;width:276pt;height:48pt;mso-wrap-style:none' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218122" style='position:absolute;left:168pt;
+  top:426pt;width:108pt;height:96pt;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218123" style='position:absolute;left:642pt;
+  top:6in;width:108pt;height:96pt;v-text-anchor:middle' filled="f" fillcolor="#0c9 [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218124" style='position:absolute;left:78pt;top:420pt;
+  width:54pt;height:30pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218125" style='position:absolute;left:192pt;
+  top:402pt;width:276pt;height:48pt;mso-wrap-style:none' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218126" style='position:absolute;left:378pt;
+  top:366pt;width:108pt;height:96pt;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218127" style='position:absolute;left:192pt;
+  top:462pt;width:276pt;height:48pt;mso-wrap-style:none' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218128" style='position:absolute;left:378pt;
+  top:426pt;width:108pt;height:96pt;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218129" style='position:absolute;left:6in;top:366pt;
+  width:108pt;height:96pt;v-text-anchor:middle' filled="f" fillcolor="#0c9 [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218130" style='position:absolute;left:6in;top:426pt;
+  width:108pt;height:96pt;v-text-anchor:middle' filled="f" fillcolor="#0c9 [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218131" style='position:absolute;left:6in;top:456pt;
+  width:54pt;height:30pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218132" style='position:absolute;left:6in;top:396pt;
+  width:54pt;height:30pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect><v:rect id="_x0000_s218133" style='position:absolute;left:528pt;
+  top:7in;width:192pt;height:36pt;mso-wrap-style:none;v-text-anchor:middle'
+  filled="f" fillcolor="#0c9 [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="gray [2]"/>
+ </v:rect>
+ <div v:shape="_x0000_s218114" class=T><span style='position:absolute;
+ top:3.75%;left:.93%;width:98.12%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-font-family:Arial;
+ font-size:90%;color:black;mso-color-index:1'>Implicit representation of
+ states: </span></span><span style='position:absolute;top:11.75%;left:.93%;
+ width:98.12%'><span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-font-family:Arial;font-size:90%;color:black;
+ mso-color-index:1'>Sequential Guards</span><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-font-family:Arial;
+ font-size:60%;color:black;mso-color-index:1;position:relative;top:.45em;
+ mso-text-raise:-30%;mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ <div v:shape="_x0000_s218115" class=B>
+ <div style='mso-margin-left-alt:0;position:absolute;top:23.0%;left:4.3%;
+ width:94.75%;height:5.25%'><span style='mso-special-format:nobullet;
+ display:none'>•</span><span style='font-family:"Courier New";mso-ascii-font-family:
+ "Courier New";font-size:75%'><b>Mg::= &#13;</b></span></div>
+ <div style='mso-margin-left-alt:0'><span style='position:absolute;top:29.5%;
+ left:4.3%;width:94.75%'><span style='mso-special-format:nobullet;display:none'>•</span><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:75%'><b><span style="mso-spacerun: yes">&nbsp; </span>e1 ! [] ,
+ &lt;&lt; e2 ! [] , Mg_plus2 ;<br>
+ </b></span></span><span style='position:
+ absolute;top:34.75%;left:4.3%;width:94.75%'><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b><span
+ style="mso-spacerun:
+ yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>e3 ? [] , Mg &gt;&gt; .<br>
+ </b></span></span><span style='position:
+ absolute;top:40.25%;left:4.3%;width:94.75%'><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b>Mg_plus2::= <br>
+ </b></span></span><span
+ style='position:absolute;top:45.5%;left:4.3%;width:94.75%'><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:75%'><b><span style="mso-spacerun: yes">&nbsp; </span>e3 ? [] ,
+ &lt;&lt; e2 ! [] , Mg_plus2 ;<br>
+ </b></span></span><span style='position:
+ absolute;top:50.75%;left:4.3%;width:94.75%'><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b><span
+ style="mso-spacerun:
+ yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ </span>e3 ? [] , Mg &gt;&gt; .<br>
+ </b></span></span><span style='position:
+ absolute;top:56.25%;left:4.3%;width:94.75%'><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b>Cl::= e1 ? [] </b></span><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:88%;color:red'><b>,</b></span><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b> e3 ! [] </b></span><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:88%;color:red'><b>,</b></span><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b> Cl ; <br>
+ </b></span></span><span
+ style='position:absolute;top:62.5%;left:4.3%;width:94.75%'><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:75%'><b><span style="mso-spacerun:
+ yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ? [] </b></span><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:88%;color:red'><b>,</b></span><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b> e4 ! [] </b></span><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:88%;color:red'><b>,</b></span><span style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";font-size:75%'><b> Cl .<br>
+ </b></span></span><span
+ style='position:absolute;top:68.5%;left:4.3%;width:94.75%'><span
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ font-size:75%;mso-special-format:lastCR;display:none'><b>&#13;</b></span></span></div>
+ </div>
+ <div v:shape="_x0000_s218116" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0"'><span style='position:absolute;top:74.5%;left:-1.49%;width:36.51%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:red'>&lt;Communication&gt; <br>
+ </span></span><span
+ style='position:absolute;top:79.75%;left:-1.49%;width:36.51%'><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ <div v:shape="_x0000_s218117" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0"'><span style='position:absolute;top:74.5%;left:63.48%;width:36.51%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:green'>&lt;Right hand side&gt;<br>
+ </span></span><span
+ style='position:absolute;top:79.75%;left:63.48%;width:36.51%'><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ <div v:shape="_x0000_s218118" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:71.0%;left:24.34%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218119" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:73.25%;left:90.26%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%'><b>;</b></span><span lang=HE style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-font-family:
+ "Times New Roman \(Hebrew\)";mso-hansi-font-family:"Comic Sans MS";font-size:
+ 167%;mso-special-format:lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218120" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:85.5%;left:-1.49%;width:36.51%;height:6.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:red'>&lt;Communication&gt;</span><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s218121" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:85.5%;left:63.48%;width:36.51%;height:6.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:green'>&lt;Right hand side&gt;</span><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s218122" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:82.25%;left:24.34%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218123" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:83.25%;left:90.26%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%'><b>.</b></span><span lang=HE style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-font-family:
+ "Times New Roman \(Hebrew\)";mso-hansi-font-family:"Comic Sans MS";font-size:
+ 167%;mso-special-format:lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218124" class=O style='text-align:center;position:absolute;
+ top:75.0%;left:11.79%;width:5.61%;height:10.5%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:167%'>…</span></div>
+ <div v:shape="_x0000_s218125" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:74.5%;left:27.71%;width:36.51%;height:6.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:red'>&lt;Communication&gt;</span><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s218126" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:71.0%;left:53.55%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218127" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:85.5%;left:27.71%;width:36.51%;height:6.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";color:red'>&lt;Communication&gt;</span><span lang=HE
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s218128" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:82.25%;left:53.55%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218129" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:71.0%;left:61.04%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218130" class=O style='text-align:center;mso-line-spacing:
+ "100 20 0";position:absolute;top:82.25%;left:61.04%;width:13.1%;height:10.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5'><b>,</b></span><span
+ lang=HE style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-font-family:"Times New Roman \(Hebrew\)";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%;color:#3333CC;mso-color-index:5;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ <div v:shape="_x0000_s218131" class=O style='text-align:center;position:absolute;
+ top:81.75%;left:61.04%;width:5.61%;height:10.5%'><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";font-size:167%'>…</span></div>
+ <div v:shape="_x0000_s218132" class=O style='text-align:center;position:absolute;
+ top:70.5%;left:61.04%;width:5.61%;height:10.5%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:167%'>…</span></div>
+ <div v:shape="_x0000_s218133" class=O style='text-align:center;mso-char-wrap:
+ 0;mso-kinsoku-overflow:0;position:absolute;top:94.75%;left:74.34%;width:24.71%;
+ height:4.25%'><span style='font-family:Tahoma;mso-ascii-font-family:Tahoma;
+ mso-fareast-font-family:Tahoma;mso-hansi-font-family:Tahoma;font-size:75%;
+ layout-flow:vertical'>mgcl2_4.cp</span><span lang=HE style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-fareast-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:75%;layout-flow:vertical;mso-special-format:lastCR;
+ display:none'>&#13;</span></div>
+</p:slide></div>
+
+</body>
+
+</html>

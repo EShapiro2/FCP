@@ -1,0 +1,2075 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../class2.htm">
+<link rel=Preview href=preview.wmf>
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../class2.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0146.htm');">The pi-Calculus</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Syntax and Semantics - II</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0203.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0202.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2(10)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>baserate(10).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Na | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0207.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0206.htm');">Na + Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>2<sup>nd</sup> order forward and
+  reverse reactions, at equilibrium</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0205.htm');">Na + K + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + K<sup>+</sup>
++ 2Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>One molecule (Cl) is able to interact
+  with more than one partner (Na or K)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Each reaction has a different base rate</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>We will use</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>A different communication channel per
+  each partner (same as e1 and e2 for forward and reverse reactions before)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0204.htm');">Na + K + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + K<sup>+</sup>
++ 2Cl<sup>-</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Several alternative reactions are
+  offered (enabled) by the same atom at the same time, but only a single one
+  can actually occur (Cl + Na </font><font face=Wingdings size=2>&agrave;</font><font
+  face="Comic Sans MS" size=2> , Cl + K </font><font face=Wingdings size=2>&agrave;</font><font
+  face="Comic Sans MS" size=2>)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>We will use</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>A mutual exclusive (stochastic) choice
+  construct to choose between the different options (all offered
+  simultaneously, but only one is selected).</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0049.htm');">K + Na + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> K<sup>+</sup> + 2Cl<sup>-</sup>
++ Na<sup>+</sup></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2(10),e3(30),e4(20)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Cl | Cl | K</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>K::= e3 ! [] , K_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>K_plus::= e4 ? [] , K .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e3 ?
+  [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl ; <br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0097.htm');">Guarded Homogenous*
+Choice</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>K::= e3 ! [] , K_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>K_plus::= e4 ? [] , K .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e3
+  ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl ; <br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0098.htm');">Choice in Communication</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0100.htm');">Na + K + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + K<sup>+</sup>
++ 2Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0150.htm');">Na + K + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> Na<sup>+</sup> + K<sup>+</sup>
++ 2Cl<sup>-</sup></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0208.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>One atom (Mg) sharing electrons with
+  two other (Cl) atoms</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Represent as two consecutive
+  interactions</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Intermediate state: Mg<sup>+</sup></font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>At Mg+ state can either</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Return to Mg state</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Proceed to Mg<sup>+2</sup> state</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0209.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Intermediate states can be represented
+  as</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Explicit processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Implicit local processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Implicit, sequential guards</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0210.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>The two alternatives in an intermediate
+  state (lose or gain an electron) are represented as mixed choice between</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Output action (lose a second electron)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Input action (gain back an electron)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0050.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(10),e2(100),e3(50),e4(5)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Mg | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Mg::= e1 ! [] , Mg_plus .<br>
+  Mg_plus::= e2 ! [] , Mg_plus2 ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e3 ?
+  [] , Mg .<br>
+  Mg_plus2::= e4 ? [] , Mg_plus .<br>
+  Cl::= e1 ? [] , Cl_minus ;<span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ?
+  [] , Cl_minus .<br>
+  Cl_minus::= e3 ! [] , Cl ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0101.htm');">Mixed Choice</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Mg::= e1 ! [] , Mg_plus .<br>
+  Mg_plus::= e2
+  ! [] , Mg_plus2 ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e3 ?
+  [] , Mg .<br>
+  Mg_plus2::= e4 ? [] , Mg_plus .<br>
+  Cl::= e1 ? [] , Cl_minus ;<span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ?
+  [] , Cl_minus .<br>
+  Cl_minus::= e3 ! [] , Cl ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0103.htm');">Intermediate States</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0149.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0106.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e1(10),e2(100),e3(50),e4(5)). <br>
+  System::=
+  Mg | Cl | Cl .<br>
+  Mg::=</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun: yes">&nbsp;
+  </span>e1 ! [] , &lt;&lt; e2 ! [] , Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Mg_plus2::= <br>
+  <span style="mso-spacerun: yes">&nbsp; </span>e4 ? [] , &lt;&lt; e2 ! [] ,
+  Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Cl::= e1 ? [] , e3 ! [] , Cl ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ? [] , e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0107.htm');">Implicit representation
+of intermediate states: Local Processes</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Mg::=</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun: yes">&nbsp;
+  </span>e1 ! [] , &lt;&lt; e2 ! [] , Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Mg_plus2::= <br>
+  <span style="mso-spacerun: yes">&nbsp; </span>e3 ? [] , &lt;&lt;
+  e2 ! [] , Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Cl::= e1 ? [] , e3 ! [] , Cl ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ? [] , e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0108.htm');">Implicit representation
+of states: Sequential Guards</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Mg::=</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun: yes">&nbsp;
+  </span>e1 ! [] , &lt;&lt; e2 ! [] , Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Mg_plus2::= <br>
+  <span style="mso-spacerun: yes">&nbsp; </span>e3 ? [] , &lt;&lt; e2 ! [] ,
+  Mg_plus2 ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e3 ? [] , Mg &gt;&gt; .<br>
+  Cl::= e1 ? [] , e3 ! [] , Cl ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e2 ?
+  [] , e4 ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0104.htm');">Mg + 2Cl <font
+face=Symbol>«</font><font face="Comic Sans MS"> MgCl<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0222.htm');">Exercise #2 – Question 1</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Write pi-calculus programs for the
+  following reactions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Al + 3Cl </font><font face=Symbol
+  size=2>«</font><font face="Comic Sans MS" size=2> </font><font face=Arial
+  size=2>AlCl<sub>3</sub> ((Al<sup>+3</sup> + 3Cl<sup>-</sup>) ionic bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>H<sub>2</sub> + Cl<sub>2</sub> </font><font
+  face=Symbol size=2>«</font><font face="Comic Sans MS" size=2> </font><font
+  face=Arial size=2>2HCl (covalent bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0212.htm');">Ionic and Covalent Bonds</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A covalent bond is a sharing of a pair
+  of electrons, so that both atoms have filled octets</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0211.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>So far, in ionic bonds, the reverse
+  reaction did not necessarily occur b/w the same two atoms that participated
+  in the forward one.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>In a covalent bond, a molecule is
+  formed, and the two products are specifically bonded</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0213.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>We will represent specific bonding and
+  unbonding by using local, private channels</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>In the forward reaction, when a bond is
+  formed, a private channels is established between the two atoms:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>A private channel is declared in one of
+  the atoms</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>The channel is sent as a message, to be
+  received by the other atoms</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>This channel will be used for the
+  reverse reaction</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Later, we will see an alternative
+  approach to this problem</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0051.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100)).<br>
+  System::= H | H | Cl | Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H::= &lt;&lt; electron(10) . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ! {electron} , H_plus . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>H_plus::= electron ? [] , H &gt;&gt; .<br>
+  Cl::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ? {e} , e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0110.htm');">Local Channel Declaration</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H::= &lt;&lt; electron(10) . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ! {electron} , H_plus . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>H_plus::= electron ? [] , H &gt;&gt; .<br>
+  Cl::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ? {e} , e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0111.htm');">Channel tuples: Messages
+and channel declarations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H::= &lt;&lt; electron(10) . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ! {electron} , H_plus . <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>H_plus::= electron ? [] , H &gt;&gt; .<br>
+  Cl::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>e1 ? {e} , e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0155.htm');">Channel tuples: Channel
+Typing (Sorts)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A channel’s sort (type): The kind of
+  message that the channel sends and receives, e.g.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Channel types are determined at run
+  time. Due to mobility static analysis is problematic.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>BioPSI typing is flat (not recursive).
+  This is not generally true for pi-calculus.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0197.htm');">Channel tuples: Channel
+Typing (Sorts)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A type mismatch will cause a run-time
+  error.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>It is the programmer’s responsibility
+  to make sure that there are no type mismatches</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0112.htm');">Communication: Local
+channel mobility</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0152.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0116.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100)).<br>
+  System::= H | H | Cl | Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H+electron(10)::= <br>
+  	e1 ! {electron} , H_plus(electron). <br>
+  H_plus(e)::= e ? [] , H .<br>
+  Cl::= e1 ? {electron} , Cl_minus(electron). Cl_minus(e)::= e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0114.htm');">Local Channel Declaration
+- Alternative</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H+electron(10)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1
+  ! {electron} , H_plus(electron). <br>
+  H_plus(e)::= e ? [] , H .<br>
+  Cl::= e1 ? {e} , Cl_minus(e).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus(e)::= e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0115.htm');">Channel tuples:
+Parameters</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H+electron(10)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ! {electron} , H_plus(electron).
+  <br>
+  H_plus(e)::= e ? [] , H .<br>
+  Cl::= e1 ? {e} , Cl_minus(e). <br>
+  Cl_minus(e)::=
+  e ! [] , Cl .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0117.htm');">Communication: Local
+channel mobility</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0151.htm');">H + Cl <font face=Symbol>«</font><font
+face="Comic Sans MS"> HCl</font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0228.htm');">Exercise #2 - Question 2
+Transition States</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>High energy activated complexes of the
+  reactants that must be formed if reaction is to lead to products.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Have only a transitory existence</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Once formed, they must lead to products
+  or lose excess energy and return to reactants</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0226.htm');">Exercise #2 - Question 2</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Write a pi-calculus program
+  representing this mechanism and its reverse (together)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>	A+B </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> </font><font face=Arial size=2>(AB)<sup>‡</sup> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> C+D</font><font
+  face=Arial size=2> <br>
+  C+D </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> </font><font face=Arial size=2>(CD)<sup>‡</sup> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> A+B</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>	A+B </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> C+D</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Assume:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>C is derived from A</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>D is derived from B</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>(CD)<sup>‡</sup> and (AB)<sup>‡</sup>
+  should be defined implicitly</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Hint: private channels for both
+  reactions of an activated complex</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0214.htm');">H + H <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A symmetric interaction: the same atom
+  serves both “roles”, in a symmetrical interaction with identical atoms</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>We will represent this by mixed choice,
+  using the same channel once for input and once for output</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>This works since choice is mutually
+  exclusive</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Rate calculation is modified for
+  symmetric interaction</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0052.htm');">H + H <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e(10),e1(10)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= H | H . <br>
+  H+electron(0.1)::=<span
+  style="mso-spacerun: yes">&nbsp; </span><br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ! {electron} ,
+  H_BoundH(electron) ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ? {e2} , H_BoundH(e2)
+  ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e<span
+  style="mso-spacerun: yes">&nbsp; </span>! {electron} , H_Bound(electron) .
+  H_BoundH(el)::= el ? [] , H ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>el ! [] , H. <br>
+  H_Bound(el)::= el ? [] , H .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0154.htm');">Mixed choice on the same
+channel: Symmetric Communication</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>H+electron(0.1)::=<span
+  style="mso-spacerun: yes">&nbsp; </span><br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1
+  ! {electron} , H_BoundH(electron) ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1
+  ? {e2} , H_BoundH(e2) ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e<span
+  style="mso-spacerun: yes">&nbsp; </span>! {electron} , H_Bound(electron) .
+  <br>
+  H_BoundH(el)::= el ? [] , H ;<br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  </span>el ! [] , H. <br>
+  H_Bound(el)::= el ? [] , H .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0158.htm');">Symmetric Communication</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0157.htm');">Symmetric Communication</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0156.htm');">Channel Typing:
+Asymmetric and symmetric channels</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Symmetric (“homodimerization”) and
+  asymmetric (“bimolecular”) channels are distinguished by their rate
+  calculation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>The same channel (name) cannot be used
+  for both types of communication</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>BioPSI identifies them at run time (due
+  to mobility). An ambiguity would cause a run-time error.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>It is the programmer’s responsibility
+  to ensure correct use.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0159.htm');">H + H <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0160.htm');">H + H <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0223.htm');">Exercise #2 – Question 1</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Write pi-calculus programs for the
+  following reactions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Al + 3Cl </font><font face=Wingdings
+  size=2>&agrave;</font><font face="Comic Sans MS" size=2> AlCl</font><font
+  face=Arial size=2><sub>3</sub> ((Al<sup>+3</sup> + 3Cl<sup>-</sup>) ionic
+  bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>H<sub>2</sub> + Cl<sub>2</sub> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> 2HCl
+  (covalent bond)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0215.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub> ?</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Symmetric interaction, sharing two electrons
+  (double bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Naive suggestion: Two consecutive
+  symmetric interactions (analogous to the MgCl<sub>2</sub> case)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0161.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub> ?</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e1(100),e2(100)). <br>
+  System::= O | O | O | O | O . O+electron1(10)::=
+  <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ! {electron1} ,
+  O_Bound1(electron1) ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ? {electron1} ,
+  O_Bound1(electron1) . <br>
+  O_Bound1(el1)+electron2(0.1)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el1 ! [] , O ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el1 ? [] , O ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e2 ! {electron2} ,
+  O_Bound2(el1,electron2) ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e2 ? {electron2} ,
+  O_Bound2(el1,electron2) .<br>
+  O_Bound2(el1,el2)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el2 ! [] , O_Bound1(el1)
+  ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el2 ? [] ,
+  O_Bound1(el1) .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0162.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub><sub> </sub>?</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face=Arial size=2>O+electron1(10)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1
+  ! {electron1} , O_Bound1(electron1) ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e1 ? {electron1} ,
+  O_Bound1(electron1) . <br>
+  O_Bound1(el1)+electron2(0.1)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el1 ! [] , O ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el1 ? [] , O ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e2
+  ! {electron2} , O_Bound2(el1,electron2) ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>e2 ? {electron2} ,
+  O_Bound2(el1,electron2).<br>
+  O_Bound2(el1,el2)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el2 ! [] , O_Bound1(el1)
+  ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>el2 ? [] , O_Bound1(el1)
+  .</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0163.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub><sub> </sub>?</font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>An O process may share its two
+  electrons with a single other O process (leading to O<sub>2</sub>) or with
+  two other O processes (leading to O<sub>n</sub>). This is incorrect.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Note, that Lewis’ Octet Theory does not
+  handle O<sub>2</sub> well.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>We will solve this by limiting O’s
+  capability for symmetric interaction</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0053.htm');">Solution 1: Single
+channel for double bond</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e(10),ee(2)). <br>
+  O+electron(0.1)::= <br>
+  	ee
+  ! {electron} ,O_Double_Bound(electron) ; <br>
+  	ee ? {electron} , O_Double_Bound(electron) ;<br>
+  	e<span
+  style="mso-spacerun: yes">&nbsp; </span>? {electron} , O_Bound1(electron) .
+  O_Double_Bound(el)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>el ! [] , O
+  ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>el ? [] , O
+  . <br>
+  O_Bound1(el)::= <br>
+  <span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>el ! [] , O ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>e ?
+  {electron1}, O_Bound2(el,electron1) . O_Bound2(el,electron1)::= <br>
+  	electron1 ! [] , O_Bound1(el)
+  ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>	el ! [] , O_Bound1(electron1) .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0165.htm');">Solution 2: Restricting
+the second electron</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e(10),e1(2)). <br>
+  O+(electron(0.1),e2(infinite))::=
+  <br>
+  	e1 ! {electron,e2} , O_Bound1_O(electron,e2); <br>
+  	e1 ? {electron,e2} , O_Bound1_O(electron,e2) ;<br>
+  	e<span style="mso-spacerun: yes">&nbsp; </span>? {electron} ,
+  O_Bound1(electron) .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>O_Bound1_O(el,e)::=</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2><span style="mso-spacerun:
+  yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e ! [] , O_Double_Bound(el);<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>e ? []
+  , O_Double_Bound(el).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>O_Double_Bound(el)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>el ! [] , O
+  ; <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>el ? [] , O
+  .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0179.htm');">Infinite channels</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>All actions on inifinite channels occur
+  instantaneously:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>As soon as they are enabled</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Before the clock is advanced and a new
+  (non-inifinte) action is selected</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Are primarily used for encoding
+  purposes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0166.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0167.htm');">O + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> O<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0168.htm');">Lattices, molecules and
+networks</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0216.htm');">H + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub>O + O<sub>2</sub> + H<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Building a complex system by “mix and
+  match”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>We already have all the components:
+  single and double, symmetric and asymmetic bonds for H and O</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0171.htm');">H + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub>O + O<sub>2</sub> + H<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e(10),ee(2)).<br>
+  System::= h2_7#System | o2_9#System .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0170.htm');">External Calls: Multi
+Module Programs</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e(10),ee(2)).<br>
+  System::= h2_7#System
+  | o2_9#System .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0185.htm');">External Calls: Export</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e1(100),e2(10)).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>export(System).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System::= Na | Na | Cl | Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na::= e1 ! [] , Na_plus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Na_plus::= e2 ? [] , Na .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl::= e1 ? [] , Cl_minus .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Cl_minus::= e2 ! [] , Cl .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0180.htm');">Inclusion of external
+files: Rate parameter files</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  -include(rates).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>global(e(R1),ee(R2)).<br>
+  System::= h2_7#System | o2_9#System .</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0172.htm');">Multiple Process Calls:
+Arithmetics and Logix Commands</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>System(N1)::= <br>
+  <span style="mso-spacerun: yes">&nbsp;</span>&lt;&lt; CREATE_H(N1).
+  <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>CREATE_H(C)::=
+  <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{C
+  =&lt; 0} , true ;<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{C
+  &gt; 0}<span style="mso-spacerun: yes">&nbsp; </span>, {C--} | H | self
+  &gt;&gt; .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0175.htm');">Logix Variables</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A new argument which is a logix
+  variable is initially uninstantiated</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A Logix variable may have a value which
+  is an arbitrary Logix term.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Such values may be tested by a Logix
+  ask guard or manipulated by a Logix goal or by a Logix tell guard</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0153.htm');">Self Iteration</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>self is a reserved word in context (it
+  may be used as a channel name as well*)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>self may be used to iterate any
+  process, including anonymous (local) processes (e.g. sequential guards, inner
+  scopes)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>It always iterates to the innermost
+  predicate, starting with the last guard preceding the period. Use with care.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0176.htm');">Self Iteration - Examples</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>A::= x ? [] , self ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>	 y ? [] , self .</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0173.htm');">H + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub>O + O<sub>2</sub> + H<sub>2</sub></font></a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>-language(psifcp).<br>
+  global(e(10),ee(2)).<br>
+  System(N1,N2)::=
+  <br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>h2_7#System(N1)
+  | o2_9#System(N2).</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0174.htm');">H + O <font face=Symbol>«</font><font
+face="Comic Sans MS"> H<sub>2</sub>O + O<sub>2</sub> + H<sub>2</sub></font></a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0227.htm');">Exercise #2 - Question 1</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>In each case:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Represent each atom (and its related
+  chemical species) as a separate .cp programs. For example, for H2 you have
+  free H atom, H bound to H, and H bound to Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Use a “Logix loop” to spawn of multiple
+  processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Write a system program to initialize
+  the system, based on parameters (see attached table for process quantities)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Use a common rates file for all the
+  rate parameters</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0169.htm');">Limitations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Interactions explained by more than
+  pair-wise sharing of electrons, e.g.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Resonance structures (benzen, ozone)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Lattice energies of ionic compounds
+  (MgCl<sub>2</sub>, NaCl)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Limitations on global interactions,
+  e.g.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Network covalent bonds</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Higher order entities., e.g.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Radicals</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0217.htm');">Exercise #2 – Question 1</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Write pi-calculus programs for the
+  following reactions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Al + 3Cl </font><font face=Symbol
+  size=2>«</font><font face="Comic Sans MS" size=2> </font><font face=Arial
+  size=2>AlCl<sub>3</sub> ((Al<sup>+3</sup> + 3Cl<sup>-</sup>) ionic bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>H<sub>2</sub> + Cl<sub>2</sub> </font><font
+  face=Symbol size=2>«</font><font face="Comic Sans MS" size=2> </font><font
+  face=Arial size=2>2HCl (covalent bond)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0229.htm');">Exercise #2 - Question 2</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Write a pi-calculus program
+  representing this mechanism and its reverse (together)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>	A+B </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> </font><font face=Arial size=2>(AB)<sup>‡</sup> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> C+D</font><font
+  face=Arial size=2> <br>
+  C+D </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> </font><font face=Arial size=2>(CD)<sup>‡</sup> </font><font
+  face=Wingdings size=2>&agrave;</font><font face="Comic Sans MS" size=2> A+B</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>	A+B </font><font face=Symbol size=2>«</font><font
+  face="Comic Sans MS" size=2> C+D</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Assume:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>C is derived from A</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>D is derived from B</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>(CD)<sup>‡</sup> and (AB)<sup>‡</sup>
+  should be defined implicitly</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>Hint: private channels for both
+  reactions of an activated complex</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0219.htm');">Exercise #2 - Question
+1+2</a></b></font></p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0220.htm');">Exercise #2 - Questions
+1+2</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face=Arial size=2>In each case:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Submit code, .table and .names files,
+  and plot change of reactants and products</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Represent each atom (and its related
+  chemical species) as a separate .cp programs. For example, for H2 you have
+  free H atom, H bound to H, and H bound to Cl</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Use a “Logix loop” to spawn of multiple
+  processes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Write a system program to initialize
+  the system, based on parameters (see attached table for process quantities)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face=Arial size=2>Use a common rates file for all the
+  rate parameters</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0218.htm');">Exercise #2 – Question 3
+(bonus*)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>In an ozone (O<sub>3</sub>) molecule, a
+  resonance structure exists, where three O atoms are sharing 3 electron pairs
+  (see picture): 2 electron pairs are shared in “the usual way”. The third pair
+  is shared by all three atoms.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>	Try to write a pi-calculus program to
+  describe this molecule.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Even an unsuccessful (but interesting)
+  attempt can gain points.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face=Arial size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0085.htm');">Supplementary Material</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Milner, R. (1999) Communicating and
+  Mobile Systems: The pi-Calculus. Cambridge University Press.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Mahan and Myers (1987) University
+  Chemistry. 4<sup>th</sup> Edition. Addison-Wesley. Chapters 2, 6, 9</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Chang R. (1991) Chemistry.
+  McGraw-Hill.<span style="mso-spacerun: yes">&nbsp; </span>Chapters 3.1, 9, 13</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Silverman W. (2001) BioPSI Appendices.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Gillespie D.T. (1976) A general method
+  for numerically simulating the stochastic time evolution of coupled chemical
+  reactions. Journal of Computational Physics 22: 403-434.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face=Arial size=2>Gillespie D. T. (1977) Exact stochastic
+  simulation of coupled chemical reactions. Journal of Physical Chemistry 81:
+  2340-2361.</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../YaaraYaki.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Modeling a Molecular Computing Device using &Otilde;-Calculus</title>
+<meta name=Description content="21-Jun-01: Implementation of the Automaton">
+<link rel=next href="v3_slide0038.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0037.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master11_background.gif" bgcolor=black alink="#9933ff"
+link=aqua vlink="#0099cc" text="#f8f8f8" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=367 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=25 height=30></td>
+  <td width=375 height=30 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=375 height=30><font face=Tahoma color=yellow size=4>Implementation
+    of the Automaton</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=75 height=30></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=25 height=167></td>
+  <td width=367 height=167>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=137 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=64 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=87 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=32 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=23><font face=Tahoma color="#6699ff" size=3>•</font></td>
+    <td width=349 height=23 colspan=9><font face=Tahoma color="#ffff99" size=3>The
+    three parameters of the automaton:</font><br>
+    </td>
+    <td width=1 height=23></td>
+   </tr>
+   <tr>
+    <td width=367 height=2 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face=Tahoma color=aqua size=2>–</font></td>
+    <td width=321 height=20 colspan=5><font face=Tahoma color="#ffff99" size=2><i>Input</i>
+    </font><font face="Times New Roman" color="#ffff99" size=2>–</font><font
+    face=Tahoma color="#ffff99" size=2> the part of the input yet to be read.</font><br>
+    </td>
+    <td width=8 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=367 height=3 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face=Tahoma color=aqua size=2>–</font></td>
+    <td width=329 height=20 colspan=7><font face=Tahoma color="#ffff99" size=2><i>Symbol</i>
+    </font><font face="Times New Roman" color="#ffff99" size=2>–</font><font
+    face=Tahoma color="#ffff99" size=2> the symbol being read at this step.</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=367 height=3 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face=Tahoma color=aqua size=2>–</font></td>
+    <td width=289 height=20 colspan=4><font face=Tahoma color="#ffff99" size=2><i>State</i>
+    </font><font face="Times New Roman" color="#ffff99" size=2>–</font><font
+    face=Tahoma color="#ffff99" size=2> current state of the automaton.</font><br>
+    </td>
+    <td width=40 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=367 height=30 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=17 height=23><font face=Tahoma color="#6699ff" size=3>•</font></td>
+    <td width=159 height=23 colspan=5><font face=Tahoma color="#ffff99" size=3>At
+    the initial state:</font><br>
+    </td>
+    <td width=191 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=17 height=22></td>
+    <td width=223 height=22 colspan=6><font face=Tahoma color="#ffff99" size=3>Symbol
+    = </font><font face="Times New Roman" color="#ffff99" size=3>“”</font><font
+    face=Tahoma color="#ffff99" size=3> , State = S0.</font><br>
+    </td>
+    <td width=127 height=22 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=83 height=167 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=115 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

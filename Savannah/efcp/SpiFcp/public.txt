@@ -1,0 +1,17 @@
+In Pi Calculus, as defined by Milner, global channels may be declared
+implicitly by reference.  In this implementation of Stochastic Pi
+Calculus, they must be declared explicitly for each module in which
+they are referenced.  They are shared between all modules.
+
+The declaration has the form:
+
+    public(<parameters>).
+
+See BNF.txt.
+
+See the modules in Examples/boolean and in Examples/circadian.
+
+
+This document is licensed under Gnu General Public License - Version 3
+
+    http://www.nongnu.org/efcp/gnu-gpl3.html

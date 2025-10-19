@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1255">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../Class7.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Biomolecular processes as concurrent computation</title>
+<meta name=Description content="7-Jun-01: Glycogen - III ">
+<link rel=next href="v3_slide0478.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0477.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0477_background.gif" bgcolor=white alink="#3333cc"
+link="#ccccff" vlink="#b2b2b2" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=122 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=198 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=27 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=103 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=476 height=41 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=139 height=38 colspan=2></td>
+  <td width=198 height=38>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=198 height=38 align=center><font face="Comic Sans MS" size=5>Glycogen
+    - III</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=139 height=38 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=476 height=27 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=17 height=203></td>
+  <td width=450 height=203 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=84 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=50 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=208 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=42 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=342 height=16 colspan=3><font face="Courier New" size=1><b>Glucose(to_root,
+    to_leaf, RC, LC, LBC)::=</b></font><br>
+    </td>
+    <td width=108 height=16 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=450 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=358 height=16 colspan=4><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp; </span>{LC &lt;0},
+    screen#display(&quot;error - LC&lt;0&quot;) ;</b></font><br>
+    </td>
+    <td width=92 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=450 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=84 height=16><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp; </span>{LC&gt;=0},</b></font><br>
+    </td>
+    <td width=366 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=450 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=134 height=16 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp; </span>&lt;&lt; {LBC = 0} ,</b></font><br>
+    </td>
+    <td width=316 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=450 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=450 height=16 colspan=7><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt; {LC = 0}
+    ,<span style="mso-spacerun: yes">&nbsp; </span>Leaf_Glucose ;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=450 height=16 colspan=7><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{LC = 7 , RC &gt;= 4} , BCE_Glucose ;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=450 height=15 colspan=7><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{LC &gt; 0 , LC =\= 7 , RC &gt;= 4} , BNCE_Glucose ;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=450 height=16 colspan=7><font face="Courier New" size=1><b><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span><span style="mso-spacerun:
+    yes">&nbsp; </span>{LC &gt; 0 , RC &lt; 4} , Disabled_Glucose &gt;&gt; ;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=134 height=16 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>{LBC &gt; 0} ,</b></font><br>
+    </td>
+    <td width=316 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=450 height=16 colspan=7><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>&lt;&lt; {RC
+    &gt;= 4 , LBC &gt;=4} , BNCE_Glucose ;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=375 height=16 colspan=5><font face="Courier New" size=1><b><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span><span style="mso-spacerun:
+    yes">&nbsp; </span>{RC &lt; 4} , Disabled_Branched_Glucose;</b></font><br>
+    </td>
+    <td width=75 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=417 height=16 colspan=6><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>{LBC &lt; 4} , Disabled_Branched_Glucose &gt;&gt; .</b></font><br>
+    </td>
+    <td width=33 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=9 height=203 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=476 height=32 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=364 height=15 colspan=4></td>
+  <td width=112 height=16 colspan=3 rowspan=2><img
+  src="v3_slide0477_image129.gif" border=0 width=112 height=16></td>
+ </tr>
+ <tr>
+  <td width=364 height=1 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>
